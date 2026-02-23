@@ -271,7 +271,7 @@ img { max-width: 100%; display: block; }
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   transition: all 0.3s ease;
   opacity: 0;
-  animation: fadeUp 1.5s var(--ease-out-expo) 2s forwards;
+  animation: fadeUp 1.5s var(--ease-out-expo) 4.2s forwards;
   overflow: hidden;
 }
 
@@ -324,7 +324,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.2em;
   z-index: 3;
   opacity: 0;
-  animation: fadeUp 1.5s var(--ease-out-expo) 3s forwards, pulse 2s ease-in-out 4s infinite;
+  animation: fadeUp 1.5s var(--ease-out-expo) 5s forwards, pulse 2s ease-in-out 6s infinite;
 }
 
 /* ============================================================
@@ -1063,6 +1063,219 @@ img { max-width: 100%; display: block; }
   .detail-container { padding: 0 1rem 3rem; }
   .status-panel { padding: 0.8rem; }
   .purchase-area { padding: 1rem; }
+  .guild-master-area { padding: 1.5rem 1rem; }
+  .guild-master-area .gm-line { font-size: 0.85rem; }
+}
+
+/* ============================================================
+   NARRATION LINES (First View)
+   ============================================================ */
+.narration-area {
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out-expo) 1.7s forwards;
+}
+.narration-line {
+  font-family: var(--body-font);
+  font-size: clamp(0.85rem, 2.2vw, 1.05rem);
+  color: var(--text-secondary);
+  line-height: 2.2;
+  letter-spacing: 0.08em;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: narratFadeIn 1.2s var(--ease-out-expo) forwards;
+}
+.narration-line:nth-child(1) { animation-delay: 1.8s; }
+.narration-line:nth-child(2) { animation-delay: 2.6s; }
+.narration-line:nth-child(3) { animation-delay: 3.4s; color: var(--neon-gold); text-shadow: 0 0 12px var(--neon-gold-dim); font-weight: 400; }
+
+@keyframes narratFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   GUILD MASTER AREA (Quest Board)
+   ============================================================ */
+.guild-master-area {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 0;
+  text-align: left;
+}
+.gm-speech {
+  position: relative;
+  background: rgba(26, 26, 58, 0.5);
+  border: 1px solid var(--border-glow);
+  border-left: 3px solid var(--neon-gold);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.gm-label {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  color: var(--neon-gold);
+  text-shadow: 0 0 6px var(--neon-gold-dim);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.15em;
+}
+.gm-line {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 2;
+  font-weight: 300;
+}
+
+/* ============================================================
+   CARD TAGLINE
+   ============================================================ */
+.card-tagline {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   CARD PIXEL FRAME (RPG window border)
+   ============================================================ */
+.card-image {
+  border: 2px solid var(--border-glow);
+  border-bottom: 1px solid var(--border-dim);
+  image-rendering: auto;
+  position: relative;
+}
+.card-image::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px solid rgba(0,240,255,0.08);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ============================================================
+   DIFFICULTY SWORDS (⚔ instead of stars)
+   ============================================================ */
+.difficulty-swords {
+  display: flex;
+  gap: 3px;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+.difficulty-swords .sword { color: var(--neon-gold); text-shadow: 0 0 4px var(--neon-gold-dim); }
+.difficulty-swords .sword.empty { color: var(--border-dim); text-shadow: none; }
+
+/* ============================================================
+   PURCHASE AREA — Enhanced frame
+   ============================================================ */
+.purchase-area {
+  position: relative;
+}
+.purchase-area::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 20px; height: 20px;
+  border-top: 2px solid var(--neon-gold);
+  border-left: 2px solid var(--neon-gold);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.purchase-area::after {
+  content: '';
+  position: absolute;
+  bottom: 8px; right: 8px;
+  width: 20px; height: 20px;
+  border-bottom: 2px solid var(--neon-gold);
+  border-right: 2px solid var(--neon-gold);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.purchase-flavor {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+}
+.purchase-cmd {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.purchase-cmd .cmd-icon {
+  font-family: var(--pixel-font);
+  font-size: 0.9rem;
+  color: var(--neon-gold);
+}
+
+/* ============================================================
+   GOLD PRICE NOTATION
+   ============================================================ */
+.gold-price {
+  font-family: var(--pixel-font);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-left: 0.3rem;
+}
+
+/* ============================================================
+   DETAIL — 依頼書 HEADING
+   ============================================================ */
+.quest-scroll-header {
+  border: 1px solid var(--neon-gold-dim);
+  background: rgba(255,215,0,0.03);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+.quest-scroll-header::before {
+  content: '';
+  position: absolute;
+  top: 4px; left: 4px;
+  width: 14px; height: 14px;
+  border-top: 1px solid var(--neon-gold);
+  border-left: 1px solid var(--neon-gold);
+  opacity: 0.5;
+}
+.quest-scroll-header::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; right: 4px;
+  width: 14px; height: 14px;
+  border-bottom: 1px solid var(--neon-gold);
+  border-right: 1px solid var(--neon-gold);
+  opacity: 0.5;
+}
+.quest-scroll-label {
+  font-family: var(--pixel-font);
+  font-size: 0.65rem;
+  color: var(--neon-gold);
+  text-shadow: 0 0 6px var(--neon-gold-dim);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.4rem;
+}
+.quest-scroll-title {
+  font-family: var(--pixel-font);
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   FOOTER WORLD TEXT
+   ============================================================ */
+.footer-world {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+  opacity: 0.7;
 }
 </style>
 </head>
@@ -1076,7 +1289,7 @@ img { max-width: 100%; display: block; }
 
 <!-- Transition overlay -->
 <div class="transition-overlay" id="transition-overlay">
-  <div class="transition-text">LOADING QUEST BOARD...</div>
+  <div class="transition-text">ギルド掲示板を開いています...</div>
 </div>
 
 <!-- ============================================================
@@ -1111,9 +1324,14 @@ img { max-width: 100%; display: block; }
       <span class="line"></span>
     </div>
     <div class="logo-tagline">日常が、<span>クエスト</span>になる</div>
+    <div class="narration-area">
+      <div class="narration-line">ある日、見知らぬ封書が届いた——</div>
+      <div class="narration-line">中には一枚の羊皮紙と、ギルドの紋章</div>
+      <div class="narration-line">"冒険者よ、おまえの日常を変える依頼がある"</div>
+    </div>
     <button class="btn-start" id="btn-start" onclick="startAdventure()">
       <span class="play-icon">▶</span>
-      <span>冒険を始める</span>
+      <span>ギルドに入る</span>
     </button>
   </div>
 
@@ -1125,7 +1343,7 @@ img { max-width: 100%; display: block; }
      ============================================================ -->
 <div class="page" id="page-quest-board">
   <header class="quest-board-header">
-    <div class="header-logo" onclick="goToOpening()">◆ リアクエ</div>
+    <div class="header-logo" onclick="goToOpening()" title="ギルド入口へ戻る">◆ リアクエ</div>
     <div class="header-nav">
       <button class="audio-toggle" id="audio-toggle" onclick="toggleAudio()">
         <div class="audio-bars">
@@ -1137,17 +1355,25 @@ img { max-width: 100%; display: block; }
   </header>
 
   <div class="board-title-area">
-    <div class="board-label">— QUEST BOARD —</div>
-    <h1 class="board-title">未完の書庫</h1>
-    <p class="board-subtitle">物語を選び、冒険を始めよ。すべてのクエストは、あなたの日常に届く。</p>
+    <div class="board-label">— GUILD QUEST BOARD —</div>
+    <h1 class="board-title">冒険者ギルド掲示板</h1>
+    <p class="board-subtitle">依頼書を手に取り、冒険を始めよ。</p>
     <div class="board-divider"></div>
   </div>
 
+  <div class="guild-master-area">
+    <div class="gm-speech">
+      <div class="gm-label">◆ ギルドマスター</div>
+      <div class="gm-line">よく来たな、冒険者。ここは"リアクエ"——現実世界のクエストを管理するギルドだ。</div>
+      <div class="gm-line">気になる依頼書を手に取ってみろ。届くのは本物のアイテムと、おまえだけの物語だ。</div>
+    </div>
+  </div>
+
   <div class="filter-bar">
-    <button class="filter-chip active" onclick="filterQuests('all', this)">ALL</button>
-    <button class="filter-chip" onclick="filterQuests('beginner', this)">初心者向け</button>
-    <button class="filter-chip" onclick="filterQuests('advanced', this)">上級者向け</button>
-    <button class="filter-chip" onclick="filterQuests('new', this)">NEW</button>
+    <button class="filter-chip active" onclick="filterQuests('all', this)">すべての依頼</button>
+    <button class="filter-chip" onclick="filterQuests('beginner', this)">見習い向け</button>
+    <button class="filter-chip" onclick="filterQuests('advanced', this)">熟練者向け</button>
+    <button class="filter-chip" onclick="filterQuests('new', this)">新着依頼</button>
   </div>
 
   <div class="quest-grid" id="quest-grid">
@@ -1156,7 +1382,8 @@ img { max-width: 100%; display: block; }
 
   <footer class="site-footer">
     <div class="footer-logo">◆ REAL QUEST ◆</div>
-    <div class="footer-text">© 2025 リアクエ — 日常が、クエストになる</div>
+    <div class="footer-text">© 2025 リアクエ</div>
+    <div class="footer-world">冒険者ギルド"リアクエ" — 日常が、クエストになる</div>
   </footer>
 </div>
 
@@ -1165,7 +1392,7 @@ img { max-width: 100%; display: block; }
      ============================================================ -->
 <div class="page" id="page-detail">
   <header class="quest-board-header">
-    <div class="header-logo" onclick="goToOpening()">◆ リアクエ</div>
+    <div class="header-logo" onclick="goToOpening()" title="ギルド入口へ戻る">◆ リアクエ</div>
     <div class="header-nav">
       <button class="audio-toggle" id="audio-toggle-detail" onclick="toggleAudio()">
         <div class="audio-bars">
@@ -1583,14 +1810,14 @@ function goToOpening() {
 
 function goToQuestBoard() {
   const overlay = document.getElementById('transition-overlay');
-  overlay.querySelector('.transition-text').textContent = 'RETURNING TO QUEST BOARD...';
+  overlay.querySelector('.transition-text').textContent = '掲示板に戻ります...';
   overlay.classList.add('active');
   setTimeout(() => {
     showPage('page-quest-board');
     currentPage = 'quest-board';
     setTimeout(() => {
       overlay.classList.remove('active');
-      overlay.querySelector('.transition-text').textContent = 'LOADING QUEST BOARD...';
+      overlay.querySelector('.transition-text').textContent = 'ギルド掲示板を開いています...';
     }, 400);
   }, 800);
 }
@@ -1600,7 +1827,7 @@ function openQuestDetail(questId) {
   if (!quest) return;
 
   const overlay = document.getElementById('transition-overlay');
-  overlay.querySelector('.transition-text').textContent = 'LOADING QUEST DATA...';
+  overlay.querySelector('.transition-text').textContent = '依頼書を準備中...';
   overlay.classList.add('active');
 
   setTimeout(() => {
@@ -1609,7 +1836,7 @@ function openQuestDetail(questId) {
     currentPage = 'detail';
     setTimeout(() => {
       overlay.classList.remove('active');
-      overlay.querySelector('.transition-text').textContent = 'LOADING QUEST BOARD...';
+      overlay.querySelector('.transition-text').textContent = 'ギルド掲示板を開いています...';
     }, 400);
   }, 800);
 }
@@ -1621,8 +1848,8 @@ function renderQuestCards(list) {
   const grid = document.getElementById('quest-grid');
   grid.innerHTML = list.map((q, i) => {
     const rankClass = `rank-${q.rank}`;
-    const stars = Array.from({length: 5}, (_, si) =>
-      `<div class="star ${si < q.difficulty ? '' : 'empty'}"></div>`
+    const swords = Array.from({length: 5}, (_, si) =>
+      `<span class="sword ${si < q.difficulty ? '' : 'empty'}">⚔</span>`
     ).join('');
     const itemsPreview = q.items.slice(0, 2).map(it => it.name).join('、') + (q.items.length > 2 ? ' 他' : '');
 
@@ -1632,24 +1859,25 @@ function renderQuestCards(list) {
         <div class="card-image">${getQuestImage(q.id, 320, 180)}</div>
         <div class="card-rank ${rankClass}">RANK ${q.rank}</div>
         <div class="card-title">${q.title}</div>
+        <div class="card-tagline">${q.tagline}</div>
         <div class="card-meta">
           <div class="meta-row">
             <span class="meta-label">難易度</span>
-            <div class="difficulty-stars">${stars}</div>
+            <div class="difficulty-swords">${swords}</div>
           </div>
           <div class="meta-row">
-            <span class="meta-label">ジャンル</span>
+            <span class="meta-label">分類</span>
             <span class="meta-value">${q.genre}</span>
           </div>
           <div class="meta-row">
-            <span class="meta-label">プレイ</span>
+            <span class="meta-label">冒険</span>
             <span class="meta-value">${q.players}／${q.estimatedTime}</span>
           </div>
         </div>
-        <div class="card-items">📦 ${itemsPreview}</div>
+        <div class="card-items">🎁 報酬アイテム：${itemsPreview}</div>
         <div class="card-footer">
-          <div class="card-price"><span class="currency">¥</span>${q.price.toLocaleString()}</div>
-          <div class="card-action">詳細を見る →</div>
+          <div class="card-price"><span class="currency">¥</span>${q.price.toLocaleString()}<span class="gold-price">（${q.price.toLocaleString()}G）</span></div>
+          <div class="card-action">この依頼を見る →</div>
         </div>
       </div>
     `;
@@ -1676,18 +1904,23 @@ function filterQuests(category, btn) {
    ============================================================ */
 function renderDetail(quest) {
   const rankClass = `rank-${quest.rank}`;
-  const stars = Array.from({length: 5}, (_, i) =>
-    `<div class="star ${i < quest.difficulty ? '' : 'empty'}" style="display:inline-block;width:12px;height:12px;background:${i < quest.difficulty ? 'var(--neon-gold)' : 'var(--border-dim)'};clip-path:polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);"></div>`
+  const swords = Array.from({length: 5}, (_, i) =>
+    `<span class="sword ${i < quest.difficulty ? '' : 'empty'}" style="font-size:0.9rem;">⚔</span>`
   ).join('');
 
   const container = document.getElementById('detail-content');
   container.innerHTML = `
-    <div class="detail-back" onclick="goToQuestBoard()">← クエストボードに戻る</div>
+    <div class="detail-back" onclick="goToQuestBoard()">← 掲示板に戻る</div>
     <div class="detail-hero">${getQuestImage(quest.id, 640, 274)}</div>
     <div class="detail-header">
       <div class="detail-rank-badge ${rankClass}">RANK ${quest.rank} QUEST</div>
       <h1 class="detail-title">${quest.title}</h1>
       <p class="detail-tagline">${quest.tagline}</p>
+    </div>
+
+    <div class="quest-scroll-header">
+      <div class="quest-scroll-label">— 依頼書 —</div>
+      <div class="quest-scroll-title">${quest.title}</div>
     </div>
 
     <div class="status-panel">
@@ -1696,28 +1929,28 @@ function renderDetail(quest) {
         <div class="stat-item">
           <div class="stat-icon">⚔️</div>
           <div class="stat-info">
-            <div class="stat-label">難易度</div>
-            <div class="stat-value">${stars}</div>
+            <div class="stat-label">クエスト難度</div>
+            <div class="stat-value"><span class="difficulty-swords">${swords}</span></div>
           </div>
         </div>
         <div class="stat-item">
           <div class="stat-icon">⏱️</div>
           <div class="stat-info">
-            <div class="stat-label">所要時間</div>
+            <div class="stat-label">想定所要時間</div>
             <div class="stat-value">${quest.estimatedTime}</div>
           </div>
         </div>
         <div class="stat-item">
           <div class="stat-icon">👥</div>
           <div class="stat-info">
-            <div class="stat-label">推奨人数</div>
+            <div class="stat-label">推奨パーティ人数</div>
             <div class="stat-value">${quest.players}</div>
           </div>
         </div>
         <div class="stat-item">
           <div class="stat-icon">📂</div>
           <div class="stat-info">
-            <div class="stat-label">ジャンル</div>
+            <div class="stat-label">分類</div>
             <div class="stat-value">${quest.genre}</div>
           </div>
         </div>
@@ -1730,7 +1963,7 @@ function renderDetail(quest) {
     </div>
 
     <div class="section-block">
-      <div class="section-title">◆ 届くリアルアイテム</div>
+      <div class="section-title">◆ 報酬：自宅に届くリアルアイテム</div>
       <ul class="items-list">
         ${quest.items.map(item => `
           <li>
@@ -1742,19 +1975,21 @@ function renderDetail(quest) {
     </div>
 
     <div class="purchase-area">
+      <div class="purchase-flavor">この依頼を受けると、数日後にリアルアイテムが届く——</div>
       <div class="purchase-price">
-        ¥${quest.price.toLocaleString()}<span class="tax">（税込）</span>
+        ¥${quest.price.toLocaleString()}<span class="gold-price">（${quest.price.toLocaleString()}G）</span><span class="tax">（税込）</span>
       </div>
       <div class="purchase-shipping">送料無料・ご注文から3〜5日でお届け</div>
       <button class="btn-purchase" onclick="alert('決済ページへ遷移します（デモ）')">
-        ⚔️ このクエストを受注する
+        <span class="cmd-icon">▶</span> このクエストを受注する
       </button>
       <div class="purchase-note">※ 商品の性質上、返品・交換はお受けできません</div>
     </div>
 
     <footer class="site-footer">
       <div class="footer-logo">◆ REAL QUEST ◆</div>
-      <div class="footer-text">© 2025 リアクエ — 日常が、クエストになる</div>
+      <div class="footer-text">© 2025 リアクエ</div>
+      <div class="footer-world">冒険者ギルド"リアクエ" — 日常が、クエストになる</div>
     </footer>
   `;
 }
