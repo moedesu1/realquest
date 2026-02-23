@@ -351,8 +351,10 @@ img { max-width: 100%; display: block; }
   z-index: 100;
   background: var(--bg-abyss);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.2rem;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -361,19 +363,69 @@ img { max-width: 100%; display: block; }
   opacity: 1;
   pointer-events: auto;
 }
+.transition-emblem {
+  width: 48px;
+  height: 48px;
+  opacity: 0.6;
+  animation: emblemPulse 1.5s ease-in-out infinite;
+}
+@keyframes emblemPulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
 .transition-text {
   font-family: var(--pixel-font);
-  font-size: clamp(0.8rem, 2vw, 1.2rem);
-  color: #ffffff;
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  color: var(--neon-gold);
   text-shadow: 0 0 12px rgba(255,215,0,0.4);
+  letter-spacing: 0.15em;
   animation: blink 0.8s steps(2) infinite;
 }
+
+/* ============================================================
+   SCROLL REVEAL ANIMATION
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   DETAIL STAGGER ANIMATION
+   ============================================================ */
+.detail-stagger {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+.detail-stagger.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.detail-stagger:nth-child(1) { transition-delay: 0s; }
+.detail-stagger:nth-child(2) { transition-delay: 0.1s; }
+.detail-stagger:nth-child(3) { transition-delay: 0.2s; }
+.detail-stagger:nth-child(4) { transition-delay: 0.3s; }
+.detail-stagger:nth-child(5) { transition-delay: 0.4s; }
+.detail-stagger:nth-child(6) { transition-delay: 0.5s; }
+.detail-stagger:nth-child(7) { transition-delay: 0.6s; }
+.detail-stagger:nth-child(8) { transition-delay: 0.7s; }
 
 /* ============================================================
    PAGE 2 — QUEST BOARD
    ============================================================ */
 #page-quest-board {
-  background: var(--bg-abyss);
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(74,80,160,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(255,215,0,0.03) 0%, transparent 50%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 60px, rgba(74,80,160,0.03) 60px, rgba(74,80,160,0.03) 61px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 60px, rgba(74,80,160,0.03) 60px, rgba(74,80,160,0.03) 61px),
+    var(--bg-abyss);
   padding-bottom: 4rem;
 }
 
@@ -558,6 +610,11 @@ img { max-width: 100%; display: block; }
   display: block;
   object-fit: cover;
   background: var(--bg-card);
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.quest-card:hover .card-image img,
+.quest-card:hover .card-image svg {
+  transform: scale(1.08);
 }
 .card-image::before {
   content: '';
@@ -645,8 +702,8 @@ img { max-width: 100%; display: block; }
 .quest-card:hover {
   border-color: var(--neon-gold);
   background: var(--bg-card-hover);
-  transform: translateY(-4px);
-  box-shadow: 0 6px 24px rgba(255,215,0,0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(255,215,0,0.15), 0 0 0 1px rgba(255,215,0,0.1);
 }
 
 .quest-card:hover::before {
@@ -1089,17 +1146,7 @@ img { max-width: 100%; display: block; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* card entrance */
-.quest-card {
-  opacity: 0;
-  animation: cardReveal 0.6s var(--ease-out-expo) forwards;
-}
-.quest-card:nth-child(1) { animation-delay: 0.1s; }
-.quest-card:nth-child(2) { animation-delay: 0.2s; }
-.quest-card:nth-child(3) { animation-delay: 0.3s; }
-.quest-card:nth-child(4) { animation-delay: 0.4s; }
-.quest-card:nth-child(5) { animation-delay: 0.5s; }
-.quest-card:nth-child(6) { animation-delay: 0.6s; }
+/* card entrance — handled by scroll reveal system */
 
 /* ============================================================
    RESPONSIVE
@@ -1696,6 +1743,7 @@ img { max-width: 100%; display: block; }
   }
   html { scroll-behavior: auto; }
   .quest-card { opacity: 1; }
+  .reveal, .detail-stagger { opacity: 1 !important; transform: none !important; }
   .logo-mark, .logo-sub, .logo-main, .logo-main-en,
   .logo-tagline, .divider-sword, .narration-line,
   .btn-start, .scroll-hint, .narration-area { opacity: 1; transform: none; }
@@ -1797,6 +1845,10 @@ img { max-width: 100%; display: block; }
 
 <!-- Transition overlay -->
 <div class="transition-overlay" id="transition-overlay">
+  <svg class="transition-emblem" viewBox="0 0 60 60" fill="none">
+    <path d="M30 4 L46 30 L30 56 L14 30 Z" stroke="#ffd700" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <circle cx="30" cy="30" r="6" fill="#ffd700" opacity="0.4"/>
+  </svg>
   <div class="transition-text">ギルド掲示板を開いています...</div>
 </div>
 
@@ -1873,7 +1925,7 @@ img { max-width: 100%; display: block; }
     <div class="board-divider"></div>
   </div>
 
-  <div class="guild-master-area">
+  <div class="guild-master-area reveal">
     <div class="gm-portrait">
       <img src="images/guildmaster.webp" alt="ギルドマスター" loading="lazy" width="80" height="80">
     </div>
@@ -1898,7 +1950,7 @@ img { max-width: 100%; display: block; }
   </div>
 
   <!-- ABOUT SECTION -->
-  <div class="about-section" id="about-section">
+  <div class="about-section reveal" id="about-section">
     <div class="about-window">
       <div class="about-window-label">◆ ギルド案内書</div>
       <div class="about-heading">ここは"リアクエ"——現実世界にクエストを仕掛ける冒険者ギルドだ。</div>
@@ -1924,7 +1976,7 @@ img { max-width: 100%; display: block; }
   </div>
 
   <!-- NEWSLETTER SECTION -->
-  <div class="newsletter-section" id="newsletter-section">
+  <div class="newsletter-section reveal" id="newsletter-section">
     <div class="newsletter-window">
       <div class="newsletter-label">◆ 伝書鳩登録</div>
       <div class="newsletter-heading">次の依頼を、見逃すな。</div>
@@ -2443,7 +2495,7 @@ function renderQuestCards(list) {
     const itemsPreview = q.items.slice(0, 2).map(it => it.name).join('、') + (q.items.length > 2 ? ' 他' : '');
 
     return `
-      <div class="quest-card" style="animation-delay: ${i * 0.1}s" onclick="openQuestDetail(${q.id})" onkeydown="if(event.key==='Enter')openQuestDetail(${q.id})" role="button" tabindex="0" aria-label="${q.title} — ${q.rank}ランク ${q.price.toLocaleString()}円" data-category="${q.category}" ${q.isNew ? 'data-new="true"' : ''}>
+      <div class="quest-card" onclick="openQuestDetail(${q.id})" onkeydown="if(event.key==='Enter')openQuestDetail(${q.id})" role="button" tabindex="0" aria-label="${q.title} — ${q.rank}ランク ${q.price.toLocaleString()}円" data-category="${q.category}" ${q.isNew ? 'data-new="true"' : ''}>
         ${q.isNew ? '<div class="badge-new">NEW</div>' : ''}
         <div class="card-image" style="background:#161a50">${q.image ? `<img src="${q.image}" alt="${q.title}のクエストイメージ画像" width="1024" height="1024" loading="lazy" style="background:#161a50">` : getQuestImage(q.id, 320, 180)}</div>
         <div class="card-rank ${rankClass}">RANK ${q.rank}</div>
@@ -2499,20 +2551,20 @@ function renderDetail(quest) {
 
   const container = document.getElementById('detail-content');
   container.innerHTML = `
-    <div class="detail-back" onclick="goToQuestBoard()">← 掲示板に戻る</div>
-    <div class="detail-hero" style="background:#161a50">${quest.image ? `<img src="${quest.image}" alt="${quest.title}のクエスト詳細画像" width="1024" height="1024" loading="lazy" style="background:#161a50">` : getQuestImage(quest.id, 640, 274)}</div>
-    <div class="detail-header">
+    <div class="detail-back detail-stagger" onclick="goToQuestBoard()">← 掲示板に戻る</div>
+    <div class="detail-hero detail-stagger" style="background:#161a50">${quest.image ? `<img src="${quest.image}" alt="${quest.title}のクエスト詳細画像" width="1024" height="1024" loading="lazy" style="background:#161a50">` : getQuestImage(quest.id, 640, 274)}</div>
+    <div class="detail-header detail-stagger">
       <div class="detail-rank-badge ${rankClass}">RANK ${quest.rank} QUEST</div>
       <h1 class="detail-title">${quest.title}</h1>
       <p class="detail-tagline">${quest.tagline}</p>
     </div>
 
-    <div class="quest-scroll-header">
+    <div class="quest-scroll-header detail-stagger">
       <div class="quest-scroll-label">— 依頼書 —</div>
       <div class="quest-scroll-title">${quest.title}</div>
     </div>
 
-    <div class="status-panel">
+    <div class="status-panel detail-stagger">
       <div class="status-panel-title">◆ QUEST STATUS</div>
       <div class="status-grid">
         <div class="stat-item">
@@ -2546,12 +2598,12 @@ function renderDetail(quest) {
       </div>
     </div>
 
-    <div class="section-block">
+    <div class="section-block detail-stagger">
       <div class="section-title">◆ プロローグ</div>
       <div class="prologue-text">${quest.prologue}</div>
     </div>
 
-    <div class="section-block">
+    <div class="section-block detail-stagger">
       <div class="section-title">◆ 報酬：自宅に届くリアルアイテム</div>
       <ul class="items-list">
         ${quest.items.map(item => `
@@ -2563,7 +2615,7 @@ function renderDetail(quest) {
       </ul>
     </div>
 
-    <div class="purchase-area">
+    <div class="purchase-area detail-stagger">
       <div class="purchase-flavor">この依頼を受けると、数日後にリアルアイテムが届く——</div>
       <div class="purchase-price">
         ¥${quest.price.toLocaleString()}<span class="gold-price">（${quest.price.toLocaleString()}G）</span><span class="tax">（税込）</span>
@@ -3097,6 +3149,47 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
+/* ============================================================
+   SCROLL REVEAL — IntersectionObserver
+   ============================================================ */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+// Observe quest board reveal elements
+function initRevealObservers() {
+  document.querySelectorAll('#page-quest-board .reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
+}
+
+// Also observe quest cards after render
+const originalRenderQuestCards = renderQuestCards;
+renderQuestCards = function(list) {
+  originalRenderQuestCards(list);
+  document.querySelectorAll('.quest-card').forEach(card => {
+    card.classList.add('reveal');
+    revealObserver.observe(card);
+  });
+  initRevealObservers();
+};
+
+// Detail page stagger — trigger after page shows
+const originalOpenQuestDetail = openQuestDetail;
+openQuestDetail = function(questId) {
+  originalOpenQuestDetail(questId);
+  setTimeout(() => {
+    document.querySelectorAll('.detail-stagger').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 80);
+    });
+  }, 900);
+};
 </script>
 </body>
 </html>
