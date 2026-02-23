@@ -2296,26 +2296,6 @@ body {
     </div>
   </div>
 
-  <div class="guild-master-area reveal">
-    <div class="gm-portrait">
-      <img src="images/guildmaster.webp" alt="ギルドマスター" loading="lazy" width="80" height="80">
-    </div>
-    <div class="gm-speech">
-      <div class="gm-label">◆ ギルドマスター</div>
-      <div class="gm-line">よく来たな、冒険者。</div>
-      <div class="gm-line">ここは"リアクエ"——現実世界のクエストを管理するギルドだ。</div>
-      <div class="gm-line">気になる依頼書を手に取ってみろ。</div>
-      <div class="gm-line">届くのは本物のアイテムと、おまえだけの物語だ。</div>
-    </div>
-  </div>
-
-  <!-- ABOUT SECTION -->
-  <div class="section-divider reveal">
-    <span class="dv-line"></span>
-    <span class="dv-icon">◆</span>
-    <span class="dv-line"></span>
-  </div>
-
   <div class="about-section reveal" id="about-section">
     <div class="about-inner">
       <div class="about-img">
@@ -2323,10 +2303,12 @@ body {
         <img src="images/guildmaster.webp" alt="ギルドマスター" width="512" height="512" loading="lazy">
       </div>
       <div class="about-body-side">
-        <div class="about-rank">GUILD INFORMATION</div>
-        <div class="about-heading">ここは"リアクエ"——<br>現実世界にクエストを仕掛ける<br>冒険者ギルドだ。</div>
+        <div class="about-rank">◆ GUILD MASTER</div>
+        <div class="about-heading">よく来たな、冒険者。</div>
         <div class="about-body">
-          おまえの元に届くのは、ただの荷物じゃない。暗号が刻まれた羊皮紙、封蝋で閉じられた手紙、正体不明のアイテム——すべてがクエストの鍵だ。
+          ここは"リアクエ"——現実世界にクエストを仕掛ける冒険者ギルドだ。<br><br>
+          おまえの元に届くのは、ただの荷物じゃない。暗号が刻まれた羊皮紙、封蝋で閉じられた手紙、正体不明のアイテム——すべてがクエストの鍵だ。<br><br>
+          気になる依頼書を手に取ってみろ。届くのは本物のアイテムと、おまえだけの物語だ。
         </div>
         <div class="about-stats">
           <div class="about-stat-item">
@@ -3667,37 +3649,6 @@ document.addEventListener('mousemove', (e) => {
     card.style.setProperty('--my', y + '%');
   });
 }, { passive: true });
-
-/* ============================================================
-   GUILD MASTER TYPEWRITER EFFECT
-   ============================================================ */
-(function initTypewriter() {
-  const gmArea = document.querySelector('.guild-master-area');
-  if (!gmArea) return;
-  let done = false;
-
-  const gmObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !done) {
-        done = true;
-        const lines = gmArea.querySelectorAll('.gm-line');
-        let totalDelay = 0;
-        lines.forEach((line) => {
-          const fullText = line.textContent;
-          line.textContent = '';
-          line.style.minHeight = '1.6em';
-          const chars = fullText.split('');
-          chars.forEach((ch, i) => {
-            setTimeout(() => { line.textContent += ch; }, totalDelay + i * 35);
-          });
-          totalDelay += chars.length * 35 + 250;
-        });
-        gmObserver.disconnect();
-      }
-    });
-  }, { threshold: 0.3 });
-  gmObserver.observe(gmArea);
-})();
 
 /* ============================================================
    HOVER SFX — Subtle RPG interface click
