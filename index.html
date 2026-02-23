@@ -104,61 +104,6 @@ body {
 }
 
 /* ============================================================
-   CINEMATIC INTRO (First Visit)
-   ============================================================ */
-.cinematic-intro {
-  position: fixed;
-  inset: 0;
-  z-index: 100000;
-  background: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  opacity: 1;
-  transition: opacity 1s ease;
-}
-.cinematic-intro.fade-out {
-  opacity: 0;
-  pointer-events: none;
-}
-.cinematic-emblem {
-  opacity: 0;
-  transform: scale(0.8);
-  animation: cinEmblem 2s var(--ease-out-expo) 0.5s forwards;
-}
-@keyframes cinEmblem {
-  from { opacity: 0; transform: scale(0.8); filter: blur(8px); }
-  to { opacity: 1; transform: scale(1); filter: blur(0); }
-}
-.cinematic-text {
-  font-family: var(--pixel-font);
-  font-size: clamp(0.6rem, 1.5vw, 0.8rem);
-  color: var(--neon-gold);
-  letter-spacing: 0.3em;
-  opacity: 0;
-  animation: cinText 1.5s ease 2s forwards;
-}
-@keyframes cinText {
-  from { opacity: 0; letter-spacing: 0.6em; }
-  to { opacity: 0.8; letter-spacing: 0.3em; }
-}
-.cinematic-sub {
-  font-family: var(--body-font);
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  font-weight: 300;
-  letter-spacing: 0.1em;
-  opacity: 0;
-  animation: cinFade 1s ease 3s forwards;
-}
-@keyframes cinFade {
-  from { opacity: 0; }
-  to { opacity: 0.6; }
-}
-
-/* ============================================================
    SHARED UTILITIES
    ============================================================ */
 .pixel-text { font-family: var(--pixel-font); }
@@ -189,18 +134,7 @@ body {
    SCANLINE OVERLAY (Global)
    ============================================================ */
 .scanlines {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.06) 2px,
-    rgba(0,0,0,0.06) 4px
-  );
-  mix-blend-mode: overlay;
+  display: none;
 }
 
 /* ============================================================
@@ -324,7 +258,7 @@ body {
     0 0 15px rgba(255,215,0,0.5),
     0 0 40px rgba(255,215,0,0.2),
     0 0 80px rgba(255,215,0,0.1);
-  letter-spacing: 0.08em;
+  letter-spacing: -0.02em;
   line-height: 1.2;
   margin-bottom: 0.3rem;
   opacity: 0;
@@ -340,7 +274,7 @@ body {
   font-size: clamp(0.6rem, 2vw, 1rem);
   color: var(--neon-gold);
   text-shadow: 0 0 10px rgba(255,215,0,0.3);
-  letter-spacing: 0.35em;
+  letter-spacing: 0.15em;
   opacity: 0;
   animation: fadeUp 0.8s var(--ease-out-expo) 0.3s forwards;
   margin-bottom: 2.5rem;
@@ -435,8 +369,9 @@ body {
 .scroll-hint {
   position: fixed;
   bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  text-align: center;
   font-family: var(--pixel-font);
   font-size: 0.6rem;
   color: var(--text-dim);
@@ -2162,7 +2097,7 @@ body {
   .logo-mark, .logo-sub, .logo-main, .logo-main-en,
   .logo-tagline, .divider-sword, .narration-line,
   .btn-start, .scroll-hint, .narration-area { opacity: 1; transform: none; }
-  .opening-mist, .opening-lens-flare, .cinematic-intro { display: none !important; }
+  .opening-mist, .opening-lens-flare { display: none !important; }
   #page-quest-board::before, #page-quest-board::after, #page-detail::before { animation: none; }
 }
 
@@ -2179,30 +2114,6 @@ body {
 </style>
 </head>
 <body>
-
-<!-- Cinematic Intro (first visit only) -->
-<div class="cinematic-intro" id="cinematic-intro" style="display:none;">
-  <svg class="cinematic-emblem" width="120" height="120" viewBox="0 0 120 120">
-    <defs>
-      <filter id="cin-glow">
-        <feGaussianBlur stdDeviation="2" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
-    <g filter="url(#cin-glow)">
-      <path d="M60 10 L78 60 L60 110 L42 60 Z" stroke="#ffd700" stroke-width="1.2" fill="none" opacity="0.5"/>
-      <path d="M60 22 L70 60 L60 98 L50 60 Z" stroke="#ffd700" stroke-width="0.6" fill="none" opacity="0.25"/>
-      <circle cx="60" cy="60" r="10" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
-      <circle cx="60" cy="60" r="4" fill="#ffd700" opacity="0.9"/>
-      <line x1="60" y1="30" x2="60" y2="50" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
-      <line x1="60" y1="70" x2="60" y2="90" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
-      <line x1="40" y1="60" x2="50" y2="60" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
-      <line x1="70" y1="60" x2="80" y2="60" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
-    </g>
-  </svg>
-  <div class="cinematic-text">REAL QUEST</div>
-  <div class="cinematic-sub">— 日常が、クエストになる —</div>
-</div>
 
 <!-- Scanline overlay -->
 <div class="scanlines"></div>
@@ -3753,27 +3664,6 @@ if (boardPage) {
     }
   }, { passive: true });
 }
-
-/* ============================================================
-   CINEMATIC INTRO — First Visit Cookie
-   ============================================================ */
-(function initCinematicIntro() {
-  if (document.cookie.includes('rq_visited=1')) return;
-  const intro = document.getElementById('cinematic-intro');
-  if (!intro) return;
-  intro.style.display = '';
-
-  // Set cookie 30 days
-  document.cookie = 'rq_visited=1;max-age=' + (30*24*60*60) + ';path=/;SameSite=Lax';
-
-  const dismiss = () => {
-    if (intro.classList.contains('fade-out')) return;
-    intro.classList.add('fade-out');
-    setTimeout(() => intro.remove(), 1200);
-  };
-  setTimeout(dismiss, 5000);
-  intro.addEventListener('click', dismiss);
-})();
 
 /* ============================================================
    CARD MOUSE-TRACKING GLOW
