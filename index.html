@@ -195,41 +195,13 @@ body {
   text-align: center;
   padding: 3rem 2.5rem;
   background: rgba(10,12,46,0.6);
-  border: 3px solid transparent;
+  border: 3px solid var(--rpg-border);
   border-radius: 16px;
   box-shadow: inset 0 0 0 2px rgba(10,12,46,0.9), inset 0 0 0 4px var(--rpg-border-inner), 0 0 80px rgba(10,12,46,0.8);
   max-width: 620px;
   margin: 0 1rem;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background-clip: padding-box;
-}
-/* Animated border glow */
-.opening-content::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 18px;
-  background: linear-gradient(
-    var(--border-angle, 0deg),
-    var(--rpg-border) 0%,
-    var(--neon-gold) 25%,
-    var(--rpg-border) 50%,
-    rgba(255,215,0,0.4) 75%,
-    var(--rpg-border) 100%
-  );
-  z-index: -1;
-  animation: borderRotate 6s linear infinite;
-  opacity: 0.7;
-}
-@keyframes borderRotate {
-  from { --border-angle: 0deg; }
-  to { --border-angle: 360deg; }
-}
-@property --border-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
 }
 
 /* logo treatment */
