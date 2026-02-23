@@ -505,10 +505,206 @@ img { max-width: 100%; display: block; }
 .audio-bars span:nth-child(4) { height: 9px; animation-delay: 0.1s; }
 .audio-toggle.muted .audio-bars span { animation: none; height: 2px; }
 
+/* ============================================================
+   GUILD HERO BANNER
+   ============================================================ */
+.guild-hero {
+  position: relative;
+  width: 100%;
+  height: clamp(200px, 40vw, 380px);
+  overflow: hidden;
+}
+.guild-hero-img {
+  position: absolute;
+  inset: 0;
+  background: url('images/hero-board.webp') center 40% / cover no-repeat;
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+.guild-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(10,12,46,0.3) 0%, rgba(10,12,46,0.1) 40%, rgba(10,12,46,0.7) 80%, var(--bg-abyss) 100%),
+    linear-gradient(to right, rgba(10,12,46,0.5) 0%, transparent 30%, transparent 70%, rgba(10,12,46,0.5) 100%);
+  pointer-events: none;
+}
+.guild-hero-content {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+  width: 90%;
+  max-width: 600px;
+}
+.guild-hero-label {
+  font-family: var(--pixel-font);
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  color: var(--neon-gold);
+  text-shadow: 0 0 8px var(--neon-gold-dim);
+  margin-bottom: 0.5rem;
+}
+.guild-hero-title {
+  font-family: var(--body-font);
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   FEATURED QUEST (ギルド推薦依頼)
+   ============================================================ */
+.featured-quest {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.featured-quest-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--bg-card);
+  border: 3px solid var(--neon-gold);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 0 40px rgba(255,215,0,0.08);
+  cursor: pointer;
+  transition: all 0.4s var(--ease-out-expo);
+  position: relative;
+}
+.featured-quest-inner:hover {
+  transform: translateY(-4px);
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 8px 40px rgba(255,215,0,0.15);
+}
+.featured-quest-img {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.featured-quest-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.featured-quest-inner:hover .featured-quest-img img {
+  transform: scale(1.06);
+}
+.featured-quest-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 60%, var(--bg-card));
+  pointer-events: none;
+}
+.featured-quest-stamp {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-family: var(--pixel-font);
+  font-size: 0.55rem;
+  color: var(--bg-abyss);
+  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  letter-spacing: 0.1em;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(255,215,0,0.3);
+}
+.featured-quest-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.featured-quest-rank {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  color: var(--neon-gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.6rem;
+}
+.featured-quest-title {
+  font-family: var(--pixel-font);
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+}
+.featured-quest-tagline {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.featured-quest-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+.featured-quest-price {
+  font-family: var(--pixel-font);
+  font-size: 1rem;
+  color: var(--neon-gold);
+  text-shadow: 0 0 6px var(--neon-gold-dim);
+}
+.featured-quest-cta {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  color: var(--neon-gold);
+  letter-spacing: 0.1em;
+  margin-top: auto;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+.featured-quest-inner:hover .featured-quest-cta {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 600px) {
+  .featured-quest-inner { grid-template-columns: 1fr; }
+  .featured-quest-img { aspect-ratio: 16 / 9; }
+  .featured-quest-img::after { background: linear-gradient(to bottom, transparent 60%, var(--bg-card)); }
+  .featured-quest-cta { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   SECTION DIVIDERS — RPG Motifs
+   ============================================================ */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2.5rem 0;
+}
+.section-divider .dv-line {
+  width: clamp(50px, 15vw, 120px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+}
+.section-divider .dv-icon {
+  color: var(--neon-gold);
+  font-size: 0.9rem;
+  opacity: 0.5;
+  text-shadow: 0 0 6px var(--neon-gold-dim);
+}
+
 /* board title area */
 .board-title-area {
   text-align: center;
-  padding: 4rem 2rem 1.5rem;
+  padding: 2rem 2rem 1.5rem;
 }
 
 .board-label {
@@ -1918,11 +2114,13 @@ img { max-width: 100%; display: block; }
     </div>
   </header>
 
-  <div class="board-title-area">
-    <div class="board-label">— GUILD QUEST BOARD —</div>
-    <h1 class="board-title">冒険者ギルド掲示板</h1>
-    <p class="board-subtitle">依頼書を手に取り、冒険を始めよ。</p>
-    <div class="board-divider"></div>
+  <!-- GUILD HERO BANNER -->
+  <div class="guild-hero">
+    <div class="guild-hero-img"></div>
+    <div class="guild-hero-content">
+      <div class="guild-hero-label">— ADVENTURERS GUILD —</div>
+      <div class="guild-hero-title">冒険者ギルド掲示板</div>
+    </div>
   </div>
 
   <div class="guild-master-area reveal">
@@ -1936,6 +2134,29 @@ img { max-width: 100%; display: block; }
       <div class="gm-line">気になる依頼書を手に取ってみろ。</div>
       <div class="gm-line">届くのは本物のアイテムと、おまえだけの物語だ。</div>
     </div>
+  </div>
+
+  <!-- FEATURED QUEST -->
+  <div class="section-divider reveal">
+    <span class="dv-line"></span>
+    <span class="dv-icon">◆</span>
+    <span class="dv-line"></span>
+  </div>
+
+  <div class="featured-quest reveal" id="featured-quest">
+    <!-- Rendered by JS -->
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="section-divider reveal">
+    <span class="dv-line"></span>
+    <span class="dv-icon">⚔</span>
+    <span class="dv-line"></span>
+  </div>
+
+  <div class="board-title-area">
+    <div class="board-label">— ALL QUESTS —</div>
+    <p class="board-subtitle">依頼書を手に取り、冒険を始めよ。</p>
   </div>
 
   <div class="filter-bar">
@@ -1973,6 +2194,12 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="section-divider reveal">
+    <span class="dv-line"></span>
+    <span class="dv-icon">✦</span>
+    <span class="dv-line"></span>
   </div>
 
   <!-- NEWSLETTER SECTION -->
@@ -2433,6 +2660,7 @@ function startAdventure() {
   setTimeout(() => {
     showPage('page-quest-board');
     currentPage = 'quest-board';
+    renderFeaturedQuest();
     renderQuestCards(quests);
     setTimeout(() => {
       overlay.classList.remove('active');
@@ -2485,6 +2713,33 @@ function openQuestDetail(questId) {
 /* ============================================================
    RENDER — Quest Cards
    ============================================================ */
+function renderFeaturedQuest() {
+  // Pick highest rank new quest, or first quest
+  const featured = quests.find(q => q.isNew && q.rank === 'A') || quests[0];
+  const container = document.getElementById('featured-quest');
+  if (!container || !featured) return;
+  container.innerHTML = `
+    <div class="featured-quest-inner" onclick="openQuestDetail(${featured.id})">
+      <div class="featured-quest-img">
+        <div class="featured-quest-stamp">◆ ギルド推薦</div>
+        ${featured.image ? `<img src="${featured.image}" alt="${featured.title}" width="1024" height="1024" loading="lazy">` : ''}
+      </div>
+      <div class="featured-quest-body">
+        <div class="featured-quest-rank">RANK ${featured.rank} QUEST</div>
+        <div class="featured-quest-title">${featured.title}</div>
+        <div class="featured-quest-tagline">${featured.tagline}</div>
+        <div class="featured-quest-meta">
+          <span>⚔ 難度 ${featured.difficulty}/5</span>
+          <span>⏱ ${featured.estimatedTime}</span>
+          <span>👥 ${featured.players}</span>
+        </div>
+        <div class="featured-quest-price">¥${featured.price.toLocaleString()}<span style="font-size:0.65rem;opacity:0.7;margin-left:0.3rem">（${featured.price.toLocaleString()}G）</span></div>
+        <div class="featured-quest-cta">→ この依頼を見る</div>
+      </div>
+    </div>
+  `;
+}
+
 function renderQuestCards(list) {
   const grid = document.getElementById('quest-grid');
   grid.innerHTML = list.map((q, i) => {
@@ -3190,6 +3445,20 @@ openQuestDetail = function(questId) {
     });
   }, 900);
 };
+
+/* ============================================================
+   PARALLAX — Guild Hero Banner
+   ============================================================ */
+const boardPage = document.getElementById('page-quest-board');
+if (boardPage) {
+  boardPage.addEventListener('scroll', () => {
+    const heroImg = boardPage.querySelector('.guild-hero-img');
+    if (heroImg) {
+      const scrollY = boardPage.scrollTop;
+      heroImg.style.transform = `scale(1.05) translateY(${scrollY * 0.3}px)`;
+    }
+  }, { passive: true });
+}
 </script>
 </body>
 </html>
