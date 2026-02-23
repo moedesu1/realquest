@@ -1427,6 +1427,19 @@ img { max-width: 100%; display: block; }
   opacity: 1;
   pointer-events: auto;
 }
+.menu-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  font-family: var(--pixel-font);
+  font-size: 1.2rem;
+  color: var(--neon-gold);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+  z-index: 1001;
+}
+.menu-close:hover { transform: rotate(90deg); }
 .menu-list {
   list-style: none;
   text-align: center;
@@ -1448,113 +1461,113 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
-   ABOUT SECTION
+   ABOUT SECTION — RPG Guild Hall Style
    ============================================================ */
 .about-section {
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 3rem 1.5rem;
-  text-align: center;
 }
-.about-label {
+.about-window {
+  background: rgba(18, 21, 69, 0.7);
+  border: 3px solid var(--rpg-border);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
+  padding: 1.5rem 1.8rem;
+}
+.about-window-label {
   font-family: var(--pixel-font);
   font-size: 0.6rem;
-  letter-spacing: 0.4em;
-  color: var(--text-dim);
+  color: var(--neon-gold);
+  letter-spacing: 0.15em;
   margin-bottom: 1rem;
 }
 .about-heading {
   font-family: var(--body-font);
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  font-weight: 700;
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  font-weight: 500;
   color: var(--text-primary);
-  line-height: 1.6;
-  margin-bottom: 0.3rem;
-}
-.about-heading span {
-  color: var(--neon-gold);
-  text-shadow: 0 0 10px var(--neon-gold-dim);
+  line-height: 1.8;
+  margin-bottom: 1rem;
 }
 .about-body {
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  line-height: 2;
+  line-height: 2.2;
   font-weight: 300;
-  max-width: 600px;
-  margin: 1.5rem auto 2.5rem;
 }
 .about-stats {
   display: flex;
   justify-content: center;
-  gap: clamp(2rem, 6vw, 4rem);
+  gap: clamp(1.5rem, 5vw, 3rem);
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border-dim);
 }
-.about-stat-item {
-  text-align: center;
-}
+.about-stat-item { text-align: center; }
 .about-stat-num {
   font-family: var(--pixel-font);
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
   color: var(--neon-gold);
   text-shadow: 0 0 8px var(--neon-gold-dim);
 }
 .about-stat-label {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--text-dim);
   margin-top: 0.3rem;
-  letter-spacing: 0.05em;
-}
-.about-divider {
-  width: 60px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
-  margin: 2.5rem auto 0;
 }
 
 /* ============================================================
-   NEWSLETTER SECTION
+   NEWSLETTER SECTION — RPG Scroll Style
    ============================================================ */
 .newsletter-section {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
+  padding: 2rem 1.5rem 3rem;
+}
+.newsletter-window {
+  background: rgba(18, 21, 69, 0.7);
+  border: 3px solid var(--neon-gold);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 0 30px rgba(255,215,0,0.08);
+  padding: 1.5rem 1.8rem;
   text-align: center;
 }
 .newsletter-label {
   font-family: var(--pixel-font);
   font-size: 0.6rem;
-  letter-spacing: 0.4em;
-  color: var(--accent-red);
-  margin-bottom: 1rem;
+  letter-spacing: 0.15em;
+  color: var(--neon-gold);
+  margin-bottom: 0.8rem;
 }
 .newsletter-heading {
   font-family: var(--body-font);
-  font-size: clamp(1.2rem, 3.5vw, 1.6rem);
-  font-weight: 700;
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  font-weight: 500;
   color: var(--text-primary);
-  line-height: 1.6;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 .newsletter-sub {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
   font-weight: 300;
   line-height: 1.8;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 }
 .newsletter-form {
   display: flex;
   gap: 0;
-  max-width: 420px;
+  max-width: 400px;
   margin: 0 auto;
 }
 .newsletter-input {
   flex: 1;
-  padding: 0.7rem 1rem;
+  padding: 0.6rem 1rem;
   font-family: var(--body-font);
   font-size: 0.85rem;
   color: var(--text-primary);
-  background: var(--bg-card);
-  border: 2px solid var(--border-glow);
+  background: var(--bg-abyss);
+  border: 2px solid var(--rpg-border);
   border-right: none;
   border-radius: 8px 0 0 8px;
   outline: none;
@@ -1563,101 +1576,93 @@ img { max-width: 100%; display: block; }
 .newsletter-input::placeholder { color: var(--text-dim); }
 .newsletter-input:focus { border-color: var(--neon-gold); }
 .newsletter-submit {
-  padding: 0.7rem 1.2rem;
+  padding: 0.6rem 1.2rem;
   font-family: var(--pixel-font);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--bg-abyss);
-  background: linear-gradient(135deg, var(--accent-red), #cc4444);
-  border: 2px solid var(--accent-red);
+  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
+  border: 2px solid var(--neon-gold);
   border-radius: 0 8px 8px 0;
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
-.newsletter-submit:hover { background: linear-gradient(135deg, #ff8080, var(--accent-red)); }
+.newsletter-submit:hover { background: linear-gradient(135deg, #ffe040, var(--neon-gold)); }
 
 /* ============================================================
-   ENHANCED FOOTER
+   ENHANCED FOOTER — RPG Guild Board Style
    ============================================================ */
 .footer-enhanced {
   border-top: 1px solid var(--border-dim);
-  padding: 2.5rem 1.5rem 1.5rem;
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
 }
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 2rem;
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  text-align: left;
-}
-.footer-brand .footer-brand-name {
+.footer-guild-mark {
   font-family: var(--pixel-font);
   font-size: 0.85rem;
   color: var(--neon-gold);
   text-shadow: 0 0 6px var(--neon-gold-dim);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
-.footer-brand .footer-brand-desc {
+.footer-guild-desc {
   font-size: 0.75rem;
   color: var(--text-dim);
   line-height: 1.8;
   font-weight: 300;
+  margin-bottom: 1rem;
 }
-.footer-brand .footer-social {
+.footer-social {
   display: flex;
-  gap: 0.8rem;
-  margin-top: 1rem;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
 }
-.footer-brand .footer-social a {
-  width: 30px;
-  height: 30px;
+.footer-social a {
+  width: 32px;
+  height: 32px;
   border: 1px solid var(--border-dim);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
   color: var(--text-dim);
   transition: all 0.3s ease;
 }
-.footer-brand .footer-social a:hover {
+.footer-social a:hover {
   border-color: var(--neon-gold);
   color: var(--neon-gold);
 }
-.footer-col-title {
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.1em;
-  margin-bottom: 0.8rem;
+.footer-social a svg { width: 14px; height: 14px; fill: currentColor; }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.5rem;
+  margin-bottom: 1.5rem;
 }
-.footer-col a {
-  display: block;
-  font-size: 0.75rem;
+.footer-links a {
+  font-size: 0.7rem;
   color: var(--text-dim);
-  margin-bottom: 0.5rem;
   transition: color 0.3s ease;
   cursor: pointer;
 }
-.footer-col a:hover { color: var(--neon-gold); }
+.footer-links a:hover { color: var(--neon-gold); }
 .footer-bottom {
-  text-align: center;
-  padding-top: 1.5rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--border-dim);
 }
 .footer-bottom-text {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--text-dim);
+  margin-bottom: 0.4rem;
 }
 .footer-bottom-legal {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  margin-top: 0.5rem;
 }
 .footer-bottom-legal a {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--text-dim);
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -1667,13 +1672,8 @@ img { max-width: 100%; display: block; }
 .footer-bottom-legal a:hover { color: var(--neon-gold); }
 
 @media (max-width: 600px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-  .footer-brand { grid-column: 1 / -1; }
   .newsletter-form { flex-direction: column; }
-  .newsletter-input { border-right: 2px solid var(--border-glow); border-radius: 8px; }
+  .newsletter-input { border-right: 2px solid var(--rpg-border); border-radius: 8px; }
   .newsletter-input:focus { border-color: var(--neon-gold); }
   .newsletter-submit { border-radius: 8px; margin-top: 0.5rem; }
 }
@@ -1778,6 +1778,7 @@ img { max-width: 100%; display: block; }
 
 <!-- Hamburger Menu Overlay -->
 <div class="menu-overlay" id="menu-overlay">
+  <button class="menu-close" onclick="closeMenu()">✕</button>
   <ul class="menu-list">
     <li><a onclick="closeMenu(); goToQuestBoard()">プロダクト</a></li>
     <li><a onclick="closeMenu(); scrollToAbout()">リアクエとは</a></li>
@@ -1887,70 +1888,57 @@ img { max-width: 100%; display: block; }
 
   <!-- ABOUT SECTION -->
   <div class="about-section" id="about-section">
-    <div class="about-label">— ABOUT —</div>
-    <div class="about-heading">現実を侵食する、<br><span>冒険者ギルド</span></div>
-    <div class="about-body">
-      リアクエは、ARG（代替現実ゲーム）を中心とした体験型エンターテインメントを企画・制作するギルドです。<br>
-      私たちは「物語に参加する」という新しい体験を通じて、日常と非日常の境界を曖昧にし、参加者一人ひとりが主人公となる世界を創造しています。
+    <div class="about-window">
+      <div class="about-window-label">◆ ギルド案内書</div>
+      <div class="about-heading">ここは"リアクエ"——現実世界にクエストを仕掛ける冒険者ギルドだ。</div>
+      <div class="about-body">
+        おまえの元に届くのは、ただの荷物じゃない。暗号が刻まれた羊皮紙、封蝋で閉じられた手紙、正体不明のアイテム——すべてがクエストの鍵だ。<br><br>
+        日常の中に潜む謎を解き、物語の主人公として冒険を進めろ。ギルドは、おまえの参加を待っている。
+      </div>
+      <div class="about-stats">
+        <div class="about-stat-item">
+          <div class="about-stat-num">6+</div>
+          <div class="about-stat-label">依頼数</div>
+        </div>
+        <div class="about-stat-item">
+          <div class="about-stat-num">—</div>
+          <div class="about-stat-label">冒険者数</div>
+        </div>
+        <div class="about-stat-item">
+          <div class="about-stat-num">4.8</div>
+          <div class="about-stat-label">ギルド評価</div>
+        </div>
+      </div>
     </div>
-    <div class="about-stats">
-      <div class="about-stat-item">
-        <div class="about-stat-num">6+</div>
-        <div class="about-stat-label">クエスト数</div>
-      </div>
-      <div class="about-stat-item">
-        <div class="about-stat-num">—</div>
-        <div class="about-stat-label">冒険者数</div>
-      </div>
-      <div class="about-stat-item">
-        <div class="about-stat-num">4.8</div>
-        <div class="about-stat-label">評価</div>
-      </div>
-    </div>
-    <div class="about-divider"></div>
   </div>
 
   <!-- NEWSLETTER SECTION -->
   <div class="newsletter-section" id="newsletter-section">
-    <div class="newsletter-label">— NEWSLETTER —</div>
-    <div class="newsletter-heading">次の冒険を、見逃すな。</div>
-    <div class="newsletter-sub">新作クエストの情報や限定グッズの先行販売など、メンバー限定の情報をお届けします。</div>
-    <div class="newsletter-form">
-      <input type="email" class="newsletter-input" placeholder="メールアドレス" aria-label="メールアドレス">
-      <button class="newsletter-submit" onclick="submitNewsletter()">登録</button>
+    <div class="newsletter-window">
+      <div class="newsletter-label">◆ 伝書鳩登録</div>
+      <div class="newsletter-heading">次の依頼を、見逃すな。</div>
+      <div class="newsletter-sub">新クエストの告知や先行受注など、ギルドメンバー限定の情報を届ける。</div>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="メールアドレス" aria-label="メールアドレス">
+        <button class="newsletter-submit" onclick="submitNewsletter()">登録</button>
+      </div>
     </div>
   </div>
 
-  <!-- ENHANCED FOOTER -->
+  <!-- FOOTER -->
   <footer class="footer-enhanced">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-brand-name">◆ REAL QUEST</div>
-        <div class="footer-brand-desc">現実の境界を侵食する、<br>体験型クエストギルド。</div>
-        <div class="footer-social">
-          <a href="#" title="X (Twitter)">𝕏</a>
-          <a href="#" title="Instagram">ig</a>
-          <a href="#" title="Note">nt</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">ショップ</div>
-        <a onclick="filterQuests('all')">すべての依頼</a>
-        <a onclick="filterQuests('new')">新着クエスト</a>
-        <a onclick="filterQuests('beginner')">見習い向け</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">サポート</div>
-        <a>よくある質問</a>
-        <a>お問い合わせ</a>
-        <a>返品・交換</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">運営情報</div>
-        <a onclick="scrollToAbout()">リアクエとは</a>
-        <a>メディア掲載</a>
-        <a>採用情報</a>
-      </div>
+    <div class="footer-guild-mark">◆ REAL QUEST ◆</div>
+    <div class="footer-guild-desc">冒険者ギルド"リアクエ" — 日常が、クエストになる</div>
+    <div class="footer-social">
+      <a href="#" title="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="#" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      <a href="#" title="Note"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 14H7v-2h8v2zm2-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></a>
+    </div>
+    <div class="footer-links">
+      <a onclick="scrollToAbout()">ギルド案内</a>
+      <a onclick="scrollToNewsletter()">伝書鳩登録</a>
+      <a>よくある質問</a>
+      <a>お問い合わせ</a>
     </div>
     <div class="footer-bottom">
       <div class="footer-bottom-text">© 2026 リアクエ REAL QUEST. All rights reserved.</div>
