@@ -155,6 +155,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 2rem 1rem;
   background: var(--bg-abyss);
   z-index: 10;
 }
@@ -184,7 +185,7 @@ body {
   content: '';
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(10,12,46,0.4) 20%, rgba(10,12,46,0.85) 70%, rgba(10,12,46,0.95) 100%);
+  background: radial-gradient(ellipse at center, rgba(10,12,46,0.3) 10%, rgba(10,12,46,0.7) 50%, rgba(10,12,46,0.92) 80%, rgba(0,0,0,0.97) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -193,15 +194,21 @@ body {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 3rem 2.5rem;
-  background: rgba(10,12,46,0.6);
-  border: 3px solid var(--rpg-border);
-  border-radius: 16px;
-  box-shadow: inset 0 0 0 2px rgba(10,12,46,0.9), inset 0 0 0 4px var(--rpg-border-inner), 0 0 80px rgba(10,12,46,0.8);
-  max-width: 620px;
-  margin: 0 1rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
+  background: linear-gradient(180deg, rgba(10,12,46,0.75) 0%, rgba(14,16,56,0.85) 100%);
+  border: 2px solid rgba(74,80,160,0.6);
+  border-radius: 20px;
+  box-shadow:
+    0 0 0 1px rgba(255,215,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    inset 0 0 40px rgba(10,12,46,0.5),
+    0 25px 80px rgba(0,0,0,0.6),
+    0 0 120px rgba(10,12,46,0.8);
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
 }
 
 /* logo treatment */
@@ -213,11 +220,11 @@ body {
 
 .logo-sub {
   font-family: var(--pixel-font);
-  font-size: clamp(0.65rem, 1.5vw, 0.85rem);
-  letter-spacing: 0.5em;
+  font-size: clamp(0.5rem, 1.2vw, 0.65rem);
+  letter-spacing: 0.4em;
   color: var(--text-dim);
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   opacity: 0;
   animation: fadeUp 0.8s var(--ease-out-expo) 0.15s forwards;
 }
@@ -255,10 +262,10 @@ body {
 .logo-tagline {
   font-family: var(--body-font);
   font-weight: 300;
-  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
   color: var(--text-secondary);
-  letter-spacing: 0.2em;
-  margin-bottom: 3.5rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 2.5rem;
   opacity: 0;
   animation: fadeUp 0.8s var(--ease-out-expo) 0.4s forwards;
 }
@@ -274,22 +281,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
   opacity: 0;
   animation: fadeUp 0.8s var(--ease-out-expo) 0.35s forwards;
 }
 .divider-sword .line {
-  width: clamp(40px, 10vw, 80px);
+  width: clamp(30px, 8vw, 60px);
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.4), transparent);
 }
 .divider-sword .diamond {
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
   background: var(--neon-gold);
   transform: rotate(45deg);
-  box-shadow: 0 0 6px rgba(255,215,0,0.4);
+  opacity: 0.6;
 }
 
 /* CTA button — RPG style */
@@ -298,15 +305,15 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 1rem 2.5rem;
+  padding: 0.9rem 2.8rem;
   font-family: var(--pixel-font);
-  font-size: clamp(0.85rem, 2vw, 1.1rem);
-  color: var(--bg-abyss);
-  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
-  border: 3px solid var(--neon-gold);
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
-  transition: all 0.3s ease;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  color: var(--neon-gold);
+  background: transparent;
+  border: 1.5px solid var(--neon-gold);
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+  transition: all 0.4s var(--ease-out-expo);
   opacity: 0;
   animation: fadeUp 0.8s var(--ease-out-expo) 1.4s forwards;
   overflow: hidden;
@@ -316,16 +323,16 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.08), transparent);
   transform: translateX(-100%);
   animation: shimmer 3s ease-in-out 3s infinite;
 }
 
 .btn-start:hover {
-  background: linear-gradient(135deg, #ffe040, var(--neon-gold));
-  color: var(--bg-abyss);
-  box-shadow: 0 0 20px rgba(255,215,0,0.3), inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
-  transform: scale(1.05);
+  background: rgba(255,215,0,0.1);
+  color: var(--neon-gold);
+  box-shadow: 0 0 30px rgba(255,215,0,0.15), inset 0 0 20px rgba(255,215,0,0.05);
+  transform: scale(1.03);
 }
 
 .btn-start .play-icon {
@@ -1412,10 +1419,10 @@ body {
 }
 .narration-line {
   font-family: var(--body-font);
-  font-size: clamp(0.85rem, 2.2vw, 1.05rem);
-  color: var(--text-secondary);
-  line-height: 2.2;
-  letter-spacing: 0.08em;
+  font-size: clamp(0.78rem, 2vw, 0.92rem);
+  color: rgba(184,182,200,0.8);
+  line-height: 2.4;
+  letter-spacing: 0.06em;
   font-weight: 300;
   opacity: 0;
   transform: translateY(8px);
@@ -1423,7 +1430,7 @@ body {
 }
 .narration-line:nth-child(1) { animation-delay: 0.6s; }
 .narration-line:nth-child(2) { animation-delay: 0.9s; }
-.narration-line:nth-child(3) { animation-delay: 1.2s; color: var(--neon-gold); text-shadow: 0 0 8px var(--neon-gold-dim); font-weight: 400; }
+.narration-line:nth-child(3) { animation-delay: 1.2s; color: var(--neon-gold); text-shadow: 0 0 12px rgba(255,215,0,0.2); font-weight: 400; font-style: italic; }
 
 @keyframes narratFadeIn {
   from { opacity: 0; transform: translateY(8px); }
