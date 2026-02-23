@@ -160,54 +160,43 @@ img { max-width: 100%; display: block; }
   z-index: 10;
 }
 
-/* vignette */
+/* background image */
+.opening-bg {
+  position: fixed;
+  inset: 0;
+  background: url('images/bg-opening.webp') center center / cover no-repeat;
+  z-index: 0;
+  opacity: 0;
+  animation: bgFadeIn 2s ease 0s forwards;
+}
+@keyframes bgFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* vignette over background */
 #page-opening::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+  background: radial-gradient(ellipse at center, rgba(10,12,46,0.4) 20%, rgba(10,12,46,0.85) 70%, rgba(10,12,46,0.95) 100%);
   pointer-events: none;
   z-index: 1;
-}
-
-/* subtle star field */
-#page-opening::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(1px 1px at 10% 15%, rgba(255,215,0,0.4), transparent),
-    radial-gradient(1px 1px at 25% 40%, rgba(255,215,0,0.3), transparent),
-    radial-gradient(1.5px 1.5px at 40% 10%, rgba(232,232,255,0.5), transparent),
-    radial-gradient(1px 1px at 55% 30%, rgba(255,215,0,0.25), transparent),
-    radial-gradient(1px 1px at 70% 20%, rgba(232,232,255,0.3), transparent),
-    radial-gradient(1.5px 1.5px at 85% 45%, rgba(255,215,0,0.4), transparent),
-    radial-gradient(1px 1px at 15% 65%, rgba(232,232,255,0.2), transparent),
-    radial-gradient(1px 1px at 90% 10%, rgba(255,215,0,0.35), transparent),
-    radial-gradient(1px 1px at 50% 55%, rgba(232,232,255,0.25), transparent),
-    radial-gradient(1px 1px at 35% 75%, rgba(255,215,0,0.2), transparent),
-    radial-gradient(1px 1px at 65% 60%, rgba(232,232,255,0.3), transparent),
-    radial-gradient(1px 1px at 80% 70%, rgba(255,215,0,0.25), transparent);
-  pointer-events: none;
-  z-index: 0;
-  animation: starTwinkle 4s ease-in-out infinite alternate;
-}
-@keyframes starTwinkle {
-  0% { opacity: 0.6; }
-  100% { opacity: 1; }
 }
 
 .opening-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 2.5rem 2rem;
-  background: rgba(10,12,46,0.85);
+  padding: 3rem 2.5rem;
+  background: rgba(10,12,46,0.6);
   border: 3px solid var(--rpg-border);
   border-radius: 16px;
-  box-shadow: inset 0 0 0 2px rgba(10,12,46,0.9), inset 0 0 0 4px var(--rpg-border-inner);
-  max-width: 600px;
+  box-shadow: inset 0 0 0 2px rgba(10,12,46,0.9), inset 0 0 0 4px var(--rpg-border-inner), 0 0 80px rgba(10,12,46,0.8);
+  max-width: 620px;
   margin: 0 1rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* logo treatment */
@@ -467,7 +456,7 @@ img { max-width: 100%; display: block; }
 /* board title area */
 .board-title-area {
   text-align: center;
-  padding: 3rem 1.5rem 1rem;
+  padding: 4rem 2rem 1.5rem;
 }
 
 .board-label {
@@ -506,7 +495,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem 2.5rem;
   flex-wrap: wrap;
 }
 
@@ -529,9 +518,9 @@ img { max-width: 100%; display: block; }
 /* quest grid */
 .quest-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.2rem;
-  padding: 0 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.8rem;
+  padding: 0 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -554,7 +543,7 @@ img { max-width: 100%; display: block; }
 .card-image {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
   margin: -1.2rem -1.2rem 1rem -1.2rem;
   width: calc(100% + 2.4rem);
   overflow: hidden;
@@ -1123,7 +1112,8 @@ img { max-width: 100%; display: block; }
   .detail-container { padding: 0 1rem 3rem; }
   .status-panel { padding: 0.8rem; }
   .purchase-area { padding: 1rem; }
-  .guild-master-area { padding: 1.5rem 1rem; }
+  .guild-master-area { padding: 1.5rem 1rem; flex-direction: column; align-items: center; }
+  .guild-master-area .gm-speech { text-align: center; }
   .guild-master-area .gm-line { font-size: 0.85rem; }
   .btn-start,
   .btn-purchase { padding: 0.8rem 1.5rem; font-size: clamp(0.7rem, 3vw, 0.9rem); }
@@ -1163,8 +1153,25 @@ img { max-width: 100%; display: block; }
 .guild-master-area {
   max-width: 700px;
   margin: 0 auto;
-  padding: 1.5rem 1.5rem 0;
+  padding: 2rem 1.5rem 1rem;
   text-align: left;
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+.gm-portrait {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--rpg-border);
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(74,80,160,0.3);
+}
+.gm-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .gm-speech {
   position: relative;
@@ -1466,7 +1473,7 @@ img { max-width: 100%; display: block; }
 .about-section {
   max-width: 700px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
+  padding: 4rem 1.5rem;
 }
 .about-window {
   background: rgba(18, 21, 69, 0.7);
@@ -1523,7 +1530,7 @@ img { max-width: 100%; display: block; }
 .newsletter-section {
   max-width: 700px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
+  padding: 2rem 1.5rem 4rem;
 }
 .newsletter-window {
   background: rgba(18, 21, 69, 0.7);
@@ -1797,6 +1804,7 @@ img { max-width: 100%; display: block; }
      PAGE 1 — OPENING
      ============================================================ -->
 <div class="page active" id="page-opening">
+  <div class="opening-bg"></div>
   <!-- corner frames -->
   <div class="corner-frame tl"></div>
   <div class="corner-frame tr"></div>
@@ -1866,6 +1874,9 @@ img { max-width: 100%; display: block; }
   </div>
 
   <div class="guild-master-area">
+    <div class="gm-portrait">
+      <img src="images/guildmaster.webp" alt="ギルドマスター" loading="lazy" width="80" height="80">
+    </div>
     <div class="gm-speech">
       <div class="gm-label">◆ ギルドマスター</div>
       <div class="gm-line">よく来たな、冒険者。</div>
