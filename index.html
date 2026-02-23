@@ -2222,7 +2222,6 @@ body {
     </button>
   </div>
 
-  <div class="scroll-hint">▼ CLICK TO START ▼</div>
 </div>
 
 <!-- ============================================================
@@ -2266,41 +2265,13 @@ body {
     </div>
   </div>
 
-  <!-- FEATURED QUEST -->
+  <!-- ABOUT SECTION -->
   <div class="section-divider reveal">
     <span class="dv-line"></span>
     <span class="dv-icon">◆</span>
     <span class="dv-line"></span>
   </div>
 
-  <div class="featured-quest reveal" id="featured-quest">
-    <!-- Rendered by JS -->
-  </div>
-
-  <!-- DIVIDER -->
-  <div class="section-divider reveal">
-    <span class="dv-line"></span>
-    <span class="dv-icon">⚔</span>
-    <span class="dv-line"></span>
-  </div>
-
-  <div class="board-title-area">
-    <div class="board-label">— ALL QUESTS —</div>
-    <p class="board-subtitle">依頼書を手に取り、冒険を始めよ。</p>
-  </div>
-
-  <div class="filter-bar">
-    <button class="filter-chip active" onclick="filterQuests('all', this)">すべての依頼</button>
-    <button class="filter-chip" onclick="filterQuests('beginner', this)">見習い向け</button>
-    <button class="filter-chip" onclick="filterQuests('advanced', this)">熟練者向け</button>
-    <button class="filter-chip" onclick="filterQuests('new', this)">新着依頼</button>
-  </div>
-
-  <div class="quest-grid" id="quest-grid">
-    <!-- Cards rendered by JS -->
-  </div>
-
-  <!-- ABOUT SECTION -->
   <div class="about-section reveal" id="about-section">
     <div class="about-window">
       <div class="about-window-label">◆ ギルド案内書</div>
@@ -2324,6 +2295,29 @@ body {
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="section-divider reveal">
+    <span class="dv-line"></span>
+    <span class="dv-icon">⚔</span>
+    <span class="dv-line"></span>
+  </div>
+
+  <div class="board-title-area">
+    <div class="board-label">— ALL QUESTS —</div>
+    <p class="board-subtitle">依頼書を手に取り、冒険を始めよ。</p>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterQuests('all', this)">すべての依頼</button>
+    <button class="filter-chip" onclick="filterQuests('beginner', this)">見習い向け</button>
+    <button class="filter-chip" onclick="filterQuests('advanced', this)">熟練者向け</button>
+    <button class="filter-chip" onclick="filterQuests('new', this)">新着依頼</button>
+  </div>
+
+  <div class="quest-grid" id="quest-grid">
+    <!-- Cards rendered by JS -->
   </div>
 
   <div class="section-divider reveal">
@@ -2790,7 +2784,6 @@ function startAdventure() {
   setTimeout(() => {
     showPage('page-quest-board');
     currentPage = 'quest-board';
-    renderFeaturedQuest();
     renderQuestCards(quests);
     setTimeout(() => {
       overlay.classList.remove('active');
@@ -2843,33 +2836,6 @@ function openQuestDetail(questId) {
 /* ============================================================
    RENDER — Quest Cards
    ============================================================ */
-function renderFeaturedQuest() {
-  // Pick highest rank new quest, or first quest
-  const featured = quests.find(q => q.isNew && q.rank === 'A') || quests[0];
-  const container = document.getElementById('featured-quest');
-  if (!container || !featured) return;
-  container.innerHTML = `
-    <div class="featured-quest-inner" onclick="openQuestDetail(${featured.id})">
-      <div class="featured-quest-img">
-        <div class="featured-quest-stamp">◆ ギルド推薦</div>
-        ${featured.image ? `<img src="${featured.image}" alt="${featured.title}" width="1024" height="1024" loading="lazy">` : ''}
-      </div>
-      <div class="featured-quest-body">
-        <div class="featured-quest-rank">RANK ${featured.rank} QUEST</div>
-        <div class="featured-quest-title">${featured.title}</div>
-        <div class="featured-quest-tagline">${featured.tagline}</div>
-        <div class="featured-quest-meta">
-          <span>⚔ 難度 ${featured.difficulty}/5</span>
-          <span>⏱ ${featured.estimatedTime}</span>
-          <span>👥 ${featured.players}</span>
-        </div>
-        <div class="featured-quest-price">¥${featured.price.toLocaleString()}<span style="font-size:0.65rem;opacity:0.7;margin-left:0.3rem">（${featured.price.toLocaleString()}G）</span></div>
-        <div class="featured-quest-cta">→ この依頼を見る</div>
-      </div>
-    </div>
-  `;
-}
-
 function renderQuestCards(list) {
   const grid = document.getElementById('quest-grid');
   grid.innerHTML = list.map((q, i) => {
