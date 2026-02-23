@@ -1390,6 +1390,295 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
+   HAMBURGER MENU
+   ============================================================ */
+.hamburger-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0.4rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger-btn span {
+  width: 18px;
+  height: 2px;
+  background: var(--neon-gold);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+.hamburger-btn.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger-btn.active span:nth-child(2) { opacity: 0; }
+.hamburger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10,12,46,0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.menu-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.menu-list {
+  list-style: none;
+  text-align: center;
+}
+.menu-list li {
+  margin-bottom: 2rem;
+}
+.menu-list a {
+  font-family: var(--body-font);
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: 0.15em;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.menu-list a:hover {
+  color: var(--neon-gold);
+}
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+.about-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+.about-label {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+.about-heading {
+  font-family: var(--body-font);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 0.3rem;
+}
+.about-heading span {
+  color: var(--neon-gold);
+  text-shadow: 0 0 10px var(--neon-gold-dim);
+}
+.about-body {
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  color: var(--text-secondary);
+  line-height: 2;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 1.5rem auto 2.5rem;
+}
+.about-stats {
+  display: flex;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 4rem);
+}
+.about-stat-item {
+  text-align: center;
+}
+.about-stat-num {
+  font-family: var(--pixel-font);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: var(--neon-gold);
+  text-shadow: 0 0 8px var(--neon-gold-dim);
+}
+.about-stat-label {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+  letter-spacing: 0.05em;
+}
+.about-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  margin: 2.5rem auto 0;
+}
+
+/* ============================================================
+   NEWSLETTER SECTION
+   ============================================================ */
+.newsletter-section {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+.newsletter-label {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  color: var(--accent-red);
+  margin-bottom: 1rem;
+}
+.newsletter-heading {
+  font-family: var(--body-font);
+  font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+.newsletter-sub {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+.newsletter-form {
+  display: flex;
+  gap: 0;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.newsletter-input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  font-family: var(--body-font);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 2px solid var(--border-glow);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.newsletter-input::placeholder { color: var(--text-dim); }
+.newsletter-input:focus { border-color: var(--neon-gold); }
+.newsletter-submit {
+  padding: 0.7rem 1.2rem;
+  font-family: var(--pixel-font);
+  font-size: 0.7rem;
+  color: var(--bg-abyss);
+  background: linear-gradient(135deg, var(--accent-red), #cc4444);
+  border: 2px solid var(--accent-red);
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.newsletter-submit:hover { background: linear-gradient(135deg, #ff8080, var(--accent-red)); }
+
+/* ============================================================
+   ENHANCED FOOTER
+   ============================================================ */
+.footer-enhanced {
+  border-top: 1px solid var(--border-dim);
+  padding: 2.5rem 1.5rem 1.5rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  text-align: left;
+}
+.footer-brand .footer-brand-name {
+  font-family: var(--pixel-font);
+  font-size: 0.85rem;
+  color: var(--neon-gold);
+  text-shadow: 0 0 6px var(--neon-gold-dim);
+  margin-bottom: 0.8rem;
+}
+.footer-brand .footer-brand-desc {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.footer-brand .footer-social {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+.footer-brand .footer-social a {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  transition: all 0.3s ease;
+}
+.footer-brand .footer-social a:hover {
+  border-color: var(--neon-gold);
+  color: var(--neon-gold);
+}
+.footer-col-title {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8rem;
+}
+.footer-col a {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.footer-col a:hover { color: var(--neon-gold); }
+.footer-bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-dim);
+}
+.footer-bottom-text {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+.footer-bottom-legal {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+.footer-bottom-legal a {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.footer-bottom-legal a:hover { color: var(--neon-gold); }
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .footer-brand { grid-column: 1 / -1; }
+  .newsletter-form { flex-direction: column; }
+  .newsletter-input { border-right: 2px solid var(--border-glow); border-radius: 8px; }
+  .newsletter-input:focus { border-color: var(--neon-gold); }
+  .newsletter-submit { border-radius: 8px; margin-top: 0.5rem; }
+}
+
+/* ============================================================
    ACCESSIBILITY — prefers-reduced-motion
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -1487,6 +1776,17 @@ img { max-width: 100%; display: block; }
 <!-- Particle canvas -->
 <canvas id="particle-canvas"></canvas>
 
+<!-- Hamburger Menu Overlay -->
+<div class="menu-overlay" id="menu-overlay">
+  <ul class="menu-list">
+    <li><a onclick="closeMenu(); goToQuestBoard()">プロダクト</a></li>
+    <li><a onclick="closeMenu(); scrollToAbout()">リアクエとは</a></li>
+    <li><a onclick="closeMenu(); scrollToNewsletter()">ニュースレター</a></li>
+    <li><a onclick="closeMenu(); openModal('modal-tokushoho')">特定商取引法</a></li>
+    <li><a onclick="closeMenu(); openModal('modal-privacy')">プライバシーポリシー</a></li>
+  </ul>
+</div>
+
 <!-- Transition overlay -->
 <div class="transition-overlay" id="transition-overlay">
   <div class="transition-text">ギルド掲示板を開いています...</div>
@@ -1551,6 +1851,9 @@ img { max-width: 100%; display: block; }
         </div>
         BGM
       </button>
+      <button class="hamburger-btn" id="hamburger-board" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -1582,14 +1885,80 @@ img { max-width: 100%; display: block; }
     <!-- Cards rendered by JS -->
   </div>
 
-  <footer class="site-footer">
-    <div class="footer-logo">◆ REAL QUEST ◆</div>
-    <div class="footer-text">© 2026 リアクエ</div>
-    <div class="footer-legal">
-      <a onclick="openModal('modal-tokushoho')">特定商取引法に基づく表記</a>
-      <a onclick="openModal('modal-privacy')">プライバシーポリシー</a>
+  <!-- ABOUT SECTION -->
+  <div class="about-section" id="about-section">
+    <div class="about-label">— ABOUT —</div>
+    <div class="about-heading">現実を侵食する、<br><span>冒険者ギルド</span></div>
+    <div class="about-body">
+      リアクエは、ARG（代替現実ゲーム）を中心とした体験型エンターテインメントを企画・制作するギルドです。<br>
+      私たちは「物語に参加する」という新しい体験を通じて、日常と非日常の境界を曖昧にし、参加者一人ひとりが主人公となる世界を創造しています。
     </div>
-    <div class="footer-world">冒険者ギルド"リアクエ" — 日常が、クエストになる</div>
+    <div class="about-stats">
+      <div class="about-stat-item">
+        <div class="about-stat-num">6+</div>
+        <div class="about-stat-label">クエスト数</div>
+      </div>
+      <div class="about-stat-item">
+        <div class="about-stat-num">—</div>
+        <div class="about-stat-label">冒険者数</div>
+      </div>
+      <div class="about-stat-item">
+        <div class="about-stat-num">4.8</div>
+        <div class="about-stat-label">評価</div>
+      </div>
+    </div>
+    <div class="about-divider"></div>
+  </div>
+
+  <!-- NEWSLETTER SECTION -->
+  <div class="newsletter-section" id="newsletter-section">
+    <div class="newsletter-label">— NEWSLETTER —</div>
+    <div class="newsletter-heading">次の冒険を、見逃すな。</div>
+    <div class="newsletter-sub">新作クエストの情報や限定グッズの先行販売など、メンバー限定の情報をお届けします。</div>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="メールアドレス" aria-label="メールアドレス">
+      <button class="newsletter-submit" onclick="submitNewsletter()">登録</button>
+    </div>
+  </div>
+
+  <!-- ENHANCED FOOTER -->
+  <footer class="footer-enhanced">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">◆ REAL QUEST</div>
+        <div class="footer-brand-desc">現実の境界を侵食する、<br>体験型クエストギルド。</div>
+        <div class="footer-social">
+          <a href="#" title="X (Twitter)">𝕏</a>
+          <a href="#" title="Instagram">ig</a>
+          <a href="#" title="Note">nt</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">ショップ</div>
+        <a onclick="filterQuests('all')">すべての依頼</a>
+        <a onclick="filterQuests('new')">新着クエスト</a>
+        <a onclick="filterQuests('beginner')">見習い向け</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">サポート</div>
+        <a>よくある質問</a>
+        <a>お問い合わせ</a>
+        <a>返品・交換</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">運営情報</div>
+        <a onclick="scrollToAbout()">リアクエとは</a>
+        <a>メディア掲載</a>
+        <a>採用情報</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-text">© 2026 リアクエ REAL QUEST. All rights reserved.</div>
+      <div class="footer-bottom-legal">
+        <a onclick="openModal('modal-tokushoho')">特定商取引法に基づく表記</a>
+        <a onclick="openModal('modal-privacy')">プライバシーポリシー</a>
+      </div>
+    </div>
   </footer>
 </div>
 
@@ -1605,6 +1974,9 @@ img { max-width: 100%; display: block; }
           <span></span><span></span><span></span><span></span>
         </div>
         BGM
+      </button>
+      <button class="hamburger-btn" id="hamburger-detail" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
@@ -2646,6 +3018,62 @@ function closeModal(id) {
 }
 
 /* ============================================================
+   HAMBURGER MENU
+   ============================================================ */
+function toggleMenu() {
+  const overlay = document.getElementById('menu-overlay');
+  const btns = document.querySelectorAll('.hamburger-btn');
+  overlay.classList.toggle('active');
+  btns.forEach(b => b.classList.toggle('active'));
+}
+function closeMenu() {
+  const overlay = document.getElementById('menu-overlay');
+  const btns = document.querySelectorAll('.hamburger-btn');
+  overlay.classList.remove('active');
+  btns.forEach(b => b.classList.remove('active'));
+}
+function scrollToAbout() {
+  if (currentPage !== 'quest-board') {
+    goToQuestBoard();
+    setTimeout(() => {
+      const el = document.getElementById('about-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 1300);
+  } else {
+    const el = document.getElementById('about-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+function scrollToNewsletter() {
+  if (currentPage !== 'quest-board') {
+    goToQuestBoard();
+    setTimeout(() => {
+      const el = document.getElementById('newsletter-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 1300);
+  } else {
+    const el = document.getElementById('newsletter-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+function submitNewsletter() {
+  const input = document.querySelector('.newsletter-input');
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    openModal('modal-coming-soon');
+    return;
+  }
+  input.value = '';
+  // 仮: 登録完了モーダル表示（実際にはAPI連携）
+  const overlay = document.getElementById('modal-coming-soon');
+  if (overlay) {
+    overlay.querySelector('.rpg-modal-title').textContent = '◆ 登録準備中 ◆';
+    overlay.querySelector('.rpg-modal-body').innerHTML = '<p>ニュースレター機能は現在準備中です。<br>冒険の便りが届く日をお待ちください。</p>';
+    openModal('modal-coming-soon');
+  }
+}
+
+/* ============================================================
    KEYBOARD
    ============================================================ */
 document.addEventListener('keydown', (e) => {
@@ -2653,7 +3081,13 @@ document.addEventListener('keydown', (e) => {
     startAdventure();
   }
   if (e.key === 'Escape') {
-    // Close any open modal first
+    // Close menu first
+    const menuOverlay = document.getElementById('menu-overlay');
+    if (menuOverlay.classList.contains('active')) {
+      closeMenu();
+      return;
+    }
+    // Close any open modal
     const activeModal = document.querySelector('.rpg-modal-overlay.active');
     if (activeModal) {
       activeModal.classList.remove('active');
