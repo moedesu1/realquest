@@ -5,6 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>リアクエ REAL QUEST — 日常が、クエストになる</title>
 <meta name="description" content="リアクエ（REAL QUEST）は日常をクエストに変える体験型アドベンチャーサービス。自宅に届くリアルアイテムで、あなただけの冒険が始まる。">
+<meta name="theme-color" content="#0a0c2e">
+
+<!-- OGP -->
+<meta property="og:title" content="リアクエ REAL QUEST — 日常が、クエストになる">
+<meta property="og:description" content="自宅に届くリアルアイテムで、あなただけの冒険が始まる。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://moedesu1.github.io/realquest/">
+<meta property="og:image" content="https://moedesu1.github.io/realquest/images/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="リアクエ REAL QUEST">
+<meta name="twitter:description" content="日常が、クエストになる — 体験型アドベンチャーサービス">
+
+<!-- Favicon -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<!-- Google Analytics (GA4) — トラッキングIDを設定後にコメント解除 -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -13,25 +39,25 @@
    REAL QUEST — DESIGN SYSTEM
    ============================================================ */
 :root {
-  --bg-abyss: #050508;
-  --bg-deep: #0a0a12;
-  --bg-panel: #0d0d1a;
-  --bg-card: #111125;
-  --bg-card-hover: #161638;
-  --border-dim: #1a1a3a;
-  --border-glow: #2a2a5a;
+  --bg-abyss: #0a0c2e;
+  --bg-deep: #0e1038;
+  --bg-panel: #121545;
+  --bg-card: #161a50;
+  --bg-card-hover: #1c2060;
+  --border-dim: #2a3070;
+  --border-glow: #4a50a0;
   --text-primary: #e8e6f0;
   --text-secondary: #b8b6c8;
   --text-dim: #7a7890;
-  --neon-cyan: #00f0ff;
-  --neon-cyan-dim: #00889940;
-  --neon-magenta: #ff00aa;
-  --neon-magenta-dim: #ff00aa30;
+  --accent-light: #e8e8ff;
+  --accent-light-dim: #e8e8ff30;
+  --accent-red: #ff6666;
+  --accent-red-dim: #ff666630;
   --neon-gold: #ffd700;
   --neon-gold-dim: #ffd70030;
   --neon-green: #00ff88;
-  --neon-red: #ff3355;
-  --neon-purple: #aa66ff;
+  --rpg-border: #4a50a0;
+  --rpg-border-inner: #3a4088;
   --pixel-font: 'DotGothic16', 'Press Start 2P', monospace;
   --body-font: 'Noto Sans JP', sans-serif;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -65,15 +91,15 @@ img { max-width: 100%; display: block; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-abyss); }
 ::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+::-webkit-scrollbar-thumb:hover { background: var(--neon-gold); }
 
 /* ============================================================
    SHARED UTILITIES
    ============================================================ */
 .pixel-text { font-family: var(--pixel-font); }
-.neon-text-cyan { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan), 0 0 40px var(--neon-cyan-dim); }
-.neon-text-gold { color: var(--neon-gold); text-shadow: 0 0 10px var(--neon-gold), 0 0 40px var(--neon-gold-dim); }
-.neon-text-magenta { color: var(--neon-magenta); text-shadow: 0 0 10px var(--neon-magenta), 0 0 40px var(--neon-magenta-dim); }
+.neon-text-cyan { color: var(--accent-light); text-shadow: 0 0 8px rgba(232,232,255,0.3); }
+.neon-text-gold { color: var(--neon-gold); text-shadow: 0 0 8px var(--neon-gold-dim); }
+.neon-text-magenta { color: var(--accent-red); text-shadow: 0 0 8px var(--accent-red-dim); }
 
 /* ============================================================
    PAGE SYSTEM
@@ -144,32 +170,44 @@ img { max-width: 100%; display: block; }
   z-index: 1;
 }
 
-/* grid floor effect */
+/* subtle star field */
 #page-opening::after {
   content: '';
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40vh;
+  inset: 0;
   background:
-    linear-gradient(to top, rgba(0,240,255,0.03) 0%, transparent 100%),
-    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(0,240,255,0.04) 59px, rgba(0,240,255,0.04) 60px),
-    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(0,240,255,0.04) 59px, rgba(0,240,255,0.04) 60px);
-  mask-image: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+    radial-gradient(1px 1px at 10% 15%, rgba(255,215,0,0.4), transparent),
+    radial-gradient(1px 1px at 25% 40%, rgba(255,215,0,0.3), transparent),
+    radial-gradient(1.5px 1.5px at 40% 10%, rgba(232,232,255,0.5), transparent),
+    radial-gradient(1px 1px at 55% 30%, rgba(255,215,0,0.25), transparent),
+    radial-gradient(1px 1px at 70% 20%, rgba(232,232,255,0.3), transparent),
+    radial-gradient(1.5px 1.5px at 85% 45%, rgba(255,215,0,0.4), transparent),
+    radial-gradient(1px 1px at 15% 65%, rgba(232,232,255,0.2), transparent),
+    radial-gradient(1px 1px at 90% 10%, rgba(255,215,0,0.35), transparent),
+    radial-gradient(1px 1px at 50% 55%, rgba(232,232,255,0.25), transparent),
+    radial-gradient(1px 1px at 35% 75%, rgba(255,215,0,0.2), transparent),
+    radial-gradient(1px 1px at 65% 60%, rgba(232,232,255,0.3), transparent),
+    radial-gradient(1px 1px at 80% 70%, rgba(255,215,0,0.25), transparent);
   pointer-events: none;
   z-index: 0;
-  perspective: 400px;
-  transform: rotateX(45deg);
-  transform-origin: bottom center;
+  animation: starTwinkle 4s ease-in-out infinite alternate;
+}
+@keyframes starTwinkle {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
 }
 
 .opening-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
+  background: rgba(10,12,46,0.85);
+  border: 3px solid var(--rpg-border);
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 2px rgba(10,12,46,0.9), inset 0 0 0 4px var(--rpg-border-inner);
+  max-width: 600px;
+  margin: 0 1rem;
 }
 
 /* logo treatment */
@@ -193,11 +231,10 @@ img { max-width: 100%; display: block; }
 .logo-main {
   font-family: var(--pixel-font);
   font-size: clamp(2.2rem, 7vw, 4.5rem);
-  color: var(--neon-cyan);
+  color: var(--neon-gold);
   text-shadow:
-    0 0 20px rgba(0,240,255,0.6),
-    0 0 60px rgba(0,240,255,0.3),
-    0 0 120px rgba(0,240,255,0.1);
+    0 0 15px rgba(255,215,0,0.5),
+    0 0 40px rgba(255,215,0,0.2);
   letter-spacing: 0.08em;
   line-height: 1.2;
   margin-bottom: 0.3rem;
@@ -208,8 +245,8 @@ img { max-width: 100%; display: block; }
 .logo-main-en {
   font-family: 'Press Start 2P', var(--pixel-font);
   font-size: clamp(0.6rem, 2vw, 1rem);
-  color: var(--neon-cyan);
-  text-shadow: 0 0 15px rgba(0,240,255,0.4);
+  color: var(--neon-gold);
+  text-shadow: 0 0 10px rgba(255,215,0,0.3);
   letter-spacing: 0.35em;
   opacity: 0;
   animation: fadeUp 1.5s var(--ease-out-expo) 1.3s forwards;
@@ -246,17 +283,17 @@ img { max-width: 100%; display: block; }
 .divider-sword .line {
   width: clamp(40px, 10vw, 80px);
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
 }
 .divider-sword .diamond {
   width: 8px;
   height: 8px;
-  background: var(--neon-cyan);
+  background: var(--neon-gold);
   transform: rotate(45deg);
-  box-shadow: 0 0 8px var(--neon-cyan);
+  box-shadow: 0 0 6px rgba(255,215,0,0.4);
 }
 
-/* CTA button */
+/* CTA button — RPG style */
 .btn-start {
   position: relative;
   display: inline-flex;
@@ -266,9 +303,10 @@ img { max-width: 100%; display: block; }
   font-family: var(--pixel-font);
   font-size: clamp(0.85rem, 2vw, 1.1rem);
   color: var(--bg-abyss);
-  background: var(--neon-cyan);
-  border: 2px solid var(--neon-cyan);
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
+  border: 3px solid var(--neon-gold);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
   transition: all 0.3s ease;
   opacity: 0;
   animation: fadeUp 1.5s var(--ease-out-expo) 4.2s forwards;
@@ -285,9 +323,9 @@ img { max-width: 100%; display: block; }
 }
 
 .btn-start:hover {
-  background: transparent;
-  color: var(--neon-cyan);
-  box-shadow: 0 0 30px var(--neon-cyan-dim), inset 0 0 30px var(--neon-cyan-dim);
+  background: linear-gradient(135deg, #ffe040, var(--neon-gold));
+  color: var(--bg-abyss);
+  box-shadow: 0 0 20px rgba(255,215,0,0.3), inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
   transform: scale(1.05);
 }
 
@@ -295,22 +333,10 @@ img { max-width: 100%; display: block; }
   font-size: 1.2em;
 }
 
-/* corner frames */
+/* corner frames — hidden (replaced by RPG window borders) */
 .corner-frame {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  border-color: var(--neon-cyan);
-  border-style: solid;
-  border-width: 0;
-  opacity: 0;
-  z-index: 3;
-  animation: cornerReveal 1.5s var(--ease-out-expo) 2.5s forwards;
+  display: none;
 }
-.corner-frame.tl { top: 20px; left: 20px; border-top-width: 2px; border-left-width: 2px; }
-.corner-frame.tr { top: 20px; right: 20px; border-top-width: 2px; border-right-width: 2px; }
-.corner-frame.bl { bottom: 20px; left: 20px; border-bottom-width: 2px; border-left-width: 2px; }
-.corner-frame.br { bottom: 20px; right: 20px; border-bottom-width: 2px; border-right-width: 2px; }
 
 /* bottom hint */
 .scroll-hint {
@@ -349,8 +375,8 @@ img { max-width: 100%; display: block; }
 .transition-text {
   font-family: var(--pixel-font);
   font-size: clamp(0.8rem, 2vw, 1.2rem);
-  color: var(--neon-cyan);
-  text-shadow: 0 0 20px var(--neon-cyan);
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(255,215,0,0.4);
   animation: blink 0.8s steps(2) infinite;
 }
 
@@ -367,7 +393,7 @@ img { max-width: 100%; display: block; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(5,5,8,0.92);
+  background: rgba(10,12,46,0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-dim);
@@ -380,8 +406,8 @@ img { max-width: 100%; display: block; }
 .header-logo {
   font-family: var(--pixel-font);
   font-size: 0.9rem;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 8px var(--neon-cyan-dim);
+  color: var(--neon-gold);
+  text-shadow: 0 0 6px var(--neon-gold-dim);
 }
 
 .header-nav {
@@ -396,12 +422,13 @@ img { max-width: 100%; display: block; }
   color: var(--text-dim);
   padding: 0.4rem 0.8rem;
   border: 1px solid var(--border-dim);
+  border-radius: 8px;
   transition: all 0.3s ease;
 }
 .nav-pill:hover, .nav-pill.active {
-  color: var(--neon-cyan);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 10px var(--neon-cyan-dim);
+  color: var(--neon-gold);
+  border-color: var(--neon-gold);
+  background: rgba(255,215,0,0.06);
 }
 
 /* audio control */
@@ -411,14 +438,14 @@ img { max-width: 100%; display: block; }
   color: var(--neon-gold);
   padding: 0.3rem 0.6rem;
   border: 1px solid var(--neon-gold-dim);
-  border-radius: 2px;
+  border-radius: 8px;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 0.3rem;
 }
 .audio-toggle:hover {
-  box-shadow: 0 0 10px var(--neon-gold-dim);
+  background: rgba(255,215,0,0.06);
 }
 .audio-bars {
   display: flex;
@@ -448,7 +475,7 @@ img { max-width: 100%; display: block; }
   font-size: 0.7rem;
   letter-spacing: 0.4em;
   color: var(--neon-gold);
-  text-shadow: 0 0 8px var(--neon-gold-dim);
+  text-shadow: 0 0 6px var(--neon-gold-dim);
   margin-bottom: 0.8rem;
 }
 
@@ -470,7 +497,8 @@ img { max-width: 100%; display: block; }
   max-width: 600px;
   margin: 1.5rem auto 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
+  opacity: 0.4;
 }
 
 /* filter bar */
@@ -487,15 +515,15 @@ img { max-width: 100%; display: block; }
   font-size: 0.65rem;
   color: var(--text-dim);
   padding: 0.4rem 1rem;
-  border: 1px solid var(--border-dim);
+  border: 2px solid var(--border-dim);
+  border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 .filter-chip:hover, .filter-chip.active {
-  color: var(--neon-cyan);
-  border-color: var(--neon-cyan);
-  background: rgba(0,240,255,0.05);
-  box-shadow: 0 0 10px var(--neon-cyan-dim);
+  color: var(--neon-gold);
+  border-color: var(--neon-gold);
+  background: rgba(255,215,0,0.06);
 }
 
 /* quest grid */
@@ -531,11 +559,24 @@ img { max-width: 100%; display: block; }
   width: calc(100% + 2.4rem);
   overflow: hidden;
   border-bottom: 1px solid var(--border-dim);
+  border-radius: 9px 9px 0 0;
+  background: var(--bg-card);
 }
-.card-image svg {
+.card-image svg,
+.card-image img {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
+  background: var(--bg-card);
+}
+.card-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10,12,46,0.5) 0%, rgba(10,12,46,0.15) 30%, rgba(10,12,46,0.15) 60%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 .card-image::after {
   content: '';
@@ -545,6 +586,7 @@ img { max-width: 100%; display: block; }
   right: 0;
   height: 40%;
   background: linear-gradient(to top, var(--bg-card), transparent);
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -554,13 +596,18 @@ img { max-width: 100%; display: block; }
   aspect-ratio: 21 / 9;
   overflow: hidden;
   margin-bottom: 1.5rem;
-  border: 1px solid var(--border-dim);
+  border: 3px solid var(--rpg-border);
+  border-radius: 12px;
   position: relative;
+  background: var(--bg-card);
 }
-.detail-hero svg {
+.detail-hero svg,
+.detail-hero img {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
+  background: var(--bg-card);
 }
 .detail-hero::after {
   content: '';
@@ -573,11 +620,12 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
 }
 
-/* quest card */
+/* quest card — RPG window style */
 .quest-card {
   position: relative;
   background: var(--bg-card);
-  border: 1px solid var(--border-dim);
+  border: 3px solid var(--rpg-border);
+  border-radius: 12px;
   padding: 1.2rem;
   cursor: pointer;
   transition: all 0.4s var(--ease-out-expo);
@@ -591,7 +639,7 @@ img { max-width: 100%; display: block; }
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+  background: var(--neon-gold);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -600,15 +648,16 @@ img { max-width: 100%; display: block; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(0,240,255,0.03));
+  background: linear-gradient(180deg, transparent 60%, rgba(255,215,0,0.02));
   pointer-events: none;
+  border-radius: 9px;
 }
 
 .quest-card:hover {
-  border-color: var(--neon-cyan);
+  border-color: var(--neon-gold);
   background: var(--bg-card-hover);
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0,240,255,0.08), 0 0 0 1px rgba(0,240,255,0.1);
+  box-shadow: 0 6px 24px rgba(255,215,0,0.1);
 }
 
 .quest-card:hover::before {
@@ -623,10 +672,11 @@ img { max-width: 100%; display: block; }
   padding: 0.25rem 0.6rem;
   margin-bottom: 0.8rem;
   border: 1px solid;
+  border-radius: 6px;
 }
 .rank-S { color: var(--neon-gold); border-color: var(--neon-gold); background: rgba(255,215,0,0.08); }
-.rank-A { color: var(--neon-magenta); border-color: var(--neon-magenta); background: rgba(255,0,170,0.08); }
-.rank-B { color: var(--neon-cyan); border-color: var(--neon-cyan); background: rgba(0,240,255,0.08); }
+.rank-A { color: var(--accent-red); border-color: var(--accent-red); background: rgba(255,102,102,0.08); }
+.rank-B { color: var(--accent-light); border-color: var(--accent-light); background: rgba(232,232,255,0.08); }
 .rank-C { color: var(--neon-green); border-color: var(--neon-green); background: rgba(0,255,136,0.08); }
 .rank-D { color: var(--text-secondary); border-color: var(--text-secondary); background: rgba(152,150,168,0.08); }
 
@@ -697,7 +747,6 @@ img { max-width: 100%; display: block; }
   font-family: var(--pixel-font);
   font-size: 1.1rem;
   color: var(--neon-gold);
-  text-shadow: 0 0 8px var(--neon-gold-dim);
 }
 .card-price .currency {
   font-size: 0.7rem;
@@ -708,7 +757,7 @@ img { max-width: 100%; display: block; }
 .card-action {
   font-family: var(--pixel-font);
   font-size: 0.6rem;
-  color: var(--neon-cyan);
+  color: var(--neon-gold);
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -724,13 +773,14 @@ img { max-width: 100%; display: block; }
 /* new badge */
 .badge-new {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 8px;
+  right: 8px;
   font-family: var(--pixel-font);
   font-size: 0.55rem;
   color: var(--bg-abyss);
-  background: var(--neon-magenta);
+  background: var(--neon-gold);
   padding: 0.25rem 0.6rem;
+  border-radius: 6px;
   z-index: 2;
   font-weight: 700;
 }
@@ -760,7 +810,7 @@ img { max-width: 100%; display: block; }
   transition: color 0.3s ease;
   cursor: pointer;
 }
-.detail-back:hover { color: var(--neon-cyan); }
+.detail-back:hover { color: var(--neon-gold); }
 
 /* detail header */
 .detail-header {
@@ -777,6 +827,7 @@ img { max-width: 100%; display: block; }
   padding: 0.3rem 0.8rem;
   margin-bottom: 1rem;
   border: 1px solid;
+  border-radius: 6px;
 }
 
 .detail-title {
@@ -794,10 +845,12 @@ img { max-width: 100%; display: block; }
   font-style: italic;
 }
 
-/* status panel */
+/* status panel — RPG window */
 .status-panel {
   background: var(--bg-panel);
-  border: 1px solid var(--border-dim);
+  border: 3px solid var(--rpg-border);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
   padding: 1.2rem;
   margin-bottom: 2rem;
 }
@@ -805,8 +858,8 @@ img { max-width: 100%; display: block; }
 .status-panel-title {
   font-family: var(--pixel-font);
   font-size: 0.7rem;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 8px var(--neon-cyan-dim);
+  color: var(--neon-gold);
+  text-shadow: 0 0 6px var(--neon-gold-dim);
   margin-bottom: 1rem;
   letter-spacing: 0.1em;
 }
@@ -827,7 +880,8 @@ img { max-width: 100%; display: block; }
   gap: 0.8rem;
   padding: 0.5rem;
   background: rgba(0,0,0,0.3);
-  border-left: 2px solid var(--border-glow);
+  border-left: 2px solid var(--neon-gold);
+  border-radius: 4px;
 }
 
 .stat-icon {
@@ -857,7 +911,6 @@ img { max-width: 100%; display: block; }
   font-family: var(--pixel-font);
   font-size: 0.8rem;
   color: var(--neon-gold);
-  text-shadow: 0 0 8px var(--neon-gold-dim);
   margin-bottom: 1rem;
   letter-spacing: 0.1em;
   display: flex;
@@ -868,7 +921,8 @@ img { max-width: 100%; display: block; }
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, var(--neon-gold-dim), transparent);
+  background: linear-gradient(90deg, var(--neon-gold), transparent);
+  opacity: 0.3;
 }
 
 .prologue-text {
@@ -878,7 +932,9 @@ img { max-width: 100%; display: block; }
   font-weight: 300;
   padding: 1rem;
   background: var(--bg-panel);
-  border-left: 2px solid var(--neon-gold-dim);
+  border: 2px solid var(--rpg-border);
+  border-radius: 12px;
+  border-left: 4px solid var(--neon-gold);
 }
 
 /* items list */
@@ -896,21 +952,24 @@ img { max-width: 100%; display: block; }
   padding: 0.7rem 1rem;
   background: var(--bg-panel);
   border: 1px solid var(--border-dim);
+  border-radius: 8px;
   font-size: 0.9rem;
   color: var(--text-primary);
   transition: border-color 0.3s ease;
 }
 .items-list li:hover {
-  border-color: var(--neon-cyan-dim);
+  border-color: var(--neon-gold-dim);
 }
 .items-list .item-icon {
   font-size: 1.1rem;
 }
 
-/* purchase area */
+/* purchase area — RPG command window */
 .purchase-area {
   background: var(--bg-panel);
-  border: 1px solid var(--border-glow);
+  border: 3px solid var(--neon-gold);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
   padding: 1.5rem;
   text-align: center;
   margin-top: 2rem;
@@ -920,7 +979,6 @@ img { max-width: 100%; display: block; }
   font-family: var(--pixel-font);
   font-size: clamp(1.5rem, 4vw, 2rem);
   color: var(--neon-gold);
-  text-shadow: 0 0 15px var(--neon-gold-dim);
   margin-bottom: 0.3rem;
 }
 .purchase-price .tax {
@@ -943,8 +1001,9 @@ img { max-width: 100%; display: block; }
   font-size: clamp(0.7rem, 2vw, 0.9rem);
   color: var(--bg-abyss);
   background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
-  border: 2px solid var(--neon-gold);
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  border: 3px solid var(--neon-gold);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -961,7 +1020,8 @@ img { max-width: 100%; display: block; }
 
 .btn-purchase:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 30px var(--neon-gold-dim);
+  background: linear-gradient(135deg, #ffe040, var(--neon-gold));
+  box-shadow: 0 0 20px rgba(255,215,0,0.3), inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
 }
 
 .purchase-note {
@@ -982,8 +1042,8 @@ img { max-width: 100%; display: block; }
 .footer-logo {
   font-family: var(--pixel-font);
   font-size: 0.8rem;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 8px var(--neon-cyan-dim);
+  color: var(--neon-gold);
+  text-shadow: 0 0 6px var(--neon-gold-dim);
   margin-bottom: 0.5rem;
 }
 
@@ -1056,7 +1116,7 @@ img { max-width: 100%; display: block; }
    RESPONSIVE
    ============================================================ */
 @media (max-width: 600px) {
-  .corner-frame { width: 30px; height: 30px; }
+  /* corner-frame hidden */
   .quest-board-header { padding: 0.6rem 0.8rem; }
   .header-logo { font-size: 0.7rem; }
   .board-title-area { padding: 2rem 1rem 0.8rem; }
@@ -1088,7 +1148,7 @@ img { max-width: 100%; display: block; }
 }
 .narration-line:nth-child(1) { animation-delay: 1.8s; }
 .narration-line:nth-child(2) { animation-delay: 2.6s; }
-.narration-line:nth-child(3) { animation-delay: 3.4s; color: var(--neon-gold); text-shadow: 0 0 12px var(--neon-gold-dim); font-weight: 400; }
+.narration-line:nth-child(3) { animation-delay: 3.4s; color: var(--neon-gold); text-shadow: 0 0 8px var(--neon-gold-dim); font-weight: 400; }
 
 @keyframes narratFadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -1101,14 +1161,15 @@ img { max-width: 100%; display: block; }
 .guild-master-area {
   max-width: 700px;
   margin: 0 auto;
-  padding: 1.5rem 2rem 0;
+  padding: 1.5rem 1.5rem 0;
   text-align: left;
 }
 .gm-speech {
   position: relative;
-  background: rgba(26, 26, 58, 0.5);
-  border: 1px solid var(--border-glow);
-  border-left: 3px solid var(--neon-gold);
+  background: rgba(18, 21, 69, 0.7);
+  border: 3px solid var(--rpg-border);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
   padding: 1.2rem 1.5rem;
   margin-bottom: 0.5rem;
 }
@@ -1116,7 +1177,6 @@ img { max-width: 100%; display: block; }
   font-family: var(--pixel-font);
   font-size: 0.6rem;
   color: var(--neon-gold);
-  text-shadow: 0 0 6px var(--neon-gold-dim);
   margin-bottom: 0.6rem;
   letter-spacing: 0.15em;
 }
@@ -1139,23 +1199,7 @@ img { max-width: 100%; display: block; }
   line-height: 1.6;
 }
 
-/* ============================================================
-   CARD PIXEL FRAME (RPG window border)
-   ============================================================ */
-.card-image {
-  border: 2px solid var(--border-glow);
-  border-bottom: 1px solid var(--border-dim);
-  image-rendering: auto;
-  position: relative;
-}
-.card-image::before {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  border: 1px solid rgba(0,240,255,0.08);
-  z-index: 1;
-  pointer-events: none;
-}
+/* card image — RPG window (handled by parent card border) */
 
 /* ============================================================
    DIFFICULTY SWORDS (⚔ instead of stars)
@@ -1166,7 +1210,7 @@ img { max-width: 100%; display: block; }
   font-size: 0.8rem;
   line-height: 1;
 }
-.difficulty-swords .sword { color: var(--neon-gold); text-shadow: 0 0 4px var(--neon-gold-dim); }
+.difficulty-swords .sword { color: var(--neon-gold); }
 .difficulty-swords .sword.empty { color: var(--border-dim); text-shadow: none; }
 
 /* ============================================================
@@ -1175,25 +1219,10 @@ img { max-width: 100%; display: block; }
 .purchase-area {
   position: relative;
 }
-.purchase-area::before {
-  content: '';
-  position: absolute;
-  top: 8px; left: 8px;
-  width: 20px; height: 20px;
-  border-top: 2px solid var(--neon-gold);
-  border-left: 2px solid var(--neon-gold);
-  opacity: 0.4;
-  pointer-events: none;
-}
+/* purchase area corner decorations removed — RPG window border handles it */
+.purchase-area::before,
 .purchase-area::after {
-  content: '';
-  position: absolute;
-  bottom: 8px; right: 8px;
-  width: 20px; height: 20px;
-  border-bottom: 2px solid var(--neon-gold);
-  border-right: 2px solid var(--neon-gold);
-  opacity: 0.4;
-  pointer-events: none;
+  display: none;
 }
 .purchase-flavor {
   font-size: 0.85rem;
@@ -1227,36 +1256,23 @@ img { max-width: 100%; display: block; }
    DETAIL — 依頼書 HEADING
    ============================================================ */
 .quest-scroll-header {
-  border: 1px solid var(--neon-gold-dim);
+  border: 3px solid var(--neon-gold);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
   background: rgba(255,215,0,0.03);
   padding: 1rem 1.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
   position: relative;
 }
-.quest-scroll-header::before {
-  content: '';
-  position: absolute;
-  top: 4px; left: 4px;
-  width: 14px; height: 14px;
-  border-top: 1px solid var(--neon-gold);
-  border-left: 1px solid var(--neon-gold);
-  opacity: 0.5;
-}
+.quest-scroll-header::before,
 .quest-scroll-header::after {
-  content: '';
-  position: absolute;
-  bottom: 4px; right: 4px;
-  width: 14px; height: 14px;
-  border-bottom: 1px solid var(--neon-gold);
-  border-right: 1px solid var(--neon-gold);
-  opacity: 0.5;
+  display: none;
 }
 .quest-scroll-label {
   font-family: var(--pixel-font);
   font-size: 0.65rem;
   color: var(--neon-gold);
-  text-shadow: 0 0 6px var(--neon-gold-dim);
   letter-spacing: 0.2em;
   margin-bottom: 0.4rem;
 }
@@ -1277,12 +1293,194 @@ img { max-width: 100%; display: block; }
   margin-top: 0.5rem;
   opacity: 0.7;
 }
+
+/* ============================================================
+   FOOTER LEGAL LINKS
+   ============================================================ */
+.footer-legal {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.8rem;
+}
+.footer-legal a {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.footer-legal a:hover {
+  color: var(--neon-gold);
+}
+
+/* ============================================================
+   RPG MODAL (購入準備中 / 法的ページ)
+   ============================================================ */
+.rpg-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+}
+.rpg-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.rpg-modal {
+  background: var(--bg-panel);
+  border: 3px solid var(--neon-gold);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 0 40px rgba(255,215,0,0.15);
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+.rpg-modal-title {
+  font-family: var(--pixel-font);
+  font-size: 0.85rem;
+  color: var(--neon-gold);
+  text-shadow: 0 0 6px var(--neon-gold-dim);
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+.rpg-modal-body {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  line-height: 1.9;
+  font-weight: 300;
+}
+.rpg-modal-body h3 {
+  font-family: var(--pixel-font);
+  font-size: 0.7rem;
+  color: var(--neon-gold);
+  margin: 1.2rem 0 0.5rem;
+  letter-spacing: 0.08em;
+}
+.rpg-modal-body p {
+  margin-bottom: 0.6rem;
+}
+.rpg-modal-close {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.6rem 2rem;
+  font-family: var(--pixel-font);
+  font-size: 0.7rem;
+  color: var(--bg-abyss);
+  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
+  border: 2px solid var(--neon-gold);
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+.rpg-modal-close:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================================
+   ACCESSIBILITY — prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .quest-card { opacity: 1; }
+  .logo-mark, .logo-sub, .logo-main, .logo-main-en,
+  .logo-tagline, .divider-sword, .narration-line,
+  .btn-start, .scroll-hint, .narration-area { opacity: 1; transform: none; }
+}
+
+/* focus-visible for keyboard navigation */
+.quest-card:focus-visible,
+.btn-start:focus-visible,
+.btn-purchase:focus-visible,
+.filter-chip:focus-visible,
+.nav-pill:focus-visible,
+.rpg-modal-close:focus-visible {
+  outline: 2px solid var(--neon-gold);
+  outline-offset: 2px;
+}
 </style>
 </head>
 <body>
 
 <!-- Scanline overlay -->
 <div class="scanlines"></div>
+
+<!-- RPG Modal — 購入準備中 -->
+<div class="rpg-modal-overlay" id="modal-coming-soon" onclick="closeModal('modal-coming-soon')">
+  <div class="rpg-modal" onclick="event.stopPropagation()">
+    <div class="rpg-modal-title">◆ ギルドからのお知らせ ◆</div>
+    <div class="rpg-modal-body" style="text-align:center;">
+      <p style="font-size:2rem;margin-bottom:0.5rem;">⚔️</p>
+      <p>この依頼の受注窓口は現在<strong style="color:var(--neon-gold);">準備中</strong>です。</p>
+      <p>まもなく冒険者の受付を開始いたします。<br>今しばらくお待ちください。</p>
+    </div>
+    <button class="rpg-modal-close" onclick="closeModal('modal-coming-soon')">▶ 了解</button>
+  </div>
+</div>
+
+<!-- RPG Modal — 特定商取引法に基づく表記 -->
+<div class="rpg-modal-overlay" id="modal-tokushoho" onclick="closeModal('modal-tokushoho')">
+  <div class="rpg-modal" onclick="event.stopPropagation()">
+    <div class="rpg-modal-title">◆ 特定商取引法に基づく表記 ◆</div>
+    <div class="rpg-modal-body">
+      <h3>販売業者</h3>
+      <p>【事業者名を記載】</p>
+      <h3>代表者</h3>
+      <p>【代表者名を記載】</p>
+      <h3>所在地</h3>
+      <p>【住所を記載】</p>
+      <h3>連絡先</h3>
+      <p>メール：【メールアドレスを記載】</p>
+      <h3>販売価格</h3>
+      <p>各商品ページに表示（税込）</p>
+      <h3>送料</h3>
+      <p>全国一律無料</p>
+      <h3>お届け時期</h3>
+      <p>ご注文から3〜5営業日以内に発送</p>
+      <h3>お支払い方法</h3>
+      <p>クレジットカード決済</p>
+      <h3>返品・交換について</h3>
+      <p>商品の性質上、お客様都合による返品・交換はお受けできません。不良品の場合は到着後7日以内にご連絡ください。</p>
+    </div>
+    <button class="rpg-modal-close" onclick="closeModal('modal-tokushoho')">▶ 閉じる</button>
+  </div>
+</div>
+
+<!-- RPG Modal — プライバシーポリシー -->
+<div class="rpg-modal-overlay" id="modal-privacy" onclick="closeModal('modal-privacy')">
+  <div class="rpg-modal" onclick="event.stopPropagation()">
+    <div class="rpg-modal-title">◆ プライバシーポリシー ◆</div>
+    <div class="rpg-modal-body">
+      <h3>個人情報の取得</h3>
+      <p>当サービスでは、商品の配送およびサービス提供に必要な範囲で、お名前・住所・メールアドレス等の個人情報を取得いたします。</p>
+      <h3>利用目的</h3>
+      <p>取得した個人情報は以下の目的で利用いたします。</p>
+      <p>・商品の発送および配送状況のご連絡<br>・ご注文内容の確認・お問い合わせへの対応<br>・サービス改善のための分析（統計処理後の匿名データ）</p>
+      <h3>第三者提供</h3>
+      <p>法令に基づく場合を除き、お客様の同意なく第三者に個人情報を提供することはありません。ただし、配送業務に必要な範囲で配送業者に情報を提供する場合があります。</p>
+      <h3>安全管理</h3>
+      <p>個人情報の漏えい・滅失を防止するため、適切なセキュリティ対策を講じます。</p>
+      <h3>お問い合わせ</h3>
+      <p>個人情報に関するお問い合わせは【メールアドレスを記載】までご連絡ください。</p>
+    </div>
+    <button class="rpg-modal-close" onclick="closeModal('modal-privacy')">▶ 閉じる</button>
+  </div>
+</div>
 
 <!-- Particle canvas -->
 <canvas id="particle-canvas"></canvas>
@@ -1305,14 +1503,14 @@ img { max-width: 100%; display: block; }
   <div class="opening-content">
     <div class="logo-mark">
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-        <rect x="2" y="2" width="56" height="56" stroke="#00f0ff" stroke-width="1" opacity="0.3"/>
-        <rect x="8" y="8" width="44" height="44" stroke="#00f0ff" stroke-width="1" opacity="0.5"/>
-        <path d="M30 14 L46 30 L30 46 L14 30 Z" stroke="#00f0ff" stroke-width="1.5" fill="none"/>
-        <circle cx="30" cy="30" r="4" fill="#00f0ff" opacity="0.8"/>
-        <line x1="30" y1="18" x2="30" y2="26" stroke="#00f0ff" stroke-width="1" opacity="0.6"/>
-        <line x1="34" y1="30" x2="42" y2="30" stroke="#00f0ff" stroke-width="1" opacity="0.6"/>
-        <line x1="30" y1="34" x2="30" y2="42" stroke="#00f0ff" stroke-width="1" opacity="0.6"/>
-        <line x1="18" y1="30" x2="26" y2="30" stroke="#00f0ff" stroke-width="1" opacity="0.6"/>
+        <rect x="2" y="2" width="56" height="56" rx="8" stroke="#ffd700" stroke-width="1" opacity="0.3"/>
+        <rect x="8" y="8" width="44" height="44" rx="6" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+        <path d="M30 14 L46 30 L30 46 L14 30 Z" stroke="#ffd700" stroke-width="1.5" fill="none"/>
+        <circle cx="30" cy="30" r="4" fill="#ffd700" opacity="0.8"/>
+        <line x1="30" y1="18" x2="30" y2="26" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+        <line x1="34" y1="30" x2="42" y2="30" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+        <line x1="30" y1="34" x2="30" y2="42" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+        <line x1="18" y1="30" x2="26" y2="30" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
       </svg>
     </div>
     <div class="logo-sub">— ENTER THE REAL QUEST —</div>
@@ -1364,8 +1562,10 @@ img { max-width: 100%; display: block; }
   <div class="guild-master-area">
     <div class="gm-speech">
       <div class="gm-label">◆ ギルドマスター</div>
-      <div class="gm-line">よく来たな、冒険者。ここは"リアクエ"——現実世界のクエストを管理するギルドだ。</div>
-      <div class="gm-line">気になる依頼書を手に取ってみろ。届くのは本物のアイテムと、おまえだけの物語だ。</div>
+      <div class="gm-line">よく来たな、冒険者。</div>
+      <div class="gm-line">ここは"リアクエ"——現実世界のクエストを管理するギルドだ。</div>
+      <div class="gm-line">気になる依頼書を手に取ってみろ。</div>
+      <div class="gm-line">届くのは本物のアイテムと、おまえだけの物語だ。</div>
     </div>
   </div>
 
@@ -1382,7 +1582,11 @@ img { max-width: 100%; display: block; }
 
   <footer class="site-footer">
     <div class="footer-logo">◆ REAL QUEST ◆</div>
-    <div class="footer-text">© 2025 リアクエ</div>
+    <div class="footer-text">© 2026 リアクエ</div>
+    <div class="footer-legal">
+      <a onclick="openModal('modal-tokushoho')">特定商取引法に基づく表記</a>
+      <a onclick="openModal('modal-privacy')">プライバシーポリシー</a>
+    </div>
     <div class="footer-world">冒険者ギルド"リアクエ" — 日常が、クエストになる</div>
   </footer>
 </div>
@@ -1627,6 +1831,7 @@ const quests = [
     price: 4980,
     category: 'advanced',
     isNew: true,
+    image: 'images/quest-1-alchemy.webp',
     estimatedTime: '3〜5時間',
     players: '1〜4人',
     genre: '謎解き × ファンタジー',
@@ -1647,6 +1852,7 @@ const quests = [
     price: 3480,
     category: 'beginner',
     isNew: false,
+    image: 'images/quest-2-library.webp',
     estimatedTime: '2〜3時間',
     players: '1〜2人',
     genre: '謎解き × ホラー',
@@ -1666,6 +1872,7 @@ const quests = [
     price: 5980,
     category: 'advanced',
     isNew: true,
+    image: 'images/quest-3-ruins.webp',
     estimatedTime: '5〜8時間',
     players: '1〜4人',
     genre: '暗号解読 × 歴史冒険',
@@ -1687,6 +1894,7 @@ const quests = [
     price: 3980,
     category: 'beginner',
     isNew: false,
+    image: 'images/quest-4-clocktower.webp',
     estimatedTime: '2〜4時間',
     players: '1〜3人',
     genre: '推理 × ゴシック',
@@ -1706,6 +1914,7 @@ const quests = [
     price: 7980,
     category: 'advanced',
     isNew: true,
+    image: 'images/quest-5-deepsea.webp',
     estimatedTime: '6〜10時間',
     players: '2〜5人',
     genre: '謎解き × SF × アドベンチャー',
@@ -1728,6 +1937,7 @@ const quests = [
     price: 2980,
     category: 'beginner',
     isNew: false,
+    image: 'images/quest-6-potionshop.webp',
     estimatedTime: '1〜2時間',
     players: '1人',
     genre: '体験型 × ファンタジー',
@@ -1854,9 +2064,9 @@ function renderQuestCards(list) {
     const itemsPreview = q.items.slice(0, 2).map(it => it.name).join('、') + (q.items.length > 2 ? ' 他' : '');
 
     return `
-      <div class="quest-card" style="animation-delay: ${i * 0.1}s" onclick="openQuestDetail(${q.id})" data-category="${q.category}" ${q.isNew ? 'data-new="true"' : ''}>
+      <div class="quest-card" style="animation-delay: ${i * 0.1}s" onclick="openQuestDetail(${q.id})" onkeydown="if(event.key==='Enter')openQuestDetail(${q.id})" role="button" tabindex="0" aria-label="${q.title} — ${q.rank}ランク ${q.price.toLocaleString()}円" data-category="${q.category}" ${q.isNew ? 'data-new="true"' : ''}>
         ${q.isNew ? '<div class="badge-new">NEW</div>' : ''}
-        <div class="card-image">${getQuestImage(q.id, 320, 180)}</div>
+        <div class="card-image" style="background:#161a50">${q.image ? `<img src="${q.image}" alt="${q.title}のクエストイメージ画像" width="1024" height="1024" loading="lazy" style="background:#161a50">` : getQuestImage(q.id, 320, 180)}</div>
         <div class="card-rank ${rankClass}">RANK ${q.rank}</div>
         <div class="card-title">${q.title}</div>
         <div class="card-tagline">${q.tagline}</div>
@@ -1911,7 +2121,7 @@ function renderDetail(quest) {
   const container = document.getElementById('detail-content');
   container.innerHTML = `
     <div class="detail-back" onclick="goToQuestBoard()">← 掲示板に戻る</div>
-    <div class="detail-hero">${getQuestImage(quest.id, 640, 274)}</div>
+    <div class="detail-hero" style="background:#161a50">${quest.image ? `<img src="${quest.image}" alt="${quest.title}のクエスト詳細画像" width="1024" height="1024" loading="lazy" style="background:#161a50">` : getQuestImage(quest.id, 640, 274)}</div>
     <div class="detail-header">
       <div class="detail-rank-badge ${rankClass}">RANK ${quest.rank} QUEST</div>
       <h1 class="detail-title">${quest.title}</h1>
@@ -1980,7 +2190,7 @@ function renderDetail(quest) {
         ¥${quest.price.toLocaleString()}<span class="gold-price">（${quest.price.toLocaleString()}G）</span><span class="tax">（税込）</span>
       </div>
       <div class="purchase-shipping">送料無料・ご注文から3〜5日でお届け</div>
-      <button class="btn-purchase" onclick="alert('決済ページへ遷移します（デモ）')">
+      <button class="btn-purchase" onclick="openModal('modal-coming-soon')">
         <span class="cmd-icon">▶</span> このクエストを受注する
       </button>
       <div class="purchase-note">※ 商品の性質上、返品・交換はお受けできません</div>
@@ -1988,7 +2198,11 @@ function renderDetail(quest) {
 
     <footer class="site-footer">
       <div class="footer-logo">◆ REAL QUEST ◆</div>
-      <div class="footer-text">© 2025 リアクエ</div>
+      <div class="footer-text">© 2026 リアクエ</div>
+      <div class="footer-legal">
+        <a onclick="openModal('modal-tokushoho')">特定商取引法に基づく表記</a>
+        <a onclick="openModal('modal-privacy')">プライバシーポリシー</a>
+      </div>
       <div class="footer-world">冒険者ギルド"リアクエ" — 日常が、クエストになる</div>
     </footer>
   `;
@@ -2374,7 +2588,7 @@ function updateAudioButtons() {
       this.speedY = -(Math.random() * 0.3 + 0.1);
       this.speedX = (Math.random() - 0.5) * 0.2;
       this.opacity = Math.random() * 0.5 + 0.1;
-      this.hue = Math.random() > 0.7 ? 51 : 180; // gold or cyan
+      this.hue = Math.random() > 0.5 ? 51 : 35; // gold or warm amber
       this.life = Math.random() * 200 + 100;
       this.maxLife = this.life;
     }
@@ -2411,12 +2625,35 @@ function updateAudioButtons() {
 /* ============================================================
    KEYBOARD — Enter to start
    ============================================================ */
+/* ============================================================
+   MODALS
+   ============================================================ */
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.add('active');
+}
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.remove('active');
+}
+
+/* ============================================================
+   KEYBOARD
+   ============================================================ */
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && currentPage === 'opening') {
     startAdventure();
   }
-  if (e.key === 'Escape' && currentPage === 'detail') {
-    goToQuestBoard();
+  if (e.key === 'Escape') {
+    // Close any open modal first
+    const activeModal = document.querySelector('.rpg-modal-overlay.active');
+    if (activeModal) {
+      activeModal.classList.remove('active');
+      return;
+    }
+    if (currentPage === 'detail') {
+      goToQuestBoard();
+    }
   }
 });
 </script>

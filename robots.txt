@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://moedesu1.github.io/realquest/sitemap.xml
