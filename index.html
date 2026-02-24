@@ -403,16 +403,94 @@ body {
 }
 
 /* ============================================================
-   SCROLL REVEAL ANIMATION
+   SCROLL REVEAL ANIMATION — Multi-directional
    ============================================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  transform: translateY(40px);
+  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
 }
 .reveal.visible {
   opacity: 1;
+  transform: translate(0) scale(1);
+}
+/* Direction variants */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+}
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-scale.visible {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+}
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 0.15s; }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 0.2s; }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 0.25s; }
+.stagger-children.visible > *:nth-child(6) { transition-delay: 0.3s; }
+.stagger-children.visible > * {
+  opacity: 0;
+  transform: translateY(25px);
+}
+.stagger-children.visible > * {
+  opacity: 1;
   transform: translateY(0);
+}
+
+/* Image clip reveal */
+.reveal-clip {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.2s var(--ease-out-expo);
+}
+.reveal-clip.visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Text split animation */
+.split-text .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
+}
+.split-text.visible .char {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Counter number animation */
+.count-up {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 3D card tilt */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease;
+}
+.tilt-card > * {
+  transform: translateZ(20px);
 }
 
 /* ============================================================
@@ -2116,7 +2194,8 @@ body {
   }
   html { scroll-behavior: auto; }
   .quest-card { opacity: 1; }
-  .reveal, .detail-stagger { opacity: 1 !important; transform: none !important; }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-clip,
+  .detail-stagger, .split-text .char, .stagger-children > * { opacity: 1 !important; transform: none !important; clip-path: none !important; }
   .logo-mark, .logo-sub, .logo-main, .logo-main-en,
   .logo-tagline, .divider-sword, .narration-line,
   .btn-start, .scroll-hint, .narration-area { opacity: 1; transform: none; }
@@ -2299,19 +2378,19 @@ body {
     <div class="guild-hero-img"></div>
     <div class="guild-hero-content">
       <div class="guild-hero-label">— ADVENTURERS GUILD —</div>
-      <div class="guild-hero-title">冒険者ギルド掲示板</div>
+      <div class="guild-hero-title split-text">冒険者ギルド掲示板</div>
     </div>
   </div>
 
-  <div class="about-section reveal" id="about-section">
+  <div class="about-section reveal-scale" id="about-section">
     <div class="about-inner">
-      <div class="about-img">
+      <div class="about-img reveal-clip">
         <div class="about-stamp">◆ ギルド案内書</div>
         <img src="images/guildmaster.webp" alt="ギルドマスター" width="512" height="512" loading="lazy">
       </div>
       <div class="about-body-side">
         <div class="about-rank">◆ GUILD MASTER</div>
-        <div class="about-heading">よく来たな、冒険者。</div>
+        <div class="about-heading split-text">よく来たな、冒険者。</div>
         <div class="about-body">
           ここは"リアクエ"——現実世界にクエストを仕掛ける冒険者ギルドだ。<br><br>
           おまえの元に届くのは、ただの荷物じゃない。暗号が刻まれた羊皮紙、封蝋で閉じられた手紙、正体不明のアイテム——すべてがクエストの鍵だ。<br><br>
@@ -2319,7 +2398,7 @@ body {
         </div>
         <div class="about-stats">
           <div class="about-stat-item">
-            <div class="about-stat-num">6+</div>
+            <div class="about-stat-num count-up" data-count="6" data-suffix="+">0</div>
             <div class="about-stat-label">依頼数</div>
           </div>
           <div class="about-stat-item">
@@ -2327,7 +2406,7 @@ body {
             <div class="about-stat-label">冒険者数</div>
           </div>
           <div class="about-stat-item">
-            <div class="about-stat-num">4.8</div>
+            <div class="about-stat-num count-up" data-count="4.8">0</div>
             <div class="about-stat-label">ギルド評価</div>
           </div>
         </div>
@@ -2342,12 +2421,12 @@ body {
     <span class="dv-line"></span>
   </div>
 
-  <div class="board-title-area">
+  <div class="board-title-area reveal">
     <div class="board-label">— ALL QUESTS —</div>
-    <p class="board-subtitle">依頼書を手に取り、冒険を始めよ。</p>
+    <p class="board-subtitle split-text">依頼書を手に取り、冒険を始めよ。</p>
   </div>
 
-  <div class="filter-bar">
+  <div class="filter-bar reveal">
     <button class="filter-chip active" onclick="filterQuests('all', this)">すべての依頼</button>
     <button class="filter-chip" onclick="filterQuests('beginner', this)">見習い向け</button>
     <button class="filter-chip" onclick="filterQuests('advanced', this)">熟練者向け</button>
@@ -2365,7 +2444,7 @@ body {
   </div>
 
   <!-- NEWSLETTER SECTION -->
-  <div class="newsletter-section reveal" id="newsletter-section">
+  <div class="newsletter-section reveal-scale" id="newsletter-section">
     <div class="newsletter-window">
       <div class="newsletter-label">◆ 伝書鳩登録</div>
       <div class="newsletter-heading">次の依頼を、見逃すな。</div>
@@ -2823,8 +2902,12 @@ function startAdventure() {
     showPage('page-quest-board');
     currentPage = 'quest-board';
     renderQuestCards(quests);
+    initSplitText();
+    initCounters();
     setTimeout(() => {
       overlay.classList.remove('active');
+      // Trigger hero text reveal after transition fades
+      document.querySelectorAll('.guild-hero .split-text').forEach(el => el.classList.add('visible'));
     }, 600);
   }, 1500);
 }
@@ -3587,7 +3670,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ============================================================
-   SCROLL REVEAL — IntersectionObserver
+   SCROLL REVEAL — IntersectionObserver (multi-directional)
    ============================================================ */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -3596,12 +3679,82 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.15 });
+}, { threshold: 0.12 });
 
-// Observe quest board reveal elements
+const revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-clip, .split-text, .stagger-children';
+
 function initRevealObservers() {
-  document.querySelectorAll('#page-quest-board .reveal').forEach(el => {
+  document.querySelectorAll('#page-quest-board').forEach(page => {
+    page.querySelectorAll(revealSelectors).forEach(el => {
+      revealObserver.observe(el);
+    });
+  });
+}
+
+/* ============================================================
+   TEXT SPLIT — Split text into individual characters
+   ============================================================ */
+function initSplitText() {
+  document.querySelectorAll('.split-text:not(.split-done)').forEach(el => {
+    const text = el.textContent;
+    el.innerHTML = '';
+    text.split('').forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = 'char';
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      span.style.transitionDelay = (i * 0.04) + 's';
+      el.appendChild(span);
+    });
+    el.classList.add('split-done');
     revealObserver.observe(el);
+  });
+}
+
+/* ============================================================
+   COUNTER — Animate numbers counting up
+   ============================================================ */
+function initCounters() {
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseFloat(el.dataset.count);
+        if (isNaN(target)) return;
+        const isFloat = target % 1 !== 0;
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = eased * target;
+          el.textContent = isFloat ? current.toFixed(1) : Math.round(current) + (el.dataset.suffix || '');
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count-up').forEach(el => counterObserver.observe(el));
+}
+
+/* ============================================================
+   3D TILT — Cards follow cursor for depth effect
+   ============================================================ */
+function initTilt() {
+  document.querySelectorAll('.quest-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const tiltX = (y - 0.5) * -8;
+      const tiltY = (x - 0.5) * 8;
+      card.style.transform = `translateY(-8px) scale(1.02) perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
   });
 }
 
@@ -3614,6 +3767,9 @@ renderQuestCards = function(list) {
     revealObserver.observe(card);
   });
   initRevealObservers();
+  initSplitText();
+  initCounters();
+  initTilt();
 };
 
 // Detail page stagger — trigger after page shows
