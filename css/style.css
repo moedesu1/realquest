@@ -2424,13 +2424,13 @@ input, select { font-family: inherit; }
 }
 
 /* --- CART BUTTON (HEADER) --- */
-.header-cart-btn {
+.header-cart-btn, .cart-btn {
   position: relative; display: flex; align-items: center;
   padding: 0.3rem; color: var(--text-secondary);
   background: none; border: none; cursor: pointer;
   transition: color 0.3s;
 }
-.header-cart-btn:hover { color: var(--neon-gold); }
+.header-cart-btn:hover, .cart-btn:hover { color: var(--neon-gold); }
 .cart-count {
   position: absolute; top: -4px; right: -6px;
   min-width: 16px; height: 16px;

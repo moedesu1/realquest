@@ -1006,10 +1006,7 @@ function renderDetail(quest) {
   quest.reviews.forEach(r => dist[r.stars - 1]++);
   const maxDist = Math.max(...dist, 1);
 
-  const hasShopify = quest.shopifyVariantId && shopifyClient;
-  const cartBtnHtml = hasShopify
-    ? `<button class="btn-accept btn-cart" onclick="addToCart(${quest.id})">カートに追加する</button>`
-    : `<button class="btn-accept" onclick="acceptQuest(${quest.id})">このクエストを受諾する</button>`;
+  const cartBtnHtml = `<button class="btn-accept" onclick="acceptQuest(${quest.id})">このクエストを受諾する</button>`;
 
   const container = document.getElementById('detail-content');
   container.innerHTML = `
@@ -1292,29 +1289,39 @@ async function acceptQuest(questId) {
 
   playAcceptSFX();
 
-  userState.acceptedQuests.push(questId);
-  userState.questsAccepted++;
-
-  const newTitle = [...titleLevels].reverse().find(t => userState.questsAccepted >= t.min);
-  if (newTitle) userState.title = newTitle.name;
-  updateHeaderUser();
-
-  // Persist to Supabase
-  if (db) {
-    const { data: { user } } = await db.auth.getUser();
-    if (user) {
-      await db.from('accepted_quests').upsert({ user_id: user.id, quest_id: questId, status: 'accepted' });
-      await db.from('profiles').update({ quests_accepted: userState.questsAccepted, title: userState.title }).eq('id', user.id);
-    }
-  }
-
+  // UI即時更新 — 緑の受諾マークをすぐ表示
   const area = document.getElementById(`accept-area-${questId}`);
   const btn = area?.querySelector('.btn-accept');
   if (btn) { btn.textContent = '受諾処理中...'; btn.style.pointerEvents = 'none'; }
+
+  // カートに追加（Shopify接続時）
+  if (shopifyClient && shopifyCheckout && quest.shopifyVariantId) {
+    try {
+      const lineItems = [{ variantId: quest.shopifyVariantId, quantity: 1 }];
+      shopifyCheckout = await shopifyClient.checkout.addLineItems(shopifyCheckout.id, lineItems);
+      updateCartBadge();
+    } catch (e) { console.warn('Cart add failed:', e.message); }
+  }
+
+  // 受諾状態をローカルに保持
+  userState.acceptedQuests.push(questId);
+
+  // Supabaseに受諾を記録（購入済みではなくaccepted状態）
+  if (db) {
+    try {
+      const { data: { user } } = await db.auth.getUser();
+      if (user) {
+        await db.from('accepted_quests').upsert({ user_id: user.id, quest_id: questId, status: 'in_cart' });
+      }
+    } catch (e) {}
+  }
+
+  // 緑の受諾マークを表示
   setTimeout(() => {
-    area?.classList.add('accepted');
+    if (area) area.classList.add('accepted');
     if (btn) btn.remove();
     showToast('クエストを受諾しました！');
+    updateCartBadge();
   }, 800);
 
   trackEvent('accept_quest', { quest_id: questId, quest_name: quest.title });
@@ -1385,7 +1392,8 @@ function proceedToCheckout() {
 }
 
 function updateCartBadge() {
-  const count = shopifyCheckout?.lineItems?.reduce((sum, item) => sum + item.quantity, 0) || 0;
+  const shopifyCount = shopifyCheckout?.lineItems?.reduce((sum, item) => sum + item.quantity, 0) || 0;
+  const count = shopifyCount || userState.acceptedQuests.length;
   document.querySelectorAll('.cart-count').forEach(el => {
     el.textContent = count;
     el.style.display = count > 0 ? 'flex' : 'none';
@@ -1640,7 +1648,7 @@ function renderMyPage() {
         <div class="mypage-name">${userState.name}</div>
         <div class="mypage-title">${userState.title}</div>
         <div class="mypage-stats-row">
-          <div class="mypage-stat-item"><div class="mypage-stat-num">${userState.questsAccepted}</div><div class="mypage-stat-label">購入済み</div></div>
+          <div class="mypage-stat-item"><div class="mypage-stat-num">${userState.questsAccepted}</div><div class="mypage-stat-label">受諾済み</div></div>
           <div class="mypage-stat-item"><div class="mypage-stat-num">${userState.coins}</div><div class="mypage-stat-label">コイン</div></div>
         </div>
       </div>
@@ -1659,7 +1667,7 @@ function renderMyPage() {
       <div class="title-progress">
         <div class="title-progress-header">
           <div class="title-progress-label">称号レベル</div>
-          <div class="title-progress-next">${nextTitle ? `次の称号: ${nextTitle.name}（あと${nextTitle.min - userState.questsAccepted}回購入）` : '最高ランク達成！'}</div>
+          <div class="title-progress-next">${nextTitle ? `次の称号: ${nextTitle.name}（あと${nextTitle.min - userState.questsAccepted}回受諾）` : '最高ランク達成！'}</div>
         </div>
         <div class="title-bar"><div class="title-bar-fill" style="width:${Math.min(progress, 100)}%"></div></div>
         <div class="title-steps">
@@ -1669,7 +1677,7 @@ function renderMyPage() {
       <div class="mypage-status-summary">
         <div class="mypage-summary-card">
           <div class="mypage-summary-num">${userState.questsAccepted}</div>
-          <div class="mypage-summary-label">購入済みクエスト</div>
+          <div class="mypage-summary-label">受諾済みクエスト</div>
         </div>
         <div class="mypage-summary-card" onclick="navigateTo('coin-shop')" style="cursor:pointer">
           <div class="mypage-summary-num" style="color:var(--neon-gold)">${userState.coins}</div>
