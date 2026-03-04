@@ -142,7 +142,7 @@ input, select { font-family: inherit; }
   animation: logoFadeIn 2s ease 1s forwards;
 }
 .hero-logo {
-  width: clamp(350px, 115vw, 1800px);
+  width: clamp(400px, 140vw, 2400px);
   filter: drop-shadow(0 0 30px rgba(255,200,50,0.5)) drop-shadow(0 0 60px rgba(255,150,0,0.25));
   animation: logoFloat 4s ease-in-out 3s infinite alternate;
 }
