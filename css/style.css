@@ -142,7 +142,7 @@ input, select { font-family: inherit; }
   animation: logoFadeIn 2s ease 1s forwards;
 }
 .hero-logo {
-  width: clamp(300px, 85vw, 1200px);
+  width: clamp(320px, 95vw, 1400px);
   filter: drop-shadow(0 0 30px rgba(255,200,50,0.5)) drop-shadow(0 0 60px rgba(255,150,0,0.25));
   animation: logoFloat 4s ease-in-out 3s infinite alternate;
 }
@@ -217,16 +217,16 @@ input, select { font-family: inherit; }
   border: 3px solid #ffd700;
   border-radius: 8px;
   color: #2d1810;
-  font-weight: bold;
-  font-size: 18px;
-  font-family: var(--pixel-font);
+  font-weight: 900;
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-family: 'Noto Sans JP', sans-serif;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
   box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.4),
     inset 0 2px 4px rgba(255, 255, 255, 0.3),
     inset 0 -2px 4px rgba(0, 0, 0, 0.2),
     0 0 20px rgba(255, 215, 0, 0.4);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.15em;
 }
 .btn-adventurer::before {
   content: '';
@@ -258,9 +258,9 @@ input, select { font-family: inherit; }
   border: 3px solid #5fa89f;
   border-radius: 8px;
   color: #e8f5f3;
-  font-weight: bold;
-  font-size: 18px;
-  font-family: var(--pixel-font);
+  font-weight: 900;
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-family: 'Noto Sans JP', sans-serif;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.4),
