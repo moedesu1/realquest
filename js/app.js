@@ -1116,7 +1116,7 @@ function renderDetail(quest) {
         </div>
         <textarea class="review-form-text" id="review-text-${quest.id}" placeholder="レビューを入力..." rows="4"></textarea>
         <div class="review-form-sub">
-          <label>できたえ: <select id="review-craft-${quest.id}"><option value="5">5</option><option value="4">4</option><option value="3" selected>3</option><option value="2">2</option><option value="1">1</option></select></label>
+          <label>クオリティ: <select id="review-craft-${quest.id}"><option value="5">5</option><option value="4">4</option><option value="3" selected>3</option><option value="2">2</option><option value="1">1</option></select></label>
           <label>ストーリー: <select id="review-story-${quest.id}"><option value="5">5</option><option value="4">4</option><option value="3" selected>3</option><option value="2">2</option><option value="1">1</option></select></label>
           <label>ボリューム: <select id="review-volume-${quest.id}"><option value="5">5</option><option value="4">4</option><option value="3" selected>3</option><option value="2">2</option><option value="1">1</option></select></label>
         </div>
@@ -1151,7 +1151,7 @@ function renderDetail(quest) {
               <div class="review-text">${r.text}</div>
               ${r.sub ? `
                 <div class="review-sub-ratings">
-                  <div class="review-sub-item"><span class="review-sub-label">できたえ：</span><span class="review-sub-value">${r.sub.craft}</span></div>
+                  <div class="review-sub-item"><span class="review-sub-label">クオリティ：</span><span class="review-sub-value">${r.sub.craft}</span></div>
                   <div class="review-sub-item"><span class="review-sub-label">ストーリー：</span><span class="review-sub-value">${r.sub.story}</span></div>
                   <div class="review-sub-item"><span class="review-sub-label">ボリューム：</span><span class="review-sub-value">${r.sub.volume}</span></div>
                 </div>
@@ -1802,6 +1802,7 @@ function renderMyPage() {
 }
 
 function toggleFavorite(questId, btn) {
+  if (!userState.loggedIn) { showToast('お気に入り機能はログインが必要です'); navigateTo('mypage'); return; }
   const idx = userState.favorites.indexOf(questId);
   if (idx >= 0) {
     userState.favorites.splice(idx, 1);
