@@ -37,6 +37,23 @@ async function initShopify() {
   } catch (e) { console.warn('Shopify init skipped:', e.message); }
 }
 
+/* ── LOGIN FUNCTIONS (early load) ── */
+function loginAsAdventurer() {
+  playStartSFX();
+  setTimeout(() => startBGM(), 300);
+  navigateTo('quest-board', {
+    transitionText: 'クエストボードへ向かっています...',
+    delay: 800,
+  });
+}
+
+function loginAsCreator() {
+  navigateTo('creator', {
+    transitionText: '創造者ギルドを準備中...',
+    delay: 800,
+  });
+}
+
 /* ── GA4 TRACKING ── */
 function trackEvent(name, params = {}) {
   if (typeof gtag === 'function') gtag('event', name, params);
@@ -643,22 +660,7 @@ if (db) { try {
   })();
 } catch(e) { console.warn('Auth listener init error:', e); } }
 
-/* Login as adventurer — show auth form on mypage */
-function loginAsAdventurer() {
-  playStartSFX();
-  setTimeout(() => startBGM(), 300);
-  navigateTo('quest-board', {
-    transitionText: 'クエストボードへ向かっています...',
-    delay: 800,
-  });
-}
-
-function loginAsCreator() {
-  navigateTo('creator', {
-    transitionText: '創造者ギルドを準備中...',
-    delay: 800,
-  });
-}
+/* loginAsAdventurer / loginAsCreator — moved to top of file */
 
 function updateHeaderUser() {
   document.querySelectorAll('#header-username').forEach(el => el.textContent = userState.name);
