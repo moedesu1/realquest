@@ -4,2429 +4,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>リアクエ REAL QUEST — 日常が、クエストになる</title>
-<meta name="description" content="リアクエ（REAL QUEST）は日常をクエストに変える体験型アドベンチャーサービス。自宅に届くリアルアイテムで、あなただけの冒険が始まる。">
-<meta name="theme-color" content="#0a0c2e">
-
-<!-- OGP -->
+<meta name="description" content="リアクエ（REAL QUEST）は物語アイテムが家に届き、現実がゲームフィールドになるリアルRPGのクエスト販売プラットフォーム。">
+<meta name="theme-color" content="#1a140e">
 <meta property="og:title" content="リアクエ REAL QUEST — 日常が、クエストになる">
-<meta property="og:description" content="自宅に届くリアルアイテムで、あなただけの冒険が始まる。">
+<meta property="og:description" content="物語アイテムが家に届き、現実がゲームフィールドになる">
 <meta property="og:type" content="website">
+<meta property="og:image" content="images/ogp.png">
 <meta property="og:url" content="https://moedesu1.github.io/realquest/">
-<meta property="og:image" content="https://moedesu1.github.io/realquest/images/ogp.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="リアクエ REAL QUEST">
-<meta name="twitter:description" content="日常が、クエストになる — 体験型アドベンチャーサービス">
-
-<!-- Favicon -->
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-
-<!-- Google Analytics (GA4) — トラッキングIDを設定後にコメント解除 -->
-<!--
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BV83G3D60G"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-BV83G3D60G');
 </script>
--->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
-<style>
-/* ============================================================
-   REAL QUEST — DESIGN SYSTEM
-   ============================================================ */
-:root {
-  --bg-abyss: #0a0c2e;
-  --bg-deep: #0e1038;
-  --bg-panel: #121545;
-  --bg-card: #161a50;
-  --bg-card-hover: #1c2060;
-  --border-dim: #2a3070;
-  --border-glow: #4a50a0;
-  --text-primary: #e8e6f0;
-  --text-secondary: #b8b6c8;
-  --text-dim: #7a7890;
-  --accent-light: #e8e8ff;
-  --accent-light-dim: #e8e8ff30;
-  --accent-red: #ff6666;
-  --accent-red-dim: #ff666630;
-  --neon-gold: #ffd700;
-  --neon-gold-dim: #ffd70030;
-  --neon-green: #00ff88;
-  --rpg-border: #4a50a0;
-  --rpg-border-inner: #3a4088;
-  --pixel-font: 'DotGothic16', 'Press Start 2P', monospace;
-  --body-font: 'Noto Sans JP', sans-serif;
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  font-family: var(--body-font);
-  background: var(--bg-abyss);
-  color: var(--text-primary);
-  overflow-x: hidden;
-  min-height: 100vh;
-}
-
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; }
-img { max-width: 100%; display: block; }
-
-/* scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-abyss); }
-::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--neon-gold); }
-
-/* ============================================================
-   CUSTOM CURSOR
-   ============================================================ */
-body {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M10 2 L12 10 L10 18 L8 10 Z' fill='%23ffd700' opacity='0.9'/%3E%3C/svg%3E") 10 10, auto;
-}
-.quest-card, .btn-start, .btn-purchase, .featured-quest-inner, .filter-chip, .hamburger-btn, .menu-list a, .footer-links a, .footer-social a, .nav-pill, .rpg-modal-close, .newsletter-submit, .audio-toggle {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 1 L13.5 9 L12 11 L10.5 9 Z' fill='%23ffd700'/%3E%3Crect x='9' y='11' width='6' height='2' rx='1' fill='%23ffd700'/%3E%3Crect x='11' y='13' width='2' height='7' fill='%23ffd700'/%3E%3Ccircle cx='12' cy='21' r='1.5' fill='%23ffd700'/%3E%3C/svg%3E") 12 12, pointer;
-}
-
-/* ============================================================
-   SHARED UTILITIES
-   ============================================================ */
-.pixel-text { font-family: var(--pixel-font); }
-.neon-text-cyan { color: var(--accent-light); text-shadow: 0 0 8px rgba(232,232,255,0.3); }
-.neon-text-gold { color: var(--neon-gold); text-shadow: 0 0 8px var(--neon-gold-dim); }
-.neon-text-magenta { color: var(--accent-red); text-shadow: 0 0 8px var(--accent-red-dim); }
-
-/* ============================================================
-   PAGE SYSTEM
-   ============================================================ */
-.page {
-  position: fixed;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s var(--ease-in-out);
-  overflow-y: auto;
-  overflow-x: hidden;
-  z-index: 1;
-}
-.page.active {
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 10;
-}
-
-/* ============================================================
-   SCANLINE OVERLAY (Global)
-   ============================================================ */
-.scanlines {
-  display: none;
-}
-
-/* ============================================================
-   PARTICLE CANVAS
-   ============================================================ */
-#particle-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* ============================================================
-   PAGE 1 — OPENING / FIRST VIEW
-   ============================================================ */
-#page-opening {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  background: #000;
-  z-index: 10;
-}
-
-/* background image */
-.opening-bg {
-  position: fixed;
-  inset: -5%;
-  width: 110%;
-  height: 110%;
-  background: url('images/bg-opening-new.webp') center center / cover no-repeat;
-  z-index: 0;
-  opacity: 0;
-  animation: bgFadeIn 3s ease 0s forwards, kenBurns 30s ease-in-out 3s infinite alternate;
-}
-@keyframes bgFadeIn {
-  from { opacity: 0; transform: scale(1.1); }
-  to { opacity: 1; transform: scale(1); }
-}
-@keyframes kenBurns {
-  0% { transform: scale(1) translate(0, 0); }
-  100% { transform: scale(1.05) translate(-1%, -0.5%); }
-}
-
-/* vignette over background — bottom-heavy for text readability */
-#page-opening::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.7) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* top ambient light */
-#page-opening::after {
-  content: '';
-  position: fixed;
-  top: -20%;
-  left: 30%;
-  width: 40%;
-  height: 60%;
-  background: radial-gradient(ellipse, rgba(255,215,0,0.06) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
-  animation: godRay 8s ease-in-out infinite alternate;
-}
-@keyframes godRay {
-  0% { opacity: 0.4; transform: translateY(0); }
-  100% { opacity: 0.8; transform: translateY(3%); }
-}
-
-/* Content — glassmorphism card */
-.opening-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.2rem, 3vw, 2.5rem);
-  background: linear-gradient(180deg, rgba(10,12,46,0.75) 0%, rgba(14,16,56,0.85) 100%);
-  border: 2px solid rgba(74,80,160,0.6);
-  border-radius: 20px;
-  box-shadow:
-    0 0 0 1px rgba(255,215,0,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.04),
-    inset 0 0 40px rgba(10,12,46,0.5),
-    0 25px 80px rgba(0,0,0,0.6),
-    0 0 120px rgba(10,12,46,0.8);
-  width: 90%;
-  max-width: 460px;
-  margin: 0 auto;
-  backdrop-filter: blur(16px) saturate(1.2);
-  -webkit-backdrop-filter: blur(16px) saturate(1.2);
-}
-
-/* Floating ornate frame behind logo area */
-.opening-frame {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(480px, 85vw);
-  height: min(480px, 85vw);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0;
-  animation: frameReveal 2s var(--ease-out-expo) 0.5s forwards;
-}
-.opening-frame svg {
-  width: 100%;
-  height: 100%;
-}
-@keyframes frameReveal {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.8) rotate(-5deg); }
-  to { opacity: 0.2; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-}
-
-/* Floating dust particles in opening */
-.opening-dust {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-}
-.dust-particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: rgba(255,215,0,0.5);
-  border-radius: 50%;
-  animation: dustFloat linear infinite;
-}
-@keyframes dustFloat {
-  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-10vh) translateX(40px); opacity: 0; }
-}
-
-/* logo treatment — full-screen hero */
-.logo-mark {
-  margin-bottom: 1.2rem;
-  opacity: 0;
-  animation: logoReveal 1.2s var(--ease-out-expo) 0.8s forwards;
-  filter: drop-shadow(0 0 20px rgba(255,215,0,0.3));
-}
-
-.logo-sub {
-  font-family: var(--pixel-font);
-  font-size: clamp(0.5rem, 1.2vw, 0.65rem);
-  letter-spacing: 0.5em;
-  color: rgba(255,215,0,0.5);
-  text-transform: uppercase;
-  margin-bottom: 0.8rem;
-  opacity: 0;
-  animation: fadeUp 1s var(--ease-out-expo) 0.6s forwards;
-}
-
-.logo-main {
-  font-family: var(--pixel-font);
-  font-size: clamp(3rem, 10vw, 6rem);
-  color: var(--neon-gold);
-  text-shadow:
-    0 0 20px rgba(255,215,0,0.6),
-    0 0 60px rgba(255,215,0,0.3),
-    0 0 120px rgba(255,215,0,0.15),
-    0 2px 4px rgba(0,0,0,0.8);
-  letter-spacing: -0.08em;
-  line-height: 1.1;
-  margin-bottom: 0.2rem;
-  opacity: 0;
-  animation: logoTextReveal 1.2s var(--ease-out-expo) 1s forwards, logoGlow 4s ease-in-out 2.5s infinite alternate;
-}
-@keyframes logoGlow {
-  0% { text-shadow: 0 0 20px rgba(255,215,0,0.6), 0 0 60px rgba(255,215,0,0.3), 0 0 120px rgba(255,215,0,0.15), 0 2px 4px rgba(0,0,0,0.8); }
-  100% { text-shadow: 0 0 30px rgba(255,215,0,0.7), 0 0 80px rgba(255,215,0,0.35), 0 0 160px rgba(255,215,0,0.2), 0 2px 4px rgba(0,0,0,0.8); }
-}
-
-.logo-main-en {
-  font-family: 'Press Start 2P', var(--pixel-font);
-  font-size: clamp(0.55rem, 1.8vw, 0.9rem);
-  color: rgba(255,215,0,0.7);
-  text-shadow: 0 0 15px rgba(255,215,0,0.3);
-  letter-spacing: 0.2em;
-  opacity: 0;
-  animation: fadeUp 1s var(--ease-out-expo) 1.2s forwards;
-  margin-bottom: 2rem;
-}
-
-.logo-tagline {
-  font-family: var(--body-font);
-  font-weight: 300;
-  font-size: clamp(1rem, 3vw, 1.4rem);
-  color: #fff;
-  letter-spacing: 0.2em;
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeUp 1s var(--ease-out-expo) 1.4s forwards;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.5);
-}
-
-.logo-tagline span {
-  color: var(--neon-gold);
-  text-shadow: 0 0 12px var(--neon-gold-dim), 0 1px 6px rgba(0,0,0,0.6);
-  font-weight: 500;
-}
-
-/* decorative sword divider */
-.divider-sword {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 1s var(--ease-out-expo) 1.3s forwards;
-}
-.divider-sword .line {
-  width: clamp(40px, 10vw, 80px);
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent);
-}
-.divider-sword .diamond {
-  width: 6px;
-  height: 6px;
-  background: var(--neon-gold);
-  transform: rotate(45deg);
-  opacity: 0.7;
-  box-shadow: 0 0 8px rgba(255,215,0,0.4);
-}
-
-/* CTA button — RPG style */
-.btn-start {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 1rem 3.5rem;
-  font-family: var(--pixel-font);
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  color: var(--neon-gold);
-  background: rgba(255,215,0,0.08);
-  border: 1px solid rgba(255,215,0,0.5);
-  border-radius: 2px;
-  letter-spacing: 0.15em;
-  transition: all 0.4s var(--ease-out-expo);
-  opacity: 0;
-  animation: fadeUp 1s var(--ease-out-expo) 2.2s forwards, btnPulse 3s ease-in-out 4s infinite;
-  overflow: hidden;
-  text-shadow: 0 0 10px rgba(255,215,0,0.4);
-  box-shadow: 0 0 20px rgba(255,215,0,0.08), inset 0 0 20px rgba(255,215,0,0.03);
-}
-
-.btn-start::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.12), transparent);
-  transform: translateX(-100%);
-  animation: shimmer 3s ease-in-out 4s infinite;
-}
-
-.btn-start::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border: 1px solid transparent;
-  border-image: linear-gradient(135deg, rgba(255,215,0,0.6), transparent 40%, transparent 60%, rgba(255,215,0,0.6)) 1;
-  pointer-events: none;
-}
-
-.btn-start:hover {
-  background: rgba(255,215,0,0.15);
-  color: #fff;
-  text-shadow: 0 0 15px rgba(255,215,0,0.6);
-  box-shadow: 0 0 40px rgba(255,215,0,0.2), 0 0 80px rgba(255,215,0,0.1), inset 0 0 30px rgba(255,215,0,0.08);
-  transform: scale(1.04);
-  border-color: rgba(255,215,0,0.8);
-}
-
-@keyframes btnPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.08), inset 0 0 20px rgba(255,215,0,0.03); }
-  50% { box-shadow: 0 0 30px rgba(255,215,0,0.15), inset 0 0 30px rgba(255,215,0,0.06); }
-}
-
-.btn-start .play-icon {
-  font-size: 1.1em;
-  animation: playBlink 2s ease-in-out 4s infinite;
-}
-@keyframes playBlink {
-  0%, 40%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-  60% { opacity: 1; }
-}
-
-/* corner frames — hidden (replaced by RPG window borders) */
-.corner-frame {
-  display: none;
-}
-
-/* Bottom hint text */
-.opening-bottom-hint {
-  font-family: var(--pixel-font);
-  font-size: 0.55rem;
-  letter-spacing: 0.4em;
-  color: rgba(255,215,0,0.3);
-  margin-top: 2rem;
-  opacity: 0;
-  animation: fadeUp 1s var(--ease-out-expo) 3s forwards, pulse 2.5s ease-in-out 4s infinite;
-}
-
-/* bottom hint — hidden, replaced by opening-bottom-hint */
-.scroll-hint {
-  display: none;
-}
-
-/* ============================================================
-   TRANSITION OVERLAY
-   ============================================================ */
-.transition-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: radial-gradient(ellipse at center, rgba(10,12,46,0.95) 0%, #000 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.2rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-.transition-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-.transition-emblem {
-  width: 48px;
-  height: 48px;
-  opacity: 0.6;
-  animation: emblemPulse 1.5s ease-in-out infinite;
-}
-@keyframes emblemPulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
-.transition-text {
-  font-family: var(--pixel-font);
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
-  color: var(--neon-gold);
-  text-shadow: 0 0 12px rgba(255,215,0,0.4);
-  letter-spacing: 0.15em;
-  animation: blink 0.8s steps(2) infinite;
-}
-
-/* ============================================================
-   SCROLL REVEAL ANIMATION — Multi-directional
-   ============================================================ */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translate(0) scale(1);
-}
-/* Direction variants */
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-60px);
-  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
-}
-.reveal-right {
-  opacity: 0;
-  transform: translateX(60px);
-  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
-}
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
-}
-.reveal-left.visible,
-.reveal-right.visible,
-.reveal-scale.visible {
-  opacity: 1;
-  transform: translate(0) scale(1);
-}
-
-/* Stagger children */
-.stagger-children > * {
-  opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
-}
-.stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
-.stagger-children.visible > *:nth-child(2) { transition-delay: 0.1s; }
-.stagger-children.visible > *:nth-child(3) { transition-delay: 0.15s; }
-.stagger-children.visible > *:nth-child(4) { transition-delay: 0.2s; }
-.stagger-children.visible > *:nth-child(5) { transition-delay: 0.25s; }
-.stagger-children.visible > *:nth-child(6) { transition-delay: 0.3s; }
-.stagger-children.visible > * {
-  opacity: 0;
-  transform: translateY(25px);
-}
-.stagger-children.visible > * {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Image clip reveal */
-.reveal-clip {
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 1.2s var(--ease-out-expo);
-}
-.reveal-clip.visible {
-  clip-path: inset(0 0 0 0);
-}
-
-/* Text split animation */
-.split-text .char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
-}
-.split-text.visible .char {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Counter number animation */
-.count-up {
-  font-variant-numeric: tabular-nums;
-}
-
-/* 3D card tilt */
-.tilt-card {
-  transform-style: preserve-3d;
-  transition: transform 0.15s ease;
-}
-.tilt-card > * {
-  transform: translateZ(20px);
-}
-
-/* ============================================================
-   DETAIL STAGGER ANIMATION
-   ============================================================ */
-.detail-stagger {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
-}
-.detail-stagger.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.detail-stagger:nth-child(1) { transition-delay: 0s; }
-.detail-stagger:nth-child(2) { transition-delay: 0.1s; }
-.detail-stagger:nth-child(3) { transition-delay: 0.2s; }
-.detail-stagger:nth-child(4) { transition-delay: 0.3s; }
-.detail-stagger:nth-child(5) { transition-delay: 0.4s; }
-.detail-stagger:nth-child(6) { transition-delay: 0.5s; }
-.detail-stagger:nth-child(7) { transition-delay: 0.6s; }
-.detail-stagger:nth-child(8) { transition-delay: 0.7s; }
-
-/* ============================================================
-   PAGE 2 — QUEST BOARD
-   ============================================================ */
-#page-quest-board {
-  background:
-    radial-gradient(ellipse at 20% 0%, rgba(74,80,160,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 100%, rgba(255,215,0,0.03) 0%, transparent 50%),
-    repeating-linear-gradient(0deg, transparent 0px, transparent 60px, rgba(74,80,160,0.03) 60px, rgba(74,80,160,0.03) 61px),
-    repeating-linear-gradient(90deg, transparent 0px, transparent 60px, rgba(74,80,160,0.03) 60px, rgba(74,80,160,0.03) 61px),
-    var(--bg-abyss);
-  padding-bottom: 4rem;
-}
-
-/* top bar */
-.quest-board-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(10,12,46,0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-dim);
-  padding: 0.8rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-logo {
-  font-family: var(--pixel-font);
-  font-size: 0.9rem;
-  color: var(--neon-gold);
-  text-shadow: 0 0 6px var(--neon-gold-dim);
-}
-
-.header-nav {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.nav-pill {
-  font-family: var(--pixel-font);
-  font-size: 0.65rem;
-  color: var(--text-dim);
-  padding: 0.4rem 0.8rem;
-  border: 1px solid var(--border-dim);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-.nav-pill:hover, .nav-pill.active {
-  color: var(--neon-gold);
-  border-color: var(--neon-gold);
-  background: rgba(255,215,0,0.06);
-}
-
-/* audio control */
-.audio-toggle {
-  font-family: var(--pixel-font);
-  font-size: 0.7rem;
-  color: var(--neon-gold);
-  padding: 0.3rem 0.6rem;
-  border: 1px solid var(--neon-gold-dim);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-.audio-toggle:hover {
-  background: rgba(255,215,0,0.06);
-}
-.audio-bars {
-  display: flex;
-  gap: 2px;
-  align-items: flex-end;
-  height: 10px;
-}
-.audio-bars span {
-  width: 2px;
-  background: var(--neon-gold);
-  animation: audioBar 0.8s ease-in-out infinite alternate;
-}
-.audio-bars span:nth-child(1) { height: 3px; animation-delay: 0s; }
-.audio-bars span:nth-child(2) { height: 7px; animation-delay: 0.2s; }
-.audio-bars span:nth-child(3) { height: 5px; animation-delay: 0.4s; }
-.audio-bars span:nth-child(4) { height: 9px; animation-delay: 0.1s; }
-.audio-toggle.muted .audio-bars span { animation: none; height: 2px; }
-
-/* ============================================================
-   GUILD HERO BANNER
-   ============================================================ */
-.guild-hero {
-  position: relative;
-  width: 100%;
-  height: clamp(200px, 40vw, 380px);
-  overflow: hidden;
-}
-.guild-hero-img {
-  position: absolute;
-  inset: 0;
-  background: url('images/hero-board.webp') center 40% / cover no-repeat;
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
-}
-.guild-hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(10,12,46,0.3) 0%, rgba(10,12,46,0.1) 40%, rgba(10,12,46,0.7) 80%, var(--bg-abyss) 100%),
-    linear-gradient(to right, rgba(10,12,46,0.5) 0%, transparent 30%, transparent 70%, rgba(10,12,46,0.5) 100%);
-  pointer-events: none;
-}
-.guild-hero-content {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  z-index: 2;
-  width: 90%;
-  max-width: 600px;
-}
-.guild-hero-label {
-  font-family: var(--pixel-font);
-  font-size: 0.55rem;
-  letter-spacing: 0.4em;
-  color: var(--neon-gold);
-  text-shadow: 0 0 8px var(--neon-gold-dim);
-  margin-bottom: 0.5rem;
-}
-.guild-hero-title {
-  font-family: var(--body-font);
-  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-  font-weight: 700;
-  color: var(--text-primary);
-  text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(255,215,0,0.15);
-  line-height: 1.5;
-  animation: titleGlow 3s ease-in-out infinite alternate;
-}
-@keyframes titleGlow {
-  0% { text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 30px rgba(255,215,0,0.1); }
-  100% { text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 50px rgba(255,215,0,0.25); }
-}
-
-/* ============================================================
-   FEATURED QUEST (ギルド推薦依頼)
-   ============================================================ */
-.featured-quest {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-.featured-quest-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--bg-card);
-  border: 3px solid var(--neon-gold);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 0 40px rgba(255,215,0,0.08);
-  cursor: pointer;
-  transition: all 0.4s var(--ease-out-expo);
-  position: relative;
-  animation: featuredGlow 4s ease-in-out infinite alternate;
-}
-@keyframes featuredGlow {
-  0% { box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 0 30px rgba(255,215,0,0.06); }
-  100% { box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 0 50px rgba(255,215,0,0.15), 0 0 100px rgba(255,215,0,0.05); }
-}
-.featured-quest-inner:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 8px 50px rgba(255,215,0,0.2), 0 0 80px rgba(255,215,0,0.08);
-  animation: none;
-}
-.featured-quest-img {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-}
-.featured-quest-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-out-expo);
-}
-.featured-quest-inner:hover .featured-quest-img img {
-  transform: scale(1.06);
-}
-.featured-quest-img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, transparent 60%, var(--bg-card));
-  pointer-events: none;
-}
-.featured-quest-stamp {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-family: var(--pixel-font);
-  font-size: 0.55rem;
-  color: var(--bg-abyss);
-  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
-  padding: 0.3rem 0.7rem;
-  border-radius: 6px;
-  letter-spacing: 0.1em;
-  z-index: 2;
-  box-shadow: 0 2px 8px rgba(255,215,0,0.3);
-}
-.featured-quest-body {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.featured-quest-rank {
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  color: var(--neon-gold);
-  letter-spacing: 0.1em;
-  margin-bottom: 0.6rem;
-}
-.featured-quest-title {
-  font-family: var(--pixel-font);
-  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-  color: var(--text-primary);
-  line-height: 1.6;
-  margin-bottom: 0.6rem;
-}
-.featured-quest-tagline {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  font-style: italic;
-  line-height: 1.7;
-  font-weight: 300;
-  margin-bottom: 1rem;
-}
-.featured-quest-meta {
-  display: flex;
-  gap: 1rem;
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  margin-bottom: 1rem;
-}
-.featured-quest-price {
-  font-family: var(--pixel-font);
-  font-size: 1rem;
-  color: var(--neon-gold);
-  text-shadow: 0 0 6px var(--neon-gold-dim);
-}
-.featured-quest-cta {
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  color: var(--neon-gold);
-  letter-spacing: 0.1em;
-  margin-top: auto;
-  opacity: 0;
-  transform: translateX(-8px);
-  transition: all 0.3s ease;
-}
-.featured-quest-inner:hover .featured-quest-cta {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-@media (max-width: 600px) {
-  .featured-quest-inner { grid-template-columns: 1fr; }
-  .featured-quest-img { aspect-ratio: 16 / 9; }
-  .featured-quest-img::after { background: linear-gradient(to bottom, transparent 60%, var(--bg-card)); }
-  .featured-quest-cta { opacity: 1; transform: none; }
-}
-
-/* ============================================================
-   SECTION DIVIDERS — RPG Motifs
-   ============================================================ */
-.section-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 2.5rem 0;
-}
-.section-divider .dv-line {
-  width: clamp(50px, 15vw, 120px);
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
-}
-.section-divider .dv-icon {
-  color: var(--neon-gold);
-  font-size: 0.9rem;
-  opacity: 0.5;
-  text-shadow: 0 0 6px var(--neon-gold-dim);
-}
-
-/* board title area */
-.board-title-area {
-  text-align: center;
-  padding: 2rem 2rem 1.5rem;
-}
-
-.board-label {
-  font-family: var(--pixel-font);
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
-  color: var(--neon-gold);
-  text-shadow: 0 0 6px var(--neon-gold-dim);
-  margin-bottom: 0.8rem;
-}
-
-.board-title {
-  font-family: var(--pixel-font);
-  font-size: clamp(1.2rem, 4vw, 2rem);
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-}
-
-.board-subtitle {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-}
-
-.board-divider {
-  width: 80%;
-  max-width: 600px;
-  margin: 1.5rem auto 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
-  opacity: 0.4;
-}
-
-/* filter bar */
-.filter-bar {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 2rem 1rem 2.5rem;
-  flex-wrap: wrap;
-}
-
-.filter-chip {
-  font-family: var(--pixel-font);
-  font-size: 0.65rem;
-  color: var(--text-dim);
-  padding: 0.4rem 1rem;
-  border: 2px solid var(--border-dim);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-.filter-chip:hover, .filter-chip.active {
-  color: var(--neon-gold);
-  border-color: var(--neon-gold);
-  background: rgba(255,215,0,0.06);
-}
-
-/* quest grid */
-.quest-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.8rem;
-  padding: 0 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-@media (max-width: 700px) {
-  .quest-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-    padding: 0 0.8rem;
-  }
-}
-
-@media (max-width: 420px) {
-  .quest-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* card image */
-.card-image {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  margin: -1.2rem -1.2rem 1rem -1.2rem;
-  width: calc(100% + 2.4rem);
-  overflow: hidden;
-  border-bottom: 1px solid var(--border-dim);
-  border-radius: 9px 9px 0 0;
-  background: var(--bg-card);
-}
-.card-image svg,
-.card-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  background: var(--bg-card);
-  transition: transform 0.6s var(--ease-out-expo);
-}
-.quest-card:hover .card-image img,
-.quest-card:hover .card-image svg {
-  transform: scale(1.08);
-}
-.card-image::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(10,12,46,0.5) 0%, rgba(10,12,46,0.15) 30%, rgba(10,12,46,0.15) 60%, transparent 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-.card-image::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background: linear-gradient(to top, var(--bg-card), transparent);
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* detail hero image */
-.detail-hero {
-  width: 100%;
-  aspect-ratio: 21 / 9;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-  border: 3px solid var(--rpg-border);
-  border-radius: 12px;
-  position: relative;
-  background: var(--bg-card);
-}
-.detail-hero svg,
-.detail-hero img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  background: var(--bg-card);
-}
-.detail-hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(to top, var(--bg-abyss), transparent);
-  pointer-events: none;
-}
-
-/* quest card — RPG window style */
-.quest-card {
-  position: relative;
-  background: var(--bg-card);
-  border: 3px solid var(--rpg-border);
-  border-radius: 12px;
-  padding: 1.2rem;
-  cursor: pointer;
-  transition: all 0.4s var(--ease-out-expo);
-  overflow: hidden;
-}
-
-.quest-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--neon-gold);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.quest-card {
-  --mx: 50%;
-  --my: 50%;
-}
-.quest-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle 250px at var(--mx) var(--my), rgba(255,215,0,0.05) 0%, transparent 100%),
-    linear-gradient(180deg, transparent 60%, rgba(255,215,0,0.02));
-  pointer-events: none;
-  border-radius: 9px;
-  transition: background 0.15s ease;
-}
-.quest-card:hover::after {
-  background:
-    radial-gradient(circle 250px at var(--mx) var(--my), rgba(255,215,0,0.12) 0%, transparent 100%),
-    linear-gradient(180deg, transparent 50%, rgba(255,215,0,0.04));
-}
-
-.quest-card:hover {
-  border-color: var(--neon-gold);
-  background: var(--bg-card-hover);
-  transform: translateY(-8px) scale(1.02);
-  box-shadow:
-    0 12px 40px rgba(255,215,0,0.18),
-    0 0 0 1px rgba(255,215,0,0.15),
-    0 0 60px rgba(255,215,0,0.06),
-    inset 0 0 30px rgba(255,215,0,0.02);
-}
-
-.quest-card:hover::before {
-  opacity: 1;
-}
-
-/* card inner elements */
-.card-rank {
-  display: inline-block;
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  padding: 0.25rem 0.6rem;
-  margin-bottom: 0.8rem;
-  border: 1px solid;
-  border-radius: 6px;
-}
-.rank-S { color: var(--neon-gold); border-color: var(--neon-gold); background: rgba(255,215,0,0.08); }
-.rank-A { color: var(--accent-red); border-color: var(--accent-red); background: rgba(255,102,102,0.08); }
-.rank-B { color: var(--accent-light); border-color: var(--accent-light); background: rgba(232,232,255,0.08); }
-.rank-C { color: var(--neon-green); border-color: var(--neon-green); background: rgba(0,255,136,0.08); }
-.rank-D { color: var(--text-secondary); border-color: var(--text-secondary); background: rgba(152,150,168,0.08); }
-
-.card-title {
-  font-family: var(--pixel-font);
-  font-size: clamp(0.85rem, 2.2vw, 1.05rem);
-  color: var(--text-primary);
-  margin-bottom: 0.8rem;
-  line-height: 1.6;
-}
-
-.card-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
-}
-
-.meta-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-}
-.meta-label {
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  min-width: 60px;
-}
-.meta-value {
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-}
-
-.difficulty-stars {
-  display: flex;
-  gap: 2px;
-}
-.difficulty-stars .star {
-  width: 12px;
-  height: 12px;
-  background: var(--neon-gold);
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-.difficulty-stars .star.empty {
-  background: var(--border-dim);
-}
-
-.card-items {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-  line-height: 1.7;
-  border-left: 2px solid var(--border-dim);
-  padding-left: 0.8rem;
-}
-
-.card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid var(--border-dim);
-  padding-top: 0.8rem;
-}
-
-.card-price {
-  font-family: var(--pixel-font);
-  font-size: 1.1rem;
-  color: var(--neon-gold);
-}
-.card-price .currency {
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  margin-right: 2px;
-}
-
-.card-action {
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  color: var(--neon-gold);
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  opacity: 0;
-  transform: translateX(-8px);
-  transition: all 0.3s ease;
-}
-.quest-card:hover .card-action {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* new badge */
-.badge-new {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  font-family: var(--pixel-font);
-  font-size: 0.55rem;
-  color: var(--bg-abyss);
-  background: var(--neon-gold);
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-  z-index: 2;
-  font-weight: 700;
-}
-
-/* ============================================================
-   PAGE 3 — QUEST DETAIL
-   ============================================================ */
-#page-detail {
-  background: var(--bg-abyss);
-}
-
-.detail-container {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 1.5rem 4rem;
-}
-
-/* back nav */
-.detail-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--pixel-font);
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  padding: 1.2rem 0;
-  transition: color 0.3s ease;
-  cursor: pointer;
-}
-.detail-back:hover { color: var(--neon-gold); }
-
-/* detail header */
-.detail-header {
-  text-align: center;
-  padding: 1rem 0 2rem;
-  border-bottom: 1px solid var(--border-dim);
-  margin-bottom: 2rem;
-}
-
-.detail-rank-badge {
-  display: inline-block;
-  font-family: var(--pixel-font);
-  font-size: 0.7rem;
-  padding: 0.3rem 0.8rem;
-  margin-bottom: 1rem;
-  border: 1px solid;
-  border-radius: 6px;
-}
-
-.detail-title {
-  font-family: var(--pixel-font);
-  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
-  color: var(--text-primary);
-  line-height: 1.5;
-  margin-bottom: 0.8rem;
-}
-
-.detail-tagline {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-  font-style: italic;
-}
-
-/* status panel — RPG window */
-.status-panel {
-  background: var(--bg-panel);
-  border: 3px solid var(--rpg-border);
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
-  padding: 1.2rem;
-  margin-bottom: 2rem;
-}
-
-.status-panel-title {
-  font-family: var(--pixel-font);
-  font-size: 0.7rem;
-  color: var(--neon-gold);
-  text-shadow: 0 0 6px var(--neon-gold-dim);
-  margin-bottom: 1rem;
-  letter-spacing: 0.1em;
-}
-
-.status-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.8rem;
-}
-
-@media (max-width: 500px) {
-  .status-grid { grid-template-columns: 1fr; }
-}
-
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 0.5rem;
-  background: rgba(0,0,0,0.3);
-  border-left: 2px solid var(--neon-gold);
-  border-radius: 4px;
-}
-
-.stat-icon {
-  font-size: 1.2rem;
-  width: 2rem;
-  text-align: center;
-}
-
-.stat-info .stat-label {
-  font-family: var(--pixel-font);
-  font-size: 0.55rem;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
-}
-.stat-info .stat-value {
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  margin-top: 0.15rem;
-}
-
-/* prologue */
-.section-block {
-  margin-bottom: 2rem;
-}
-
-.section-title {
-  font-family: var(--pixel-font);
-  font-size: 0.8rem;
-  color: var(--neon-gold);
-  margin-bottom: 1rem;
-  letter-spacing: 0.1em;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-.section-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, var(--neon-gold), transparent);
-  opacity: 0.3;
-}
-
-.prologue-text {
-  font-size: 0.95rem;
-  line-height: 2;
-  color: var(--text-primary);
-  font-weight: 300;
-  padding: 1rem;
-  background: var(--bg-panel);
-  border: 2px solid var(--rpg-border);
-  border-radius: 12px;
-  border-left: 4px solid var(--neon-gold);
-}
-
-/* items list */
-.items-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.items-list li {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 0.7rem 1rem;
-  background: var(--bg-panel);
-  border: 1px solid var(--border-dim);
-  border-radius: 8px;
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  transition: border-color 0.3s ease;
-}
-.items-list li:hover {
-  border-color: var(--neon-gold-dim);
-}
-.items-list .item-icon {
-  font-size: 1.1rem;
-}
-
-/* purchase area — RPG command window */
-.purchase-area {
-  background: var(--bg-panel);
-  border: 3px solid var(--neon-gold);
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
-  padding: 1.5rem;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.purchase-price {
-  font-family: var(--pixel-font);
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  color: var(--neon-gold);
-  margin-bottom: 0.3rem;
-}
-.purchase-price .tax {
-  font-size: 0.65rem;
-  color: var(--text-dim);
-}
-
-.purchase-shipping {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  margin-bottom: 1.2rem;
-}
-
-.btn-purchase {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 1rem 2.5rem;
-  font-family: var(--pixel-font);
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
-  color: var(--bg-abyss);
-  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
-  border: 3px solid var(--neon-gold);
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-purchase::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  transform: translateX(-100%);
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-.btn-purchase:hover {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, #ffe040, var(--neon-gold));
-  box-shadow: 0 0 20px rgba(255,215,0,0.3), inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
-}
-
-.purchase-note {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  margin-top: 0.8rem;
-}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.site-footer {
-  border-top: 1px solid var(--border-dim);
-  padding: 2rem 1.5rem;
-  text-align: center;
-}
-
-.footer-logo {
-  font-family: var(--pixel-font);
-  font-size: 0.8rem;
-  color: var(--neon-gold);
-  text-shadow: 0 0 6px var(--neon-gold-dim);
-  margin-bottom: 0.5rem;
-}
-
-.footer-text {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-}
-
-/* ============================================================
-   ANIMATIONS
-   ============================================================ */
-@keyframes logoReveal {
-  from { opacity: 0; transform: scale(0.8); filter: blur(10px) drop-shadow(0 0 0 transparent); }
-  to { opacity: 1; transform: scale(1); filter: blur(0) drop-shadow(0 0 20px rgba(255,215,0,0.3)); }
-}
-
-@keyframes logoTextReveal {
-  0% { opacity: 0; transform: translateY(30px) scale(0.95); letter-spacing: 0.2em; }
-  100% { opacity: 1; transform: translateY(0) scale(1); letter-spacing: -0.08em; }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes cornerReveal {
-  from { opacity: 0; }
-  to { opacity: 0.3; }
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  60%, 100% { transform: translateX(100%); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes audioBar {
-  0% { height: 2px; }
-  100% { height: 10px; }
-}
-
-@keyframes cardReveal {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* card entrance — handled by scroll reveal system */
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 600px) {
-  /* corner-frame hidden */
-  .quest-board-header { padding: 0.6rem 0.8rem; }
-  .header-logo { font-size: 0.7rem; }
-  .board-title-area { padding: 2rem 1rem 0.8rem; }
-  .detail-container { padding: 0 1rem 3rem; }
-  .status-panel { padding: 0.8rem; }
-  .purchase-area { padding: 1rem; }
-  .guild-master-area { padding: 1.5rem 1rem; flex-direction: column; align-items: center; }
-  .guild-master-area .gm-speech { text-align: center; }
-  .guild-master-area .gm-line { font-size: 0.85rem; }
-  .btn-start { padding: 0.9rem 2.5rem; font-size: clamp(0.75rem, 3vw, 0.9rem); }
-  .btn-purchase { padding: 0.8rem 1.5rem; font-size: clamp(0.7rem, 3vw, 0.9rem); }
-  .opening-content { padding: 0 1.2rem 3rem; }
-}
-
-/* ============================================================
-   NARRATION LINES (First View)
-   ============================================================ */
-.narration-area {
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeUp 1s var(--ease-out-expo) 1.6s forwards;
-}
-.narration-line {
-  font-family: var(--body-font);
-  font-size: clamp(0.8rem, 2vw, 0.95rem);
-  color: rgba(255,255,255,0.85);
-  line-height: 2.4;
-  letter-spacing: 0.08em;
-  font-weight: 400;
-  opacity: 0;
-  transform: translateY(8px);
-  animation: narratFadeIn 1.5s var(--ease-out-expo) forwards;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.5);
-}
-.narration-line:nth-child(1) { animation-delay: 1.7s; }
-.narration-line:nth-child(2) { animation-delay: 2.0s; }
-.narration-line:nth-child(3) { animation-delay: 2.3s; color: var(--neon-gold); text-shadow: 0 0 12px rgba(255,215,0,0.2), 0 1px 4px rgba(0,0,0,0.6); font-weight: 400; font-style: italic; }
-
-@keyframes narratFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ============================================================
-   GUILD MASTER AREA (Quest Board)
-   ============================================================ */
-.guild-master-area {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 1rem;
-  text-align: left;
-  display: flex;
-  gap: 1.2rem;
-  align-items: flex-start;
-}
-.gm-portrait {
-  width: 80px;
-  height: 80px;
-  min-width: 80px;
-  border-radius: 50%;
-  border: 2px solid var(--rpg-border);
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(74,80,160,0.3);
-}
-.gm-portrait img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.gm-speech {
-  position: relative;
-  background: rgba(18, 21, 69, 0.7);
-  border: 3px solid var(--rpg-border);
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 0.5rem;
-}
-.gm-label {
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  color: var(--neon-gold);
-  margin-bottom: 0.6rem;
-  letter-spacing: 0.15em;
-}
-.gm-line {
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  line-height: 2;
-  font-weight: 300;
-}
-
-/* ============================================================
-   CARD TAGLINE
-   ============================================================ */
-.card-tagline {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  font-style: italic;
-  margin-bottom: 0.8rem;
-  letter-spacing: 0.04em;
-  line-height: 1.6;
-}
-
-/* card image — RPG window (handled by parent card border) */
-
-/* ============================================================
-   DIFFICULTY SWORDS (⚔ instead of stars)
-   ============================================================ */
-.difficulty-swords {
-  display: flex;
-  gap: 3px;
-  font-size: 0.8rem;
-  line-height: 1;
-}
-.difficulty-swords .sword { color: var(--neon-gold); }
-.difficulty-swords .sword.empty { color: var(--border-dim); text-shadow: none; }
-
-/* ============================================================
-   PURCHASE AREA — Enhanced frame
-   ============================================================ */
-.purchase-area {
-  position: relative;
-}
-/* purchase area corner decorations removed — RPG window border handles it */
-.purchase-area::before,
-.purchase-area::after {
-  display: none;
-}
-.purchase-flavor {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-style: italic;
-  margin-bottom: 1rem;
-  letter-spacing: 0.04em;
-}
-.purchase-cmd {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-.purchase-cmd .cmd-icon {
-  font-family: var(--pixel-font);
-  font-size: 0.9rem;
-  color: var(--neon-gold);
-}
-
-/* ============================================================
-   GOLD PRICE NOTATION
-   ============================================================ */
-.gold-price {
-  font-family: var(--pixel-font);
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  margin-left: 0.3rem;
-}
-
-/* ============================================================
-   DETAIL — 依頼書 HEADING
-   ============================================================ */
-.quest-scroll-header {
-  border: 3px solid var(--neon-gold);
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner);
-  background: rgba(255,215,0,0.03);
-  padding: 1rem 1.5rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  position: relative;
-}
-.quest-scroll-header::before,
-.quest-scroll-header::after {
-  display: none;
-}
-.quest-scroll-label {
-  font-family: var(--pixel-font);
-  font-size: 0.65rem;
-  color: var(--neon-gold);
-  letter-spacing: 0.2em;
-  margin-bottom: 0.4rem;
-}
-.quest-scroll-title {
-  font-family: var(--pixel-font);
-  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-  color: var(--text-primary);
-}
-
-/* ============================================================
-   FOOTER WORLD TEXT
-   ============================================================ */
-.footer-world {
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
-  margin-top: 0.5rem;
-  opacity: 0.7;
-}
-
-/* ============================================================
-   FOOTER LEGAL LINKS
-   ============================================================ */
-.footer-legal {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 0.8rem;
-}
-.footer-legal a {
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.3s ease;
-  cursor: pointer;
-}
-.footer-legal a:hover {
-  color: var(--neon-gold);
-}
-
-/* ============================================================
-   RPG MODAL (購入準備中 / 法的ページ)
-   ============================================================ */
-.rpg-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  padding: 1rem;
-}
-.rpg-modal-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-.rpg-modal {
-  background: var(--bg-panel);
-  border: 3px solid var(--neon-gold);
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 0 40px rgba(255,215,0,0.15);
-  max-width: 560px;
-  width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  padding: 1.5rem;
-}
-.rpg-modal-title {
-  font-family: var(--pixel-font);
-  font-size: 0.85rem;
-  color: var(--neon-gold);
-  text-shadow: 0 0 6px var(--neon-gold-dim);
-  margin-bottom: 1rem;
-  text-align: center;
-  letter-spacing: 0.1em;
-}
-.rpg-modal-body {
-  font-size: 0.85rem;
-  color: var(--text-primary);
-  line-height: 1.9;
-  font-weight: 300;
-}
-.rpg-modal-body h3 {
-  font-family: var(--pixel-font);
-  font-size: 0.7rem;
-  color: var(--neon-gold);
-  margin: 1.2rem 0 0.5rem;
-  letter-spacing: 0.08em;
-}
-.rpg-modal-body p {
-  margin-bottom: 0.6rem;
-}
-.rpg-modal-close {
-  display: block;
-  margin: 1.5rem auto 0;
-  padding: 0.6rem 2rem;
-  font-family: var(--pixel-font);
-  font-size: 0.7rem;
-  color: var(--bg-abyss);
-  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
-  border: 2px solid var(--neon-gold);
-  border-radius: 8px;
-  transition: transform 0.2s ease;
-}
-.rpg-modal-close:hover {
-  transform: scale(1.05);
-}
-
-/* ============================================================
-   HAMBURGER MENU
-   ============================================================ */
-.hamburger-btn {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0.4rem;
-  cursor: pointer;
-  z-index: 1001;
-}
-.hamburger-btn span {
-  width: 18px;
-  height: 2px;
-  background: var(--neon-gold);
-  border-radius: 1px;
-  transition: all 0.3s ease;
-}
-.hamburger-btn.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
-.hamburger-btn.active span:nth-child(2) { opacity: 0; }
-.hamburger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
-
-.menu-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(10,12,46,0.97);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-.menu-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-.menu-close {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.5rem;
-  font-family: var(--pixel-font);
-  font-size: 1.2rem;
-  color: var(--neon-gold);
-  cursor: pointer;
-  padding: 0.5rem;
-  transition: transform 0.3s ease;
-  z-index: 1001;
-}
-.menu-close:hover { transform: rotate(90deg); }
-.menu-list {
-  list-style: none;
-  text-align: center;
-}
-.menu-list li {
-  margin-bottom: 2rem;
-}
-.menu-list a {
-  font-family: var(--body-font);
-  font-size: clamp(1.2rem, 4vw, 1.6rem);
-  font-weight: 300;
-  color: var(--text-primary);
-  letter-spacing: 0.15em;
-  transition: color 0.3s ease;
-  cursor: pointer;
-}
-.menu-list a:hover {
-  color: var(--neon-gold);
-}
-
-/* ============================================================
-   ABOUT SECTION — RPG Guild Hall Style
-   ============================================================ */
-.about-section {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-.about-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--bg-card);
-  border: 3px solid var(--neon-gold);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 0 40px rgba(255,215,0,0.08);
-  position: relative;
-  animation: featuredGlow 4s ease-in-out infinite alternate;
-}
-.about-img {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-}
-.about-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.about-img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, transparent 60%, var(--bg-card));
-  pointer-events: none;
-}
-.about-stamp {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-family: var(--pixel-font);
-  font-size: 0.55rem;
-  color: var(--bg-abyss);
-  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
-  padding: 0.3rem 0.7rem;
-  border-radius: 6px;
-  letter-spacing: 0.1em;
-  z-index: 2;
-  box-shadow: 0 2px 8px rgba(255,215,0,0.3);
-}
-.about-body-side {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.about-rank {
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  color: var(--neon-gold);
-  letter-spacing: 0.1em;
-  margin-bottom: 0.6rem;
-}
-.about-heading {
-  font-family: var(--pixel-font);
-  font-size: clamp(0.8rem, 2vw, 1rem);
-  color: var(--text-primary);
-  line-height: 1.8;
-  margin-bottom: 0.8rem;
-}
-.about-body {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 2;
-  font-weight: 300;
-  margin-bottom: 1rem;
-}
-.about-stats {
-  display: flex;
-  gap: clamp(1rem, 3vw, 2rem);
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-dim);
-}
-.about-stat-item { text-align: center; }
-.about-stat-num {
-  font-family: var(--pixel-font);
-  font-size: clamp(1rem, 2.5vw, 1.4rem);
-  color: var(--neon-gold);
-  text-shadow: 0 0 8px var(--neon-gold-dim);
-}
-.about-stat-label {
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  margin-top: 0.3rem;
-}
-@media (max-width: 600px) {
-  .about-inner { grid-template-columns: 1fr; }
-  .about-img { aspect-ratio: 16 / 9; }
-  .about-img::after { background: linear-gradient(to bottom, transparent 60%, var(--bg-card)); }
-}
-
-/* ============================================================
-   NEWSLETTER SECTION — RPG Scroll Style
-   ============================================================ */
-.newsletter-section {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
-}
-.newsletter-window {
-  background: rgba(18, 21, 69, 0.7);
-  border: 3px solid var(--neon-gold);
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2px var(--bg-abyss), inset 0 0 0 4px var(--rpg-border-inner), 0 0 30px rgba(255,215,0,0.08);
-  padding: 1.5rem 1.8rem;
-  text-align: center;
-}
-.newsletter-label {
-  font-family: var(--pixel-font);
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  color: var(--neon-gold);
-  margin-bottom: 0.8rem;
-}
-.newsletter-heading {
-  font-family: var(--body-font);
-  font-size: clamp(1rem, 3vw, 1.3rem);
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: 0.6rem;
-}
-.newsletter-sub {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-  line-height: 1.8;
-  margin-bottom: 1.2rem;
-}
-.newsletter-form {
-  display: flex;
-  gap: 0;
-  max-width: 400px;
-  margin: 0 auto;
-}
-.newsletter-input {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  font-family: var(--body-font);
-  font-size: 0.85rem;
-  color: var(--text-primary);
-  background: var(--bg-abyss);
-  border: 2px solid var(--rpg-border);
-  border-right: none;
-  border-radius: 8px 0 0 8px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-.newsletter-input::placeholder { color: var(--text-dim); }
-.newsletter-input:focus { border-color: var(--neon-gold); }
-.newsletter-submit {
-  padding: 0.6rem 1.2rem;
-  font-family: var(--pixel-font);
-  font-size: 0.65rem;
-  color: var(--bg-abyss);
-  background: linear-gradient(135deg, var(--neon-gold), #ffaa00);
-  border: 2px solid var(--neon-gold);
-  border-radius: 0 8px 8px 0;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-.newsletter-submit:hover { background: linear-gradient(135deg, #ffe040, var(--neon-gold)); }
-
-/* ============================================================
-   ENHANCED FOOTER — RPG Guild Board Style
-   ============================================================ */
-.footer-enhanced {
-  border-top: 1px solid var(--border-dim);
-  padding: 2rem 1.5rem 1.5rem;
-  text-align: center;
-}
-.footer-guild-mark {
-  font-family: var(--pixel-font);
-  font-size: 0.85rem;
-  color: var(--neon-gold);
-  text-shadow: 0 0 6px var(--neon-gold-dim);
-  margin-bottom: 0.6rem;
-}
-.footer-guild-desc {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  line-height: 1.8;
-  font-weight: 300;
-  margin-bottom: 1rem;
-}
-.footer-social {
-  display: flex;
-  justify-content: center;
-  gap: 0.6rem;
-  margin-bottom: 1.5rem;
-}
-.footer-social a {
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--border-dim);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-dim);
-  transition: all 0.3s ease;
-}
-.footer-social a:hover {
-  border-color: var(--neon-gold);
-  color: var(--neon-gold);
-}
-.footer-social a svg { width: 14px; height: 14px; fill: currentColor; }
-.footer-links {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.8rem 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.footer-links a {
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  transition: color 0.3s ease;
-  cursor: pointer;
-}
-.footer-links a:hover { color: var(--neon-gold); }
-.footer-bottom {
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-dim);
-}
-.footer-bottom-text {
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  margin-bottom: 0.4rem;
-}
-.footer-bottom-legal {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-.footer-bottom-legal a {
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.3s ease;
-  cursor: pointer;
-}
-.footer-bottom-legal a:hover { color: var(--neon-gold); }
-
-@media (max-width: 600px) {
-  .newsletter-form { flex-direction: column; }
-  .newsletter-input { border-right: 2px solid var(--rpg-border); border-radius: 8px; }
-  .newsletter-input:focus { border-color: var(--neon-gold); }
-  .newsletter-submit { border-radius: 8px; margin-top: 0.5rem; }
-}
-
-/* ============================================================
-   AMBIENT ATMOSPHERE — Torch Light, Mist, Vignette
-   ============================================================ */
-
-/* Quest board — torch light flicker */
-#page-quest-board::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 8% 12%, rgba(255,180,60,0.07) 0%, transparent 45%),
-    radial-gradient(ellipse at 93% 88%, rgba(255,120,40,0.05) 0%, transparent 40%);
-  pointer-events: none;
-  z-index: 0;
-  animation: torchFlicker 6s ease-in-out infinite alternate;
-}
-@keyframes torchFlicker {
-  0% { opacity: 0.4; }
-  20% { opacity: 0.9; }
-  40% { opacity: 0.5; }
-  60% { opacity: 1; }
-  80% { opacity: 0.65; }
-  100% { opacity: 0.45; }
-}
-
-/* Quest board — vignette depth */
-#page-quest-board::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 25%, rgba(10,12,46,0.5) 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Detail page — ambient glow spots */
-#page-detail::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 15% 25%, rgba(255,215,0,0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 75%, rgba(74,80,160,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at center, transparent 30%, rgba(10,12,46,0.5) 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Opening page — drifting mist */
-.opening-mist {
-  position: fixed;
-  inset: -10%;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 15% 85%, rgba(74,80,160,0.18) 0%, transparent 50%),
-    radial-gradient(ellipse at 88% 8%, rgba(232,232,255,0.08) 0%, transparent 40%),
-    radial-gradient(ellipse at 50% 50%, rgba(255,215,0,0.02) 0%, transparent 60%);
-  animation: mistDrift 12s ease-in-out infinite alternate;
-}
-@keyframes mistDrift {
-  0% { transform: translate(-1%, 0.5%) scale(1); opacity: 0.5; }
-  100% { transform: translate(1%, -0.5%) scale(1.02); opacity: 1; }
-}
-
-/* Lens flare — subtle wandering light on opening */
-.opening-lens-flare {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, rgba(255,215,0,0.02) 40%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
-  top: 15%;
-  right: 10%;
-  animation: lensWander 15s ease-in-out infinite alternate;
-  filter: blur(30px);
-}
-@keyframes lensWander {
-  0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-  33% { transform: translate(-60px, 40px) scale(1.2); opacity: 0.7; }
-  66% { transform: translate(40px, -20px) scale(0.9); opacity: 0.5; }
-  100% { transform: translate(-20px, 60px) scale(1.1); opacity: 0.6; }
-}
-
-/* ============================================================
-   ACCESSIBILITY — prefers-reduced-motion
-   ============================================================ */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  html { scroll-behavior: auto; }
-  .quest-card { opacity: 1; }
-  .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-clip,
-  .detail-stagger, .split-text .char, .stagger-children > * { opacity: 1 !important; transform: none !important; clip-path: none !important; }
-  .logo-mark, .logo-sub, .logo-main, .logo-main-en,
-  .logo-tagline, .divider-sword, .narration-line,
-  .btn-start, .scroll-hint, .narration-area, .opening-bottom-hint { opacity: 1; transform: none; }
-  .opening-mist, .opening-lens-flare, .opening-dust { display: none !important; }
-  #page-quest-board::before, #page-quest-board::after, #page-detail::before { animation: none; }
-}
-
-/* focus-visible for keyboard navigation */
-.quest-card:focus-visible,
-.btn-start:focus-visible,
-.btn-purchase:focus-visible,
-.filter-chip:focus-visible,
-.nav-pill:focus-visible,
-.rpg-modal-close:focus-visible {
-  outline: 2px solid var(--neon-gold);
-  outline-offset: 2px;
-}
-</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
-<!-- Scanline overlay -->
-<div class="scanlines"></div>
-
-<!-- RPG Modal — 購入準備中 -->
-<div class="rpg-modal-overlay" id="modal-coming-soon" onclick="closeModal('modal-coming-soon')">
-  <div class="rpg-modal" onclick="event.stopPropagation()">
-    <div class="rpg-modal-title">◆ ギルドからのお知らせ ◆</div>
-    <div class="rpg-modal-body" style="text-align:center;">
-      <p style="font-size:2rem;margin-bottom:0.5rem;">⚔️</p>
-      <p>この依頼の受注窓口は現在<strong style="color:var(--neon-gold);">準備中</strong>です。</p>
-      <p>まもなく冒険者の受付を開始いたします。<br>今しばらくお待ちください。</p>
-    </div>
-    <button class="rpg-modal-close" onclick="closeModal('modal-coming-soon')">▶ 了解</button>
-  </div>
-</div>
-
-<!-- RPG Modal — 特定商取引法に基づく表記 -->
-<div class="rpg-modal-overlay" id="modal-tokushoho" onclick="closeModal('modal-tokushoho')">
-  <div class="rpg-modal" onclick="event.stopPropagation()">
-    <div class="rpg-modal-title">◆ 特定商取引法に基づく表記 ◆</div>
-    <div class="rpg-modal-body">
-      <h3>販売業者</h3>
-      <p>【事業者名を記載】</p>
-      <h3>代表者</h3>
-      <p>【代表者名を記載】</p>
-      <h3>所在地</h3>
-      <p>【住所を記載】</p>
-      <h3>連絡先</h3>
-      <p>メール：【メールアドレスを記載】</p>
-      <h3>販売価格</h3>
-      <p>各商品ページに表示（税込）</p>
-      <h3>送料</h3>
-      <p>全国一律無料</p>
-      <h3>お届け時期</h3>
-      <p>ご注文から3〜5営業日以内に発送</p>
-      <h3>お支払い方法</h3>
-      <p>クレジットカード決済</p>
-      <h3>返品・交換について</h3>
-      <p>商品の性質上、お客様都合による返品・交換はお受けできません。不良品の場合は到着後7日以内にご連絡ください。</p>
-    </div>
-    <button class="rpg-modal-close" onclick="closeModal('modal-tokushoho')">▶ 閉じる</button>
-  </div>
-</div>
-
-<!-- RPG Modal — プライバシーポリシー -->
-<div class="rpg-modal-overlay" id="modal-privacy" onclick="closeModal('modal-privacy')">
-  <div class="rpg-modal" onclick="event.stopPropagation()">
-    <div class="rpg-modal-title">◆ プライバシーポリシー ◆</div>
-    <div class="rpg-modal-body">
-      <h3>個人情報の取得</h3>
-      <p>当サービスでは、商品の配送およびサービス提供に必要な範囲で、お名前・住所・メールアドレス等の個人情報を取得いたします。</p>
-      <h3>利用目的</h3>
-      <p>取得した個人情報は以下の目的で利用いたします。</p>
-      <p>・商品の発送および配送状況のご連絡<br>・ご注文内容の確認・お問い合わせへの対応<br>・サービス改善のための分析（統計処理後の匿名データ）</p>
-      <h3>第三者提供</h3>
-      <p>法令に基づく場合を除き、お客様の同意なく第三者に個人情報を提供することはありません。ただし、配送業務に必要な範囲で配送業者に情報を提供する場合があります。</p>
-      <h3>安全管理</h3>
-      <p>個人情報の漏えい・滅失を防止するため、適切なセキュリティ対策を講じます。</p>
-      <h3>お問い合わせ</h3>
-      <p>個人情報に関するお問い合わせは【メールアドレスを記載】までご連絡ください。</p>
-    </div>
-    <button class="rpg-modal-close" onclick="closeModal('modal-privacy')">▶ 閉じる</button>
-  </div>
-</div>
-
-<!-- Particle canvas -->
-<canvas id="particle-canvas"></canvas>
-
-<!-- Hamburger Menu Overlay -->
-<div class="menu-overlay" id="menu-overlay">
-  <button class="menu-close" onclick="closeMenu()">✕</button>
-  <ul class="menu-list">
-    <li><a onclick="closeMenu(); goToQuestBoard()">プロダクト</a></li>
-    <li><a onclick="closeMenu(); scrollToAbout()">リアクエとは</a></li>
-    <li><a onclick="closeMenu(); scrollToNewsletter()">ニュースレター</a></li>
-    <li><a onclick="closeMenu(); openModal('modal-tokushoho')">特定商取引法</a></li>
-    <li><a onclick="closeMenu(); openModal('modal-privacy')">プライバシーポリシー</a></li>
-  </ul>
-</div>
-
-<!-- Transition overlay -->
+<!-- Transition Overlay -->
 <div class="transition-overlay" id="transition-overlay">
-  <svg class="transition-emblem" viewBox="0 0 60 60" fill="none">
-    <path d="M30 4 L46 30 L30 56 L14 30 Z" stroke="#ffd700" stroke-width="1.5" fill="none" opacity="0.6"/>
-    <circle cx="30" cy="30" r="6" fill="#ffd700" opacity="0.4"/>
-  </svg>
+  <div class="transition-spinner"></div>
   <div class="transition-text">ギルド掲示板を開いています...</div>
 </div>
 
+<!-- Particle Canvas -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+  <button onclick="navigateTo('quest-board'); closeMobileMenu()">クエスト一覧</button>
+  <button onclick="navigateTo('rankings'); closeMobileMenu()">ランキング</button>
+  <button onclick="navigateTo('mypage'); closeMobileMenu()">マイページ</button>
+  <button class="audio-toggle" id="audio-toggle-menu" onclick="toggleAudio()">
+    <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+    BGM
+  </button>
+</div>
+
 <!-- ============================================================
-     PAGE 1 — OPENING
+     PAGE 1 — OPENING (FIRST VIEW)
      ============================================================ -->
 <div class="page active" id="page-opening">
   <div class="opening-bg"></div>
-  <div class="opening-mist"></div>
-  <div class="opening-lens-flare"></div>
-  <div class="opening-dust" id="opening-dust"></div>
 
   <div class="opening-content">
-    <!-- Ornate emblem -->
+    <!-- Emblem -->
     <div class="logo-mark">
-      <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-        <!-- outer diamond -->
+      <svg width="70" height="70" viewBox="0 0 80 80" fill="none">
         <path d="M40 4 L72 40 L40 76 L8 40 Z" stroke="#ffd700" stroke-width="0.8" fill="none" opacity="0.3"/>
-        <!-- inner diamond -->
         <path d="M40 14 L62 40 L40 66 L18 40 Z" stroke="#ffd700" stroke-width="1" fill="none" opacity="0.5"/>
-        <!-- cross lines -->
-        <line x1="40" y1="8" x2="40" y2="32" stroke="#ffd700" stroke-width="0.6" opacity="0.4"/>
-        <line x1="40" y1="48" x2="40" y2="72" stroke="#ffd700" stroke-width="0.6" opacity="0.4"/>
-        <line x1="12" y1="40" x2="32" y2="40" stroke="#ffd700" stroke-width="0.6" opacity="0.4"/>
-        <line x1="48" y1="40" x2="68" y2="40" stroke="#ffd700" stroke-width="0.6" opacity="0.4"/>
-        <!-- center jewel -->
         <circle cx="40" cy="40" r="5" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.7"/>
         <circle cx="40" cy="40" r="2" fill="#ffd700" opacity="0.9"/>
-        <!-- corner dots -->
         <circle cx="40" cy="8" r="1.5" fill="#ffd700" opacity="0.5"/>
         <circle cx="68" cy="40" r="1.5" fill="#ffd700" opacity="0.5"/>
         <circle cx="40" cy="72" r="1.5" fill="#ffd700" opacity="0.5"/>
@@ -2436,168 +73,261 @@ body {
     <div class="logo-sub">— ENTER THE REAL QUEST —</div>
     <div class="logo-main">リアクエ</div>
     <div class="logo-main-en">REAL QUEST</div>
-    <div class="divider-sword">
-      <span class="line"></span>
-      <span class="diamond"></span>
-      <span class="line"></span>
-    </div>
-    <div class="logo-tagline">日常が、<span>クエスト</span>になる</div>
-    <div class="narration-area">
-      <div class="narration-line">ある日、見知らぬ封書が届いた——</div>
-      <div class="narration-line">中には一枚の羊皮紙と、ギルドの紋章</div>
-      <div class="narration-line">"冒険者よ、おまえの日常を変える依頼がある"</div>
-    </div>
-    <button class="btn-start" id="btn-start" onclick="startAdventure()">
-      <span class="play-icon">▶</span>
-      <span>ギルドに入る</span>
-    </button>
-    <!-- scroll hint at the very bottom -->
-    <div class="opening-bottom-hint">PRESS TO ENTER</div>
-  </div>
 
+    <div class="divider-sword">
+      <span class="line"></span><span class="diamond"></span><span class="line"></span>
+    </div>
+
+    <div class="logo-tagline">日常が、<span>クエスト</span>になる</div>
+
+    <!-- 3-step explanation -->
+    <div class="opening-steps">
+      <div class="step-item">
+        <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="2"/><path d="M13 3h4a2 2 0 0 1 2 2v4"/><path d="m15 15-2-2"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <div class="step-num">STEP 1</div>
+        <div class="step-label">クエストを選ぶ</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-item">
+        <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
+        <div class="step-num">STEP 2</div>
+        <div class="step-label">物語が届く</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-item">
+        <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+        <div class="step-num">STEP 3</div>
+        <div class="step-label">冒険が始まる</div>
+      </div>
+    </div>
+
+    <!-- Login buttons — two roles -->
+    <div class="login-buttons">
+      <button class="btn-login btn-adventurer" onclick="loginAsAdventurer()">
+        <span class="btn-login-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg></span>
+        <span>冒険者としてログイン</span>
+      </button>
+      <button class="btn-login btn-creator" onclick="loginAsCreator()">
+        <span class="btn-login-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></span>
+        <span>創造者としてログイン</span>
+      </button>
+    </div>
+  </div>
 </div>
 
 <!-- ============================================================
-     PAGE 2 — QUEST BOARD
+     PAGE 2 — QUEST BOARD (ADVENTURER HOME)
      ============================================================ -->
 <div class="page" id="page-quest-board">
-  <header class="quest-board-header">
-    <div class="header-logo" onclick="goToOpening()" title="ギルド入口へ戻る">◆ リアクエ</div>
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
     <div class="header-nav">
-      <button class="audio-toggle" id="audio-toggle" onclick="toggleAudio()">
-        <div class="audio-bars">
-          <span></span><span></span><span></span><span></span>
-        </div>
+      <button class="header-nav-link active" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="audio-toggle" id="audio-toggle-board" onclick="toggleAudio()">
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
         BGM
       </button>
-      <button class="hamburger-btn" id="hamburger-board" onclick="toggleMenu()">
+      <button class="header-user" onclick="navigateTo('mypage')">
+        <div class="header-avatar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <span id="header-username">冒険者</span>
+        <span class="header-title-badge" id="header-title">見習い</span>
+      </button>
+      <button class="hamburger-btn" onclick="openMobileMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <!-- GUILD HERO BANNER -->
-  <div class="guild-hero">
-    <div class="guild-hero-img"></div>
-    <div class="guild-hero-content">
-      <div class="guild-hero-label">— ADVENTURERS GUILD —</div>
-      <div class="guild-hero-title split-text">冒険者ギルド掲示板</div>
-    </div>
-  </div>
-
-  <div class="about-section reveal-scale" id="about-section">
-    <div class="about-inner">
-      <div class="about-img reveal-clip">
-        <div class="about-stamp">◆ ギルド案内書</div>
-        <img src="images/guildmaster.webp" alt="ギルドマスター" width="512" height="512" loading="lazy">
+  <!-- Hero Banner -->
+  <div class="board-hero">
+    <div class="board-hero-label">— ADVENTURERS GUILD —</div>
+    <div class="board-hero-title">冒険者ギルド掲示板</div>
+    <div class="board-hero-sub">物語アイテムが届き、現実がクエストフィールドになる</div>
+    <div class="board-hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="stat-quests">6</div>
+        <div class="hero-stat-label">依頼数</div>
       </div>
-      <div class="about-body-side">
-        <div class="about-rank">◆ GUILD MASTER</div>
-        <div class="about-heading split-text">よく来たな、冒険者。</div>
-        <div class="about-body">
-          ここは"リアクエ"——現実世界にクエストを仕掛ける冒険者ギルドだ。<br><br>
-          おまえの元に届くのは、ただの荷物じゃない。暗号が刻まれた羊皮紙、封蝋で閉じられた手紙、正体不明のアイテム——すべてがクエストの鍵だ。<br><br>
-          気になる依頼書を手に取ってみろ。届くのは本物のアイテムと、おまえだけの物語だ。
-        </div>
-        <div class="about-stats">
-          <div class="about-stat-item">
-            <div class="about-stat-num count-up" data-count="6" data-suffix="+">0</div>
-            <div class="about-stat-label">依頼数</div>
-          </div>
-          <div class="about-stat-item">
-            <div class="about-stat-num">—</div>
-            <div class="about-stat-label">冒険者数</div>
-          </div>
-          <div class="about-stat-item">
-            <div class="about-stat-num count-up" data-count="4.8">0</div>
-            <div class="about-stat-label">ギルド評価</div>
-          </div>
-        </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4.8</div>
+        <div class="hero-stat-label">平均評価</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">—</div>
+        <div class="hero-stat-label">冒険者数</div>
       </div>
     </div>
   </div>
 
-  <!-- DIVIDER -->
-  <div class="section-divider reveal">
-    <span class="dv-line"></span>
-    <span class="dv-icon">⚔</span>
-    <span class="dv-line"></span>
+  <!-- Purpose-based Search (HV style) -->
+  <div class="purpose-search">
+    <div class="purpose-search-inner">
+      <div class="purpose-heading">
+        <span class="purpose-heading-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg></span>
+        <span class="purpose-heading-text"><strong>目的</strong>から探す</span>
+      </div>
+      <div class="purpose-cards">
+        <button class="purpose-card" onclick="setPurposeFilter('puzzle')">
+          <div class="purpose-card-icon">
+            <img src="images/section-treasure.webp" alt="謎解き">
+          </div>
+          <div class="purpose-card-title">謎解き・宝探し</div>
+          <div class="purpose-card-sub">を楽しみたい</div>
+        </button>
+        <button class="purpose-card" onclick="setPurposeFilter('outdoor')">
+          <div class="purpose-card-icon">
+            <img src="images/quest-3-ruins.webp" alt="街クエスト">
+          </div>
+          <div class="purpose-card-title">街に出てクエスト</div>
+          <div class="purpose-card-sub">したい</div>
+        </button>
+        <button class="purpose-card" onclick="setPurposeFilter('boardgame')">
+          <div class="purpose-card-icon">
+            <img src="images/quest-6-potionshop.webp" alt="ボードゲーム">
+          </div>
+          <div class="purpose-card-title">ボードゲーム</div>
+          <div class="purpose-card-sub">で遊びたい</div>
+        </button>
+        <button class="purpose-card" onclick="setPurposeFilter('home')">
+          <div class="purpose-card-icon">
+            <img src="images/quest-2-library.webp" alt="自宅完結">
+          </div>
+          <div class="purpose-card-title">自宅で完結</div>
+          <div class="purpose-card-sub">したい</div>
+        </button>
+      </div>
+      <button class="purpose-card purpose-card-wide" onclick="setPurposeFilter('region')">
+        <div class="purpose-card-icon">
+          <img src="images/quest-4-clocktower.webp" alt="都道府県">
+        </div>
+        <div class="purpose-card-title"><strong>都道府県</strong>から探したい</div>
+      </button>
+    </div>
   </div>
 
-  <div class="board-title-area reveal">
-    <div class="board-label">— ALL QUESTS —</div>
-    <p class="board-subtitle split-text">依頼書を手に取り、冒険を始めよ。</p>
+  <!-- Search & Filters -->
+  <div class="search-filter-area">
+    <div class="search-row">
+      <div class="search-input-wrap">
+        <span class="search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+        <input type="text" class="search-input" id="search-input" placeholder="クエスト名・ジャンルで検索..." oninput="handleSearch()">
+      </div>
+      <button class="search-btn" onclick="handleSearch()">検索</button>
+    </div>
+    <div class="filter-row" id="filter-row">
+      <button class="filter-chip active" onclick="setFilter('all', this)">すべて</button>
+      <button class="filter-chip" onclick="setFilter('home', this)">自宅完結</button>
+      <button class="filter-chip" onclick="setFilter('outdoor', this)">現地型</button>
+      <button class="filter-chip" onclick="setFilter('beginner', this)">初心者向け</button>
+      <button class="filter-chip" onclick="setFilter('advanced', this)">上級者向け</button>
+      <button class="filter-chip" onclick="setFilter('puzzle', this)">謎解き</button>
+      <button class="filter-chip" onclick="setFilter('boardgame', this)">ボードゲーム</button>
+    </div>
+    <div class="sort-row">
+      <span class="sort-label" id="result-count">6件のクエスト</span>
+      <select class="sort-select" id="sort-select" onchange="handleSort()">
+        <option value="popular">人気順</option>
+        <option value="newest">新着順</option>
+        <option value="price-low">価格が安い順</option>
+        <option value="price-high">価格が高い順</option>
+        <option value="difficulty-low">難易度が低い順</option>
+        <option value="difficulty-high">難易度が高い順</option>
+      </select>
+    </div>
   </div>
 
-  <div class="filter-bar reveal">
-    <button class="filter-chip active" onclick="filterQuests('all', this)">すべての依頼</button>
-    <button class="filter-chip" onclick="filterQuests('beginner', this)">見習い向け</button>
-    <button class="filter-chip" onclick="filterQuests('advanced', this)">熟練者向け</button>
-    <button class="filter-chip" onclick="filterQuests('new', this)">新着依頼</button>
-  </div>
-
+  <!-- Quest Grid -->
   <div class="quest-grid" id="quest-grid">
-    <!-- Cards rendered by JS -->
+    <!-- Rendered by JS -->
   </div>
 
-  <div class="section-divider reveal">
-    <span class="dv-line"></span>
-    <span class="dv-icon">✦</span>
-    <span class="dv-line"></span>
+  <div class="section-divider">
+    <span class="dv-line"></span><span class="dv-icon">◆</span><span class="dv-line"></span>
   </div>
 
-  <!-- NEWSLETTER SECTION -->
-  <div class="newsletter-section reveal-scale" id="newsletter-section">
-    <div class="newsletter-window">
-      <div class="newsletter-label">◆ 伝書鳩登録</div>
-      <div class="newsletter-heading">次の依頼を、見逃すな。</div>
-      <div class="newsletter-sub">新クエストの告知や先行受注など、ギルドメンバー限定の情報を届ける。</div>
-      <div class="newsletter-form">
-        <input type="email" class="newsletter-input" placeholder="メールアドレス" aria-label="メールアドレス">
-        <button class="newsletter-submit" onclick="submitNewsletter()">登録</button>
+  <!-- Footer (HV-style) -->
+  <footer class="site-footer-full">
+    <div class="footer-main">
+      <div class="footer-main-inner">
+        <!-- Brand column -->
+        <div class="footer-brand">
+          <div class="footer-brand-logo">◆ リアクエ<br><span>REAL QUEST</span></div>
+          <div class="footer-brand-desc">物語アイテムが届き、<br>現実がクエストフィールドになる</div>
+          <div class="footer-social">
+            <a href="#" title="X (Twitter)" class="footer-social-link">𝕏</a>
+            <a href="#" title="Instagram" class="footer-social-link">Ig</a>
+            <a href="#" title="Note" class="footer-social-link">No</a>
+          </div>
+        </div>
+        <!-- Nav columns -->
+        <div class="footer-nav-col">
+          <div class="footer-nav-title">クエストを探す</div>
+          <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+          <a onclick="navigateTo('guide')">初めての方へ</a>
+        </div>
+        <div class="footer-nav-col">
+          <div class="footer-nav-title">リアクエとは</div>
+          <a onclick="navigateTo('guide')">リアクエとは</a>
+          <a onclick="navigateTo('guide')">クエストとは</a>
+          <a onclick="navigateTo('guide')">冒険者とは</a>
+          <a onclick="navigateTo('guide')">称号について</a>
+          <a onclick="navigateTo('coin-shop')">コインについて</a>
+        </div>
+        <div class="footer-nav-col">
+          <div class="footer-nav-title">コミュニティ</div>
+          <a onclick="navigateTo('rankings')">ランキング</a>
+          <a onclick="navigateTo('reviews')">最新のクエストレビュー</a>
+          <a onclick="navigateTo('news')">お知らせ</a>
+          <a onclick="navigateTo('campaigns')">キャンペーン情報</a>
+        </div>
+        <div class="footer-nav-col">
+          <div class="footer-nav-title">その他</div>
+          <a onclick="navigateTo('guide')">Q&A</a>
+          <a onclick="navigateTo('contact')">お問い合わせ</a>
+          <a onclick="navigateTo('contact')">イベント企画依頼</a>
+        </div>
+        <div class="footer-nav-col">
+          <div class="footer-nav-title">マイページ</div>
+          <a onclick="navigateTo('mypage')">ステータス</a>
+          <a onclick="navigateTo('mypage')">お気に入り</a>
+          <a onclick="navigateTo('mypage')">受注済みクエスト</a>
+          <a onclick="navigateTo('reviews')">クエストレビュー</a>
+          <a onclick="navigateTo('mypage')">通知</a>
+          <a onclick="navigateTo('mypage')">設定</a>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="footer-enhanced">
-    <div class="footer-guild-mark">◆ REAL QUEST ◆</div>
-    <div class="footer-guild-desc">冒険者ギルド"リアクエ" — 日常が、クエストになる</div>
-    <div class="footer-social">
-      <a href="#" title="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-      <a href="#" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-      <a href="#" title="Note"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 14H7v-2h8v2zm2-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></a>
-    </div>
-    <div class="footer-links">
-      <a onclick="scrollToAbout()">ギルド案内</a>
-      <a onclick="scrollToNewsletter()">伝書鳩登録</a>
-      <a>よくある質問</a>
-      <a>お問い合わせ</a>
     </div>
     <div class="footer-bottom">
-      <div class="footer-bottom-text">© 2026 リアクエ REAL QUEST. All rights reserved.</div>
-      <div class="footer-bottom-legal">
-        <a onclick="openModal('modal-tokushoho')">特定商取引法に基づく表記</a>
-        <a onclick="openModal('modal-privacy')">プライバシーポリシー</a>
+      <div class="footer-bottom-inner">
+        <div class="footer-legal">
+          <a onclick="navigateTo('terms')">利用規約</a>
+          <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+          <a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+          <a onclick="navigateTo('commerce-law')">運営会社情報</a>
+        </div>
+        <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
       </div>
     </div>
   </footer>
 </div>
 
 <!-- ============================================================
-     PAGE 3 — QUEST DETAIL
+     PAGE 3 — QUEST DETAIL + ACCEPTANCE UI
      ============================================================ -->
 <div class="page" id="page-detail">
-  <header class="quest-board-header">
-    <div class="header-logo" onclick="goToOpening()" title="ギルド入口へ戻る">◆ リアクエ</div>
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
     <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
       <button class="audio-toggle" id="audio-toggle-detail" onclick="toggleAudio()">
-        <div class="audio-bars">
-          <span></span><span></span><span></span><span></span>
-        </div>
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
         BGM
       </button>
-      <button class="hamburger-btn" id="hamburger-detail" onclick="toggleMenu()">
+      <button class="hamburger-btn" onclick="openMobileMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -2606,1364 +336,493 @@ body {
   <div class="detail-container" id="detail-content">
     <!-- Rendered by JS -->
   </div>
+
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('guide')">Q&A</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
 </div>
 
-<script>
-/* ============================================================
-   DATA — Quest products
-   ============================================================ */
-// SVG scene generators for each quest
-const questImages = {
-  1: (w,h) => `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="g1a" cx="50%" cy="60%"><stop offset="0%" stop-color="#1a0a2e"/><stop offset="100%" stop-color="#050508"/></radialGradient>
-      <filter id="f1g"><feGaussianBlur stdDeviation="2"/></filter>
-    </defs>
-    <rect width="${w}" height="${h}" fill="url(#g1a)"/>
-    <!-- Shelves -->
-    <rect x="20" y="${h*0.55}" width="${w-40}" height="3" fill="#2a1a4a" rx="1"/>
-    <rect x="30" y="${h*0.72}" width="${w-60}" height="3" fill="#2a1a4a" rx="1"/>
-    <!-- Bottles/flasks -->
-    <g opacity="0.8">
-      <path d="M${w*0.2} ${h*0.55} L${w*0.2-6} ${h*0.38} Q${w*0.2} ${h*0.32} ${w*0.2+6} ${h*0.38} Z" fill="#00ff8840" stroke="#00ff88" stroke-width="0.5"/>
-      <path d="M${w*0.35} ${h*0.55} L${w*0.35-8} ${h*0.35} L${w*0.35-4} ${h*0.28} L${w*0.35+4} ${h*0.28} L${w*0.35+8} ${h*0.35} Z" fill="#ff00aa30" stroke="#ff00aa" stroke-width="0.5"/>
-      <circle cx="${w*0.5}" cy="${h*0.42}" r="10" fill="#ffd70020" stroke="#ffd700" stroke-width="0.5"/>
-      <rect x="${w*0.5-2}" y="${h*0.32}" width="4" height="10" fill="#ffd70030" stroke="#ffd700" stroke-width="0.5"/>
-      <path d="M${w*0.65} ${h*0.55} L${w*0.65-5} ${h*0.4} Q${w*0.65} ${h*0.33} ${w*0.65+5} ${h*0.4} Z" fill="#00f0ff30" stroke="#00f0ff" stroke-width="0.5"/>
-      <path d="M${w*0.8} ${h*0.55} L${w*0.8-7} ${h*0.36} L${w*0.8+7} ${h*0.36} Z" fill="#aa66ff20" stroke="#aa66ff" stroke-width="0.5"/>
-    </g>
-    <!-- Scroll on lower shelf -->
-    <ellipse cx="${w*0.4}" cy="${h*0.72}" rx="14" ry="5" fill="#3a2a1a" stroke="#ffd70040" stroke-width="0.5"/>
-    <rect x="${w*0.38}" y="${h*0.65}" width="8" height="7" rx="4" fill="#4a3a2a" stroke="#ffd70040" stroke-width="0.5"/>
-    <!-- Key glow -->
-    <circle cx="${w*0.65}" cy="${h*0.68}" r="3" fill="#ffd700" filter="url(#f1g)" opacity="0.6"/>
-    <path d="M${w*0.65} ${h*0.66} l3-4 m-3 4 l-3-4 m3 4 l0 5 l2 1 m-2-1 l-2 1" stroke="#ffd700" stroke-width="0.8" fill="none"/>
-    <!-- Magical particles -->
-    <circle cx="${w*0.3}" cy="${h*0.25}" r="1" fill="#ffd700" opacity="0.8"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/></circle>
-    <circle cx="${w*0.7}" cy="${h*0.2}" r="1.5" fill="#00f0ff" opacity="0.6"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="3s" repeatCount="indefinite"/></circle>
-    <circle cx="${w*0.55}" cy="${h*0.15}" r="1" fill="#ff00aa" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="2.5s" repeatCount="indefinite"/></circle>
-    <circle cx="${w*0.15}" cy="${h*0.4}" r="0.8" fill="#ffd700" opacity="0.7"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.8s" repeatCount="indefinite"/></circle>
-  </svg>`,
-
-  2: (w,h) => `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="g2a" cx="50%" cy="30%"><stop offset="0%" stop-color="#0a0a2a"/><stop offset="100%" stop-color="#050508"/></radialGradient>
-      <filter id="f2g"><feGaussianBlur stdDeviation="3"/></filter>
-    </defs>
-    <rect width="${w}" height="${h}" fill="url(#g2a)"/>
-    <!-- Moon -->
-    <circle cx="${w*0.75}" cy="${h*0.2}" r="18" fill="#e8e6f0" opacity="0.15" filter="url(#f2g)"/>
-    <circle cx="${w*0.75}" cy="${h*0.2}" r="10" fill="#c8c6e0" opacity="0.3"/>
-    <circle cx="${w*0.77}" cy="${h*0.18}" r="10" fill="#0a0a2a" opacity="0.7"/>
-    <!-- Bookshelves -->
-    <g opacity="0.7">
-      <rect x="${w*0.05}" y="${h*0.3}" width="${w*0.25}" height="${h*0.65}" fill="#0d0820" stroke="#1a1a3a" stroke-width="0.5"/>
-      <rect x="${w*0.7}" y="${h*0.25}" width="${w*0.25}" height="${h*0.7}" fill="#0d0820" stroke="#1a1a3a" stroke-width="0.5"/>
-      ${[0.35,0.5,0.65,0.8].map(y => `<rect x="${w*0.07}" y="${h*y}" width="${w*0.21}" height="2" fill="#1a1a3a"/>`).join('')}
-      ${[0.3,0.45,0.6,0.75].map(y => `<rect x="${w*0.72}" y="${h*y}" width="${w*0.21}" height="2" fill="#1a1a3a"/>`).join('')}
-    </g>
-    <!-- Book spines on shelves -->
-    <g opacity="0.6">
-      ${[0,1,2,3,4].map(i => `<rect x="${w*0.08+i*10}" y="${h*0.37}" width="7" height="12" fill="hsl(${260+i*30},40%,20%)" stroke="hsl(${260+i*30},60%,40%)" stroke-width="0.3" rx="0.5"/>`).join('')}
-      ${[0,1,2,3].map(i => `<rect x="${w*0.73+i*12}" y="${h*0.32}" width="9" height="12" fill="hsl(${200+i*40},40%,18%)" stroke="hsl(${200+i*40},60%,35%)" stroke-width="0.3" rx="0.5"/>`).join('')}
-    </g>
-    <!-- Open glowing book center -->
-    <g transform="translate(${w*0.5},${h*0.6})">
-      <path d="M-20 0 Q-15 -8 0 -10 Q15 -8 20 0 Z" fill="#1a0a30" stroke="#aa66ff" stroke-width="0.5"/>
-      <path d="M0 -10 L0 0" stroke="#aa66ff40" stroke-width="0.3"/>
-      <circle cx="0" cy="-5" r="12" fill="#aa66ff" opacity="0.1" filter="url(#f2g)"/>
-      <circle cx="0" cy="-5" r="6" fill="#aa66ff" opacity="0.15" filter="url(#f2g)"/>
-    </g>
-    <!-- Floating glyphs -->
-    <text x="${w*0.4}" y="${h*0.42}" font-size="6" fill="#aa66ff" opacity="0.4" font-family="serif">✦</text>
-    <text x="${w*0.55}" y="${h*0.38}" font-size="5" fill="#aa66ff" opacity="0.3" font-family="serif">✧</text>
-    <text x="${w*0.45}" y="${h*0.48}" font-size="4" fill="#aa66ff" opacity="0.35" font-family="serif">⍟</text>
-    <circle cx="${w*0.42}" cy="${h*0.35}" r="1" fill="#aa66ff" opacity="0.6"><animate attributeName="cy" values="${h*0.35};${h*0.3};${h*0.35}" dur="3s" repeatCount="indefinite"/></circle>
-    <circle cx="${w*0.58}" cy="${h*0.32}" r="0.8" fill="#aa66ff" opacity="0.5"><animate attributeName="cy" values="${h*0.32};${h*0.27};${h*0.32}" dur="2.5s" repeatCount="indefinite"/></circle>
-  </svg>`,
-
-  3: (w,h) => `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="g3a" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1008"/><stop offset="100%" stop-color="#050508"/></linearGradient>
-      <filter id="f3g"><feGaussianBlur stdDeviation="2.5"/></filter>
-    </defs>
-    <rect width="${w}" height="${h}" fill="url(#g3a)"/>
-    <!-- Desert dunes -->
-    <path d="M0 ${h*0.7} Q${w*0.2} ${h*0.55} ${w*0.4} ${h*0.65} Q${w*0.6} ${h*0.75} ${w*0.8} ${h*0.6} Q${w*0.9} ${h*0.55} ${w} ${h*0.62} L${w} ${h} L0 ${h} Z" fill="#1a1508" stroke="#3a2a08" stroke-width="0.5"/>
-    <!-- Ruins/pillars -->
-    <rect x="${w*0.25}" y="${h*0.3}" width="8" height="${h*0.4}" fill="#1a1a10" stroke="#ffd70020" stroke-width="0.5"/>
-    <rect x="${w*0.25-3}" y="${h*0.28}" width="14" height="5" fill="#1a1a10" stroke="#ffd70020" stroke-width="0.5"/>
-    <rect x="${w*0.65}" y="${h*0.35}" width="8" height="${h*0.3}" fill="#1a1a10" stroke="#ffd70020" stroke-width="0.5"/>
-    <rect x="${w*0.65-3}" y="${h*0.33}" width="14" height="5" fill="#1a1a10" stroke="#ffd70020" stroke-width="0.5"/>
-    <!-- Broken arch -->
-    <path d="M${w*0.29} ${h*0.3} Q${w*0.45} ${h*0.15} ${w*0.61} ${h*0.35}" stroke="#ffd70015" stroke-width="2" fill="none" stroke-dasharray="4 3"/>
-    <!-- Stone tablet center -->
-    <g transform="translate(${w*0.5},${h*0.52})">
-      <rect x="-15" y="-20" width="30" height="28" rx="2" fill="#2a2010" stroke="#ffd700" stroke-width="0.5" opacity="0.6"/>
-      <line x1="-10" y1="-14" x2="10" y2="-14" stroke="#ffd70050" stroke-width="0.5"/>
-      <line x1="-8" y1="-9" x2="8" y2="-9" stroke="#ffd70040" stroke-width="0.5"/>
-      <line x1="-10" y1="-4" x2="10" y2="-4" stroke="#ffd70050" stroke-width="0.5"/>
-      <line x1="-6" y1="1" x2="6" y2="1" stroke="#ffd70030" stroke-width="0.5"/>
-      <circle cx="0" cy="-12" r="8" fill="#ffd700" opacity="0.06" filter="url(#f3g)"/>
-    </g>
-    <!-- Stars -->
-    ${[...Array(8)].map((_,i) => `<circle cx="${w*0.1+Math.random()*w*0.8}" cy="${h*0.05+Math.random()*h*0.25}" r="${0.5+Math.random()}" fill="#ffd700" opacity="${0.2+Math.random()*0.4}"/>`).join('')}
-    <!-- Compass glow -->
-    <circle cx="${w*0.82}" cy="${h*0.75}" r="8" fill="#ffd700" opacity="0.05" filter="url(#f3g)"/>
-    <circle cx="${w*0.82}" cy="${h*0.75}" r="5" stroke="#ffd700" stroke-width="0.5" fill="none" opacity="0.3"/>
-    <line x1="${w*0.82}" y1="${h*0.75-4}" x2="${w*0.82}" y2="${h*0.75+4}" stroke="#ffd700" stroke-width="0.3" opacity="0.4"/>
-    <line x1="${w*0.82-4}" y1="${h*0.75}" x2="${w*0.82+4}" y2="${h*0.75}" stroke="#ffd700" stroke-width="0.3" opacity="0.4"/>
-  </svg>`,
-
-  4: (w,h) => `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="g4a" cx="50%" cy="30%"><stop offset="0%" stop-color="#0a0812"/><stop offset="100%" stop-color="#050508"/></radialGradient>
-      <filter id="f4g"><feGaussianBlur stdDeviation="3"/></filter>
-    </defs>
-    <rect width="${w}" height="${h}" fill="url(#g4a)"/>
-    <!-- Clock tower silhouette -->
-    <g transform="translate(${w*0.5},${h*0.1})">
-      <rect x="-18" y="10" width="36" height="${h*0.8}" fill="#0a0812" stroke="#1a1a3a" stroke-width="0.5"/>
-      <rect x="-22" y="${h*0.7}" width="44" height="${h*0.2}" fill="#0a0812" stroke="#1a1a3a" stroke-width="0.5"/>
-      <polygon points="-14,10 0,-10 14,10" fill="#0a0812" stroke="#1a1a3a" stroke-width="0.5"/>
-      <!-- Clock face -->
-      <circle cx="0" cy="35" r="14" fill="#0d0d1a" stroke="#00f0ff" stroke-width="0.5" opacity="0.6"/>
-      <circle cx="0" cy="35" r="12" fill="none" stroke="#00f0ff" stroke-width="0.3" opacity="0.3"/>
-      <!-- Clock hands (stopped) -->
-      <line x1="0" y1="35" x2="0" y2="25" stroke="#00f0ff" stroke-width="1" opacity="0.7"/>
-      <line x1="0" y1="35" x2="8" y2="32" stroke="#00f0ff" stroke-width="0.7" opacity="0.5"/>
-      <circle cx="0" cy="35" r="1.5" fill="#00f0ff" opacity="0.5"/>
-      <!-- Hour markers -->
-      ${[...Array(12)].map((_,i) => {const a=i*30*Math.PI/180; return `<circle cx="${Math.sin(a)*11}" cy="${35-Math.cos(a)*11}" r="0.6" fill="#00f0ff" opacity="0.4"/>`}).join('')}
-      <!-- Windows -->
-      <rect x="-6" y="55" width="5" height="8" rx="2.5" fill="#00f0ff08" stroke="#00f0ff20" stroke-width="0.3"/>
-      <rect x="1" y="55" width="5" height="8" rx="2.5" fill="#00f0ff08" stroke="#00f0ff20" stroke-width="0.3"/>
-    </g>
-    <!-- Ghost particles -->
-    <circle cx="${w*0.3}" cy="${h*0.4}" r="4" fill="#00f0ff" opacity="0.04" filter="url(#f4g)"><animate attributeName="cy" values="${h*0.4};${h*0.35};${h*0.4}" dur="4s" repeatCount="indefinite"/></circle>
-    <circle cx="${w*0.7}" cy="${h*0.5}" r="3" fill="#00f0ff" opacity="0.05" filter="url(#f4g)"><animate attributeName="cy" values="${h*0.5};${h*0.45};${h*0.5}" dur="3s" repeatCount="indefinite"/></circle>
-    <!-- Fog -->
-    <ellipse cx="${w*0.3}" cy="${h*0.85}" rx="${w*0.3}" ry="15" fill="#0a0812" opacity="0.5" filter="url(#f4g)"/>
-    <ellipse cx="${w*0.7}" cy="${h*0.9}" rx="${w*0.25}" ry="12" fill="#0a0812" opacity="0.4" filter="url(#f4g)"/>
-  </svg>`,
-
-  5: (w,h) => `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="g5a" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020818"/><stop offset="100%" stop-color="#050508"/></linearGradient>
-      <filter id="f5g"><feGaussianBlur stdDeviation="3"/></filter>
-    </defs>
-    <rect width="${w}" height="${h}" fill="url(#g5a)"/>
-    <!-- Water caustics -->
-    <g opacity="0.15">
-      ${[...Array(6)].map((_,i) => `<ellipse cx="${w*0.15+i*w*0.14}" cy="${h*0.2+Math.sin(i)*h*0.1}" rx="${15+i*3}" ry="${8+i*2}" fill="none" stroke="#00f0ff" stroke-width="0.5"><animate attributeName="rx" values="${15+i*3};${20+i*3};${15+i*3}" dur="${3+i*0.5}s" repeatCount="indefinite"/></ellipse>`).join('')}
-    </g>
-    <!-- Underwater ruins -->
-    <g transform="translate(${w*0.5},${h*0.55})" opacity="0.7">
-      <!-- Temple structure -->
-      <rect x="-30" y="-5" width="60" height="35" fill="#0a1020" stroke="#00f0ff30" stroke-width="0.5"/>
-      <polygon points="-35,-5 0,-22 35,-5" fill="#0a1020" stroke="#00f0ff30" stroke-width="0.5"/>
-      <!-- Doorway -->
-      <rect x="-8" y="8" width="16" height="22" rx="8" fill="#00f0ff08" stroke="#00f0ff" stroke-width="0.3" opacity="0.4"/>
-      <!-- Columns -->
-      <rect x="-25" y="-2" width="4" height="32" fill="#0a1020" stroke="#00f0ff20" stroke-width="0.3"/>
-      <rect x="21" y="-2" width="4" height="32" fill="#0a1020" stroke="#00f0ff20" stroke-width="0.3"/>
-      <!-- Crystal glow from door -->
-      <circle cx="0" cy="18" r="15" fill="#00f0ff" opacity="0.06" filter="url(#f5g)"/>
-    </g>
-    <!-- Bubbles -->
-    ${[...Array(10)].map((_,i) => `<circle cx="${w*0.1+Math.random()*w*0.8}" cy="${h*0.3+Math.random()*h*0.6}" r="${1+Math.random()*2}" fill="none" stroke="#00f0ff" stroke-width="0.3" opacity="${0.15+Math.random()*0.25}"><animate attributeName="cy" values="${h*0.3+Math.random()*h*0.6};${h*0.1};${h*0.3+Math.random()*h*0.6}" dur="${4+Math.random()*4}s" repeatCount="indefinite"/></circle>`).join('')}
-    <!-- Crystal -->
-    <g transform="translate(${w*0.2},${h*0.7})">
-      <polygon points="0,-10 6,0 0,10 -6,0" fill="#00f0ff15" stroke="#00f0ff" stroke-width="0.5" opacity="0.5"/>
-      <circle cx="0" cy="0" r="8" fill="#00f0ff" opacity="0.05" filter="url(#f5g)"/>
-    </g>
-  </svg>`,
-
-  6: (w,h) => `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="g6a" cx="40%" cy="50%"><stop offset="0%" stop-color="#1a0a18"/><stop offset="100%" stop-color="#050508"/></radialGradient>
-      <filter id="f6g"><feGaussianBlur stdDeviation="2"/></filter>
-    </defs>
-    <rect width="${w}" height="${h}" fill="url(#g6a)"/>
-    <!-- Shop shelf -->
-    <rect x="${w*0.1}" y="${h*0.45}" width="${w*0.8}" height="3" fill="#2a1a2a" rx="1"/>
-    <rect x="${w*0.08}" y="${h*0.75}" width="${w*0.84}" height="3" fill="#2a1a2a" rx="1"/>
-    <!-- Potion bottles -->
-    <g opacity="0.8">
-      <path d="M${w*0.2} ${h*0.45} L${w*0.2-5} ${h*0.32} Q${w*0.2} ${h*0.26} ${w*0.2+5} ${h*0.32} Z" fill="#ff00aa25" stroke="#ff00aa" stroke-width="0.5"/>
-      <rect x="${w*0.2-2}" y="${h*0.24}" width="4" height="5" rx="1" fill="#ff00aa15" stroke="#ff00aa" stroke-width="0.3"/>
-      <path d="M${w*0.35} ${h*0.45} L${w*0.35-7} ${h*0.3} L${w*0.35+7} ${h*0.3} Z" fill="#00ff8820" stroke="#00ff88" stroke-width="0.5"/>
-      <rect x="${w*0.35-2}" y="${h*0.24}" width="4" height="6" rx="1" fill="#00ff8815" stroke="#00ff88" stroke-width="0.3"/>
-      <circle cx="${w*0.52}" cy="${h*0.36}" r="8" fill="#ffd70015" stroke="#ffd700" stroke-width="0.5"/>
-      <rect x="${w*0.52-2}" y="${h*0.26}" width="4" height="5" rx="1" fill="#ffd70020" stroke="#ffd700" stroke-width="0.3"/>
-      <path d="M${w*0.68} ${h*0.45} L${w*0.68-4} ${h*0.33} Q${w*0.68} ${h*0.28} ${w*0.68+4} ${h*0.33} Z" fill="#00f0ff20" stroke="#00f0ff" stroke-width="0.5"/>
-      <path d="M${w*0.82} ${h*0.45} L${w*0.82-6} ${h*0.34} L${w*0.82-3} ${h*0.27} L${w*0.82+3} ${h*0.27} L${w*0.82+6} ${h*0.34} Z" fill="#aa66ff20" stroke="#aa66ff" stroke-width="0.5"/>
-    </g>
-    <!-- Herbs on lower shelf -->
-    <g opacity="0.6">
-      ${[0.18,0.32,0.48,0.62,0.78].map((x,i) => `<g transform="translate(${w*x},${h*0.7})"><line x1="0" y1="0" x2="0" y2="-8" stroke="#00ff88" stroke-width="0.5"/><circle cx="${-2}" cy="${-9}" r="2" fill="#00ff8830"/><circle cx="${2}" cy="${-10}" r="1.5" fill="#00ff8820"/><circle cx="${0}" cy="${-7}" r="1.8" fill="#00ff8825"/></g>`).join('')}
-    </g>
-    <!-- Warm candle glow -->
-    <circle cx="${w*0.5}" cy="${h*0.5}" r="30" fill="#ffd700" opacity="0.04" filter="url(#f6g)"/>
-    <circle cx="${w*0.5}" cy="${h*0.5}" r="15" fill="#ffd700" opacity="0.06" filter="url(#f6g)"/>
-    <!-- Sparkles -->
-    <circle cx="${w*0.3}" cy="${h*0.2}" r="1" fill="#ff00aa" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="2s" repeatCount="indefinite"/></circle>
-    <circle cx="${w*0.6}" cy="${h*0.18}" r="0.8" fill="#00ff88" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.8s" repeatCount="indefinite"/></circle>
-    <circle cx="${w*0.75}" cy="${h*0.25}" r="1.2" fill="#ffd700" opacity="0.5"><animate attributeName="opacity" values="0.5;0.15;0.5" dur="1.8s" repeatCount="indefinite"/></circle>
-  </svg>`,
-};
-
-function getQuestImage(id, w, h) {
-  return questImages[id] ? questImages[id](w, h) : '';
-}
-
-const quests = [
-  {
-    id: 1,
-    title: '消えた錬金術師の遺産',
-    tagline: '失われた知識が、あなたの手元に届く——',
-    rank: 'A',
-    difficulty: 3,
-    price: 4980,
-    category: 'advanced',
-    isNew: true,
-    image: 'images/quest-1-alchemy.webp',
-    estimatedTime: '3〜5時間',
-    players: '1〜4人',
-    genre: '謎解き × ファンタジー',
-    items: [
-      { icon: '📜', name: '錬金術師の手記（暗号入り羊皮紙風）' },
-      { icon: '🧪', name: '謎の試薬セット（3本）' },
-      { icon: '🗝️', name: '封印の鍵（金属製レプリカ）' },
-      { icon: '📦', name: 'ギルドからの依頼書' },
-    ],
-    prologue: 'かつて王国に仕えた天才錬金術師・エルドが姿を消してから百年。彼の工房跡から届いた一通の手紙には、「遺産を継ぐ者へ」とだけ記されていた。封を開けた瞬間、あなたの日常は冒険へと変わる。手記に隠された暗号を解き、失われた錬金術の秘密に辿り着けるか——。',
-  },
-  {
-    id: 2,
-    title: '月夜の図書館と禁断の書',
-    tagline: 'ページを開くと、現実が書き換わる——',
-    rank: 'B',
-    difficulty: 2,
-    price: 3480,
-    category: 'beginner',
-    isNew: false,
-    image: 'images/quest-2-library.webp',
-    estimatedTime: '2〜3時間',
-    players: '1〜2人',
-    genre: '謎解き × ホラー',
-    items: [
-      { icon: '📖', name: '禁断の書（特殊インク仕掛け本）' },
-      { icon: '🕯️', name: '蝋封の手紙' },
-      { icon: '🔮', name: '月光石（蓄光アクセサリー）' },
-    ],
-    prologue: '深夜の図書館で見つけた一冊の古書。表紙には「この本を読んだ者は、物語の中に取り込まれる」と警告が刻まれている。好奇心に負けてページをめくったその瞬間——図書館の照明が消え、物語が動き出す。',
-  },
-  {
-    id: 3,
-    title: '失われた王国の暗号',
-    tagline: '千年の謎が、今あなたの元に——',
-    rank: 'A',
-    difficulty: 4,
-    price: 5980,
-    category: 'advanced',
-    isNew: true,
-    image: 'images/quest-3-ruins.webp',
-    estimatedTime: '5〜8時間',
-    players: '1〜4人',
-    genre: '暗号解読 × 歴史冒険',
-    items: [
-      { icon: '🗺️', name: '古代王国の地図（布製）' },
-      { icon: '💎', name: '王家の紋章（メタルコイン）' },
-      { icon: '📜', name: '暗号文書セット（5枚）' },
-      { icon: '🧭', name: '冒険者のコンパス（機能付き）' },
-      { icon: '📦', name: 'ギルド特別依頼書' },
-    ],
-    prologue: '学術調査隊が砂漠の遺跡で発見した石板の拓本が、冒険者ギルド経由であなたに届いた。石板には滅びた王国の財宝の在処が記されているという。だが暗号は幾重にも重ねられ、解読には王国の歴史そのものを紐解く必要がある。',
-  },
-  {
-    id: 4,
-    title: '時計塔の幽霊事件簿',
-    tagline: '時を止めた真犯人を、暴け——',
-    rank: 'B',
-    difficulty: 2,
-    price: 3980,
-    category: 'beginner',
-    isNew: false,
-    image: 'images/quest-4-clocktower.webp',
-    estimatedTime: '2〜4時間',
-    players: '1〜3人',
-    genre: '推理 × ゴシック',
-    items: [
-      { icon: '🕰️', name: '止まった懐中時計（レプリカ）' },
-      { icon: '📋', name: '事件調書ファイル' },
-      { icon: '🔍', name: '探偵の証拠品セット' },
-    ],
-    prologue: '街の象徴である時計塔が、ある夜を境に止まった。同時に塔守が姿を消し、「幽霊の仕業だ」と噂が広まる。ギルドから届いた事件調書には、不可解な証言と矛盾する証拠が並ぶ。真相は、止まった時計の針の先にある。',
-  },
-  {
-    id: 5,
-    title: '深海遺跡からの招待状',
-    tagline: '海底に眠る文明が、あなたを呼んでいる——',
-    rank: 'S',
-    difficulty: 5,
-    price: 7980,
-    category: 'advanced',
-    isNew: true,
-    image: 'images/quest-5-deepsea.webp',
-    estimatedTime: '6〜10時間',
-    players: '2〜5人',
-    genre: '謎解き × SF × アドベンチャー',
-    items: [
-      { icon: '🐚', name: '深海の通信器（音声ギミック付き）' },
-      { icon: '🗺️', name: '海底遺跡の海図（防水仕様）' },
-      { icon: '💠', name: '古代文明のクリスタル（LED内蔵）' },
-      { icon: '📜', name: '暗号化された研究日誌' },
-      { icon: '🧩', name: 'パズルロックボックス' },
-      { icon: '📦', name: 'ギルド最高機密依頼書' },
-    ],
-    prologue: '深海探査船が海底3,000mで発見した遺跡——それは、既知のどの文明にも属さない未知の建造物だった。探査チームが回収した遺物の一つ「通信器」が突如起動し、あなたの名前を呼んだ。海底からの招待に応じる覚悟はあるか。',
-  },
-  {
-    id: 6,
-    title: '魔法薬店の最後の一日',
-    tagline: '閉店までに、最後のレシピを完成させよ——',
-    rank: 'C',
-    difficulty: 1,
-    price: 2980,
-    category: 'beginner',
-    isNew: false,
-    image: 'images/quest-6-potionshop.webp',
-    estimatedTime: '1〜2時間',
-    players: '1人',
-    genre: '体験型 × ファンタジー',
-    items: [
-      { icon: '🧪', name: '魔法薬レシピカード（5枚）' },
-      { icon: '🌿', name: 'ハーブ素材セット（本物のドライハーブ）' },
-      { icon: '📔', name: '薬店主の日記' },
-    ],
-    prologue: 'ひっそりと営業を続けてきた「月影の魔法薬店」が、今日で閉店する。店主のおばあさんから届いた小包には、完成させられなかった最後のレシピと、本物のハーブが入っていた。「あなたなら、きっと作れるはず」——その言葉を信じて、最後の魔法薬を調合せよ。',
-  },
-];
-
-/* ============================================================
-   STATE
-   ============================================================ */
-let currentPage = 'opening';
-let audioContext = null;
-let isPlaying = false;
-let bgmNodes = {};
-
-/* ============================================================
-   NAVIGATION
-   ============================================================ */
-let savedBoardScroll = 0;
-
-function showPage(pageId, restoreScroll) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const target = document.getElementById(pageId);
-  if (target) {
-    target.classList.add('active');
-    target.scrollTop = restoreScroll ? savedBoardScroll : 0;
-  }
-}
-
-function playStartSFX() {
-  try {
-    const sfxCtx = audioContext || new (window.AudioContext || window.webkitAudioContext)();
-    const now = sfxCtx.currentTime;
-    const sfxGain = sfxCtx.createGain();
-    sfxGain.gain.value = 0.15;
-    sfxGain.connect(sfxCtx.destination);
-
-    // RPG "quest accepted" ascending arpeggio
-    const sfxNotes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5 E5 G5 C6 E6
-    sfxNotes.forEach((freq, i) => {
-      const osc = sfxCtx.createOscillator();
-      const env = sfxCtx.createGain();
-      osc.type = 'square';
-      osc.frequency.value = freq;
-      env.gain.setValueAtTime(0.5, now + i * 0.08);
-      env.gain.exponentialRampToValueAtTime(0.01, now + i * 0.08 + 0.25);
-      osc.connect(env);
-      env.connect(sfxGain);
-      osc.start(now + i * 0.08);
-      osc.stop(now + i * 0.08 + 0.3);
-    });
-  } catch(e) {}
-}
-
-function startAdventure() {
-  const overlay = document.getElementById('transition-overlay');
-  overlay.classList.add('active');
-
-  // Play start SFX then BGM
-  playStartSFX();
-  setTimeout(() => startBGM(), 500);
-
-  setTimeout(() => {
-    showPage('page-quest-board');
-    currentPage = 'quest-board';
-    renderQuestCards(quests);
-    initSplitText();
-    initCounters();
-    setTimeout(() => {
-      overlay.classList.remove('active');
-      // Trigger hero text reveal after transition fades
-      document.querySelectorAll('.guild-hero .split-text').forEach(el => el.classList.add('visible'));
-    }, 600);
-  }, 1500);
-}
-
-function goToOpening() {
-  showPage('page-opening');
-  currentPage = 'opening';
-}
-
-function goToQuestBoard() {
-  const overlay = document.getElementById('transition-overlay');
-  overlay.querySelector('.transition-text').textContent = '掲示板に戻ります...';
-  overlay.classList.add('active');
-  setTimeout(() => {
-    showPage('page-quest-board', true);
-    currentPage = 'quest-board';
-    setTimeout(() => {
-      overlay.classList.remove('active');
-      overlay.querySelector('.transition-text').textContent = 'ギルド掲示板を開いています...';
-    }, 400);
-  }, 800);
-}
-
-function openQuestDetail(questId) {
-  const quest = quests.find(q => q.id === questId);
-  if (!quest) return;
-
-  // Save scroll position of quest board
-  const boardPage = document.getElementById('page-quest-board');
-  if (boardPage) savedBoardScroll = boardPage.scrollTop;
-
-  const overlay = document.getElementById('transition-overlay');
-  overlay.querySelector('.transition-text').textContent = '依頼書を準備中...';
-  overlay.classList.add('active');
-
-  setTimeout(() => {
-    renderDetail(quest);
-    showPage('page-detail');
-    currentPage = 'detail';
-    setTimeout(() => {
-      overlay.classList.remove('active');
-      overlay.querySelector('.transition-text').textContent = 'ギルド掲示板を開いています...';
-    }, 400);
-  }, 800);
-}
-
-/* ============================================================
-   RENDER — Quest Cards
-   ============================================================ */
-function renderQuestCards(list) {
-  const grid = document.getElementById('quest-grid');
-  grid.innerHTML = list.map((q, i) => {
-    const rankClass = `rank-${q.rank}`;
-    const swords = Array.from({length: 5}, (_, si) =>
-      `<span class="sword ${si < q.difficulty ? '' : 'empty'}">⚔</span>`
-    ).join('');
-    const itemsPreview = q.items.slice(0, 2).map(it => it.name).join('、') + (q.items.length > 2 ? ' 他' : '');
-
-    return `
-      <div class="quest-card" onclick="openQuestDetail(${q.id})" onkeydown="if(event.key==='Enter')openQuestDetail(${q.id})" role="button" tabindex="0" aria-label="${q.title} — ${q.rank}ランク ${q.price.toLocaleString()}円" data-category="${q.category}" ${q.isNew ? 'data-new="true"' : ''}>
-        ${q.isNew ? '<div class="badge-new">NEW</div>' : ''}
-        <div class="card-image" style="background:#161a50">${q.image ? `<img src="${q.image}" alt="${q.title}のクエストイメージ画像" width="1024" height="1024" loading="lazy" style="background:#161a50">` : getQuestImage(q.id, 320, 180)}</div>
-        <div class="card-rank ${rankClass}">RANK ${q.rank}</div>
-        <div class="card-title">${q.title}</div>
-        <div class="card-tagline">${q.tagline}</div>
-        <div class="card-meta">
-          <div class="meta-row">
-            <span class="meta-label">難易度</span>
-            <div class="difficulty-swords">${swords}</div>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">分類</span>
-            <span class="meta-value">${q.genre}</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">冒険</span>
-            <span class="meta-value">${q.players}／${q.estimatedTime}</span>
-          </div>
-        </div>
-        <div class="card-items">🎁 報酬アイテム：${itemsPreview}</div>
-        <div class="card-footer">
-          <div class="card-price"><span class="currency">¥</span>${q.price.toLocaleString()}<span class="gold-price">（${q.price.toLocaleString()}G）</span></div>
-          <div class="card-action">この依頼を見る →</div>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-/* ============================================================
-   FILTER
-   ============================================================ */
-function filterQuests(category, btn) {
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-
-  let filtered = quests;
-  if (category === 'beginner') filtered = quests.filter(q => q.difficulty <= 2);
-  else if (category === 'advanced') filtered = quests.filter(q => q.difficulty >= 3);
-  else if (category === 'new') filtered = quests.filter(q => q.isNew);
-
-  renderQuestCards(filtered);
-}
-
-/* ============================================================
-   RENDER — Detail Page
-   ============================================================ */
-function renderDetail(quest) {
-  const rankClass = `rank-${quest.rank}`;
-  const swords = Array.from({length: 5}, (_, i) =>
-    `<span class="sword ${i < quest.difficulty ? '' : 'empty'}" style="font-size:0.9rem;">⚔</span>`
-  ).join('');
-
-  const container = document.getElementById('detail-content');
-  container.innerHTML = `
-    <div class="detail-back detail-stagger" onclick="goToQuestBoard()">← 掲示板に戻る</div>
-    <div class="detail-hero detail-stagger" style="background:#161a50">${quest.image ? `<img src="${quest.image}" alt="${quest.title}のクエスト詳細画像" width="1024" height="1024" loading="lazy" style="background:#161a50">` : getQuestImage(quest.id, 640, 274)}</div>
-    <div class="detail-header detail-stagger">
-      <div class="detail-rank-badge ${rankClass}">RANK ${quest.rank} QUEST</div>
-      <h1 class="detail-title">${quest.title}</h1>
-      <p class="detail-tagline">${quest.tagline}</p>
-    </div>
-
-    <div class="quest-scroll-header detail-stagger">
-      <div class="quest-scroll-label">— 依頼書 —</div>
-      <div class="quest-scroll-title">${quest.title}</div>
-    </div>
-
-    <div class="status-panel detail-stagger">
-      <div class="status-panel-title">◆ QUEST STATUS</div>
-      <div class="status-grid">
-        <div class="stat-item">
-          <div class="stat-icon">⚔️</div>
-          <div class="stat-info">
-            <div class="stat-label">クエスト難度</div>
-            <div class="stat-value"><span class="difficulty-swords">${swords}</span></div>
-          </div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">⏱️</div>
-          <div class="stat-info">
-            <div class="stat-label">想定所要時間</div>
-            <div class="stat-value">${quest.estimatedTime}</div>
-          </div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">👥</div>
-          <div class="stat-info">
-            <div class="stat-label">推奨パーティ人数</div>
-            <div class="stat-value">${quest.players}</div>
-          </div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">📂</div>
-          <div class="stat-info">
-            <div class="stat-label">分類</div>
-            <div class="stat-value">${quest.genre}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-block detail-stagger">
-      <div class="section-title">◆ プロローグ</div>
-      <div class="prologue-text">${quest.prologue}</div>
-    </div>
-
-    <div class="section-block detail-stagger">
-      <div class="section-title">◆ 報酬：自宅に届くリアルアイテム</div>
-      <ul class="items-list">
-        ${quest.items.map(item => `
-          <li>
-            <span class="item-icon">${item.icon}</span>
-            <span>${item.name}</span>
-          </li>
-        `).join('')}
-      </ul>
-    </div>
-
-    <div class="purchase-area detail-stagger">
-      <div class="purchase-flavor">この依頼を受けると、数日後にリアルアイテムが届く——</div>
-      <div class="purchase-price">
-        ¥${quest.price.toLocaleString()}<span class="gold-price">（${quest.price.toLocaleString()}G）</span><span class="tax">（税込）</span>
-      </div>
-      <div class="purchase-shipping">送料無料・ご注文から3〜5日でお届け</div>
-      <button class="btn-purchase" onclick="openModal('modal-coming-soon')">
-        <span class="cmd-icon">▶</span> このクエストを受注する
+<!-- ============================================================
+     PAGE 4 — RANKINGS
+     ============================================================ -->
+<div class="page" id="page-rankings">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link active" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="audio-toggle" id="audio-toggle-ranking" onclick="toggleAudio()">
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+        BGM
       </button>
-      <div class="purchase-note">※ 商品の性質上、返品・交換はお受けできません</div>
+      <button class="hamburger-btn" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="ranking-page-content">
+    <div class="ranking-hero">
+      <div class="ranking-hero-title">ギルドランキング</div>
+      <div class="ranking-hero-sub">勇者たちの戦績と、人気クエストの記録</div>
     </div>
 
-    <footer class="site-footer">
+    <div class="ranking-tabs">
+      <button class="ranking-tab active" onclick="switchRankingTab('popular', this)">人気クエスト</button>
+      <button class="ranking-tab" onclick="switchRankingTab('rated', this)">高評価</button>
+      <button class="ranking-tab" onclick="switchRankingTab('adventurers', this)">冒険者</button>
+      <button class="ranking-tab" onclick="switchRankingTab('creators', this)">創造者</button>
+    </div>
+
+    <div class="ranking-list" id="ranking-list">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
       <div class="footer-logo">◆ REAL QUEST ◆</div>
-      <div class="footer-text">© 2026 リアクエ</div>
-      <div class="footer-legal">
-        <a onclick="openModal('modal-tokushoho')">特定商取引法に基づく表記</a>
-        <a onclick="openModal('modal-privacy')">プライバシーポリシー</a>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('guide')">Q&A</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
-      <div class="footer-world">冒険者ギルド"リアクエ" — 日常が、クエストになる</div>
-    </footer>
-  `;
-}
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-/* ============================================================
-   WEB AUDIO — IMMERSIVE RPG BGM (Ambient + Chiptune layers)
-   ============================================================ */
-function startBGM() {
-  if (isPlaying) return;
+<!-- ============================================================
+     PAGE 5 — MY PAGE
+     ============================================================ -->
+<div class="page" id="page-mypage">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link active" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="audio-toggle" id="audio-toggle-mypage" onclick="toggleAudio()">
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+        BGM
+      </button>
+      <button class="hamburger-btn" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-  try {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  } catch(e) { return; }
+  <div class="mypage-content" id="mypage-content">
+    <!-- Rendered by JS -->
+  </div>
 
-  const masterGain = audioContext.createGain();
-  masterGain.gain.value = 0;
-  masterGain.connect(audioContext.destination);
-  masterGain.gain.linearRampToValueAtTime(0.25, audioContext.currentTime + 2);
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('guide')">Q&A</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-  const BPM = 110;
-  const beatDur = 60 / BPM;
-  const sixteenth = beatDur / 4;
-  let loopTimerVal = null;
+<!-- ============================================================
+     PAGE 6 — GUIDE (初めての方へ)
+     ============================================================ -->
+<div class="page" id="page-guide">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="audio-toggle" onclick="toggleAudio()">
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+        BGM
+      </button>
+      <button class="hamburger-btn" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="sub-page-content" id="guide-content"><!-- Rendered by JS --></div>
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-  const nf = (note, octave) => {
-    const n = { C:0,'C#':1,D:2,'D#':3,E:4,F:5,'F#':6,G:7,'G#':8,A:9,'A#':10,B:11 };
-    return 440 * Math.pow(2, (n[note] - 9 + (octave - 4) * 12) / 12);
-  };
+<!-- ============================================================
+     PAGE 7 — REVIEWS (レビュー一覧)
+     ============================================================ -->
+<div class="page" id="page-reviews">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="audio-toggle" onclick="toggleAudio()">
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+        BGM
+      </button>
+      <button class="hamburger-btn" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="sub-page-content" id="reviews-content"><!-- Rendered by JS --></div>
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-  // ================================================================
-  // LAYER 1: Ambient pad drone (continuous, immersive atmosphere)
-  // ================================================================
-  const padGain = audioContext.createGain();
-  padGain.gain.value = 0.07;
-  const padFilter = audioContext.createBiquadFilter();
-  padFilter.type = 'lowpass';
-  padFilter.frequency.value = 600;
-  padFilter.Q.value = 1.5;
-  padGain.connect(padFilter);
-  padFilter.connect(masterGain);
+<!-- ============================================================
+     PAGE 8 — COIN SHOP (コイン交換所)
+     ============================================================ -->
+<div class="page" id="page-coin-shop">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="audio-toggle" onclick="toggleAudio()">
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+        BGM
+      </button>
+      <button class="hamburger-btn" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="sub-page-content" id="coin-shop-content"><!-- Rendered by JS --></div>
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-  // Slow chord drone: Am → F → C → G
-  const padChords = [
-    [nf('A',2), nf('C',3), nf('E',3)],
-    [nf('F',2), nf('A',2), nf('C',3)],
-    [nf('C',3), nf('E',3), nf('G',3)],
-    [nf('G',2), nf('B',2), nf('D',3)],
-  ];
-  let padOscs = [];
+<!-- ============================================================
+     PAGE 9 — NEWS (お知らせ)
+     ============================================================ -->
+<div class="page" id="page-news">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="audio-toggle" onclick="toggleAudio()">
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+        BGM
+      </button>
+      <button class="hamburger-btn" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="sub-page-content" id="news-content"><!-- Rendered by JS --></div>
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-  function startPadChord(chordIdx) {
-    padOscs.forEach(o => { try { o.osc.stop(); } catch(e){} });
-    padOscs = [];
-    const chord = padChords[chordIdx % padChords.length];
-    const now = audioContext.currentTime;
-    chord.forEach((freq, i) => {
-      const osc = audioContext.createOscillator();
-      const g = audioContext.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      osc.detune.value = (i - 1) * 4;
-      g.gain.setValueAtTime(0, now);
-      g.gain.linearRampToValueAtTime(0.4, now + 2);
-      osc.connect(g);
-      g.connect(padGain);
-      osc.start();
-      padOscs.push({ osc, g });
+<!-- ============================================================
+     PAGE 10 — CAMPAIGNS (キャンペーン)
+     ============================================================ -->
+<div class="page" id="page-campaigns">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="audio-toggle" onclick="toggleAudio()">
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+        BGM
+      </button>
+      <button class="hamburger-btn" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="sub-page-content" id="campaigns-content"><!-- Rendered by JS --></div>
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-      // Add detuned copy for thickness
-      const osc2 = audioContext.createOscillator();
-      const g2 = audioContext.createGain();
-      osc2.type = 'sine';
-      osc2.frequency.value = freq;
-      osc2.detune.value = (i - 1) * 4 + 8;
-      g2.gain.setValueAtTime(0, now);
-      g2.gain.linearRampToValueAtTime(0.15, now + 2);
-      osc2.connect(g2);
-      g2.connect(padGain);
-      osc2.start();
-      padOscs.push({ osc: osc2, g: g2 });
-    });
-  }
+<!-- ============================================================
+     PAGE 11 — CONTACT (お問い合わせ)
+     ============================================================ -->
+<div class="page" id="page-contact">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="audio-toggle" onclick="toggleAudio()">
+        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+        BGM
+      </button>
+      <button class="hamburger-btn" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="sub-page-content" id="contact-content"><!-- Rendered by JS --></div>
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-  // LFO modulating pad filter for movement
-  const padLfo = audioContext.createOscillator();
-  const padLfoGain = audioContext.createGain();
-  padLfo.type = 'sine';
-  padLfo.frequency.value = 0.15;
-  padLfoGain.gain.value = 200;
-  padLfo.connect(padLfoGain);
-  padLfoGain.connect(padFilter.frequency);
-  padLfo.start();
+<!-- ============================================================
+     PAGE 12 — TERMS (利用規約)
+     ============================================================ -->
+<div class="page" id="page-terms">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="hamburger-btn" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="sub-page-content" id="terms-content"><!-- Rendered by JS --></div>
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-  let padChordIdx = 0;
-  startPadChord(0);
-  const padInterval = setInterval(() => {
-    if (!isPlaying) return;
-    padChordIdx++;
-    // Fade out old, start new
-    const now = audioContext.currentTime;
-    padOscs.forEach(o => o.g.gain.linearRampToValueAtTime(0, now + 1.5));
-    setTimeout(() => { if (isPlaying) startPadChord(padChordIdx); }, 1200);
-  }, beatDur * 16 * 1000); // change chord every 4 bars
+<!-- ============================================================
+     PAGE 13 — PRIVACY (プライバシーポリシー)
+     ============================================================ -->
+<div class="page" id="page-privacy">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="hamburger-btn" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="sub-page-content" id="privacy-content"><!-- Rendered by JS --></div>
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-  // ================================================================
-  // LAYER 2: Chiptune melody (square wave, RPG adventure theme)
-  // ================================================================
-  const melGain = audioContext.createGain();
-  melGain.gain.value = 0.07;
-  const melFilter = audioContext.createBiquadFilter();
-  melFilter.type = 'lowpass';
-  melFilter.frequency.value = 3000;
-  melGain.connect(melFilter);
-  melFilter.connect(masterGain);
+<!-- ============================================================
+     PAGE 14 — COMMERCE LAW (特定商取引法)
+     ============================================================ -->
+<div class="page" id="page-commerce-law">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
+      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      <button class="hamburger-btn" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="sub-page-content" id="commerce-law-content"><!-- Rendered by JS --></div>
+  <footer class="site-footer-mini">
+    <div class="footer-mini-inner">
+      <div class="footer-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-mini-links">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+      </div>
+      <div class="footer-mini-legal">
+        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+    </div>
+  </footer>
+</div>
 
-  // [note, octave, duration in sixteenths] 0=rest
-  const melody = [
-    // 4 bars — Am: mysterious, adventurous
-    ['A',4,4], ['C',5,2], ['E',5,2], ['D',5,4], ['C',5,2], ['B',4,2],
-    ['A',4,4], ['E',5,4], ['D',5,2], ['C',5,2], ['B',4,2], ['A',4,2],
-    // 4 bars — F: wonder
-    ['F',4,4], ['A',4,2], ['C',5,2], ['D',5,4], ['C',5,2], ['A',4,2],
-    ['F',4,2], ['G',4,2], ['A',4,4], ['G',4,4], [0,0,2], ['F',4,2],
-    // 4 bars — C: heroic ascent
-    ['C',5,2], ['E',5,2], ['G',5,4], ['A',5,2], ['G',5,2], ['E',5,4],
-    ['C',5,2], ['D',5,2], ['E',5,2], ['G',5,2], ['A',5,4], [0,0,4],
-    // 4 bars — G: triumphant resolve
-    ['G',4,4], ['B',4,2], ['D',5,2], ['E',5,4], ['D',5,2], ['B',4,2],
-    ['G',4,2], ['A',4,2], ['B',4,4], ['A',4,4], ['G',4,2], [0,0,2],
-  ];
+<!-- ============================================================
+     PAGE — CREATOR PLACEHOLDER
+     ============================================================ -->
+<div class="page" id="page-creator">
+  <header class="site-header">
+    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
+    <div class="header-nav">
+      <button class="header-nav-link" onclick="navigateTo('quest-board')">冒険者側へ</button>
+    </div>
+  </header>
+  <div class="creator-placeholder">
+    <div class="creator-placeholder-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></div>
+    <div class="creator-placeholder-title">創造者ギルド — 準備中</div>
+    <div class="creator-placeholder-text">
+      クエストを生み出す創造者のための機能を整備しています。<br>
+      作品登録・販売、運営からの発注受注など、近日公開予定です。
+    </div>
+  </div>
+</div>
 
-  // ================================================================
-  // LAYER 3: Triangle bass
-  // ================================================================
-  const bassGain = audioContext.createGain();
-  bassGain.gain.value = 0.10;
-  bassGain.connect(masterGain);
+<!-- Auth Modal -->
+<div class="auth-modal-overlay" id="auth-modal" style="display:none">
+  <div class="auth-modal">
+    <button class="auth-modal-close" onclick="closeAuthModal()">✕</button>
+    <div class="auth-modal-title" id="auth-modal-title">冒険者ログイン</div>
+    <div class="auth-modal-sub" id="auth-modal-sub">— ADVENTURER LOGIN —</div>
 
-  const bass = [
-    // Am
-    ['A',2,4], ['E',2,2], ['A',2,2], ['A',2,4], ['C',3,2], ['A',2,2],
-    ['A',2,4], ['E',2,4], ['A',2,2], ['E',2,2], ['A',2,2], ['C',3,2],
-    // F
-    ['F',2,4], ['C',3,2], ['F',2,2], ['F',2,4], ['A',2,2], ['F',2,2],
-    ['F',2,4], ['C',3,4], ['A',2,2], ['F',2,2], ['C',3,2], ['F',2,2],
-    // C
-    ['C',3,4], ['G',2,2], ['C',3,2], ['E',3,4], ['C',3,2], ['G',2,2],
-    ['C',3,4], ['E',3,2], ['G',2,2], ['C',3,2], ['E',3,2], ['C',3,2], [0,0,2],
-    // G
-    ['G',2,4], ['D',3,2], ['G',2,2], ['B',2,4], ['G',2,2], ['D',3,2],
-    ['G',2,4], ['B',2,4], ['D',3,2], ['G',2,2], ['B',2,2], [0,0,2],
-  ];
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="auth-tab-login" onclick="switchAuthTab('login')">ログイン</button>
+      <button class="auth-tab" id="auth-tab-signup" onclick="switchAuthTab('signup')">新規登録</button>
+    </div>
 
-  // ================================================================
-  // LAYER 4: Drums (soft, rhythmic pulse)
-  // ================================================================
-  const drumGain = audioContext.createGain();
-  drumGain.gain.value = 0.05;
-  drumGain.connect(masterGain);
+    <form class="auth-form" id="auth-form" onsubmit="handleAuthSubmit(event)">
+      <div class="auth-form-group" id="auth-name-group" style="display:none">
+        <label class="contact-label">冒険者名</label>
+        <input type="text" class="contact-input" id="auth-name" placeholder="あなたの冒険者名">
+      </div>
+      <div class="auth-form-group">
+        <label class="contact-label">メールアドレス</label>
+        <input type="email" class="contact-input" id="auth-email" required placeholder="your@email.com">
+      </div>
+      <div class="auth-form-group">
+        <label class="contact-label">パスワード</label>
+        <input type="password" class="contact-input" id="auth-password" required placeholder="6文字以上" minlength="6">
+      </div>
+      <div class="auth-error" id="auth-error" style="display:none"></div>
+      <button type="submit" class="btn-accept auth-submit" id="auth-submit-btn">ログイン</button>
+    </form>
 
-  const drums = 'K00H00SHK00H00SHK00HK0SHK0HK0SSH'.split('');
+    <div class="auth-divider"><span>または</span></div>
+    <button class="auth-google-btn" onclick="handleGoogleLogin()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Googleでログイン
+    </button>
+  </div>
+</div>
 
-  // ================================================================
-  // LAYER 5: Arpeggio shimmer
-  // ================================================================
-  const arpGain = audioContext.createGain();
-  arpGain.gain.value = 0.03;
-  const arpFilter = audioContext.createBiquadFilter();
-  arpFilter.type = 'lowpass';
-  arpFilter.frequency.value = 2200;
-  arpGain.connect(arpFilter);
-  arpFilter.connect(masterGain);
-
-  const arpChords = [
-    ['A','C','E'], ['A','C','E'], ['A','C','E'], ['A','C','E'],
-    ['F','A','C'], ['F','A','C'], ['F','A','C'], ['F','A','C'],
-    ['C','E','G'], ['C','E','G'], ['C','E','G'], ['C','E','G'],
-    ['G','B','D'], ['G','B','D'], ['G','B','D'], ['G','B','D'],
-  ];
-
-  // ================================================================
-  // LAYER 6: Ambient reverb tail (shimmer)
-  // ================================================================
-  const reverbGain = audioContext.createGain();
-  reverbGain.gain.value = 0.04;
-  reverbGain.connect(masterGain);
-
-  // Simple delay-based pseudo-reverb
-  const delay1 = audioContext.createDelay(1);
-  delay1.delayTime.value = 0.3;
-  const delay1fb = audioContext.createGain();
-  delay1fb.gain.value = 0.3;
-  const delay2 = audioContext.createDelay(1);
-  delay2.delayTime.value = 0.5;
-  const delay2fb = audioContext.createGain();
-  delay2fb.gain.value = 0.2;
-  melFilter.connect(delay1);
-  delay1.connect(delay1fb);
-  delay1fb.connect(delay1);
-  delay1.connect(reverbGain);
-  melFilter.connect(delay2);
-  delay2.connect(delay2fb);
-  delay2fb.connect(delay2);
-  delay2.connect(reverbGain);
-
-  // ================================================================
-  // Playback helpers
-  // ================================================================
-  function playNote(type, freq, dur, gn, vol, t) {
-    if (!audioContext) return;
-    const osc = audioContext.createOscillator();
-    const env = audioContext.createGain();
-    osc.type = type;
-    osc.frequency.value = freq;
-    env.gain.setValueAtTime(vol, t);
-    env.gain.setValueAtTime(vol * 0.7, t + dur * 0.15);
-    env.gain.exponentialRampToValueAtTime(0.001, t + dur * 0.92);
-    osc.connect(env);
-    env.connect(gn);
-    osc.start(t);
-    osc.stop(t + dur);
-  }
-
-  function playDrumHit(type, t) {
-    if (!audioContext) return;
-    if (type === 'K') {
-      const o = audioContext.createOscillator();
-      const g = audioContext.createGain();
-      o.type = 'sine';
-      o.frequency.setValueAtTime(120, t);
-      o.frequency.exponentialRampToValueAtTime(35, t + 0.12);
-      g.gain.setValueAtTime(0.5, t);
-      g.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
-      o.connect(g); g.connect(drumGain);
-      o.start(t); o.stop(t + 0.15);
-    } else if (type === 'S') {
-      const buf = audioContext.createBuffer(1, audioContext.sampleRate * 0.06, audioContext.sampleRate);
-      const d = buf.getChannelData(0);
-      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-      const n = audioContext.createBufferSource(); n.buffer = buf;
-      const g = audioContext.createGain();
-      const f = audioContext.createBiquadFilter();
-      f.type = 'highpass'; f.frequency.value = 4000;
-      g.gain.setValueAtTime(0.35, t);
-      g.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
-      n.connect(f); f.connect(g); g.connect(drumGain);
-      n.start(t); n.stop(t + 0.06);
-    } else if (type === 'H') {
-      const buf = audioContext.createBuffer(1, audioContext.sampleRate * 0.03, audioContext.sampleRate);
-      const d = buf.getChannelData(0);
-      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-      const n = audioContext.createBufferSource(); n.buffer = buf;
-      const g = audioContext.createGain();
-      const f = audioContext.createBiquadFilter();
-      f.type = 'highpass'; f.frequency.value = 9000;
-      g.gain.setValueAtTime(0.15, t);
-      g.gain.exponentialRampToValueAtTime(0.001, t + 0.03);
-      n.connect(f); f.connect(g); g.connect(drumGain);
-      n.start(t); n.stop(t + 0.03);
-    }
-  }
-
-  // ================================================================
-  // Main scheduling loop
-  // ================================================================
-  function scheduleLoop() {
-    if (!isPlaying || !audioContext) return;
-    const now = audioContext.currentTime + 0.08;
-
-    // Melody
-    let t = now;
-    for (const [note, oct, dur] of melody) {
-      if (note !== 0) playNote('square', nf(note, oct), dur * sixteenth * 0.88, melGain, 0.45, t);
-      t += dur * sixteenth;
-    }
-
-    // Bass
-    t = now;
-    for (const [note, oct, dur] of bass) {
-      if (note !== 0) playNote('triangle', nf(note, oct), dur * sixteenth * 0.8, bassGain, 0.55, t);
-      t += dur * sixteenth;
-    }
-
-    // Total duration from melody
-    const totalSx = melody.reduce((s, n) => s + n[2], 0);
-
-    // Drums
-    for (let i = 0; i < totalSx; i++) {
-      const ch = drums[i % drums.length];
-      if (ch !== '0') playDrumHit(ch, now + i * sixteenth);
-    }
-
-    // Arpeggios (every other sixteenth)
-    for (let i = 0; i < totalSx; i++) {
-      if (i % 3 === 0) {
-        const ci = Math.floor(i / 4) % arpChords.length;
-        const ni = i % 3;
-        const ch = arpChords[ci];
-        playNote('square', nf(ch[ni], 5), sixteenth * 0.4, arpGain, 0.25, now + i * sixteenth);
-      }
-    }
-
-    const loopDur = totalSx * sixteenth;
-    loopTimerVal = setTimeout(scheduleLoop, (loopDur - 0.3) * 1000);
-  }
-
-  scheduleLoop();
-
-  bgmNodes = { masterGain, padLfo, padInterval, loopTimer: () => loopTimerVal, padOscs: () => padOscs };
-  isPlaying = true;
-  updateAudioButtons();
-}
-
-function stopBGM() {
-  if (!isPlaying || !audioContext) return;
-  isPlaying = false;
-
-  if (bgmNodes.loopTimer) clearTimeout(bgmNodes.loopTimer());
-  if (bgmNodes.padInterval) clearInterval(bgmNodes.padInterval);
-
-  // Fade out pad oscillators
-  if (bgmNodes.padOscs) {
-    const oscs = bgmNodes.padOscs();
-    const now = audioContext.currentTime;
-    oscs.forEach(o => { try { o.g.gain.linearRampToValueAtTime(0, now + 0.5); } catch(e){} });
-  }
-  try { bgmNodes.padLfo.stop(); } catch(e){}
-
-  if (bgmNodes.masterGain) {
-    bgmNodes.masterGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.8);
-  }
-
-  setTimeout(() => {
-    if (audioContext && audioContext.state !== 'closed') {
-      audioContext.close().catch(() => {});
-    }
-    audioContext = null;
-    bgmNodes = {};
-  }, 1000);
-
-  updateAudioButtons();
-}
-
-function toggleAudio() {
-  if (isPlaying) {
-    stopBGM();
-  } else {
-    startBGM();
-  }
-}
-
-function updateAudioButtons() {
-  document.querySelectorAll('.audio-toggle').forEach(btn => {
-    btn.classList.toggle('muted', !isPlaying);
-  });
-}
-
-/* ============================================================
-   PARTICLES
-   ============================================================ */
-(function initParticles() {
-  const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let embers = [];
-  const PARTICLE_COUNT = 60;
-  const EMBER_COUNT = 15;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Small dust particles
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 2 + 0.5;
-      this.speedY = -(Math.random() * 0.3 + 0.1);
-      this.speedX = (Math.random() - 0.5) * 0.2;
-      this.opacity = Math.random() * 0.5 + 0.1;
-      this.hue = Math.random() > 0.5 ? 51 : 35;
-      this.life = Math.random() * 200 + 100;
-      this.maxLife = this.life;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      this.life--;
-      this.opacity = (this.life / this.maxLife) * 0.4;
-      if (this.life <= 0 || this.y < -10) this.reset();
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${this.hue}, 100%, 70%, ${this.opacity})`;
-      ctx.fill();
-    }
-  }
-
-  // Larger ember particles with glow trail
-  class Ember {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = canvas.height + 10;
-      this.size = Math.random() * 3 + 2;
-      this.speedY = -(Math.random() * 0.6 + 0.3);
-      this.speedX = (Math.random() - 0.5) * 0.4;
-      this.wobble = Math.random() * Math.PI * 2;
-      this.wobbleSpeed = Math.random() * 0.02 + 0.01;
-      this.opacity = 0;
-      this.maxOpacity = Math.random() * 0.4 + 0.2;
-      this.hue = Math.random() > 0.3 ? 45 : 20;
-      this.life = Math.random() * 400 + 200;
-      this.maxLife = this.life;
-      this.trail = [];
-    }
-    update() {
-      this.wobble += this.wobbleSpeed;
-      this.x += this.speedX + Math.sin(this.wobble) * 0.3;
-      this.y += this.speedY;
-      this.life--;
-      const lifeRatio = this.life / this.maxLife;
-      this.opacity = lifeRatio > 0.8 ? (1 - lifeRatio) / 0.2 * this.maxOpacity : lifeRatio * this.maxOpacity;
-      this.trail.push({ x: this.x, y: this.y, opacity: this.opacity * 0.3 });
-      if (this.trail.length > 8) this.trail.shift();
-      if (this.life <= 0 || this.y < -20) this.reset();
-    }
-    draw() {
-      // Trail
-      this.trail.forEach((t, i) => {
-        const r = this.size * (i / this.trail.length) * 0.5;
-        ctx.beginPath();
-        ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${this.hue}, 100%, 65%, ${t.opacity * (i / this.trail.length)})`;
-        ctx.fill();
-      });
-      // Core
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-      grad.addColorStop(0, `hsla(${this.hue}, 100%, 80%, ${this.opacity})`);
-      grad.addColorStop(1, `hsla(${this.hue}, 100%, 60%, 0)`);
-      ctx.fillStyle = grad;
-      ctx.fill();
-    }
-  }
-
-  for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
-  for (let i = 0; i < EMBER_COUNT; i++) { const e = new Ember(); e.y = Math.random() * canvas.height; embers.push(e); }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    embers.forEach(e => { e.update(); e.draw(); });
-    requestAnimationFrame(animate);
-  }
-  animate();
-})();
-
-/* ============================================================
-   KEYBOARD — Enter to start
-   ============================================================ */
-/* ============================================================
-   MODALS
-   ============================================================ */
-function openModal(id) {
-  const modal = document.getElementById(id);
-  if (modal) modal.classList.add('active');
-}
-function closeModal(id) {
-  const modal = document.getElementById(id);
-  if (modal) modal.classList.remove('active');
-}
-
-/* ============================================================
-   HAMBURGER MENU
-   ============================================================ */
-function toggleMenu() {
-  const overlay = document.getElementById('menu-overlay');
-  const btns = document.querySelectorAll('.hamburger-btn');
-  overlay.classList.toggle('active');
-  btns.forEach(b => b.classList.toggle('active'));
-}
-function closeMenu() {
-  const overlay = document.getElementById('menu-overlay');
-  const btns = document.querySelectorAll('.hamburger-btn');
-  overlay.classList.remove('active');
-  btns.forEach(b => b.classList.remove('active'));
-}
-function scrollToAbout() {
-  if (currentPage !== 'quest-board') {
-    goToQuestBoard();
-    setTimeout(() => {
-      const el = document.getElementById('about-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 1300);
-  } else {
-    const el = document.getElementById('about-section');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-function scrollToNewsletter() {
-  if (currentPage !== 'quest-board') {
-    goToQuestBoard();
-    setTimeout(() => {
-      const el = document.getElementById('newsletter-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 1300);
-  } else {
-    const el = document.getElementById('newsletter-section');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-function submitNewsletter() {
-  const input = document.querySelector('.newsletter-input');
-  const email = input.value.trim();
-  if (!email || !email.includes('@')) {
-    openModal('modal-coming-soon');
-    return;
-  }
-  input.value = '';
-  // 仮: 登録完了モーダル表示（実際にはAPI連携）
-  const overlay = document.getElementById('modal-coming-soon');
-  if (overlay) {
-    overlay.querySelector('.rpg-modal-title').textContent = '◆ 登録準備中 ◆';
-    overlay.querySelector('.rpg-modal-body').innerHTML = '<p>ニュースレター機能は現在準備中です。<br>冒険の便りが届く日をお待ちください。</p>';
-    openModal('modal-coming-soon');
-  }
-}
-
-/* ============================================================
-   KEYBOARD
-   ============================================================ */
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && currentPage === 'opening') {
-    startAdventure();
-  }
-  if (e.key === 'Escape') {
-    // Close menu first
-    const menuOverlay = document.getElementById('menu-overlay');
-    if (menuOverlay.classList.contains('active')) {
-      closeMenu();
-      return;
-    }
-    // Close any open modal
-    const activeModal = document.querySelector('.rpg-modal-overlay.active');
-    if (activeModal) {
-      activeModal.classList.remove('active');
-      return;
-    }
-    if (currentPage === 'detail') {
-      goToQuestBoard();
-    }
-  }
-});
-
-/* ============================================================
-   SCROLL REVEAL — IntersectionObserver (multi-directional)
-   ============================================================ */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-const revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-clip, .split-text, .stagger-children';
-
-function initRevealObservers() {
-  document.querySelectorAll('#page-quest-board').forEach(page => {
-    page.querySelectorAll(revealSelectors).forEach(el => {
-      revealObserver.observe(el);
-    });
-  });
-}
-
-/* ============================================================
-   TEXT SPLIT — Split text into individual characters
-   ============================================================ */
-function initSplitText() {
-  document.querySelectorAll('.split-text:not(.split-done)').forEach(el => {
-    const text = el.textContent;
-    el.innerHTML = '';
-    text.split('').forEach((ch, i) => {
-      const span = document.createElement('span');
-      span.className = 'char';
-      span.textContent = ch === ' ' ? '\u00A0' : ch;
-      span.style.transitionDelay = (i * 0.04) + 's';
-      el.appendChild(span);
-    });
-    el.classList.add('split-done');
-    revealObserver.observe(el);
-  });
-}
-
-/* ============================================================
-   COUNTER — Animate numbers counting up
-   ============================================================ */
-function initCounters() {
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseFloat(el.dataset.count);
-        if (isNaN(target)) return;
-        const isFloat = target % 1 !== 0;
-        const duration = 1200;
-        const start = performance.now();
-        function tick(now) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = eased * target;
-          el.textContent = isFloat ? current.toFixed(1) : Math.round(current) + (el.dataset.suffix || '');
-          if (progress < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-        counterObserver.unobserve(el);
-      }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.count-up').forEach(el => counterObserver.observe(el));
-}
-
-/* ============================================================
-   3D TILT — Cards follow cursor for depth effect
-   ============================================================ */
-function initTilt() {
-  document.querySelectorAll('.quest-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      const tiltX = (y - 0.5) * -8;
-      const tiltY = (x - 0.5) * 8;
-      card.style.transform = `translateY(-8px) scale(1.02) perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
-}
-
-// Also observe quest cards after render
-const originalRenderQuestCards = renderQuestCards;
-renderQuestCards = function(list) {
-  originalRenderQuestCards(list);
-  document.querySelectorAll('.quest-card').forEach(card => {
-    card.classList.add('reveal');
-    revealObserver.observe(card);
-  });
-  initRevealObservers();
-  initSplitText();
-  initCounters();
-  initTilt();
-};
-
-// Detail page stagger — trigger after page shows
-const originalOpenQuestDetail = openQuestDetail;
-openQuestDetail = function(questId) {
-  originalOpenQuestDetail(questId);
-  setTimeout(() => {
-    document.querySelectorAll('.detail-stagger').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), i * 80);
-    });
-  }, 900);
-};
-
-/* ============================================================
-   PARALLAX — Guild Hero Banner
-   ============================================================ */
-const boardPage = document.getElementById('page-quest-board');
-if (boardPage) {
-  boardPage.addEventListener('scroll', () => {
-    const heroImg = boardPage.querySelector('.guild-hero-img');
-    if (heroImg) {
-      const scrollY = boardPage.scrollTop;
-      heroImg.style.transform = `scale(1.05) translateY(${scrollY * 0.3}px)`;
-    }
-  }, { passive: true });
-}
-
-/* ============================================================
-   CARD MOUSE-TRACKING GLOW
-   ============================================================ */
-document.addEventListener('mousemove', (e) => {
-  const cards = document.querySelectorAll('.quest-card');
-  cards.forEach(card => {
-    const rect = card.getBoundingClientRect();
-    if (e.clientX < rect.left - 100 || e.clientX > rect.right + 100 ||
-        e.clientY < rect.top - 100 || e.clientY > rect.bottom + 100) return;
-    const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
-    const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
-    card.style.setProperty('--mx', x + '%');
-    card.style.setProperty('--my', y + '%');
-  });
-}, { passive: true });
-
-/* ============================================================
-   HOVER SFX — Subtle RPG interface click
-   ============================================================ */
-function playHoverSFX() {
-  try {
-    const ctx = audioContext || new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.value = 1200;
-    gain.gain.setValueAtTime(0.02, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.06);
-  } catch(e) {}
-}
-
-// Attach after cards are rendered
-const origRenderCards2 = renderQuestCards;
-renderQuestCards = function(list) {
-  origRenderCards2(list);
-  document.querySelectorAll('.quest-card').forEach(card => {
-    card.addEventListener('mouseenter', playHoverSFX);
-  });
-};
-
-/* ============================================================
-   OPENING — Floating Dust Particles
-   ============================================================ */
-(function initDustParticles() {
-  const container = document.getElementById('opening-dust');
-  if (!container) return;
-  const count = window.innerWidth < 600 ? 15 : 30;
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('div');
-    p.className = 'dust-particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDuration = (8 + Math.random() * 12) + 's';
-    p.style.animationDelay = (Math.random() * 10) + 's';
-    p.style.width = (1.5 + Math.random() * 2.5) + 'px';
-    p.style.height = p.style.width;
-    p.style.opacity = 0.2 + Math.random() * 0.4;
-    container.appendChild(p);
-  }
-})();
-
-</script>
+<script src="js/supabase-config.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
