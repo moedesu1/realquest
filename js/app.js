@@ -104,7 +104,7 @@ let quests = [
       { user: '旅の商人', title: '見習い', avatar: '旅', level: 12, rank: 'D', stars: 5, date: '2026.01.28', text: '友達3人でやって最高に盛り上がった。大阪が舞台なのもリアルで面白い。次のクエストも必ずやります。', sub: { craft: 4, story: 5, volume: 4 }, likes: 5 },
     ],
     reviewAvg: 4.7,
-    reviewCount: 24,
+    reviewCount: 3,
     salesCount: 156,
   },
   {
@@ -136,7 +136,7 @@ let quests = [
       { user: '森の狩人', title: '見習い', avatar: '森', level: 8, rank: 'E', stars: 4, date: '2026.02.01', text: 'カップルでやったら最高。古びた手紙の質感がリアルで、開封する瞬間のドキドキ感がいい。初めてのリアクエだったけど、すっかりハマりました。', sub: { craft: 4, story: 5, volume: 3 }, likes: 7 },
     ],
     reviewAvg: 4.5,
-    reviewCount: 18,
+    reviewCount: 2,
     salesCount: 112,
   },
   {
@@ -166,7 +166,7 @@ let quests = [
       { user: '古代の探究者', title: '勇者', avatar: '古', level: 52, rank: 'B', stars: 5, date: '2026.02.20', text: '携帯電話が本物みたいで驚いた。メッセージを一つずつ読み解いていく過程に感動。最後のメッセージの内容に泣きました。', sub: { craft: 5, story: 5, volume: 2 }, likes: 23 },
     ],
     reviewAvg: 4.9,
-    reviewCount: 31,
+    reviewCount: 1,
     salesCount: 89,
   },
   {
@@ -197,7 +197,7 @@ let quests = [
       { user: '風の吟遊詩人', title: '見習い', avatar: '風', level: 5, rank: 'E', stars: 5, date: '2026.01.18', text: 'リアルな小道具の作り込みが素晴らしい！レシートの日付や店名まで手がかりになっているのが面白い。推理好きには絶対おすすめ。', sub: { craft: 5, story: 5, volume: 3 }, likes: 6 },
     ],
     reviewAvg: 4.3,
-    reviewCount: 15,
+    reviewCount: 2,
     salesCount: 78,
   },
   {
@@ -230,7 +230,7 @@ let quests = [
       { user: '銀の盗賊', title: '冒険者', avatar: '銀', level: 31, rank: 'C', stars: 4, date: '2026.02.05', text: '招待状の演出が最高。ただ2人だと少し物足りない場面があったので、3人以上推奨。ゲーム自体のクオリティは文句なし。', sub: { craft: 5, story: 4, volume: 5 }, likes: 11 },
     ],
     reviewAvg: 4.8,
-    reviewCount: 42,
+    reviewCount: 3,
     salesCount: 203,
   },
   {
@@ -261,7 +261,7 @@ let quests = [
       { user: '大地の守人', title: '見習い', avatar: '大', level: 3, rank: 'F', stars: 4, date: '2026.01.30', text: 'ポーション瓶のデザインが可愛い。ヒントコードが思った以上に役立つ。気軽に買えるのがいい。', sub: { craft: 4, story: 3, volume: 2 }, likes: 10 },
     ],
     reviewAvg: 4.6,
-    reviewCount: 35,
+    reviewCount: 2,
     salesCount: 267,
   },
 ];
@@ -1088,14 +1088,14 @@ function renderDetail(quest) {
     <div class="reviews-section">
       <div class="detail-section-title">冒険者レビュー</div>
       <div class="reviews-header">
-        <div class="reviews-total">総数：<strong>${quest.reviewCount}</strong>件</div>
+        <div class="reviews-total">総数：<strong>${quest.reviews.length}</strong>件</div>
         <button class="btn-write-review" onclick="showReviewForm(${quest.id})">✏️ レビューを書く</button>
       </div>
       <div class="review-summary">
         <div class="review-avg">
           <div class="review-avg-num">${quest.reviewAvg}</div>
           <div class="review-avg-stars">${reviewStars(quest.reviewAvg)}</div>
-          <div class="review-avg-count">${quest.reviewCount}件の評価</div>
+          <div class="review-avg-count">${quest.reviews.length}件の評価</div>
         </div>
         <div class="review-bars">
           ${[5,4,3,2,1].map(n => `
