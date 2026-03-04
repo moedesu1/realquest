@@ -271,44 +271,67 @@ input, select { font-family: inherit; }
 }
 
 .btn-creator {
-  padding: 16px 48px;
-  background: linear-gradient(180deg, #4a6e5a 0%, #35543f 40%, #243a2b 100%);
-  border: 2px solid #5a8a6a;
-  border-radius: 6px;
-  color: #d4e8da;
-  font-weight: 800;
-  font-size: clamp(15px, 2.2vw, 20px);
-  font-family: 'Shippori Mincho', serif;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  padding: 18px 60px;
+  background: linear-gradient(180deg,
+    rgba(47, 79, 79, 0.95) 0%,
+    rgba(29, 53, 53, 0.98) 100%);
+  border: 2px solid rgba(72, 118, 118, 0.8);
+  border-radius: 4px;
+  color: #D8E8E4;
+  font-family: 'Cinzel', 'Noto Serif JP', serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(72, 118, 118, 0.3);
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.4),
-    inset 0 2px 4px rgba(255, 255, 255, 0.15),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.3),
-    0 0 15px rgba(70, 120, 85, 0.3);
-  letter-spacing: 0.18em;
+    0 0 0 1px rgba(47, 79, 79, 0.5),
+    inset 0 1px 0 rgba(72, 118, 118, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(72, 118, 118, 0.2);
+  backdrop-filter: blur(2px);
 }
 .btn-creator::before {
   content: '';
   position: absolute;
-  top: 3px; left: 3px; right: 3px;
-  height: 40%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
-  border-radius: 4px 4px 0 0;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg,
+    rgba(72, 118, 118, 0.15) 0%,
+    transparent 50%);
+  border-radius: 2px;
   pointer-events: none;
 }
+.btn-creator::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(72, 118, 118, 0.3) 50%,
+    transparent 100%);
+}
 .btn-creator:hover {
-  transform: translateY(-2px);
+  background: linear-gradient(180deg,
+    rgba(60, 95, 95, 0.95) 0%,
+    rgba(40, 65, 65, 0.98) 100%);
+  border-color: rgba(85, 135, 135, 0.9);
   box-shadow:
-    0 6px 14px rgba(0, 0, 0, 0.6),
-    inset 0 1px 2px rgba(200, 230, 210, 0.2),
-    0 0 25px rgba(70, 120, 85, 0.4);
-  background: linear-gradient(180deg, #567e66 0%, #3f6049 40%, #2d4633 100%);
+    0 0 0 1px rgba(60, 95, 95, 0.6),
+    inset 0 1px 0 rgba(85, 135, 135, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 4px 16px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(72, 118, 118, 0.4);
+  transform: translateY(-1px);
 }
 .btn-creator:active {
   transform: translateY(0);
   box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.4),
-    inset 0 3px 6px rgba(0, 0, 0, 0.4);
+    0 0 0 1px rgba(47, 79, 79, 0.5),
+    inset 0 2px 4px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .btn-login-icon { font-size: 1.2rem; }
