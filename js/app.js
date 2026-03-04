@@ -1417,35 +1417,58 @@ function renderCartDrawer() {
   }
 
   // Shopify未接続時：ローカルの受諾済みクエストを表示
-  const acceptedItems = userState.acceptedQuests.map(qid => quests.find(q => q.id === qid)).filter(Boolean);
+  // 受諾済みクエストを数量付きで集計
+  if (!localCartQty) window.localCartQty = {};
+  userState.acceptedQuests.forEach(qid => {
+    if (!localCartQty[qid]) localCartQty[qid] = 1;
+  });
+  // 削除されたものを除外
+  Object.keys(localCartQty).forEach(k => {
+    if (!userState.acceptedQuests.includes(Number(k))) delete localCartQty[k];
+  });
+
+  const acceptedItems = [...new Set(userState.acceptedQuests)].map(qid => quests.find(q => q.id === qid)).filter(Boolean);
   if (!acceptedItems.length) {
     itemsEl.innerHTML = '<div class="cart-empty">カートは空です</div>';
     footerEl.style.display = 'none';
     return;
   }
 
-  const total = acceptedItems.reduce((sum, q) => sum + q.price, 0);
-  itemsEl.innerHTML = acceptedItems.map(q => `
+  const total = acceptedItems.reduce((sum, q) => sum + q.price * (localCartQty[q.id] || 1), 0);
+  itemsEl.innerHTML = acceptedItems.map(q => {
+    const qty = localCartQty[q.id] || 1;
+    return `
     <div class="cart-item">
       <div class="cart-item-info">
         <div class="cart-item-title">${q.title}</div>
-        <div class="cart-item-price">¥${q.price.toLocaleString()}</div>
+        <div class="cart-item-price">¥${(q.price * qty).toLocaleString()}</div>
       </div>
       <div class="cart-item-actions">
-        <span>1</span>
+        <button onclick="updateLocalCartQty(${q.id}, -1)">−</button>
+        <span>${qty}</span>
+        <button onclick="updateLocalCartQty(${q.id}, 1)">+</button>
         <button class="cart-item-remove" onclick="removeLocalCart(${q.id})">✕</button>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
   footerEl.style.display = 'block';
   document.getElementById('cart-total-price').textContent = `¥${total.toLocaleString()}`;
 }
 
+function updateLocalCartQty(questId, delta) {
+  if (!window.localCartQty) window.localCartQty = {};
+  const current = localCartQty[questId] || 1;
+  const newQty = current + delta;
+  if (newQty <= 0) { removeLocalCart(questId); return; }
+  localCartQty[questId] = newQty;
+  renderCartDrawer();
+}
+
 function removeLocalCart(questId) {
   userState.acceptedQuests = userState.acceptedQuests.filter(id => id !== questId);
+  if (window.localCartQty) delete localCartQty[questId];
   updateCartBadge();
   renderCartDrawer();
-  // accept-areaのUIもリセット
   const area = document.getElementById(`accept-area-${questId}`);
   if (area) area.classList.remove('accepted');
 }
