@@ -113,7 +113,7 @@ input, select { font-family: inherit; }
 .opening-bg {
   position: fixed; inset: -5%; width: 110%; height: 110%;
   background: url('../images/bg-opening-hero.jpg') center/cover no-repeat;
-  filter: contrast(1.05) saturate(1.08) brightness(1.02);
+  filter: contrast(1.05) saturate(1.08) brightness(0.6);
   image-rendering: -webkit-optimize-contrast;
   z-index: 0; opacity: 0;
   animation: bgFadeIn 3s ease forwards, kenBurns 30s ease-in-out 3s infinite alternate;
@@ -121,10 +121,35 @@ input, select { font-family: inherit; }
 @keyframes bgFadeIn { from { opacity: 0; transform: scale(1.1); } to { opacity: 1; transform: scale(1); } }
 @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.05) translate(-1%,-0.5%); } }
 
+.opening-overlay {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%);
+}
+
 #page-opening::before {
   content: ''; position: fixed; inset: 0;
   background: none;
   pointer-events: none; z-index: 1;
+}
+
+/* Hero Logo */
+.hero-logo-wrap {
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: logoFadeIn 2s ease 1s forwards;
+}
+.hero-logo {
+  width: clamp(280px, 50vw, 520px);
+  filter: drop-shadow(0 0 30px rgba(255,200,50,0.4)) drop-shadow(0 0 60px rgba(255,150,0,0.2));
+  animation: logoFloat 4s ease-in-out 3s infinite alternate;
+}
+@keyframes logoFadeIn {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes logoFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
 }
 
 .opening-content {

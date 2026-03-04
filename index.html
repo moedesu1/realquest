@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20260305f">
+<link rel="stylesheet" href="css/style.css?v=20260305g">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="https://sdks.shopifycdn.com/buy-button-sdk/3.1.0/buybutton.min.js" defer></script>
 </head>
@@ -54,8 +54,12 @@
      ============================================================ -->
 <div class="page active" id="page-opening">
   <div class="opening-bg"></div>
+  <div class="opening-overlay"></div>
 
   <div class="opening-content opening-content--minimal">
+    <div class="hero-logo-wrap">
+      <img src="images/logo-hero.png" alt="Creators Questory" class="hero-logo">
+    </div>
     <!-- Login buttons — two roles -->
     <div class="login-buttons">
       <button class="btn-login btn-adventurer" onclick="loginAsAdventurer()">
@@ -1150,6 +1154,6 @@
 <div class="toast-notification" id="toast-notification"></div>
 
 <script src="js/config.js" defer></script>
-<script src="js/app.js?v=20260305f" defer></script>
+<script src="js/app.js?v=20260305g" defer></script>
 </body>
 </html>
