@@ -10,22 +10,15 @@
 <meta property="og:description" content="物語アイテムが家に届き、現実がゲームフィールドになる">
 <meta property="og:type" content="website">
 <meta property="og:image" content="images/ogp.png">
-<meta property="og:url" content="https://moedesu1.github.io/realquest/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://moedesu1.github.io/realquest-demo/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BV83G3D60G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-BV83G3D60G');
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="stylesheet" href="css/style.css?v=20260303d">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="https://sdks.shopifycdn.com/buy-button-sdk/3.1.0/buybutton.min.js" defer></script>
 </head>
 <body>
 
@@ -42,7 +35,13 @@
 <div class="mobile-menu" id="mobile-menu">
   <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
   <button onclick="navigateTo('quest-board'); closeMobileMenu()">クエスト一覧</button>
+  <button onclick="navigateTo('guide'); closeMobileMenu()">初めての方へ</button>
   <button onclick="navigateTo('rankings'); closeMobileMenu()">ランキング</button>
+  <button onclick="navigateTo('reviews'); closeMobileMenu()">レビュー</button>
+  <button onclick="navigateTo('coin-shop'); closeMobileMenu()">コイン交換所</button>
+  <button onclick="navigateTo('news'); closeMobileMenu()">お知らせ</button>
+  <button onclick="navigateTo('campaigns'); closeMobileMenu()">キャンペーン</button>
+  <button onclick="navigateTo('contact'); closeMobileMenu()">お問い合わせ</button>
   <button onclick="navigateTo('mypage'); closeMobileMenu()">マイページ</button>
   <button class="audio-toggle" id="audio-toggle-menu" onclick="toggleAudio()">
     <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
@@ -56,51 +55,7 @@
 <div class="page active" id="page-opening">
   <div class="opening-bg"></div>
 
-  <div class="opening-content">
-    <!-- Emblem -->
-    <div class="logo-mark">
-      <svg width="70" height="70" viewBox="0 0 80 80" fill="none">
-        <path d="M40 4 L72 40 L40 76 L8 40 Z" stroke="#ffd700" stroke-width="0.8" fill="none" opacity="0.3"/>
-        <path d="M40 14 L62 40 L40 66 L18 40 Z" stroke="#ffd700" stroke-width="1" fill="none" opacity="0.5"/>
-        <circle cx="40" cy="40" r="5" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.7"/>
-        <circle cx="40" cy="40" r="2" fill="#ffd700" opacity="0.9"/>
-        <circle cx="40" cy="8" r="1.5" fill="#ffd700" opacity="0.5"/>
-        <circle cx="68" cy="40" r="1.5" fill="#ffd700" opacity="0.5"/>
-        <circle cx="40" cy="72" r="1.5" fill="#ffd700" opacity="0.5"/>
-        <circle cx="12" cy="40" r="1.5" fill="#ffd700" opacity="0.5"/>
-      </svg>
-    </div>
-    <div class="logo-sub">— ENTER THE REAL QUEST —</div>
-    <div class="logo-main">リアクエ</div>
-    <div class="logo-main-en">REAL QUEST</div>
-
-    <div class="divider-sword">
-      <span class="line"></span><span class="diamond"></span><span class="line"></span>
-    </div>
-
-    <div class="logo-tagline">日常が、<span>クエスト</span>になる</div>
-
-    <!-- 3-step explanation -->
-    <div class="opening-steps">
-      <div class="step-item">
-        <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="2"/><path d="M13 3h4a2 2 0 0 1 2 2v4"/><path d="m15 15-2-2"/><path d="M21 21l-4.3-4.3"/></svg></div>
-        <div class="step-num">STEP 1</div>
-        <div class="step-label">クエストを選ぶ</div>
-      </div>
-      <div class="step-arrow">→</div>
-      <div class="step-item">
-        <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
-        <div class="step-num">STEP 2</div>
-        <div class="step-label">物語が届く</div>
-      </div>
-      <div class="step-arrow">→</div>
-      <div class="step-item">
-        <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
-        <div class="step-num">STEP 3</div>
-        <div class="step-label">冒険が始まる</div>
-      </div>
-    </div>
-
+  <div class="opening-content opening-content--minimal">
     <!-- Login buttons — two roles -->
     <div class="login-buttons">
       <button class="btn-login btn-adventurer" onclick="loginAsAdventurer()">
@@ -119,196 +74,338 @@
      PAGE 2 — QUEST BOARD (ADVENTURER HOME)
      ============================================================ -->
 <div class="page" id="page-quest-board">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link active" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" id="audio-toggle-board" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="header-user" onclick="navigateTo('mypage')">
-        <div class="header-avatar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <span id="header-username">冒険者</span>
-        <span class="header-title-badge" id="header-title">見習い</span>
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" id="audio-toggle-board" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link active" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
 
-  <!-- Hero Banner -->
-  <div class="board-hero">
-    <div class="board-hero-label">— ADVENTURERS GUILD —</div>
-    <div class="board-hero-title">冒険者ギルド掲示板</div>
-    <div class="board-hero-sub">物語アイテムが届き、現実がクエストフィールドになる</div>
-    <div class="board-hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num" id="stat-quests">6</div>
-        <div class="hero-stat-label">依頼数</div>
+  <!-- ============ SECTION 1: 新着クエスト ============ -->
+  <section class="home-section" id="home-new-quests">
+    <div class="home-section-inner">
+      <h2 class="home-section-title">新着クエスト</h2>
+      <div class="home-quest-row" id="new-quests-row">
+        <!-- Rendered by JS -->
       </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">4.8</div>
-        <div class="hero-stat-label">平均評価</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">—</div>
-        <div class="hero-stat-label">冒険者数</div>
+      <div class="home-section-more">
+        <button class="btn-more" onclick="showAllQuests()">もっと見る →</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Purpose-based Search (HV style) -->
-  <div class="purpose-search">
-    <div class="purpose-search-inner">
-      <div class="purpose-heading">
-        <span class="purpose-heading-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg></span>
-        <span class="purpose-heading-text"><strong>目的</strong>から探す</span>
+  <div class="section-divider"><span class="dv-line"></span><span class="dv-ornament"><span class="dv-diamond"></span></span><span class="dv-line"></span></div>
+
+  <!-- ============ SECTION 2: クエストを探す ============ -->
+  <section class="home-section" id="home-search">
+    <div class="home-section-inner">
+      <h2 class="home-section-title home-section-title--center">クエストを探す</h2>
+      <div class="home-section-title-en--center">SEARCH</div>
+
+      <!-- Search Results (hidden by default, shown on search) -->
+      <div class="quest-grid" id="quest-grid" style="display:none"></div>
+      <div class="sort-row" id="result-row" style="display:none">
+        <span class="sort-label" id="result-count"></span>
       </div>
-      <div class="purpose-cards">
+      <!-- hidden search input for JS compatibility -->
+      <input type="hidden" id="search-input">
+      <input type="hidden" id="filter-genre">
+      <input type="hidden" id="filter-format">
+      <input type="hidden" id="filter-difficulty">
+      <input type="hidden" id="filter-time">
+      <input type="hidden" id="filter-price">
+      <select id="sort-select" style="display:none"><option value="newest">新着順</option></select>
+
+      <!-- 目的から探す -->
+      <div class="purpose-sub-heading"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg> <strong>目的</strong>から探す</div>
+      <div class="purpose-grid purpose-grid--4">
         <button class="purpose-card" onclick="setPurposeFilter('puzzle')">
-          <div class="purpose-card-icon">
-            <img src="images/section-treasure.webp" alt="謎解き">
-          </div>
-          <div class="purpose-card-title">謎解き・宝探し</div>
+          <div class="purpose-card-icon"><img src="images/section-treasure.webp" alt="宝探し" loading="lazy"></div>
+          <div class="purpose-card-title">宝探し・謎解き</div>
           <div class="purpose-card-sub">を楽しみたい</div>
         </button>
         <button class="purpose-card" onclick="setPurposeFilter('outdoor')">
-          <div class="purpose-card-icon">
-            <img src="images/quest-3-ruins.webp" alt="街クエスト">
-          </div>
-          <div class="purpose-card-title">街に出てクエスト</div>
-          <div class="purpose-card-sub">したい</div>
-        </button>
-        <button class="purpose-card" onclick="setPurposeFilter('boardgame')">
-          <div class="purpose-card-icon">
-            <img src="images/quest-6-potionshop.webp" alt="ボードゲーム">
-          </div>
-          <div class="purpose-card-title">ボードゲーム</div>
-          <div class="purpose-card-sub">で遊びたい</div>
+          <div class="purpose-card-icon"><img src="images/quest-3-ruins.webp" alt="豪華景品" loading="lazy"></div>
+          <div class="purpose-card-title">豪華景品</div>
+          <div class="purpose-card-sub">を狙いたい</div>
         </button>
         <button class="purpose-card" onclick="setPurposeFilter('home')">
-          <div class="purpose-card-icon">
-            <img src="images/quest-2-library.webp" alt="自宅完結">
-          </div>
-          <div class="purpose-card-title">自宅で完結</div>
-          <div class="purpose-card-sub">したい</div>
+          <div class="purpose-card-icon"><img src="images/quest-2-library.webp" alt="レジャー" loading="lazy"></div>
+          <div class="purpose-card-title">レジャー・観光</div>
+          <div class="purpose-card-sub">を楽しみたい</div>
+        </button>
+        <button class="purpose-card" onclick="setPurposeFilter('boardgame')">
+          <div class="purpose-card-icon"><img src="images/quest-6-potionshop.webp" alt="工作" loading="lazy"></div>
+          <div class="purpose-card-title">工作・パズル</div>
+          <div class="purpose-card-sub">で遊びたい</div>
         </button>
       </div>
-      <button class="purpose-card purpose-card-wide" onclick="setPurposeFilter('region')">
-        <div class="purpose-card-icon">
-          <img src="images/quest-4-clocktower.webp" alt="都道府県">
+
+      <!-- 地域から探す -->
+      <div class="region-box">
+        <div class="region-box-heading"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <strong>都道府県</strong> から探したい</div>
+        <div class="region-tags">
+          <button class="region-tag" onclick="setRegionFilter('北海道')">北海道</button>
+          <button class="region-tag" onclick="setRegionFilter('東北')">東北</button>
+          <button class="region-tag" onclick="setRegionFilter('関東')">関東</button>
+          <button class="region-tag" onclick="setRegionFilter('中部')">中部</button>
+          <button class="region-tag" onclick="setRegionFilter('関西')">関西</button>
+          <button class="region-tag" onclick="setRegionFilter('中国')">中国</button>
+          <button class="region-tag" onclick="setRegionFilter('四国')">四国</button>
+          <button class="region-tag" onclick="setRegionFilter('九州・沖縄')">九州・沖縄</button>
+          <button class="region-tag" onclick="setRegionFilter('自宅完結')">オンライン</button>
         </div>
-        <div class="purpose-card-title"><strong>都道府県</strong>から探したい</div>
-      </button>
-    </div>
-  </div>
-
-  <!-- Search & Filters -->
-  <div class="search-filter-area">
-    <div class="search-row">
-      <div class="search-input-wrap">
-        <span class="search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
-        <input type="text" class="search-input" id="search-input" placeholder="クエスト名・ジャンルで検索..." oninput="handleSearch()">
       </div>
-      <button class="search-btn" onclick="handleSearch()">検索</button>
     </div>
-    <div class="filter-row" id="filter-row">
-      <button class="filter-chip active" onclick="setFilter('all', this)">すべて</button>
-      <button class="filter-chip" onclick="setFilter('home', this)">自宅完結</button>
-      <button class="filter-chip" onclick="setFilter('outdoor', this)">現地型</button>
-      <button class="filter-chip" onclick="setFilter('beginner', this)">初心者向け</button>
-      <button class="filter-chip" onclick="setFilter('advanced', this)">上級者向け</button>
-      <button class="filter-chip" onclick="setFilter('puzzle', this)">謎解き</button>
-      <button class="filter-chip" onclick="setFilter('boardgame', this)">ボードゲーム</button>
+  </section>
+
+  <!-- ============ SECTION 3: 人気クエスト ============ -->
+  <section class="home-section" id="home-popular-quests">
+    <div class="home-section-inner">
+      <h2 class="home-section-title">人気クエスト</h2>
+      <div class="home-quest-row" id="popular-quests-row"></div>
+      <div class="home-section-more">
+        <button class="btn-more" onclick="showAllQuests()">もっと見る →</button>
+      </div>
     </div>
-    <div class="sort-row">
-      <span class="sort-label" id="result-count">6件のクエスト</span>
-      <select class="sort-select" id="sort-select" onchange="handleSort()">
-        <option value="popular">人気順</option>
-        <option value="newest">新着順</option>
-        <option value="price-low">価格が安い順</option>
-        <option value="price-high">価格が高い順</option>
-        <option value="difficulty-low">難易度が低い順</option>
-        <option value="difficulty-high">難易度が高い順</option>
-      </select>
+  </section>
+
+  <div class="section-divider"><span class="dv-line"></span><span class="dv-ornament"><span class="dv-diamond"></span></span><span class="dv-line"></span></div>
+
+  <!-- ============ SECTION 4: コイン交換所 ============ -->
+  <section class="home-section" id="home-coin-shop">
+    <div class="home-section-inner">
+      <h2 class="home-section-title">コイン交換所</h2>
+      <div class="coin-shop-grid">
+        <div class="coin-shop-card">
+          <div class="coin-shop-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          <div class="coin-shop-name">冒険者バッジ</div>
+          <div class="coin-shop-cost">500コイン</div>
+          <button class="btn-coin-detail" onclick="navigateTo('coin-shop')">詳細</button>
+        </div>
+        <div class="coin-shop-card">
+          <div class="coin-shop-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 15h6"/></svg></div>
+          <div class="coin-shop-name">レアクエスト招待券</div>
+          <div class="coin-shop-cost">1,200コイン</div>
+          <button class="btn-coin-detail" onclick="navigateTo('coin-shop')">詳細</button>
+        </div>
+        <div class="coin-shop-card">
+          <div class="coin-shop-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="4"/></svg></div>
+          <div class="coin-shop-name">限定アバターフレーム</div>
+          <div class="coin-shop-cost">800コイン</div>
+          <button class="btn-coin-detail" onclick="navigateTo('coin-shop')">詳細</button>
+        </div>
+        <div class="coin-shop-card">
+          <div class="coin-shop-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4l3 12h14l3-12"/><path d="M3 16l-1 4h20l-1-4"/><path d="M8 12V8c0-2.2 1.8-4 4-4s4 1.8 4 4v4"/></svg></div>
+          <div class="coin-shop-name">ギルドマスター称号</div>
+          <div class="coin-shop-cost">2,000コイン</div>
+          <button class="btn-coin-detail" onclick="navigateTo('coin-shop')">詳細</button>
+        </div>
+      </div>
+      <div class="home-section-more">
+        <button class="btn-more" onclick="navigateTo('coin-shop')">一覧を見る →</button>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Quest Grid -->
-  <div class="quest-grid" id="quest-grid">
-    <!-- Rendered by JS -->
-  </div>
+  <div class="section-divider"><span class="dv-line"></span><span class="dv-ornament"><span class="dv-diamond"></span></span><span class="dv-line"></span></div>
 
-  <div class="section-divider">
-    <span class="dv-line"></span><span class="dv-icon">◆</span><span class="dv-line"></span>
-  </div>
+  <!-- ============ SECTION 5: REAL QUESTとは？ ============ -->
+  <section class="home-section about-section" id="home-about">
+    <div class="home-section-inner">
+      <div class="about-content">
+        <h2 class="about-title">REAL QUESTとは？</h2>
+        <p class="about-text">
+          REAL QUESTは、リアルな世界で冒険を体験できるクエスト受注型ポータルです。<br>
+          謎解き・脱出ゲーム・宝探しなど、多彩なクエストがあなたを待っています。
+        </p>
+        <div class="about-buttons">
+          <button class="btn-more" onclick="navigateTo('guide')">初めての方へ</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Footer (HV-style) -->
-  <footer class="site-footer-full">
-    <div class="footer-main">
-      <div class="footer-main-inner">
-        <!-- Brand column -->
-        <div class="footer-brand">
-          <div class="footer-brand-logo">◆ リアクエ<br><span>REAL QUEST</span></div>
-          <div class="footer-brand-desc">物語アイテムが届き、<br>現実がクエストフィールドになる</div>
-          <div class="footer-social">
-            <a href="#" title="X (Twitter)" class="footer-social-link">𝕏</a>
-            <a href="#" title="Instagram" class="footer-social-link">Ig</a>
-            <a href="#" title="Note" class="footer-social-link">No</a>
+  <div class="section-divider"><span class="dv-line"></span><span class="dv-ornament"><span class="dv-diamond"></span></span><span class="dv-line"></span></div>
+
+  <!-- ============ SECTION 6: ランキング ============ -->
+  <section class="home-section" id="home-ranking">
+    <div class="home-section-inner">
+      <h2 class="home-section-title">ランキング</h2>
+      <div class="home-ranking-list" id="home-ranking-list"></div>
+      <p class="ranking-note">称号はクエスト達成数に応じて自動で付与されます。</p>
+      <div class="home-section-more">
+        <button class="btn-more" onclick="navigateTo('rankings')">ランキング一覧 →</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="dv-line"></span><span class="dv-ornament"><span class="dv-diamond"></span></span><span class="dv-line"></span></div>
+
+  <!-- ============ SECTION 7: 最新レビュー ============ -->
+  <section class="home-section" id="home-reviews">
+    <div class="home-section-inner">
+      <h2 class="home-section-title">最新レビュー</h2>
+      <div class="home-review-row" id="home-reviews-row"></div>
+      <div class="home-section-more">
+        <button class="btn-more" onclick="navigateTo('reviews')">レビュー一覧 →</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="dv-line"></span><span class="dv-ornament"><span class="dv-diamond"></span></span><span class="dv-line"></span></div>
+
+  <!-- ============ SECTION 8: お知らせ ============ -->
+  <section class="home-section" id="home-news">
+    <div class="home-section-inner">
+      <h2 class="home-section-title">お知らせ</h2>
+      <div class="news-list">
+        <a class="news-item" href="#">
+          <span class="news-date">2026.02.28</span>
+          <span class="news-cat cat-info">お知らせ</span>
+          <span class="news-title-text">システムメンテナンスのお知らせ（3/5 深夜）</span>
+        </a>
+        <a class="news-item" href="#">
+          <span class="news-date">2026.02.25</span>
+          <span class="news-cat cat-new">新着</span>
+          <span class="news-title-text">新クエスト「海底神殿の秘密」が追加されました</span>
+        </a>
+        <a class="news-item" href="#">
+          <span class="news-date">2026.02.20</span>
+          <span class="news-cat cat-important">重要</span>
+          <span class="news-title-text">利用規約改定のお知らせ</span>
+        </a>
+      </div>
+      <div class="home-section-more">
+        <button class="btn-more" onclick="navigateTo('news')">一覧を見る →</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="dv-line"></span><span class="dv-ornament"><span class="dv-diamond"></span></span><span class="dv-line"></span></div>
+
+  <!-- ============ SECTION 9: キャンペーン ============ -->
+  <section class="home-section" id="home-campaign">
+    <div class="home-section-inner">
+      <h2 class="home-section-title">キャンペーン</h2>
+      <div class="campaign-list">
+        <a class="news-item" href="#">
+          <span class="news-date">2026.03.01</span>
+          <span class="news-cat cat-active">開催中</span>
+          <span class="news-title-text">春の冒険キャンペーン！全クエスト20%OFF</span>
+        </a>
+        <a class="news-item" href="#">
+          <span class="news-date">2026.02.15</span>
+          <span class="news-cat cat-preview">予告</span>
+          <span class="news-title-text">ゴールデンウィーク特別クエスト予約開始</span>
+        </a>
+        <a class="news-item" href="#">
+          <span class="news-date">2026.02.10</span>
+          <span class="news-cat cat-active">開催中</span>
+          <span class="news-title-text">友達紹介で500コインプレゼント</span>
+        </a>
+      </div>
+      <div class="home-section-more">
+        <button class="btn-more" onclick="navigateTo('campaigns')">一覧を見る →</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="dv-line"></span><span class="dv-ornament"><span class="dv-diamond"></span></span><span class="dv-line"></span></div>
+
+  <!-- ============ SECTION 10: 関連ショップ / 別ブランドサイト ============ -->
+  <section class="home-section" id="home-related">
+    <div class="home-section-inner">
+      <div class="related-sites">
+        <a class="related-site-card" href="#" target="_blank">
+          <div class="related-site-thumb"></div>
+          <div class="related-site-info">
+            <div class="related-site-name">関連ショップ</div>
+            <div class="related-site-desc">外部サイトへ →</div>
           </div>
+        </a>
+        <a class="related-site-card" href="#" target="_blank">
+          <div class="related-site-thumb"></div>
+          <div class="related-site-info">
+            <div class="related-site-name">別ブランドサイト</div>
+            <div class="related-site-desc">外部サイトへ →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="dv-line"></span><span class="dv-ornament"><span class="dv-diamond"></span></span><span class="dv-line"></span></div>
+
+  <!-- ============ SECTION 11: お問い合わせ ============ -->
+  <section class="home-section" id="home-contact">
+    <div class="home-section-inner">
+      <h2 class="home-section-title">お問い合わせ</h2>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="contact-card-title">一般のお問い合わせ</div>
+          <div class="contact-card-desc">クエストの内容やサービスについて</div>
+          <button class="btn-more" onclick="navigateTo('contact')">お問い合わせフォーム →</button>
         </div>
-        <!-- Nav columns -->
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">クエストを探す</div>
-          <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-          <a onclick="navigateTo('guide')">初めての方へ</a>
-        </div>
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">リアクエとは</div>
-          <a onclick="navigateTo('guide')">リアクエとは</a>
-          <a onclick="navigateTo('guide')">クエストとは</a>
-          <a onclick="navigateTo('guide')">冒険者とは</a>
-          <a onclick="navigateTo('guide')">称号について</a>
-          <a onclick="navigateTo('coin-shop')">コインについて</a>
-        </div>
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">コミュニティ</div>
-          <a onclick="navigateTo('rankings')">ランキング</a>
-          <a onclick="navigateTo('reviews')">最新のクエストレビュー</a>
-          <a onclick="navigateTo('news')">お知らせ</a>
-          <a onclick="navigateTo('campaigns')">キャンペーン情報</a>
-        </div>
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">その他</div>
-          <a onclick="navigateTo('guide')">Q&A</a>
-          <a onclick="navigateTo('contact')">お問い合わせ</a>
-          <a onclick="navigateTo('contact')">イベント企画依頼</a>
-        </div>
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">マイページ</div>
-          <a onclick="navigateTo('mypage')">ステータス</a>
-          <a onclick="navigateTo('mypage')">お気に入り</a>
-          <a onclick="navigateTo('mypage')">受注済みクエスト</a>
-          <a onclick="navigateTo('reviews')">クエストレビュー</a>
-          <a onclick="navigateTo('mypage')">通知</a>
-          <a onclick="navigateTo('mypage')">設定</a>
+        <div class="contact-card">
+          <div class="contact-card-title">法人のお問い合わせ</div>
+          <div class="contact-card-desc">企業向けイベント・団体利用について</div>
+          <button class="btn-more" onclick="navigateTo('contact')">お問い合わせフォーム →</button>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <div class="footer-legal">
-          <a onclick="navigateTo('terms')">利用規約</a>
-          <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
-          <a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
-          <a onclick="navigateTo('commerce-law')">運営会社情報</a>
-        </div>
-        <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
+  </section>
+
+  <!-- ============ SECTION 12: フッター ============ -->
+  <footer class="site-footer-simple">
+    <div class="footer-simple-inner">
+      <div class="footer-simple-logo">◆ REAL QUEST ◆</div>
+      <div class="footer-simple-social">
+        <a href="#" title="X (Twitter)" class="footer-social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" title="Instagram" class="footer-social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" title="YouTube" class="footer-social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
+        <a href="#" title="Facebook" class="footer-social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07c0 6.02 4.39 11.01 10.13 11.93v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.08 24 18.09 24 12.07z"/></svg></a>
       </div>
+      <div class="footer-simple-nav">
+        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('rankings')">ランキング</a>
+        <a onclick="navigateTo('reviews')">レビュー</a>
+        <a onclick="navigateTo('coin-shop')">コイン</a>
+        <a onclick="navigateTo('news')">お知らせ</a>
+        <a onclick="navigateTo('contact')">お問い合わせ</a>
+        <a onclick="navigateTo('mypage')">マイページ</a>
+      </div>
+      <div class="footer-simple-legal">
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('contact')">運営会社情報</a>
+      </div>
+      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
   </footer>
 </div>
@@ -317,20 +414,34 @@
      PAGE 3 — QUEST DETAIL + ACCEPTANCE UI
      ============================================================ -->
 <div class="page" id="page-detail">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" id="audio-toggle-detail" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link active" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
 
   <div class="detail-container" id="detail-content">
@@ -343,13 +454,13 @@
       <div class="footer-mini-links">
         <a onclick="navigateTo('quest-board')">クエスト一覧</a>
         <a onclick="navigateTo('rankings')">ランキング</a>
-        <a onclick="navigateTo('guide')">Q&A</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
         <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
       <div class="footer-mini-legal">
         <a onclick="navigateTo('terms')">利用規約</a>
         <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
-        <a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
       </div>
       <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
@@ -360,20 +471,34 @@
      PAGE 4 — RANKINGS
      ============================================================ -->
 <div class="page" id="page-rankings">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link active" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" id="audio-toggle-ranking" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link active" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
 
   <div class="ranking-page-content">
@@ -400,13 +525,13 @@
       <div class="footer-mini-links">
         <a onclick="navigateTo('quest-board')">クエスト一覧</a>
         <a onclick="navigateTo('rankings')">ランキング</a>
-        <a onclick="navigateTo('guide')">Q&A</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
         <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
       <div class="footer-mini-legal">
         <a onclick="navigateTo('terms')">利用規約</a>
         <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
-        <a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
       </div>
       <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
@@ -417,20 +542,34 @@
      PAGE 5 — MY PAGE
      ============================================================ -->
 <div class="page" id="page-mypage">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link active" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" id="audio-toggle-mypage" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link active" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
 
   <div class="mypage-content" id="mypage-content">
@@ -443,13 +582,13 @@
       <div class="footer-mini-links">
         <a onclick="navigateTo('quest-board')">クエスト一覧</a>
         <a onclick="navigateTo('rankings')">ランキング</a>
-        <a onclick="navigateTo('guide')">Q&A</a>
+        <a onclick="navigateTo('guide')">初めての方へ</a>
         <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
       <div class="footer-mini-legal">
         <a onclick="navigateTo('terms')">利用規約</a>
         <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
-        <a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
       </div>
       <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
@@ -457,36 +596,54 @@
 </div>
 
 <!-- ============================================================
-     PAGE 6 — GUIDE (初めての方へ)
+     PAGE: GUIDE (初めての方へ)
      ============================================================ -->
 <div class="page" id="page-guide">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link active" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
-  <div class="sub-page-content" id="guide-content"><!-- Rendered by JS --></div>
+  <div class="subpage-content" id="guide-content">
+    <!-- Rendered by JS -->
+  </div>
   <footer class="site-footer-mini">
     <div class="footer-mini-inner">
       <div class="footer-logo">◆ REAL QUEST ◆</div>
       <div class="footer-mini-links">
         <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-        <a onclick="navigateTo('rankings')">ランキング</a>
         <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('reviews')">レビュー</a>
         <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
       <div class="footer-mini-legal">
-        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
       </div>
       <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
@@ -494,36 +651,54 @@
 </div>
 
 <!-- ============================================================
-     PAGE 7 — REVIEWS (レビュー一覧)
+     PAGE: REVIEWS (レビュー一覧)
      ============================================================ -->
 <div class="page" id="page-reviews">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link active" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
-  <div class="sub-page-content" id="reviews-content"><!-- Rendered by JS --></div>
+  <div class="subpage-content" id="reviews-content">
+    <!-- Rendered by JS -->
+  </div>
   <footer class="site-footer-mini">
     <div class="footer-mini-inner">
       <div class="footer-logo">◆ REAL QUEST ◆</div>
       <div class="footer-mini-links">
         <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-        <a onclick="navigateTo('rankings')">ランキング</a>
         <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('reviews')">レビュー</a>
         <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
       <div class="footer-mini-legal">
-        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
       </div>
       <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
@@ -531,36 +706,54 @@
 </div>
 
 <!-- ============================================================
-     PAGE 8 — COIN SHOP (コイン交換所)
+     PAGE: COIN SHOP (コイン交換所)
      ============================================================ -->
 <div class="page" id="page-coin-shop">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link active" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
-  <div class="sub-page-content" id="coin-shop-content"><!-- Rendered by JS --></div>
+  <div class="subpage-content" id="coin-shop-content">
+    <!-- Rendered by JS -->
+  </div>
   <footer class="site-footer-mini">
     <div class="footer-mini-inner">
       <div class="footer-logo">◆ REAL QUEST ◆</div>
       <div class="footer-mini-links">
         <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-        <a onclick="navigateTo('rankings')">ランキング</a>
         <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('coin-shop')">コイン交換所</a>
         <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
       <div class="footer-mini-legal">
-        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
       </div>
       <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
@@ -568,36 +761,54 @@
 </div>
 
 <!-- ============================================================
-     PAGE 9 — NEWS (お知らせ)
+     PAGE: NEWS (お知らせ)
      ============================================================ -->
 <div class="page" id="page-news">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link active" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
-  <div class="sub-page-content" id="news-content"><!-- Rendered by JS --></div>
+  <div class="subpage-content" id="news-content">
+    <!-- Rendered by JS -->
+  </div>
   <footer class="site-footer-mini">
     <div class="footer-mini-inner">
       <div class="footer-logo">◆ REAL QUEST ◆</div>
       <div class="footer-mini-links">
         <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-        <a onclick="navigateTo('rankings')">ランキング</a>
-        <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('news')">お知らせ</a>
+        <a onclick="navigateTo('campaigns')">キャンペーン</a>
         <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
       <div class="footer-mini-legal">
-        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
       </div>
       <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
@@ -605,36 +816,54 @@
 </div>
 
 <!-- ============================================================
-     PAGE 10 — CAMPAIGNS (キャンペーン)
+     PAGE: CAMPAIGNS (キャンペーン)
      ============================================================ -->
 <div class="page" id="page-campaigns">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link active" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
-  <div class="sub-page-content" id="campaigns-content"><!-- Rendered by JS --></div>
+  <div class="subpage-content" id="campaigns-content">
+    <!-- Rendered by JS -->
+  </div>
   <footer class="site-footer-mini">
     <div class="footer-mini-inner">
       <div class="footer-logo">◆ REAL QUEST ◆</div>
       <div class="footer-mini-links">
         <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-        <a onclick="navigateTo('rankings')">ランキング</a>
-        <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('news')">お知らせ</a>
+        <a onclick="navigateTo('campaigns')">キャンペーン</a>
         <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
       <div class="footer-mini-legal">
-        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
       </div>
       <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
@@ -642,123 +871,54 @@
 </div>
 
 <!-- ============================================================
-     PAGE 11 — CONTACT (お問い合わせ)
+     PAGE: CONTACT (お問い合わせ)
      ============================================================ -->
 <div class="page" id="page-contact">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="audio-toggle" onclick="toggleAudio()">
-        <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
-        BGM
-      </button>
-      <button class="hamburger-btn" onclick="openMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link active" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
-  <div class="sub-page-content" id="contact-content"><!-- Rendered by JS --></div>
+  <div class="subpage-content" id="contact-content">
+    <!-- Rendered by JS -->
+  </div>
   <footer class="site-footer-mini">
     <div class="footer-mini-inner">
       <div class="footer-logo">◆ REAL QUEST ◆</div>
       <div class="footer-mini-links">
         <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-        <a onclick="navigateTo('rankings')">ランキング</a>
         <a onclick="navigateTo('guide')">初めての方へ</a>
+        <a onclick="navigateTo('reviews')">レビュー</a>
         <a onclick="navigateTo('contact')">お問い合わせ</a>
       </div>
       <div class="footer-mini-legal">
-        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
-      </div>
-      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
-    </div>
-  </footer>
-</div>
-
-<!-- ============================================================
-     PAGE 12 — TERMS (利用規約)
-     ============================================================ -->
-<div class="page" id="page-terms">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="hamburger-btn" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
-    </div>
-  </header>
-  <div class="sub-page-content" id="terms-content"><!-- Rendered by JS --></div>
-  <footer class="site-footer-mini">
-    <div class="footer-mini-inner">
-      <div class="footer-logo">◆ REAL QUEST ◆</div>
-      <div class="footer-mini-links">
-        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-        <a onclick="navigateTo('contact')">お問い合わせ</a>
-      </div>
-      <div class="footer-mini-legal">
-        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
-      </div>
-      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
-    </div>
-  </footer>
-</div>
-
-<!-- ============================================================
-     PAGE 13 — PRIVACY (プライバシーポリシー)
-     ============================================================ -->
-<div class="page" id="page-privacy">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="hamburger-btn" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
-    </div>
-  </header>
-  <div class="sub-page-content" id="privacy-content"><!-- Rendered by JS --></div>
-  <footer class="site-footer-mini">
-    <div class="footer-mini-inner">
-      <div class="footer-logo">◆ REAL QUEST ◆</div>
-      <div class="footer-mini-links">
-        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-        <a onclick="navigateTo('contact')">お問い合わせ</a>
-      </div>
-      <div class="footer-mini-legal">
-        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
-      </div>
-      <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
-    </div>
-  </footer>
-</div>
-
-<!-- ============================================================
-     PAGE 14 — COMMERCE LAW (特定商取引法)
-     ============================================================ -->
-<div class="page" id="page-commerce-law">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">クエスト</button>
-      <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
-      <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
-      <button class="hamburger-btn" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
-    </div>
-  </header>
-  <div class="sub-page-content" id="commerce-law-content"><!-- Rendered by JS --></div>
-  <footer class="site-footer-mini">
-    <div class="footer-mini-inner">
-      <div class="footer-logo">◆ REAL QUEST ◆</div>
-      <div class="footer-mini-links">
-        <a onclick="navigateTo('quest-board')">クエスト一覧</a>
-        <a onclick="navigateTo('contact')">お問い合わせ</a>
-      </div>
-      <div class="footer-mini-legal">
-        <a onclick="navigateTo('terms')">利用規約</a><a onclick="navigateTo('privacy')">プライバシーポリシー</a><a onclick="navigateTo('commerce-law')">特定商取引法に基づく表記</a>
+        <a onclick="navigateTo('terms')">利用規約</a>
+        <a onclick="navigateTo('privacy')">プライバシーポリシー</a>
+        <a onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
       </div>
       <div class="footer-copy">© リアクエ REAL QUEST 2026</div>
     </div>
@@ -769,11 +929,34 @@
      PAGE — CREATOR PLACEHOLDER
      ============================================================ -->
 <div class="page" id="page-creator">
-  <header class="site-header">
-    <div class="header-logo" onclick="navigateTo('opening')">◆ リアクエ</div>
-    <div class="header-nav">
-      <button class="header-nav-link" onclick="navigateTo('quest-board')">冒険者側へ</button>
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link active" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
   </header>
   <div class="creator-placeholder">
     <div class="creator-placeholder-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></div>
@@ -785,44 +968,132 @@
   </div>
 </div>
 
-<!-- Auth Modal -->
-<div class="auth-modal-overlay" id="auth-modal" style="display:none">
-  <div class="auth-modal">
-    <button class="auth-modal-close" onclick="closeAuthModal()">✕</button>
-    <div class="auth-modal-title" id="auth-modal-title">冒険者ログイン</div>
-    <div class="auth-modal-sub" id="auth-modal-sub">— ADVENTURER LOGIN —</div>
-
-    <div class="auth-tabs">
-      <button class="auth-tab active" id="auth-tab-login" onclick="switchAuthTab('login')">ログイン</button>
-      <button class="auth-tab" id="auth-tab-signup" onclick="switchAuthTab('signup')">新規登録</button>
+<!-- ============================================================
+     CART DRAWER
+     ============================================================ -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer" role="dialog" aria-label="ショッピングカート">
+  <div class="cart-header">
+    <div class="cart-header-title">カート</div>
+    <button class="cart-close-btn" onclick="closeCart()" aria-label="閉じる">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">カートは空です</div>
+  </div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-total">
+      <span>合計</span>
+      <span id="cart-total-price">¥0</span>
     </div>
-
-    <form class="auth-form" id="auth-form" onsubmit="handleAuthSubmit(event)">
-      <div class="auth-form-group" id="auth-name-group" style="display:none">
-        <label class="contact-label">冒険者名</label>
-        <input type="text" class="contact-input" id="auth-name" placeholder="あなたの冒険者名">
-      </div>
-      <div class="auth-form-group">
-        <label class="contact-label">メールアドレス</label>
-        <input type="email" class="contact-input" id="auth-email" required placeholder="your@email.com">
-      </div>
-      <div class="auth-form-group">
-        <label class="contact-label">パスワード</label>
-        <input type="password" class="contact-input" id="auth-password" required placeholder="6文字以上" minlength="6">
-      </div>
-      <div class="auth-error" id="auth-error" style="display:none"></div>
-      <button type="submit" class="btn-accept auth-submit" id="auth-submit-btn">ログイン</button>
-    </form>
-
-    <div class="auth-divider"><span>または</span></div>
-    <button class="auth-google-btn" onclick="handleGoogleLogin()">
-      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-      Googleでログイン
-    </button>
+    <button class="btn-checkout" onclick="proceedToCheckout()">手続きに進む</button>
+    <div class="cart-note">税込・送料込</div>
   </div>
 </div>
 
-<script src="js/supabase-config.js"></script>
-<script src="js/app.js"></script>
+<!-- ============================================================
+     LEGAL PAGES
+     ============================================================ -->
+<div class="page" id="page-terms">
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
+  </header>
+  <div class="legal-content" id="terms-content"></div>
+</div>
+<div class="page" id="page-privacy">
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
+  </header>
+  <div class="legal-content" id="privacy-content"></div>
+</div>
+<div class="page" id="page-tokushoho">
+  <header class="site-header site-header--2row">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-logo" onclick="navigateTo('quest-board')">REAL QUEST</div>
+        <div class="header-right">
+          <button class="audio-toggle" onclick="toggleAudio()">
+            <div class="audio-bars"><span></span><span></span><span></span><span></span></div>
+            BGM
+          </button>
+          <button class="hamburger-btn" onclick="openMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <nav class="header-nav-bar">
+      <div class="header-nav-bar-inner">
+        <button class="header-nav-link" onclick="navigateTo('quest-board')">クエストを探す</button>
+        <button class="header-nav-link" onclick="navigateTo('guide')">初めての方へ</button>
+        <button class="header-nav-link" onclick="navigateTo('rankings')">ランキング</button>
+        <button class="header-nav-link" onclick="navigateTo('reviews')">レビュー</button>
+        <button class="header-nav-link" onclick="navigateTo('coin-shop')">コイン</button>
+        <button class="header-nav-link" onclick="navigateTo('news')">お知らせ</button>
+        <button class="header-nav-link" onclick="navigateTo('campaigns')">キャンペーン</button>
+        <button class="header-nav-link" onclick="navigateTo('contact')">お問い合わせ</button>
+        <button class="header-nav-link" onclick="navigateTo('mypage')">マイページ</button>
+      </div>
+    </nav>
+  </header>
+  <div class="legal-content" id="tokushoho-content"></div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast-notification" id="toast-notification"></div>
+
+<script src="js/config.js" defer></script>
+<script src="js/app.js" defer></script>
 </body>
 </html>
