@@ -113,7 +113,7 @@ input, select { font-family: inherit; }
 .opening-bg {
   position: fixed; inset: -5%; width: 110%; height: 110%;
   background: url('../images/bg-opening-hero.jpg') center/cover no-repeat;
-  filter: contrast(1.05) saturate(1.08) brightness(1);
+  filter: contrast(1.1) saturate(1.15) brightness(1.05);
   image-rendering: -webkit-optimize-contrast;
   z-index: 0; opacity: 0;
   animation: bgFadeIn 3s ease forwards, kenBurns 30s ease-in-out 3s infinite alternate;
@@ -123,7 +123,9 @@ input, select { font-family: inherit; }
 
 .opening-overlay {
   position: fixed; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.4) 100%);
+  background:
+    radial-gradient(ellipse 60% 45% at center 40%, transparent 0%, rgba(0,0,0,0.6) 100%),
+    radial-gradient(ellipse 35% 25% at center 40%, rgba(255,200,80,0.08) 0%, transparent 100%);
 }
 
 #page-opening::before {
