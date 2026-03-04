@@ -112,7 +112,7 @@ input, select { font-family: inherit; }
 }
 .opening-bg {
   position: fixed; inset: -5%; width: 110%; height: 110%;
-  background: url('../images/bg-opening-hero.png') center/cover no-repeat;
+  background: url('../images/bg-opening-hero.jpg') center/cover no-repeat;
   filter: contrast(1.05) saturate(1.08) brightness(1.02);
   image-rendering: -webkit-optimize-contrast;
   z-index: 0; opacity: 0;
