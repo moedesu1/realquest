@@ -591,7 +591,7 @@ async function loadUserProfile(userId) {
 }
 
 /* Supabase auth state listener */
-if (db) {
+if (db) { try {
   db.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_OUT') {
       userState.loggedIn = false;
@@ -640,7 +640,7 @@ if (db) {
       history.replaceState(null, '', window.location.pathname);
     }
   })();
-}
+} catch(e) { console.warn('Auth listener init error:', e); } }
 
 /* Login as adventurer — show auth form on mypage */
 function loginAsAdventurer() {
