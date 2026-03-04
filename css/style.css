@@ -142,7 +142,7 @@ input, select { font-family: inherit; }
   animation: logoFadeIn 2s ease 1s forwards;
 }
 .hero-logo {
-  width: clamp(320px, 95vw, 1400px);
+  width: clamp(350px, 115vw, 1800px);
   filter: drop-shadow(0 0 30px rgba(255,200,50,0.5)) drop-shadow(0 0 60px rgba(255,150,0,0.25));
   animation: logoFloat 4s ease-in-out 3s infinite alternate;
 }
@@ -213,61 +213,61 @@ input, select { font-family: inherit; }
 
 .btn-adventurer {
   padding: 16px 48px;
-  background: linear-gradient(180deg, #f4d03f 0%, #c89116 50%, #9c6d0f 100%);
-  border: 3px solid #ffd700;
-  border-radius: 8px;
-  color: #2d1810;
-  font-weight: 900;
+  background: linear-gradient(180deg, #c9a84c 0%, #9e7a2e 40%, #7a5a1a 100%);
+  border: 2px solid #b8943d;
+  border-radius: 6px;
+  color: #fef0d0;
+  font-weight: 800;
   font-size: clamp(15px, 2.2vw, 20px);
-  font-family: 'Noto Sans JP', sans-serif;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  font-family: 'Shippori Mincho', serif;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.4),
-    inset 0 2px 4px rgba(255, 255, 255, 0.3),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
-    0 0 20px rgba(255, 215, 0, 0.4);
-  letter-spacing: 0.15em;
+    0 4px 10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 230, 160, 0.25),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(180, 140, 50, 0.3);
+  letter-spacing: 0.18em;
 }
 .btn-adventurer::before {
   content: '';
   position: absolute;
-  top: 3px; left: 3px; right: 3px;
-  height: 40%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+  top: 2px; left: 2px; right: 2px;
+  height: 35%;
+  background: linear-gradient(180deg, rgba(255, 240, 200, 0.2) 0%, transparent 100%);
   border-radius: 4px 4px 0 0;
   pointer-events: none;
 }
 .btn-adventurer:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 6px 12px rgba(0, 0, 0, 0.5),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4),
-    0 0 30px rgba(255, 215, 0, 0.6);
-  background: linear-gradient(180deg, #f9e05f 0%, #d4a320 50%, #a87d15 100%);
+    0 6px 14px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(255, 230, 160, 0.3),
+    0 0 25px rgba(180, 140, 50, 0.45);
+  background: linear-gradient(180deg, #d4b45a 0%, #ab8535 40%, #856320 100%);
 }
 .btn-adventurer:active {
   transform: translateY(0);
   box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.4),
-    inset 0 3px 6px rgba(0, 0, 0, 0.3);
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 3px 6px rgba(0, 0, 0, 0.4);
 }
 
 .btn-creator {
   padding: 16px 48px;
-  background: linear-gradient(180deg, #3a7f7a 0%, #2d5f5c 50%, #1f4442 100%);
-  border: 3px solid #5fa89f;
-  border-radius: 8px;
-  color: #e8f5f3;
-  font-weight: 900;
+  background: linear-gradient(180deg, #4a6e5a 0%, #35543f 40%, #243a2b 100%);
+  border: 2px solid #5a8a6a;
+  border-radius: 6px;
+  color: #d4e8da;
+  font-weight: 800;
   font-size: clamp(15px, 2.2vw, 20px);
-  font-family: 'Noto Sans JP', sans-serif;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Shippori Mincho', serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.4),
     inset 0 2px 4px rgba(255, 255, 255, 0.15),
     inset 0 -2px 4px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(95, 168, 159, 0.3);
-  letter-spacing: 0.08em;
+    0 0 15px rgba(70, 120, 85, 0.3);
+  letter-spacing: 0.18em;
 }
 .btn-creator::before {
   content: '';
@@ -281,10 +281,10 @@ input, select { font-family: inherit; }
 .btn-creator:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 6px 12px rgba(0, 0, 0, 0.5),
-    inset 0 2px 4px rgba(255, 255, 255, 0.2),
-    0 0 30px rgba(95, 168, 159, 0.5);
-  background: linear-gradient(180deg, #469490 0%, #356d6a 50%, #265250 100%);
+    0 6px 14px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(200, 230, 210, 0.2),
+    0 0 25px rgba(70, 120, 85, 0.4);
+  background: linear-gradient(180deg, #567e66 0%, #3f6049 40%, #2d4633 100%);
 }
 .btn-creator:active {
   transform: translateY(0);
