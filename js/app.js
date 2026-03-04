@@ -1174,6 +1174,7 @@ function renderDetail(quest) {
 let reviewRatings = {};
 
 function showReviewForm(questId) {
+  if (!userState.loggedIn) { showToast('レビューを書くにはログインしてください'); navigateTo('mypage'); return; }
   const form = document.getElementById(`review-form-${questId}`);
   if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
 }
@@ -1239,6 +1240,7 @@ function setReviewRating(questId, rating) {
 }
 
 function submitReview(questId) {
+  if (!userState.loggedIn) { showToast('レビューを投稿するにはログインが必要です'); navigateTo('mypage'); return; }
   const rating = reviewRatings[questId] || 0;
   const text = document.getElementById(`review-text-${questId}`)?.value.trim();
   const errorEl = document.getElementById(`review-error-${questId}`);
