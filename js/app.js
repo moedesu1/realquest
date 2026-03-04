@@ -2338,7 +2338,7 @@ function renderLegalPage(type) {
       <button class="btn-outline" onclick="navigateTo('quest-board')" style="margin-top:2rem">← トップに戻る</button>`,
     tokushoho: `<h1>特定商取引法に基づく表記</h1>
       <table class="legal-table">
-        <tr><th>販売業者</th><td>Cloud Illusion合同会社</td></tr>
+        <tr><th>販売業者</th><td>株式会社 Cloud Illusion</td></tr>
         <tr><th>運営統括責任者</th><td>大隅直人</td></tr>
         <tr><th>所在地</th><td>〒561-0832 大阪府豊中市庄内西町3-1-5 サンパティオビル4階</td></tr>
         <tr><th>電話番号</th><td>06-4400-0361</td></tr>
