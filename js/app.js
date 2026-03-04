@@ -1284,9 +1284,7 @@ function submitReview(questId) {
 
 /* ── ACCEPT QUEST ── */
 async function acceptQuest(questId) {
-  console.log('acceptQuest called:', questId);
   const quest = quests.find(q => q.id === questId);
-  console.log('quest found:', !!quest, 'already accepted:', userState.acceptedQuests.includes(questId));
   if (!quest || userState.acceptedQuests.includes(questId)) return;
 
   playAcceptSFX();
@@ -1396,29 +1394,60 @@ function updateCartBadge() {
 function renderCartDrawer() {
   const itemsEl = document.getElementById('cart-items');
   const footerEl = document.getElementById('cart-footer');
-  if (!shopifyCheckout || !shopifyCheckout.lineItems?.length) {
+
+  // Shopifyカートがあればそれを表示
+  if (shopifyCheckout?.lineItems?.length) {
+    itemsEl.innerHTML = shopifyCheckout.lineItems.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <div class="cart-item-title">${item.title}</div>
+          <div class="cart-item-price">¥${parseInt(item.variant.price.amount).toLocaleString()}</div>
+        </div>
+        <div class="cart-item-actions">
+          <button onclick="updateCartQuantity('${item.id}', ${item.quantity - 1})">−</button>
+          <span>${item.quantity}</span>
+          <button onclick="updateCartQuantity('${item.id}', ${item.quantity + 1})">+</button>
+          <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">✕</button>
+        </div>
+      </div>
+    `).join('');
+    footerEl.style.display = 'block';
+    document.getElementById('cart-total-price').textContent = `¥${parseInt(shopifyCheckout.totalPrice.amount).toLocaleString()}`;
+    return;
+  }
+
+  // Shopify未接続時：ローカルの受諾済みクエストを表示
+  const acceptedItems = userState.acceptedQuests.map(qid => quests.find(q => q.id === qid)).filter(Boolean);
+  if (!acceptedItems.length) {
     itemsEl.innerHTML = '<div class="cart-empty">カートは空です</div>';
     footerEl.style.display = 'none';
     return;
   }
 
-  itemsEl.innerHTML = shopifyCheckout.lineItems.map(item => `
+  const total = acceptedItems.reduce((sum, q) => sum + q.price, 0);
+  itemsEl.innerHTML = acceptedItems.map(q => `
     <div class="cart-item">
       <div class="cart-item-info">
-        <div class="cart-item-title">${item.title}</div>
-        <div class="cart-item-price">¥${parseInt(item.variant.price.amount).toLocaleString()}</div>
+        <div class="cart-item-title">${q.title}</div>
+        <div class="cart-item-price">¥${q.price.toLocaleString()}</div>
       </div>
       <div class="cart-item-actions">
-        <button onclick="updateCartQuantity('${item.id}', ${item.quantity - 1})">−</button>
-        <span>${item.quantity}</span>
-        <button onclick="updateCartQuantity('${item.id}', ${item.quantity + 1})">+</button>
-        <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">✕</button>
+        <span>1</span>
+        <button class="cart-item-remove" onclick="removeLocalCart(${q.id})">✕</button>
       </div>
     </div>
   `).join('');
-
   footerEl.style.display = 'block';
-  document.getElementById('cart-total-price').textContent = `¥${parseInt(shopifyCheckout.totalPrice.amount).toLocaleString()}`;
+  document.getElementById('cart-total-price').textContent = `¥${total.toLocaleString()}`;
+}
+
+function removeLocalCart(questId) {
+  userState.acceptedQuests = userState.acceptedQuests.filter(id => id !== questId);
+  updateCartBadge();
+  renderCartDrawer();
+  // accept-areaのUIもリセット
+  const area = document.getElementById(`accept-area-${questId}`);
+  if (area) area.classList.remove('accepted');
 }
 
 function openCart() {
@@ -2309,16 +2338,20 @@ function renderLegalPage(type) {
       <button class="btn-outline" onclick="navigateTo('quest-board')" style="margin-top:2rem">← トップに戻る</button>`,
     tokushoho: `<h1>特定商取引法に基づく表記</h1>
       <table class="legal-table">
-        <tr><th>販売業者</th><td>リアクエ REAL QUEST 運営事務局</td></tr>
-        <tr><th>運営統括責任者</th><td>お問い合わせください</td></tr>
-        <tr><th>所在地</th><td>お問い合わせください</td></tr>
-        <tr><th>電話番号</th><td>お問い合わせください</td></tr>
-        <tr><th>メールアドレス</th><td>info@realquest.jp</td></tr>
-        <tr><th>販売価格</th><td>各商品ページに記載（税込表示）</td></tr>
-        <tr><th>送料</th><td>販売価格に含む（全国一律送料込み）</td></tr>
-        <tr><th>お支払い方法</th><td>クレジットカード、Apple Pay、Google Pay</td></tr>
-        <tr><th>商品の引渡し時期</th><td>注文確認後3〜5営業日以内に発送</td></tr>
-        <tr><th>返品・交換</th><td>商品の性質上（謎解き・体験型コンテンツ）、開封後の返品はお受けできません。未開封の場合は商品到着後7日以内にご連絡ください。</td></tr>
+        <tr><th>販売業者</th><td>Cloud Illusion合同会社</td></tr>
+        <tr><th>運営統括責任者</th><td>大隅直人</td></tr>
+        <tr><th>所在地</th><td>〒561-0832 大阪府豊中市庄内西町3-1-5 サンパティオビル4階</td></tr>
+        <tr><th>電話番号</th><td>06-4400-0361</td></tr>
+        <tr><th>メールアドレス</th><td>info@c-ill.com</td></tr>
+        <tr><th>URL</th><td>https://moedesu1.github.io/realquest/</td></tr>
+        <tr><th>商品の名称</th><td>体験型クエスト商品（物語アイテム一式）</td></tr>
+        <tr><th>販売価格</th><td>各商品ページに税込価格で表示</td></tr>
+        <tr><th>商品代金以外の必要料金</th><td>なし（税込・送料込）</td></tr>
+        <tr><th>お支払い方法</th><td>クレジットカード決済（Shopify Payments経由）</td></tr>
+        <tr><th>お支払い時期</th><td>注文確定時に決済</td></tr>
+        <tr><th>商品の引渡し時期</th><td>注文確定後3〜5営業日以内に発送</td></tr>
+        <tr><th>返品・交換</th><td>謎解き商品の特性上、開封後の返品不可。未開封品は到着後7日以内にご連絡いただいた場合に限り対応。不良品の場合は送料当社負担で交換。</td></tr>
+        <tr><th>返品送料</th><td>お客様都合の場合はお客様負担、不良品の場合は当社負担</td></tr>
       </table>
       <button class="btn-outline" onclick="navigateTo('quest-board')" style="margin-top:2rem">← トップに戻る</button>`,
   };
