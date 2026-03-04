@@ -107,13 +107,13 @@ input, select { font-family: inherit; }
    ============================================================ */
 #page-opening {
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 2rem 1rem 2rem; background: #000; z-index: 10;
+  align-items: center; justify-content: flex-end;
+  padding: 2rem 1rem 8vh; background: #000; z-index: 10;
 }
 .opening-bg {
   position: fixed; inset: -5%; width: 110%; height: 110%;
   background: url('../images/bg-opening-hero.jpg') center/cover no-repeat;
-  filter: contrast(1.05) saturate(1.08) brightness(0.6);
+  filter: contrast(1.05) saturate(1.08) brightness(1);
   image-rendering: -webkit-optimize-contrast;
   z-index: 0; opacity: 0;
   animation: bgFadeIn 3s ease forwards, kenBurns 30s ease-in-out 3s infinite alternate;
@@ -123,9 +123,7 @@ input, select { font-family: inherit; }
 
 .opening-overlay {
   position: fixed; inset: 0; z-index: 1; pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 55% at center 42%, rgba(0,0,0,0.75) 0%, transparent 100%),
-    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%);
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.4) 100%);
 }
 
 #page-opening::before {
@@ -136,10 +134,7 @@ input, select { font-family: inherit; }
 
 /* Hero Logo */
 .hero-logo-wrap {
-  margin-bottom: 2rem;
-  margin-top: -12vh;
-  opacity: 0;
-  animation: logoFadeIn 2s ease 1s forwards;
+  display: none;
 }
 .hero-logo {
   width: clamp(400px, 300vw, 5400px);
