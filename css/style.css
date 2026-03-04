@@ -137,12 +137,12 @@ input, select { font-family: inherit; }
 /* Hero Logo */
 .hero-logo-wrap {
   margin-bottom: 2rem;
-  margin-top: -8vh;
+  margin-top: -12vh;
   opacity: 0;
   animation: logoFadeIn 2s ease 1s forwards;
 }
 .hero-logo {
-  width: clamp(300px, 60vw, 850px);
+  width: clamp(300px, 85vw, 1200px);
   filter: drop-shadow(0 0 30px rgba(255,200,50,0.5)) drop-shadow(0 0 60px rgba(255,150,0,0.25));
   animation: logoFloat 4s ease-in-out 3s infinite alternate;
 }
