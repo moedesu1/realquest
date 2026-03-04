@@ -123,8 +123,9 @@ input, select { font-family: inherit; }
 
 @media (max-width: 600px) {
   .opening-bg {
-    background-size: auto 100%;
-    background-position: center 40%;
+    background-size: contain;
+    background-position: center 35%;
+    background-color: #0a0804;
   }
 }
 
