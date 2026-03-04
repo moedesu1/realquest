@@ -1289,34 +1289,13 @@ async function acceptQuest(questId) {
 
   playAcceptSFX();
 
+  // 受諾状態をローカルに即反映
+  userState.acceptedQuests.push(questId);
+
   // UI即時更新 — 緑の受諾マークをすぐ表示
   const area = document.getElementById(`accept-area-${questId}`);
   const btn = area?.querySelector('.btn-accept');
   if (btn) { btn.textContent = '受諾処理中...'; btn.style.pointerEvents = 'none'; }
-
-  // カートに追加（Shopify接続時）
-  if (shopifyClient && shopifyCheckout && quest.shopifyVariantId) {
-    try {
-      const lineItems = [{ variantId: quest.shopifyVariantId, quantity: 1 }];
-      shopifyCheckout = await shopifyClient.checkout.addLineItems(shopifyCheckout.id, lineItems);
-      updateCartBadge();
-    } catch (e) { console.warn('Cart add failed:', e.message); }
-  }
-
-  // 受諾状態をローカルに保持
-  userState.acceptedQuests.push(questId);
-
-  // Supabaseに受諾を記録（購入済みではなくaccepted状態）
-  if (db) {
-    try {
-      const { data: { user } } = await db.auth.getUser();
-      if (user) {
-        await db.from('accepted_quests').upsert({ user_id: user.id, quest_id: questId, status: 'in_cart' });
-      }
-    } catch (e) {}
-  }
-
-  // 緑の受諾マークを表示
   setTimeout(() => {
     if (area) area.classList.add('accepted');
     if (btn) btn.remove();
@@ -1325,6 +1304,18 @@ async function acceptQuest(questId) {
   }, 800);
 
   trackEvent('accept_quest', { quest_id: questId, quest_name: quest.title });
+
+  // ネットワーク処理はバックグラウンドで実行（UIをブロックしない）
+  if (shopifyClient && shopifyCheckout && quest.shopifyVariantId) {
+    shopifyClient.checkout.addLineItems(shopifyCheckout.id, [{ variantId: quest.shopifyVariantId, quantity: 1 }])
+      .then(checkout => { shopifyCheckout = checkout; updateCartBadge(); })
+      .catch(e => console.warn('Cart add failed:', e.message));
+  }
+  if (db) {
+    db.auth.getUser().then(({ data: { user } }) => {
+      if (user) db.from('accepted_quests').upsert({ user_id: user.id, quest_id: questId, status: 'in_cart' });
+    }).catch(() => {});
+  }
 }
 
 function playAcceptSFX() {
