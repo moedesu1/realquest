@@ -14,6 +14,7 @@ try {
 /* ── SHOPIFY CLIENT ── */
 let shopifyClient = null;
 let shopifyCheckout = null;
+let localCartQty = {};
 
 async function initShopify() {
   try {
@@ -1418,11 +1419,9 @@ function renderCartDrawer() {
 
   // Shopify未接続時：ローカルの受諾済みクエストを表示
   // 受諾済みクエストを数量付きで集計
-  if (!localCartQty) window.localCartQty = {};
   userState.acceptedQuests.forEach(qid => {
     if (!localCartQty[qid]) localCartQty[qid] = 1;
   });
-  // 削除されたものを除外
   Object.keys(localCartQty).forEach(k => {
     if (!userState.acceptedQuests.includes(Number(k))) delete localCartQty[k];
   });
@@ -1456,7 +1455,6 @@ function renderCartDrawer() {
 }
 
 function updateLocalCartQty(questId, delta) {
-  if (!window.localCartQty) window.localCartQty = {};
   const current = localCartQty[questId] || 1;
   const newQty = current + delta;
   if (newQty <= 0) { removeLocalCart(questId); return; }
@@ -1466,7 +1464,7 @@ function updateLocalCartQty(questId, delta) {
 
 function removeLocalCart(questId) {
   userState.acceptedQuests = userState.acceptedQuests.filter(id => id !== questId);
-  if (window.localCartQty) delete localCartQty[questId];
+  delete localCartQty[questId];
   updateCartBadge();
   renderCartDrawer();
   const area = document.getElementById(`accept-area-${questId}`);
