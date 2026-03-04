@@ -1284,7 +1284,9 @@ function submitReview(questId) {
 
 /* ── ACCEPT QUEST ── */
 async function acceptQuest(questId) {
+  console.log('acceptQuest called:', questId);
   const quest = quests.find(q => q.id === questId);
+  console.log('quest found:', !!quest, 'already accepted:', userState.acceptedQuests.includes(questId));
   if (!quest || userState.acceptedQuests.includes(questId)) return;
 
   playAcceptSFX();
