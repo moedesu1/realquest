@@ -591,8 +591,10 @@ function renderDetail(quest) {
         </div>
       </div>
 
-      <button class="btn-purchase" onclick="acceptQuest(${quest.id})">
-        ${quest.price === 0 ? '▶ プレイ開始' : isAccepted ? `¥${quest.price.toLocaleString()} もう1つ追加する` : `¥${quest.price.toLocaleString()} で購入する`}
+      <button class="btn-purchase ${isAccepted ? 'purchased' : ''}"
+              onclick="${isAccepted ? '' : `acceptQuest(${quest.id})`}"
+              ${isAccepted ? 'disabled' : ''}>
+        ${isAccepted ? '✓ カートに追加済み' : quest.price === 0 ? '▶ プレイ開始' : `¥${quest.price.toLocaleString()} で購入する`}
       </button>
 
       ${quest.items && quest.items.length > 0 ? `
@@ -712,7 +714,7 @@ function updateCartBadge() {
   }
   document.querySelectorAll('.cart-count').forEach(el => {
     el.textContent = count;
-    el.style.display = count > 0 ? '' : 'none';
+    el.style.display = count > 0 ? 'flex' : 'none';
   });
 }
 
@@ -746,7 +748,7 @@ function renderCartDrawer() {
             <button class="qty-btn" onclick="updateQty('${item.id}', ${item.quantity + 1})">+</button>
           </div>
         </div>
-        <button class="cart-item-delete" onclick="removeFromCart('${item.id}')" aria-label="削除">🗑</button>
+        <button class="cart-item-delete" onclick="removeFromCart('${item.id}')" aria-label="削除"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14M10 11v6M14 11v6"/></svg></button>
       </div>
     `).join('');
     const total = shopifyCheckout.totalPrice?.amount || '0';
@@ -785,7 +787,7 @@ function renderCartDrawer() {
           <button class="qty-btn" onclick="updateLocalQty(${q.id}, 1)">+</button>
         </div>
       </div>
-      <button class="cart-item-delete" onclick="removeFromCartLocal(${q.id})" aria-label="削除">🗑</button>
+      <button class="cart-item-delete" onclick="removeFromCartLocal(${q.id})" aria-label="削除"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14M10 11v6M14 11v6"/></svg></button>
     </div>
   `).join('');
 
