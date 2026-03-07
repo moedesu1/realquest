@@ -57,60 +57,60 @@ const userState = {
 /* ── FALLBACK QUEST DATA ── */
 const FALLBACK_QUESTS = [
   {
-    id: 1, title: '神戸異聞録 ― 港町の消えた宝石商',
-    tagline: '北野異人館街に眠る、百年前の未解決事件',
+    id: 1, title: '枯山水の暗号 ― 禅庭に隠された遺言',
+    tagline: '石の配置が示す、住職が遺した最後の謎',
     genre: '推理', subGenre: 'フィールド探索',
     price: 3500, difficulty: 3,
-    image: 'images/quest-1-new.png',
+    image: 'images/quest-1-new.webp',
     estimatedTime: '3〜5時間', players: '1〜4人',
-    region: '神戸・北野〜メリケンパーク', format: 'outdoor',
+    region: '京都・東山〜南禅寺周辺', format: 'outdoor',
     isNew: true, isOfficial: true,
-    prologue: '1923年、神戸北野の異人館から一人の宝石商が忽然と姿を消した。残されたのは暗号が刻まれた懐中時計と、港を示す古地図。百年の時を経て、あなたの元に届いた一通の手紙がすべてを動かす。メリケンパークから北野坂を辿り、この街に隠された真実を解き明かせ。',
+    prologue: '京都東山の古刹。三代続いた住職が遺したのは、枯山水の庭に刻まれた暗号だった。白砂の波紋、苔むした飛び石、刈り込まれた植栽――すべてが一つの座標を指し示している。寺院の参道を歩き、石庭の配置を読み解き、住職が300年守り続けた秘密の在処を突き止めよ。',
     cautions: ['歩きやすい靴推奨', '雨天決行', 'スマートフォン必須', '対象年齢: 12歳以上'],
     reviewAvg: 4.7, reviewCount: 12, salesCount: 156,
     creatorName: 'REALQUEST公式', creatorSns: '',
     items: [
-      { icon: '◆', name: '捜査資料ファイル（古地図・証拠写真入り）' },
-      { icon: '◆', name: '暗号が刻まれたレプリカ懐中時計' },
-      { icon: '◆', name: '宝石商からの手紙（封蝋付き）' },
+      { icon: '◆', name: '住職の遺言状（和紙・封蝋付き）' },
+      { icon: '◆', name: '庭園見取り図（暗号入り）' },
+      { icon: '◆', name: '石の配置を読み解く解読シート' },
     ],
   },
   {
-    id: 2, title: '団地の灯 ― 404号室の住人',
-    tagline: 'あの部屋の灯りは、誰が点けているのか',
-    genre: 'ホラー', subGenre: 'サスペンス',
-    price: 2500, difficulty: 2,
-    image: 'images/quest-2-new.png',
-    estimatedTime: '2〜3時間', players: '1〜2人',
-    region: '自宅完結', format: 'home',
-    isNew: true, isOfficial: false,
-    prologue: '取り壊しが決まった昭和の団地。全住民が退去したはずの建物で、404号室だけ毎晩灯りが点く。管理会社から届いた調査依頼。部屋の鍵と共に届いた資料には、30年前にこの部屋で起きた「あの事件」の記録が入っていた。',
-    cautions: ['ホラー要素あり', '対象年齢: 15歳以上', 'LINEアプリ必須'],
-    reviewAvg: 4.8, reviewCount: 8, salesCount: 203,
-    creatorName: 'RIDDLE STORY', creatorSns: '@riddlestory',
-    items: [
-      { icon: '◆', name: '404号室の鍵（レプリカ）' },
-      { icon: '◆', name: '管理会社からの調査依頼書' },
-      { icon: '◆', name: '住民台帳の写し（一部黒塗り）' },
-    ],
-  },
-  {
-    id: 3, title: '商店街の亡霊 ― ネオンに消えた歌姫',
-    tagline: '昭和の商店街に響く、幻のメロディー',
+    id: 2, title: '先斗町の影 ― 提灯が照らす密書',
+    tagline: '赤い提灯の下、百年前の密約が甦る',
     genre: '推理', subGenre: 'ミステリー',
     price: 3000, difficulty: 2,
-    image: 'images/quest-3-new.png',
+    image: 'images/quest-2-new.webp',
     estimatedTime: '2〜4時間', players: '1〜3人',
-    region: '自宅完結', format: 'home',
+    region: '京都・先斗町〜木屋町通', format: 'outdoor',
+    isNew: true, isOfficial: true,
+    prologue: '京都・先斗町。赤提灯が揺れる石畳の路地に、一軒の老舗茶屋がある。店主が亡くなった翌日、店の奥から見つかったのは明治時代の密書と、路地裏の地図。先斗町を歩きながら、提灯に記された紋章と店の暗号を辿り、茶屋の女将が命懸けで守った秘密を暴け。',
+    cautions: ['夕方〜夜の開始推奨', '歩きやすい靴推奨', 'スマートフォン必須', '対象年齢: 12歳以上'],
+    reviewAvg: 4.8, reviewCount: 8, salesCount: 203,
+    creatorName: 'REALQUEST公式', creatorSns: '',
+    items: [
+      { icon: '◆', name: '明治時代の密書（復刻版）' },
+      { icon: '◆', name: '先斗町の古地図' },
+      { icon: '◆', name: '提灯の紋章カード一式' },
+    ],
+  },
+  {
+    id: 3, title: '湯煙の失踪 ― 温泉街最後の手がかり',
+    tagline: '湯気の向こうに消えた旅人の行方を追え',
+    genre: '推理', subGenre: 'フィールド探索',
+    price: 3500, difficulty: 3,
+    image: 'images/quest-3-new.webp',
+    estimatedTime: '3〜5時間', players: '2〜4人',
+    region: '有馬温泉・温泉街周辺', format: 'outdoor',
     isNew: false, isOfficial: true,
-    prologue: 'かつて賑わったアーケード商店街。閉店後の深夜、どこからか昭和歌謡が聞こえるという噂が絶えない。調査を始めたあなたの元に届いたのは、40年前に姿を消した歌手のレコードと、商店街の裏の顔を記した手帳だった。',
-    cautions: ['ネタバレ厳禁', '筆記用具推奨', '対象年齢: 12歳以上'],
+    prologue: '有馬温泉の老舗旅館で、一人の旅行客が忽然と姿を消した。部屋に残されていたのは、温泉街の店を巡るスタンプカードと、裏面に書かれた謎めいた数字の羅列。湯煙が立ち上る石畳の通りを歩き、土産物屋や足湯の番台に散りばめられた手がかりを集め、消えた旅人の真実に迫れ。',
+    cautions: ['歩きやすい靴推奨', '雨天決行', 'スマートフォン必須', '対象年齢: 12歳以上'],
     reviewAvg: 4.5, reviewCount: 6, salesCount: 134,
     creatorName: 'REALQUEST公式', creatorSns: '',
     items: [
-      { icon: '◆', name: '幻のレコードジャケット（復刻版）' },
-      { icon: '◆', name: '商店街の見取り図' },
-      { icon: '◆', name: '謎の手帳（暗号入り）' },
+      { icon: '◆', name: '旅行客の手帳（暗号メモ入り）' },
+      { icon: '◆', name: '温泉街スタンプカード' },
+      { icon: '◆', name: '老舗旅館の宿帳の写し' },
     ],
   },
   {
@@ -118,11 +118,11 @@ const FALLBACK_QUESTS = [
     tagline: '奉納箱の中に、あなた宛の御神託が入っていた',
     genre: '冒険', subGenre: 'フィールド探索',
     price: 3500, difficulty: 3,
-    image: 'images/quest-4-new.png',
+    image: 'images/quest-4-new.webp',
     estimatedTime: '3〜5時間', players: '1〜4人',
     region: '奈良・山の辺の道周辺', format: 'outdoor',
     isNew: false, isOfficial: true,
-    prologue: '奈良の古社に伝わる「神隠しの言い伝え」。千年杉の根元に置かれた奉納箱を開けると、中にはあなたの名前が書かれた御神託が入っていた。古代の参道を辿り、石灯籠に刻まれた暗号を解読し、鎮守の森の奥に眠る秘密に辿り着け。',
+    prologue: '奈良の古社に伝わる「神隠しの言い伝え」。千年杉の根元に置かれた奉納箱を開けると、中にはあなたの名前が書かれた御神託が入っていた。鳥居をくぐり、苔むした石灯籠が並ぶ参道を辿り、暗号を解読し、鎮守の森の奥に眠る秘密に辿り着け。',
     cautions: ['歩きやすい靴・服装必須', '山道あり', '雨天延期', '対象年齢: 10歳以上'],
     reviewAvg: 4.9, reviewCount: 15, salesCount: 89,
     creatorName: 'REALQUEST公式', creatorSns: '',
@@ -133,42 +133,42 @@ const FALLBACK_QUESTS = [
     ],
   },
   {
-    id: 5, title: '路地裏の密約 ― 花街スパイ・ゲーム',
-    tagline: '石畳の先に、裏切り者がいる',
-    genre: 'スパイ', subGenre: '潜入ミッション',
+    id: 5, title: '古都の宝探し ― 失われた絵師の地図',
+    tagline: '古びた宝の地図が、街を冒険に変える',
+    genre: '冒険', subGenre: 'トレジャーハント',
     price: 4000, difficulty: 4,
-    image: 'images/quest-5-new.png',
-    estimatedTime: '3〜5時間', players: '2〜6人',
-    region: '自宅完結', format: 'home',
-    isNew: false, isOfficial: false,
-    prologue: '京都の花街に潜むスパイ網。あなたは組織から極秘任務を受ける。石畳の路地裏で行われる密約の現場に潜入し、二重スパイを特定せよ。ただし、仲間の中にも裏切り者がいるかもしれない。信じるか、疑うか。すべてはあなた次第。',
-    cautions: ['対象年齢: 15歳以上', '複数人推奨', '裏切り要素あり'],
+    image: 'images/quest-5-new.webp',
+    estimatedTime: '4〜6時間', players: '2〜6人',
+    region: '京都・祇園〜東山エリア', format: 'outdoor',
+    isNew: false, isOfficial: true,
+    prologue: '京都の古書店で見つかった、江戸時代の絵師が遺した一枚の地図。山、川、寺社の記号と謎の暗号文字が描かれたその地図は、絵師が生涯をかけて集めた「ある宝」の在処を示しているという。祇園の路地から東山の寺社へ、地図を片手に街を歩き、200年の時を超えた宝探しに挑め。',
+    cautions: ['歩きやすい靴必須', '長距離歩行あり', 'スマートフォン必須', '対象年齢: 12歳以上'],
     reviewAvg: 4.6, reviewCount: 9, salesCount: 178,
-    creatorName: 'DarkRoom Games', creatorSns: '@darkroomgames',
+    creatorName: 'REALQUEST公式', creatorSns: '',
     items: [
-      { icon: '◆', name: '極秘任務指令書（封蝋付き）' },
-      { icon: '◆', name: 'エージェント手帳' },
-      { icon: '◆', name: '花街の路地裏マップ' },
-      { icon: '◆', name: '正体カード（人数分）' },
+      { icon: '◆', name: '絵師の宝の地図（古紙レプリカ）' },
+      { icon: '◆', name: '暗号解読ガイドブック' },
+      { icon: '◆', name: '探索チェックリスト' },
+      { icon: '◆', name: '方位磁石（レプリカ）' },
     ],
   },
   {
-    id: 6, title: '廃校の記憶 ― 最後の卒業式',
-    tagline: '誰もいない教室で、チャイムが鳴った',
-    genre: 'ホラー', subGenre: '脱出系',
-    price: 3000, difficulty: 3,
-    image: 'images/quest-6-new.png',
-    estimatedTime: '2〜4時間', players: '1〜3人',
-    region: '自宅完結', format: 'home',
-    isNew: true, isOfficial: false,
-    prologue: '15年前に廃校になった小学校。取り壊し前の最終調査に訪れたあなたは、職員室で一冊の卒業アルバムを見つける。そこに写る子どもたちの顔は全員黒く塗りつぶされていた。突然、校内放送が流れ始める。「最後の卒業式を、始めます」',
-    cautions: ['ホラー要素強め', '対象年齢: 15歳以上', '暗い場所でのプレイ推奨'],
+    id: 6, title: '黄昏の街 ― 五重塔に沈む真実',
+    tagline: '夕暮れの京都で、街全体が謎解きの舞台になる',
+    genre: '推理', subGenre: '街歩きミステリー',
+    price: 3000, difficulty: 2,
+    image: 'images/quest-6-new.webp',
+    estimatedTime: '2〜4時間', players: '1〜4人',
+    region: '京都・清水寺〜八坂周辺', format: 'outdoor',
+    isNew: true, isOfficial: true,
+    prologue: '夕暮れの京都。清水坂から二年坂、八坂の塔を望む街並みに、一人の写真家が最後に撮った9枚の写真が遺されていた。それぞれの写真には不自然な影と、裏面に走り書きされた一行のメッセージ。日が沈む前に、写真と同じ場所を巡り、写真家が命を懸けて伝えようとした真実を解き明かせ。',
+    cautions: ['夕方開始推奨（16時頃〜）', '歩きやすい靴推奨', 'スマートフォン必須', '対象年齢: 12歳以上'],
     reviewAvg: 4.7, reviewCount: 11, salesCount: 267,
-    creatorName: 'RIDDLE STORY', creatorSns: '@riddlestory',
+    creatorName: 'REALQUEST公式', creatorSns: '',
     items: [
-      { icon: '◆', name: '卒業アルバム（復刻版・一部黒塗り）' },
-      { icon: '◆', name: '校内見取り図' },
-      { icon: '◆', name: '職員室の鍵' },
+      { icon: '◆', name: '写真家の9枚の写真（復刻版）' },
+      { icon: '◆', name: '街歩きマップ' },
+      { icon: '◆', name: '写真家の日記（抜粋）' },
     ],
   },
 ];
@@ -423,7 +423,7 @@ function renderQuestGrid(containerId, quests) {
     <div class="quest-card" onclick="openDetail(${q.id})">
       <div class="quest-card-thumb-wrap">
         <img class="quest-card-thumb" src="${q.image}" alt="${q.title}" loading="lazy"
-             onerror="this.src='images/quest-1-new.png'">
+             onerror="this.src='images/quest-1-new.webp'">
         ${userState.loggedIn ? `<button class="fav-btn ${userFavorites.has(q.id) ? 'active' : ''}"
           onclick="event.stopPropagation(); toggleFavorite(${q.id}, this)"
           title="お気に入り">${userFavorites.has(q.id) ? '♥' : '♡'}</button>` : ''}
@@ -490,7 +490,7 @@ function renderDetail(quest) {
   document.getElementById('detail-content').innerHTML = `
     <div class="detail-hero">
       <img class="detail-hero-img" src="${quest.image}" alt="${quest.title}"
-           onerror="this.src='images/quest-1-new.png'">
+           onerror="this.src='images/quest-1-new.webp'">
       <div class="detail-hero-overlay">
         <h1 class="detail-hero-title">${quest.title}</h1>
       </div>
@@ -680,7 +680,7 @@ function renderCartDrawer() {
 
   cartItemsEl.innerHTML = items.map(item => `
     <div class="cart-item">
-      <img class="cart-item-img" src="${item.variant?.image?.src || 'images/quest-1-new.png'}" alt="">
+      <img class="cart-item-img" src="${item.variant?.image?.src || 'images/quest-1-new.webp'}" alt="">
       <div class="cart-item-info">
         <div class="cart-item-title">${item.title}</div>
         <div class="cart-item-price">¥${parseInt(item.variant?.price?.amount || 0).toLocaleString()}</div>
