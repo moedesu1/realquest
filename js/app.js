@@ -175,6 +175,7 @@ const FALLBACK_QUESTS = [
 
 /* ── INIT ── */
 document.addEventListener('DOMContentLoaded', async () => {
+  startOpeningTimer();
   await loadQuests();
   await initShopify();
   await checkAuth();
@@ -397,8 +398,18 @@ function navigateTo(pageId) {
   if (pageId === 'news') renderNews();
 }
 
+let openingTimer = null;
+
 function enterSite() {
-  navigateTo('main');
+  if (openingTimer) clearTimeout(openingTimer);
+  const opening = document.getElementById('page-opening');
+  opening.classList.add('fade-out');
+  setTimeout(() => navigateTo('main'), 800);
+}
+
+// Auto-transition after 3.5s (enough for animations to complete)
+function startOpeningTimer() {
+  openingTimer = setTimeout(enterSite, 2200);
 }
 
 /* ── RENDER: HOME ── */
