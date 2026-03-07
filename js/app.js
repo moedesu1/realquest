@@ -5,11 +5,13 @@
 
 /* ── SUPABASE CLIENT ── */
 let db = null;
-try {
-  if (typeof window.supabase !== 'undefined' && RQ_CONFIG.SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
-    db = window.supabase.createClient(RQ_CONFIG.SUPABASE_URL, RQ_CONFIG.SUPABASE_ANON_KEY);
-  }
-} catch (e) { console.warn('Supabase init failed:', e); }
+function initSupabase() {
+  try {
+    if (typeof window.supabase !== 'undefined' && RQ_CONFIG.SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+      db = window.supabase.createClient(RQ_CONFIG.SUPABASE_URL, RQ_CONFIG.SUPABASE_ANON_KEY);
+    }
+  } catch (e) { console.warn('Supabase init failed:', e); }
+}
 
 /* ── SHOPIFY CLIENT ── */
 let shopifyClient = null;
@@ -233,6 +235,7 @@ const FALLBACK_REVIEWS = {
 
 /* ── INIT ── */
 document.addEventListener('DOMContentLoaded', async () => {
+  initSupabase();
   startOpeningTimer();
   await loadQuests();
   await initShopify();
