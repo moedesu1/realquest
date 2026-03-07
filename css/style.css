@@ -99,25 +99,27 @@ img { max-width: 100%; display: block; }
   position: relative; z-index: 2; text-align: center; padding: 2rem;
 }
 .opening-title {
-  font-family: 'Cinzel Decorative', 'Cinzel', 'Times New Roman', serif;
-  font-size: clamp(3rem, 10vw, 6rem);
-  font-weight: 400; color: #f0e8d8;
-  letter-spacing: 0.15em; line-height: 1;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+  font-family: 'Cinzel Decorative', 'Cinzel', Georgia, 'Times New Roman', serif;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 700; color: #f0e8d8;
+  letter-spacing: 0.12em; line-height: 1;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.85), 0 0 60px rgba(0,0,0,0.5);
 }
 .opening-sub {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  color: #f0e8d8; letter-spacing: 0.4em;
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.1rem, 3vw, 1.8rem);
+  font-weight: 700; color: #f0e8d8;
+  letter-spacing: 0.4em;
   margin-top: 0.3rem;
-  text-shadow: 0 1px 10px rgba(0,0,0,0.6);
+  text-shadow: 0 4px 30px rgba(0,0,0,0.85), 0 0 60px rgba(0,0,0,0.5);
 }
 .opening-desc {
-  font-family: var(--font-body);
-  font-size: clamp(0.85rem, 2.5vw, 1.15rem);
-  color: #f0e8d8; letter-spacing: 0.3em;
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+  font-weight: 700; color: #f0e8d8;
+  letter-spacing: 0.3em;
   margin-top: 1rem;
-  text-shadow: 0 1px 10px rgba(0,0,0,0.6);
+  text-shadow: 0 4px 30px rgba(0,0,0,0.85), 0 0 60px rgba(0,0,0,0.5);
 }
 
 /* ============================================================
