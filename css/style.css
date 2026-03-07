@@ -635,6 +635,7 @@ img { max-width: 100%; display: block; }
   font-size: 1.5rem; cursor: pointer;
 }
 .modal-title { font-size: 1.2rem; color: var(--text-primary); margin-bottom: 1.5rem; }
+.modal .btn-primary { display: block; width: 100%; }
 .auth-switch { font-size: 0.8rem; color: var(--text-dim); margin-top: 1rem; text-align: center; }
 .auth-switch a { color: var(--gold); }
 
