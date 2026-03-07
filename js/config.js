@@ -42,6 +42,10 @@ const RQ_CONFIG = {
     6: '44926688591926',   // 回復のポーション
   },
 
+  // ── microCMS ──
+  MICROCMS_DOMAIN: 'realquest',
+  MICROCMS_API_KEY: 'PP7u0vGyX42sNyq3UOqXVnkx33zIBLhNEA7X',
+
   // ── Google Analytics 4 ──
   GA4_ID: 'G-XXXXXXXXXX',
 };

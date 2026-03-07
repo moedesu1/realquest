@@ -698,24 +698,26 @@ function renderMyPage() {
 async function renderNews() {
   const el = document.getElementById('news-list');
   try {
-    if (!db) throw new Error('no db');
-    const { data, error } = await db.from('news')
-      .select('*')
-      .order('published_at', { ascending: false });
-    if (error) throw error;
-    if (!data || data.length === 0) {
+    const res = await fetch(
+      `https://${RQ_CONFIG.MICROCMS_DOMAIN}.microcms.io/api/v1/news?limit=20`,
+      { headers: { 'X-MICROCMS-API-KEY': RQ_CONFIG.MICROCMS_API_KEY } }
+    );
+    if (!res.ok) throw new Error('fetch failed');
+    const json = await res.json();
+    const items = json.contents || [];
+    if (items.length === 0) {
       el.innerHTML = '<p class="empty-state">お知らせはまだありません。</p>';
       return;
     }
-    const catLabel = { info: 'お知らせ', new: '新着', important: '重要', update: 'アップデート', maintenance: 'メンテナンス' };
-    el.innerHTML = data.map(n => `
+    el.innerHTML = items.map(n => `
       <div class="news-item">
-        <span class="news-date">${new Date(n.published_at).toLocaleDateString('ja-JP')}</span>
-        <span class="news-category">${catLabel[n.category] || n.category}</span>
+        <span class="news-date">${new Date(n.publishedAt || n.createdAt).toLocaleDateString('ja-JP')}</span>
+        ${n.category ? `<span class="news-category">${n.category.name || n.category}</span>` : ''}
         <div class="news-title">${n.title}</div>
       </div>
     `).join('');
-  } catch {
+  } catch (e) {
+    console.warn('News fetch failed:', e);
     el.innerHTML = '<p class="empty-state">お知らせはまだありません。</p>';
   }
 }
