@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QUESTORE — 物語の書庫</title>
-<meta name="description" content="QUESTORE（リアクエ）は現実世界を舞台にしたリアルRPGコンテンツが集まるプラットフォーム。謎解き・冒険・ホラーなど多ジャンルの体験があなたを待っています。">
+<meta name="description" content="QUESTORE（クエストア）は現実世界を舞台にしたリアルRPGコンテンツが集まるプラットフォーム。謎解き・冒険・ホラーなど多ジャンルの体験があなたを待っています。">
 <meta name="theme-color" content="#1a140e">
 <meta property="og:title" content="QUESTORE — 物語の書庫">
 <meta property="og:description" content="現実世界を舞台にしたリアルRPGコンテンツが集まるプラットフォーム">
@@ -126,11 +126,11 @@
     <div class="header-inner">
       <div class="header-logo" onclick="navigateTo('main')">QUESTORE</div>
       <nav class="header-nav">
-        <a href="#" class="nav-link active" data-page="main">ホーム</a>
-        <a href="#" class="nav-link" data-page="about">Questoreとは</a>
-        <a href="#" class="nav-link" data-page="creator">クリエイター</a>
-        <a href="#" class="nav-link" data-page="news">お知らせ</a>
-        <a href="#" class="nav-link" data-page="contact">お問い合わせ</a>
+        <a href="#" class="nav-link active" data-page="main" onclick="event.preventDefault();navigateTo('main')">ホーム</a>
+        <a href="#" class="nav-link" data-page="about" onclick="event.preventDefault();navigateTo('about')">Questoreとは</a>
+        <a href="#" class="nav-link" data-page="creator" onclick="event.preventDefault();navigateTo('creator')">クリエイター</a>
+        <a href="#" class="nav-link" data-page="news" onclick="event.preventDefault();navigateTo('news')">お知らせ</a>
+        <a href="#" class="nav-link" data-page="contact" onclick="event.preventDefault();navigateTo('contact')">お問い合わせ</a>
       </nav>
       <div class="header-actions">
         <button class="icon-btn" onclick="openSearch()" aria-label="検索">
@@ -305,7 +305,7 @@
   <main class="static-content">
     <h1 class="page-title">Questoreとは</h1>
     <div class="static-body">
-      <p>QUESTORE（リアクエ）は、現実世界を舞台にしたリアルRPGコンテンツが集まるプラットフォームです。</p>
+      <p>QUESTORE（クエストア）は、現実世界を舞台にしたリアルRPGコンテンツが集まるプラットフォームです。</p>
       <p>クリエイターが制作した謎解き・冒険・ホラー・スパイ・歴史・家族向けなど多ジャンルの体験を、あなたはこの「書庫」で手に取り、物語の主人公になることができます。</p>
       <h2>体験の流れ</h2>
       <ol>

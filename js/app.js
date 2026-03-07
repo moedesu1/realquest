@@ -173,6 +173,36 @@ const FALLBACK_QUESTS = [
   },
 ];
 
+const FALLBACK_REVIEWS = {
+  1: [
+    { id: 101, user: '旅する謎解き師', stars: 5, text: '枯山水の庭が本当に美しくて、謎解きしながら京都の文化に触れられる素晴らしい体験でした。石の配置の暗号は難しかったけど、解けた時の達成感がすごい！', date: '2026-02-15', likeCount: 8 },
+    { id: 102, user: 'ミステリー好き', stars: 5, text: '友人4人で参加。全員で議論しながら進めるのが楽しかった。難易度もちょうどよく、3時間半で完了。', date: '2026-02-08', likeCount: 5 },
+    { id: 103, user: '京都散歩', stars: 4, text: '庭園の雰囲気が最高。謎解きの難易度は高めなので、初心者だけだと少し苦戦するかも。ヒントシステムがあると嬉しい。', date: '2026-01-22', likeCount: 3 },
+  ],
+  2: [
+    { id: 201, user: '夜の京都が好き', stars: 5, text: '夜の先斗町の雰囲気と謎解きの組み合わせが最高でした。提灯の紋章を探すのがワクワクする。', date: '2026-02-20', likeCount: 12 },
+    { id: 202, user: 'カップルで参加', stars: 5, text: 'デートで参加しました。ロマンチックな雰囲気の中で謎を解くのは新鮮な体験。2人でも十分楽しめます。', date: '2026-02-10', likeCount: 7 },
+  ],
+  3: [
+    { id: 301, user: '温泉好きの探偵', stars: 4, text: '有馬温泉の街歩きと謎解きが両方楽しめる。足湯に浸かりながら手がかりを考えるのが贅沢な時間でした。', date: '2026-01-30', likeCount: 6 },
+    { id: 302, user: '家族で冒険', stars: 5, text: '中学生の子供と一緒に参加。温泉街のお店の人も協力的で、子供も大人も楽しめました。', date: '2026-01-18', likeCount: 4 },
+  ],
+  4: [
+    { id: 401, user: '森の冒険者', stars: 5, text: '鎮守の森の雰囲気が圧倒的。千年杉の前に立った時は鳥肌が立ちました。御神託の演出も素晴らしい。', date: '2026-02-25', likeCount: 15 },
+    { id: 402, user: '自然派ハイカー', stars: 5, text: '山の辺の道を歩きながらの謎解きは最高の体験。体力は少し必要だけど、達成感は一番。', date: '2026-02-12', likeCount: 9 },
+    { id: 403, user: 'リピーター', stars: 5, text: '2回目の参加。季節が変わると森の雰囲気も変わって、また違った楽しみ方ができました。', date: '2026-01-28', likeCount: 6 },
+  ],
+  5: [
+    { id: 501, user: 'トレジャーハンター', stars: 5, text: '宝の地図のクオリティが高すぎる。古紙レプリカの質感が本物みたいで、冒険気分が一気に高まる。', date: '2026-02-18', likeCount: 10 },
+    { id: 502, user: '歴史オタク', stars: 4, text: '江戸時代の絵師の設定がよく作り込まれていて、歴史好きにはたまらない。ただ歩く距離が長いので体力は必要。', date: '2026-02-05', likeCount: 5 },
+  ],
+  6: [
+    { id: 601, user: '写真家志望', stars: 5, text: '夕暮れの京都×謎解きという組み合わせが天才的。写真を手がかりに街を巡るのが楽しすぎて時間を忘れました。', date: '2026-02-22', likeCount: 11 },
+    { id: 602, user: '初めての謎解き', stars: 5, text: '謎解き初心者でも楽しめました。難易度が低めなので入門にぴったり。景色も最高です。', date: '2026-02-14', likeCount: 8 },
+    { id: 603, user: '八坂の住人', stars: 4, text: '地元民ですが、知らない路地や新しい発見があって新鮮でした。観光客にも地元民にもおすすめ。', date: '2026-01-30', likeCount: 4 },
+  ],
+};
+
 /* ── INIT ── */
 document.addEventListener('DOMContentLoaded', async () => {
   startOpeningTimer();
@@ -236,6 +266,7 @@ async function loadQuests() {
   } catch (e) {
     console.warn('Using fallback data:', e.message);
     allQuests = FALLBACK_QUESTS;
+    reviewsByQuest = FALLBACK_REVIEWS;
   }
 }
 
@@ -581,10 +612,6 @@ function renderDetail(quest) {
         ${isAccepted ? '✓ カートに追加済み' : quest.price === 0 ? '▶ プレイ開始' : `¥${quest.price.toLocaleString()} で購入する`}
       </button>
 
-      <div class="detail-actions">
-        <button class="btn-report" onclick="openReportModal(${quest.id})">通報する</button>
-      </div>
-
       <div class="detail-reviews">
         <h3>レビュー ${reviews.length > 0 ? `(${reviews.length}件)` : ''}</h3>
         ${userState.loggedIn ? `
@@ -610,7 +637,7 @@ function renderDetail(quest) {
             <div class="review-footer">
               <span class="review-date">${r.date}</span>
               ${r.id ? `<button class="review-like-btn" data-count="${r.likeCount || 0}" onclick="likeReview(${r.id}, this)">参考になった (${r.likeCount || 0})</button>
-              <button class="review-report-btn" onclick="openReportModal(${quest.id}, ${r.id})">通報</button>` : ''}
+              ${userState.loggedIn ? `<button class="review-report-btn" onclick="openReportModal(${quest.id}, ${r.id})">通報</button>` : ''}` : ''}
             </div>
           </div>
         `).join('') : '<p class="empty-state" style="margin-top:1rem">まだレビューはありません。最初のレビューを書いてみましょう。</p>'}
