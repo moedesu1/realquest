@@ -368,7 +368,17 @@
   <main class="static-content">
     <h1 class="page-title">レビュー</h1>
     <div id="all-reviews-list"></div>
-    <a href="https://forms.gle/PLACEHOLDER_REVIEW" target="_blank" class="btn-secondary" style="display:inline-block;margin:1.5rem 0">レビューを書く（Googleフォーム）</a>
+    <div id="review-page-action"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const el = document.getElementById('review-page-action');
+        if (el) {
+          el.innerHTML = userState?.loggedIn
+            ? '<p style="margin:1.5rem 0;color:var(--text-secondary)">各クエストの詳細ページからレビューを投稿できます。</p>'
+            : '<p style="margin:1.5rem 0;color:var(--text-secondary)">レビューを投稿するには<a href="#" onclick="openAuthModal(); return false;" style="color:var(--gold)">ログイン</a>してください。<br>ログイン後、各クエストの詳細ページからレビューを書くことができます。</p>';
+        }
+      });
+    </script>
   </main>
   <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE.</p></div></footer>
 </div>
