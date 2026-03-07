@@ -615,11 +615,8 @@ function renderDetail(quest) {
 
       <div class="detail-reviews">
         <h3>レビュー ${reviews.length > 0 ? `(${reviews.length}件)` : ''}</h3>
-        ${!userState.loggedIn
-          ? `<p class="review-login-hint">レビューを投稿するには<a href="#" onclick="openAuthModal(); return false;">ログイン</a>してください</p>`
-          : !isAccepted
-            ? `<p class="review-login-hint">レビューは購入者のみ投稿できます</p>`
-            : `<form class="review-form" onsubmit="submitReview(event, ${quest.id})">
+        ${isAccepted
+          ? `<form class="review-form" onsubmit="submitReview(event, ${quest.id})">
             <div class="review-form-stars">
               <span class="review-form-label">評価</span>
               <div class="star-select" id="star-select">
@@ -630,6 +627,7 @@ function renderDetail(quest) {
             <textarea id="review-text" class="review-textarea" placeholder="感想を書いてください（任意）" rows="3"></textarea>
             <button type="submit" class="btn-primary" style="margin-top:0.5rem">レビューを投稿</button>
           </form>`
+          : ''
         }
         ${reviews.length > 0 ? reviews.map(r => `
           <div class="review-card">
@@ -644,7 +642,7 @@ function renderDetail(quest) {
               ${userState.loggedIn ? `<button class="review-report-btn" onclick="openReportModal(${quest.id}, ${r.id})">通報</button>` : ''}` : ''}
             </div>
           </div>
-        `).join('') : '<p class="empty-state" style="margin-top:1rem">まだレビューはありません。最初のレビューを書いてみましょう。</p>'}
+        `).join('') : '<p class="empty-state" style="margin-top:1rem">まだレビューはありません</p>'}
       </div>
     </div>
   `;
@@ -821,16 +819,21 @@ function renderMyPage() {
       `).join('') : '<p class="empty-state">お気に入りはまだありません</p>'}
     </div>
     <div class="mypage-section">
-      <h3>カートに追加したコンテンツ (${accepted.length})</h3>
-      ${accepted.length > 0 ? accepted.map(q => `
-        <div class="cart-item" onclick="openDetail(${q.id})" style="cursor:pointer">
-          <img class="cart-item-img" src="${q.image}" alt="${q.title}">
-          <div class="cart-item-info">
+      <h3>購入した商品 (${accepted.length})</h3>
+      ${accepted.length > 0 ? accepted.map(q => {
+        const myReview = (reviewsByQuest[q.id] || []).find(r => r.user === userState.name);
+        return `
+        <div class="cart-item" style="cursor:pointer">
+          <img class="cart-item-img" src="${q.image}" alt="${q.title}" onclick="openDetail(${q.id})">
+          <div class="cart-item-info" onclick="openDetail(${q.id})">
             <div class="cart-item-title">${q.title}</div>
             <div class="cart-item-price">¥${q.price.toLocaleString()}</div>
           </div>
-        </div>
-      `).join('') : '<p class="empty-state">まだコンテンツを追加していません</p>'}
+          <button class="btn-review-link" onclick="openDetail(${q.id})">
+            ${myReview ? '✏️ レビュー済み' : '📝 レビューを書く'}
+          </button>
+        </div>`;
+      }).join('') : '<p class="empty-state">購入した商品はまだありません</p>'}
     </div>
     <button class="mypage-logout" onclick="logout()">ログアウト</button>
   `;

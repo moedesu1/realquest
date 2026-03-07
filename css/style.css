@@ -720,6 +720,13 @@ img { max-width: 100%; display: block; }
   font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem;
   padding-bottom: 0.3rem; border-bottom: 1px solid rgba(184,152,88,0.1);
 }
+.btn-review-link {
+  background: none; border: 1px solid var(--gold-dim); color: var(--gold);
+  font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: var(--radius);
+  cursor: pointer; white-space: nowrap; transition: background 0.2s;
+}
+.btn-review-link:hover { background: rgba(184,152,88,0.15); }
+
 .mypage-logout {
   background: none; border: 1px solid var(--text-dim);
   color: var(--text-dim); padding: 0.5rem 1.5rem;
