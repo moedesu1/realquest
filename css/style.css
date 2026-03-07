@@ -94,7 +94,6 @@ img { max-width: 100%; display: block; }
 .opening-bg {
   position: absolute; inset: 0;
   background: url('../images/library-bg.jpg') center/cover no-repeat;
-  filter: brightness(0.3);
 }
 .opening-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
 .opening-logo { margin-bottom: 2rem; }
