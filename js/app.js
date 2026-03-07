@@ -77,22 +77,23 @@ const FALLBACK_QUESTS = [
     ],
   },
   {
-    id: 2, title: '先斗町の影 ― 提灯が照らす密書',
-    tagline: '赤い提灯の下、百年前の密約が甦る',
-    genre: '推理', subGenre: 'ミステリー',
-    price: 3000, difficulty: 2,
-    image: 'images/quest-2-new.webp',
-    estimatedTime: '2〜4時間', players: '1〜3人',
-    region: '京都・先斗町〜木屋町通', format: 'outdoor',
+    id: 2, title: 'みんなでわいわい！たのしい毎日 ― 平成の教室からの招待状',
+    tagline: 'あの頃の放課後が、謎解きの舞台になる',
+    genre: '冒険', subGenre: '平成レトロ×謎解き',
+    price: 2500, difficulty: 1,
+    image: 'images/quest-2-heisei.png',
+    estimatedTime: '1〜3時間', players: '1〜6人',
+    region: '大阪・中崎町〜天満周辺', format: 'outdoor',
     isNew: true, isOfficial: true,
-    prologue: '京都・先斗町。赤提灯が揺れる石畳の路地に、一軒の老舗茶屋がある。店主が亡くなった翌日、店の奥から見つかったのは明治時代の密書と、路地裏の地図。先斗町を歩きながら、提灯に記された紋章と店の暗号を辿り、茶屋の女将が命懸けで守った秘密を暴け。',
-    cautions: ['夕方〜夜の開始推奨', '歩きやすい靴推奨', 'スマートフォン必須', '対象年齢: 12歳以上'],
-    reviewAvg: 4.8, reviewCount: 8, salesCount: 203,
-    creatorName: 'REALQUEST公式', creatorSns: '',
+    prologue: '机の引き出しから出てきた一枚のシール帳。たまごっち、交換日記、プリクラ――平成の思い出が詰まったその裏に「放課後、いつもの場所で待ってる」と書かれていた。懐かしい文房具屋、駄菓子屋、ゲームセンターを巡りながら、あの頃の友達が残した暗号を解き明かそう。最後に届くのは、あなただけへの手紙。',
+    cautions: ['スマートフォン必須', '対象年齢: 全年齢', '懐かしさで泣くかもしれません'],
+    reviewAvg: 4.9, reviewCount: 24, salesCount: 380,
+    creatorName: 'QUESTORE公式', creatorSns: '',
     items: [
-      { icon: '◆', name: '明治時代の密書（復刻版）' },
-      { icon: '◆', name: '先斗町の古地図' },
-      { icon: '◆', name: '提灯の紋章カード一式' },
+      { icon: '◆', name: '平成シール帳（復刻版・暗号入り）' },
+      { icon: '◆', name: '交換日記ノート（手がかり付き）' },
+      { icon: '◆', name: '駄菓子屋マップ' },
+      { icon: '◆', name: 'あなたへの手紙（クリア後開封）' },
     ],
   },
   {
@@ -201,8 +202,9 @@ const FALLBACK_REVIEWS = {
     { id: 103, user: 'レトロ好き', stars: 4, text: 'ポスターの世界観そのまま！サーカスの暗号カードが可愛くて、謎解き後もコレクションとして飾ってます。', date: '2026-02-10', likeCount: 7 },
   ],
   2: [
-    { id: 201, user: '夜の京都が好き', stars: 5, text: '夜の先斗町の雰囲気と謎解きの組み合わせが最高でした。提灯の紋章を探すのがワクワクする。', date: '2026-02-20', likeCount: 12 },
-    { id: 202, user: 'カップルで参加', stars: 5, text: 'デートで参加しました。ロマンチックな雰囲気の中で謎を解くのは新鮮な体験。2人でも十分楽しめます。', date: '2026-02-10', likeCount: 7 },
+    { id: 201, user: '平成生まれ', stars: 5, text: 'シール帳を開いた瞬間に小学校の記憶が蘇って泣きそうになった。駄菓子屋のおばちゃんも協力してくれて最高。', date: '2026-03-03', likeCount: 20 },
+    { id: 202, user: '母と娘で参加', stars: 5, text: '母が「懐かしい！」と大はしゃぎ。世代を超えて楽しめる素敵な体験でした。最後の手紙で二人とも号泣。', date: '2026-02-25', likeCount: 16 },
+    { id: 203, user: 'レトロ雑貨好き', stars: 5, text: '交換日記ノートのデザインが完璧すぎる。謎解き終わっても大事に使ってます。中崎町の雰囲気にもぴったり。', date: '2026-02-18', likeCount: 11 },
   ],
   3: [
     { id: 301, user: '温泉好きの探偵', stars: 4, text: '有馬温泉の街歩きと謎解きが両方楽しめる。足湯に浸かりながら手がかりを考えるのが贅沢な時間でした。', date: '2026-01-30', likeCount: 6 },
@@ -466,7 +468,7 @@ function enterSite() {
 
 // Auto-transition after 3.5s (enough for animations to complete)
 function startOpeningTimer() {
-  openingTimer = setTimeout(enterSite, 3000);
+  openingTimer = setTimeout(enterSite, 2400);
 }
 
 /* ── RENDER: HOME ── */
@@ -486,11 +488,12 @@ function renderHome() {
 function renderQuestGrid(containerId, quests) {
   const container = document.getElementById(containerId);
   if (!container) return;
+  const isPopular = containerId === 'popular-quests-grid';
 
-  container.innerHTML = quests.map(q => `
+  container.innerHTML = quests.map((q, i) => `
     <div class="quest-card" onclick="openDetail(${q.id})">
       <div class="quest-card-thumb-wrap">
-        <img class="quest-card-thumb" src="${q.image}" alt="${q.title}" loading="lazy"
+                <img class="quest-card-thumb" src="${q.image}" alt="${q.title}" loading="lazy"
              onerror="this.src='images/quest-1-new.webp'">
         ${userState.loggedIn ? `<button class="fav-btn ${userFavorites.has(q.id) ? 'active' : ''}"
           onclick="event.stopPropagation(); toggleFavorite(${q.id}, this)"

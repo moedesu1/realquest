@@ -520,6 +520,16 @@ img { max-width: 100%; display: block; }
 
 /* Favorite button on cards */
 .quest-card-thumb-wrap { position: relative; }
+.rank-label {
+  position: absolute; top: 0; left: 0; z-index: 2;
+  padding: 0.2rem 0.7rem;
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  border-bottom-right-radius: 6px;
+}
+.rank-1 { background: var(--gold); color: #1a1408; }
+.rank-2 { background: #8a8a8a; color: #fff; }
+.rank-3 { background: #6b4c2a; color: #e0d0b8; }
 .fav-btn {
   position: absolute; top: 0.5rem; right: 0.5rem;
   background: rgba(0,0,0,0.5); border: none;
@@ -544,7 +554,7 @@ img { max-width: 100%; display: block; }
 .btn-report:hover { border-color: var(--red); color: var(--red); }
 
 /* Password reset link */
-.auth-forgot { font-size: 0.75rem; text-align: right; margin-top: 0.5rem; }
+.auth-forgot { font-size: 0.75rem; text-align: center; margin-top: 0.5rem; }
 .auth-forgot a { color: var(--text-dim); }
 .auth-forgot a:hover { color: var(--gold); }
 
