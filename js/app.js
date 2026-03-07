@@ -77,7 +77,7 @@ const FALLBACK_QUESTS = [
     ],
   },
   {
-    id: 2, title: 'みんなでわいわい！たのしい毎日 ― 平成の教室からの招待状',
+    id: 2, title: '放課後の招待状 ― 平成の教室',
     tagline: 'あの頃の放課後が、謎解きの舞台になる',
     genre: '冒険', subGenre: '平成レトロ×謎解き',
     price: 2500, difficulty: 1,
@@ -178,7 +178,7 @@ const FALLBACK_QUESTS = [
     tagline: 'ゲーム音楽の伝説が仕掛けた、商店街まるごと音の謎解き',
     genre: '冒険', subGenre: '音楽×街歩き',
     price: 2500, difficulty: 2,
-    image: 'images/quest-7-okanp.webp',
+    image: 'images/quest-7-okanp.png',
     estimatedTime: '2〜3時間', players: '1〜4人',
     region: '大阪・豊中〜庄内商店街周辺', format: 'outdoor',
     isNew: true, isOfficial: true,
@@ -687,6 +687,7 @@ async function acceptQuest(questId) {
 
   // Re-render detail
   renderDetail(quest);
+  updateCartBadge();
   showToast(`「${quest.title}」をカートに追加しました`);
 
   // Add to Shopify cart
@@ -716,7 +717,7 @@ async function acceptQuest(questId) {
 }
 
 function updateCartBadge() {
-  const count = shopifyCheckout?.lineItems?.length || 0;
+  const count = shopifyCheckout?.lineItems?.length || userState.acceptedQuests.length;
   document.querySelectorAll('.cart-count').forEach(el => {
     el.textContent = count;
     el.style.display = count > 0 ? '' : 'none';
@@ -735,35 +736,66 @@ function closeCart() {
 }
 
 function renderCartDrawer() {
-  const items = shopifyCheckout?.lineItems || [];
+  const shopifyItems = shopifyCheckout?.lineItems || [];
   const cartItemsEl = document.getElementById('cart-items');
   const cartFooterEl = document.getElementById('cart-footer');
 
-  if (items.length === 0) {
+  // Shopifyが使える場合はShopifyのカートを表示
+  if (shopifyItems.length > 0) {
+    cartItemsEl.innerHTML = shopifyItems.map(item => `
+      <div class="cart-item">
+        <img class="cart-item-img" src="${item.variant?.image?.src || 'images/quest-1-new.webp'}" alt="">
+        <div class="cart-item-info">
+          <div class="cart-item-title">${item.title}</div>
+          <div class="cart-item-price">¥${parseInt(item.variant?.price?.amount || 0).toLocaleString()}</div>
+          <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">削除</button>
+        </div>
+      </div>
+    `).join('');
+    const total = shopifyCheckout.totalPrice?.amount || '0';
+    cartFooterEl.innerHTML = `
+      <div class="cart-total">
+        <span>合計</span>
+        <span>¥${parseInt(total).toLocaleString()}</span>
+      </div>
+      <button class="cart-checkout" onclick="goToCheckout()">決済へ進む</button>
+    `;
+    return;
+  }
+
+  // Shopifyが使えない場合はローカルのacceptedQuestsから表示
+  const localItems = userState.acceptedQuests.map(id => allQuests.find(q => q.id === id)).filter(Boolean);
+  if (localItems.length === 0) {
     cartItemsEl.innerHTML = '<p class="empty-state">カートは空です</p>';
     cartFooterEl.innerHTML = '';
     return;
   }
 
-  cartItemsEl.innerHTML = items.map(item => `
+  cartItemsEl.innerHTML = localItems.map(q => `
     <div class="cart-item">
-      <img class="cart-item-img" src="${item.variant?.image?.src || 'images/quest-1-new.webp'}" alt="">
+      <img class="cart-item-img" src="${q.image}" alt="${q.title}">
       <div class="cart-item-info">
-        <div class="cart-item-title">${item.title}</div>
-        <div class="cart-item-price">¥${parseInt(item.variant?.price?.amount || 0).toLocaleString()}</div>
-        <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">削除</button>
+        <div class="cart-item-title">${q.title}</div>
+        <div class="cart-item-price">${q.price === 0 ? '無料' : '¥' + q.price.toLocaleString()}</div>
+        <button class="cart-item-remove" onclick="removeFromCartLocal(${q.id})">削除</button>
       </div>
     </div>
   `).join('');
 
-  const total = shopifyCheckout.totalPrice?.amount || '0';
+  const total = localItems.reduce((sum, q) => sum + q.price, 0);
   cartFooterEl.innerHTML = `
     <div class="cart-total">
       <span>合計</span>
-      <span>¥${parseInt(total).toLocaleString()}</span>
+      <span>¥${total.toLocaleString()}</span>
     </div>
     <button class="cart-checkout" onclick="goToCheckout()">決済へ進む</button>
   `;
+}
+
+function removeFromCartLocal(questId) {
+  userState.acceptedQuests = userState.acceptedQuests.filter(id => id !== questId);
+  updateCartBadge();
+  renderCartDrawer();
 }
 
 async function removeFromCart(lineItemId) {
