@@ -399,7 +399,15 @@ async function handleAuth(e) {
       renderHome();
     }
   } catch (err) {
-    showToast(err.message || 'エラーが発生しました');
+    const msg = err.message || '';
+    const ja =
+      msg.includes('already registered') ? 'このメールアドレスは既に登録されています' :
+      msg.includes('Invalid login') ? 'メールアドレスまたはパスワードが正しくありません' :
+      msg.includes('Email rate limit') ? 'しばらく時間をおいてからお試しください' :
+      msg.includes('valid password') ? 'パスワードは6文字以上で入力してください' :
+      msg.includes('valid email') ? '正しいメールアドレスを入力してください' :
+      'エラーが発生しました';
+    showToast(ja);
   }
 }
 
