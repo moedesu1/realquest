@@ -61,7 +61,7 @@ const FALLBACK_QUESTS = [
     tagline: 'レトロな路面電車の切符が、失われた遊園地への片道切符だった',
     genre: '冒険', subGenre: '街歩きファンタジー',
     price: 3000, difficulty: 2,
-    image: 'images/quest-1-dreamland.png',
+    image: 'images/quest-1-dreamland.jpg',
     estimatedTime: '2〜4時間', players: '1〜4人',
     region: '大阪・新世界〜天王寺周辺', format: 'outdoor',
     isNew: true, isOfficial: true,
@@ -635,11 +635,6 @@ function renderDetail(quest) {
         </div>
       </div>
 
-      <button class="btn-purchase ${isAccepted ? 'purchased' : ''}" style="margin-top:1.5rem"
-              onclick="${isAccepted ? '' : `acceptQuest(${quest.id})`}"
-              ${isAccepted ? 'disabled' : ''}>
-        ${isAccepted ? '✓ カートに追加済み' : quest.price === 0 ? '▶ プレイ開始' : `¥${quest.price.toLocaleString()} で購入する`}
-      </button>
 
       <div class="detail-reviews">
         <h3>レビュー ${reviews.length > 0 ? `(${reviews.length}件)` : ''}</h3>
