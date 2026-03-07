@@ -404,12 +404,12 @@ function enterSite() {
   if (openingTimer) clearTimeout(openingTimer);
   const opening = document.getElementById('page-opening');
   opening.classList.add('fade-out');
-  setTimeout(() => navigateTo('main'), 800);
+  setTimeout(() => navigateTo('main'), 450);
 }
 
 // Auto-transition after 3.5s (enough for animations to complete)
 function startOpeningTimer() {
-  openingTimer = setTimeout(enterSite, 2200);
+  openingTimer = setTimeout(enterSite, 3000);
 }
 
 /* ── RENDER: HOME ── */
