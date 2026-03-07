@@ -245,42 +245,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 /* ── DATA LOADING ── */
 async function loadQuests() {
+  // 商品データは常にフォールバック（コード内データ）を使用
+  // Supabaseは認証・レビュー・お問い合わせ用
+  allQuests = FALLBACK_QUESTS;
+  reviewsByQuest = FALLBACK_REVIEWS;
+
+  // DBにレビューがあればそちらを優先
   try {
-    if (!db) throw new Error('no db');
-    const { data, error } = await db.from('quests')
-      .select('*, quest_items(*)')
-      .eq('is_published', true)
-      .order('id');
-    if (error) throw error;
-    allQuests = data.map(q => ({
-      id: q.id,
-      title: q.title,
-      tagline: q.tagline,
-      genre: q.genre,
-      subGenre: q.sub_genre,
-      price: q.price,
-      difficulty: q.difficulty,
-      image: q.image_url || `images/quest-${q.id}-new.png`,
-      estimatedTime: q.estimated_time,
-      players: q.players,
-      region: q.region,
-      format: q.format,
-      isNew: q.is_new,
-      isOfficial: q.category === 'beginner',
-      prologue: q.prologue,
-      cautions: q.cautions || [],
-      reviewAvg: q.review_avg || 0,
-      reviewCount: q.review_count || 0,
-      salesCount: q.sales_count || 0,
-      creatorName: '',
-      creatorSns: '',
-      items: (q.quest_items || []).sort((a, b) => a.sort_order - b.sort_order),
-    }));
-    // Load reviews with like counts
+    if (!db) return;
     const { data: revData } = await db.from('reviews')
       .select('*, profiles(display_name), review_likes(count)')
       .order('created_at', { ascending: false });
-    if (revData) {
+    if (revData && revData.length > 0) {
       reviewsByQuest = {};
       revData.forEach(r => {
         if (!reviewsByQuest[r.quest_id]) reviewsByQuest[r.quest_id] = [];
@@ -295,9 +271,7 @@ async function loadQuests() {
       });
     }
   } catch (e) {
-    console.warn('Using fallback data:', e.message);
-    allQuests = FALLBACK_QUESTS;
-    reviewsByQuest = FALLBACK_REVIEWS;
+    console.warn('Review load failed:', e.message);
   }
 }
 
