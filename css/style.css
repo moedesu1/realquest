@@ -480,6 +480,53 @@ img { max-width: 100%; display: block; }
 .review-login-hint { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; }
 .review-login-hint a { color: var(--gold); }
 
+.review-footer {
+  display: flex; align-items: center; gap: 0.8rem; margin-top: 0.5rem;
+}
+.review-like-btn {
+  background: none; border: 1px solid rgba(184,152,88,0.2);
+  color: var(--text-dim); font-size: 0.72rem; padding: 0.2rem 0.6rem;
+  border-radius: 3px; cursor: pointer; transition: all 0.2s;
+}
+.review-like-btn:hover, .review-like-btn.liked {
+  color: var(--gold); border-color: var(--gold-dim);
+}
+.review-report-btn {
+  background: none; border: none; color: var(--text-dim);
+  font-size: 0.7rem; cursor: pointer; transition: color 0.2s;
+}
+.review-report-btn:hover { color: var(--red); }
+
+/* Favorite button on cards */
+.quest-card-thumb-wrap { position: relative; }
+.fav-btn {
+  position: absolute; top: 0.5rem; right: 0.5rem;
+  background: rgba(0,0,0,0.5); border: none;
+  color: var(--text-secondary); font-size: 1.2rem;
+  width: 32px; height: 32px; border-radius: 50%;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.fav-btn:hover { background: rgba(0,0,0,0.7); color: var(--red); }
+.fav-btn.active { color: var(--red); }
+
+/* Report button on detail */
+.detail-actions {
+  display: flex; justify-content: flex-end; margin-top: 1rem;
+}
+.btn-report {
+  background: none; border: 1px solid var(--text-dim);
+  color: var(--text-dim); font-size: 0.75rem;
+  padding: 0.3rem 0.8rem; border-radius: var(--radius);
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-report:hover { border-color: var(--red); color: var(--red); }
+
+/* Password reset link */
+.auth-forgot { font-size: 0.75rem; text-align: right; margin-top: 0.5rem; }
+.auth-forgot a { color: var(--text-dim); }
+.auth-forgot a:hover { color: var(--gold); }
+
 /* ============================================================
    STATIC PAGES
    ============================================================ */

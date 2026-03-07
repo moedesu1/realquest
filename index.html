@@ -46,10 +46,47 @@
         <input type="password" id="auth-password" required placeholder="6文字以上" minlength="6">
       </div>
       <button type="submit" class="btn-primary" id="auth-submit-btn">ログイン</button>
+      <p class="auth-forgot" id="auth-forgot"><a href="#" onclick="openPasswordReset(event)">パスワードをお忘れですか？</a></p>
       <p class="auth-switch">
         <span id="auth-switch-text">アカウントをお持ちでない方は</span>
         <a href="#" onclick="toggleAuthMode(event);" id="auth-switch-link">新規登録</a>
       </p>
+    </form>
+    <form id="reset-form" style="display:none" onsubmit="handlePasswordReset(event)">
+      <div class="form-group">
+        <label>メールアドレス</label>
+        <input type="email" id="reset-email" required placeholder="登録済みメールアドレス">
+      </div>
+      <button type="submit" class="btn-primary">リセットメールを送信</button>
+      <p class="auth-switch"><a href="#" onclick="closePasswordReset(event)">ログインに戻る</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- Report Modal -->
+<div class="modal-overlay" id="report-modal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" onclick="closeReportModal()">&times;</button>
+    <h2 class="modal-title">通報する</h2>
+    <form onsubmit="submitReport(event)">
+      <input type="hidden" id="report-quest-id" value="">
+      <input type="hidden" id="report-review-id" value="">
+      <div class="form-group">
+        <label>通報理由</label>
+        <select id="report-reason" required>
+          <option value="">選択してください</option>
+          <option value="spam">スパム・迷惑行為</option>
+          <option value="inappropriate">不適切なコンテンツ</option>
+          <option value="copyright">著作権侵害</option>
+          <option value="fake">虚偽の情報</option>
+          <option value="other">その他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>詳細（任意）</label>
+        <textarea id="report-detail" rows="3" placeholder="具体的な内容をお書きください"></textarea>
+      </div>
+      <button type="submit" class="btn-primary">送信する</button>
     </form>
   </div>
 </div>

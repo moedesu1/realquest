@@ -214,19 +214,21 @@ async function loadQuests() {
       creatorSns: '',
       items: (q.quest_items || []).sort((a, b) => a.sort_order - b.sort_order),
     }));
-    // Load reviews
+    // Load reviews with like counts
     const { data: revData } = await db.from('reviews')
-      .select('*, profiles(display_name)')
+      .select('*, profiles(display_name), review_likes(count)')
       .order('created_at', { ascending: false });
     if (revData) {
       reviewsByQuest = {};
       revData.forEach(r => {
         if (!reviewsByQuest[r.quest_id]) reviewsByQuest[r.quest_id] = [];
         reviewsByQuest[r.quest_id].push({
+          id: r.id,
           user: r.profiles?.display_name || '匿名',
           stars: r.rating,
           text: r.text,
           date: new Date(r.created_at).toLocaleDateString('ja-JP'),
+          likeCount: r.review_likes?.[0]?.count || 0,
         });
       });
     }
@@ -252,11 +254,17 @@ async function checkAuth() {
         .select('quest_id')
         .eq('user_id', session.user.id);
       if (data) userState.acceptedQuests = data.map(d => d.quest_id);
+      // Load favorites
+      const { data: favData } = await db.from('favorites')
+        .select('quest_id')
+        .eq('user_id', session.user.id);
+      if (favData) userFavorites = new Set(favData.map(f => f.quest_id));
     }
   } catch (e) { console.warn('Auth check failed:', e); }
 }
 
 let authMode = 'login';
+let userFavorites = new Set();
 
 function handleUserClick() {
   if (userState.loggedIn) {
@@ -289,6 +297,40 @@ function updateAuthUI() {
   document.getElementById('auth-submit-btn').textContent = isLogin ? 'ログイン' : '新規登録';
   document.getElementById('auth-switch-text').textContent = isLogin ? 'アカウントをお持ちでない方は' : 'すでにアカウントをお持ちの方は';
   document.getElementById('auth-switch-link').textContent = isLogin ? '新規登録' : 'ログイン';
+  document.getElementById('auth-forgot').style.display = isLogin ? '' : 'none';
+  document.getElementById('auth-form').style.display = '';
+  document.getElementById('reset-form').style.display = 'none';
+}
+
+/* ── PASSWORD RESET ── */
+function openPasswordReset(e) {
+  e.preventDefault();
+  document.getElementById('auth-form').style.display = 'none';
+  document.getElementById('reset-form').style.display = '';
+  document.getElementById('auth-modal-title').textContent = 'パスワードリセット';
+}
+
+function closePasswordReset(e) {
+  e.preventDefault();
+  document.getElementById('auth-form').style.display = '';
+  document.getElementById('reset-form').style.display = 'none';
+  document.getElementById('auth-modal-title').textContent = 'ログイン';
+}
+
+async function handlePasswordReset(e) {
+  e.preventDefault();
+  if (!db) { showToast('データベースに接続できません'); return; }
+  const email = document.getElementById('reset-email').value;
+  try {
+    const { error } = await db.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/?page=reset-password',
+    });
+    if (error) throw error;
+    showToast('リセットメールを送信しました。メールをご確認ください。');
+    closeAuthModal();
+  } catch (err) {
+    showToast(err.message || 'エラーが発生しました');
+  }
 }
 
 async function handleAuth(e) {
@@ -379,8 +421,13 @@ function renderQuestGrid(containerId, quests) {
 
   container.innerHTML = quests.map(q => `
     <div class="quest-card" onclick="openDetail(${q.id})">
-      <img class="quest-card-thumb" src="${q.image}" alt="${q.title}" loading="lazy"
-           onerror="this.src='images/quest-1-new.png'">
+      <div class="quest-card-thumb-wrap">
+        <img class="quest-card-thumb" src="${q.image}" alt="${q.title}" loading="lazy"
+             onerror="this.src='images/quest-1-new.png'">
+        ${userState.loggedIn ? `<button class="fav-btn ${userFavorites.has(q.id) ? 'active' : ''}"
+          onclick="event.stopPropagation(); toggleFavorite(${q.id}, this)"
+          title="お気に入り">${userFavorites.has(q.id) ? '♥' : '♡'}</button>` : ''}
+      </div>
       <div class="quest-card-body">
         <div class="quest-card-title">${q.title}</div>
         <div class="quest-card-price">${q.price === 0 ? '無料' : '¥' + q.price.toLocaleString()}</div>
@@ -523,6 +570,10 @@ function renderDetail(quest) {
         ${isAccepted ? '✓ カートに追加済み' : quest.price === 0 ? '▶ プレイ開始' : `¥${quest.price.toLocaleString()} で購入する`}
       </button>
 
+      <div class="detail-actions">
+        <button class="btn-report" onclick="openReportModal(${quest.id})">通報する</button>
+      </div>
+
       <div class="detail-reviews">
         <h3>レビュー ${reviews.length > 0 ? `(${reviews.length}件)` : ''}</h3>
         ${userState.loggedIn ? `
@@ -545,7 +596,11 @@ function renderDetail(quest) {
               <span class="review-stars">${stars(r.stars)}</span>
             </div>
             <div class="review-text">${r.text}</div>
-            <div class="review-date">${r.date}</div>
+            <div class="review-footer">
+              <span class="review-date">${r.date}</span>
+              ${r.id ? `<button class="review-like-btn" data-count="${r.likeCount || 0}" onclick="likeReview(${r.id}, this)">参考になった (${r.likeCount || 0})</button>
+              <button class="review-report-btn" onclick="openReportModal(${quest.id}, ${r.id})">通報</button>` : ''}
+            </div>
           </div>
         `).join('') : '<p class="empty-state" style="margin-top:1rem">まだレビューはありません。最初のレビューを書いてみましょう。</p>'}
       </div>
@@ -669,6 +724,7 @@ function renderMyPage() {
   }
 
   const accepted = allQuests.filter(q => userState.acceptedQuests.includes(q.id));
+  const favQuests = allQuests.filter(q => userFavorites.has(q.id));
 
   el.innerHTML = `
     <div class="mypage-header">
@@ -677,6 +733,18 @@ function renderMyPage() {
         <div class="mypage-name">${userState.name}</div>
         <div class="mypage-email">${userState.email}</div>
       </div>
+    </div>
+    <div class="mypage-section">
+      <h3>お気に入り (${favQuests.length})</h3>
+      ${favQuests.length > 0 ? favQuests.map(q => `
+        <div class="cart-item" onclick="openDetail(${q.id})" style="cursor:pointer">
+          <img class="cart-item-img" src="${q.image}" alt="${q.title}">
+          <div class="cart-item-info">
+            <div class="cart-item-title">${q.title}</div>
+            <div class="cart-item-price">¥${q.price.toLocaleString()}</div>
+          </div>
+        </div>
+      `).join('') : '<p class="empty-state">お気に入りはまだありません</p>'}
     </div>
     <div class="mypage-section">
       <h3>カートに追加したコンテンツ (${accepted.length})</h3>
@@ -801,6 +869,98 @@ async function submitReview(e, questId) {
   } catch (err) {
     console.error('Review submit error:', err);
     showToast(err.message || 'レビューの投稿に失敗しました');
+  }
+}
+
+/* ── FAVORITES ── */
+async function toggleFavorite(questId, btnEl) {
+  if (!userState.loggedIn || !db) { showToast('ログインが必要です'); return; }
+  const isFav = userFavorites.has(questId);
+  try {
+    if (isFav) {
+      await db.from('favorites').delete().eq('user_id', userState.userId).eq('quest_id', questId);
+      userFavorites.delete(questId);
+      if (btnEl) { btnEl.textContent = '♡'; btnEl.classList.remove('active'); }
+      showToast('お気に入りから削除しました');
+    } else {
+      await db.from('favorites').insert({ user_id: userState.userId, quest_id: questId });
+      userFavorites.add(questId);
+      if (btnEl) { btnEl.textContent = '♥'; btnEl.classList.add('active'); }
+      showToast('お気に入りに追加しました');
+    }
+  } catch (e) {
+    console.error('Favorite toggle error:', e);
+    showToast('操作に失敗しました');
+  }
+}
+
+/* ── REPORT ── */
+function openReportModal(questId, reviewId) {
+  document.getElementById('report-quest-id').value = questId || '';
+  document.getElementById('report-review-id').value = reviewId || '';
+  document.getElementById('report-modal').style.display = '';
+}
+function closeReportModal() {
+  document.getElementById('report-modal').style.display = 'none';
+}
+
+async function submitReport(e) {
+  e.preventDefault();
+  if (!db) { showToast('データベースに接続できません'); return; }
+  const questId = document.getElementById('report-quest-id').value;
+  const reviewId = document.getElementById('report-review-id').value;
+  const reason = document.getElementById('report-reason').value;
+  const detail = document.getElementById('report-detail').value;
+
+  if (!reason) { showToast('通報理由を選択してください'); return; }
+
+  try {
+    const { error } = await db.from('reports').insert({
+      user_id: userState.userId || null,
+      quest_id: questId ? parseInt(questId) : null,
+      review_id: reviewId ? parseInt(reviewId) : null,
+      reason, detail,
+    });
+    if (error) throw error;
+    showToast('通報を受け付けました。ご報告ありがとうございます。');
+    closeReportModal();
+  } catch (err) {
+    console.error('Report error:', err);
+    showToast('送信に失敗しました');
+  }
+}
+
+/* ── REVIEW LIKES ── */
+async function likeReview(reviewId, btnEl) {
+  if (!userState.loggedIn || !db) { showToast('ログインが必要です'); return; }
+  try {
+    // Check if already liked
+    const { data: existing } = await db.from('review_likes')
+      .select('id')
+      .eq('user_id', userState.userId)
+      .eq('review_id', reviewId)
+      .maybeSingle();
+
+    if (existing) {
+      await db.from('review_likes').delete().eq('id', existing.id);
+      if (btnEl) {
+        const count = parseInt(btnEl.dataset.count) - 1;
+        btnEl.dataset.count = count;
+        btnEl.textContent = `参考になった (${count})`;
+        btnEl.classList.remove('liked');
+      }
+    } else {
+      await db.from('review_likes').insert({ user_id: userState.userId, review_id: reviewId });
+      if (btnEl) {
+        const count = parseInt(btnEl.dataset.count) + 1;
+        btnEl.dataset.count = count;
+        btnEl.textContent = `参考になった (${count})`;
+        btnEl.classList.add('liked');
+      }
+    }
+  } catch (e) {
+    console.error('Like error:', e);
+    showToast('操作に失敗しました');
   }
 }
 
