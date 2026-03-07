@@ -615,8 +615,11 @@ function renderDetail(quest) {
 
       <div class="detail-reviews">
         <h3>レビュー ${reviews.length > 0 ? `(${reviews.length}件)` : ''}</h3>
-        ${userState.loggedIn ? `
-          <form class="review-form" onsubmit="submitReview(event, ${quest.id})">
+        ${!userState.loggedIn
+          ? `<p class="review-login-hint">レビューを投稿するには<a href="#" onclick="openAuthModal(); return false;">ログイン</a>してください</p>`
+          : !isAccepted
+            ? `<p class="review-login-hint">レビューは購入者のみ投稿できます</p>`
+            : `<form class="review-form" onsubmit="submitReview(event, ${quest.id})">
             <div class="review-form-stars">
               <span class="review-form-label">評価</span>
               <div class="star-select" id="star-select">
@@ -626,8 +629,8 @@ function renderDetail(quest) {
             </div>
             <textarea id="review-text" class="review-textarea" placeholder="感想を書いてください（任意）" rows="3"></textarea>
             <button type="submit" class="btn-primary" style="margin-top:0.5rem">レビューを投稿</button>
-          </form>
-        ` : `<p class="review-login-hint">レビューを投稿するには<a href="#" onclick="openAuthModal(); return false;">ログイン</a>してください</p>`}
+          </form>`
+        }
         ${reviews.length > 0 ? reviews.map(r => `
           <div class="review-card">
             <div class="review-header">
@@ -905,6 +908,10 @@ async function submitReview(e, questId) {
   }
   if (!userState.loggedIn || !db) {
     showToast('ログインが必要です');
+    return;
+  }
+  if (!userState.acceptedQuests.includes(questId)) {
+    showToast('レビューは購入者のみ投稿できます');
     return;
   }
 
