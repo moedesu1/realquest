@@ -28,7 +28,12 @@ async function initShopify() {
     if (savedId) {
       try {
         shopifyCheckout = await shopifyClient.checkout.fetch(savedId);
-        if (shopifyCheckout.completedAt) throw new Error('completed');
+        if (shopifyCheckout.completedAt) {
+          // 決済完了 → カート内商品を購入済みに更新
+          await markCartAsPurchased();
+          shopifyCheckout = await shopifyClient.checkout.create();
+          localStorage.setItem('rq_checkout_id', shopifyCheckout.id);
+        }
       } catch {
         shopifyCheckout = await shopifyClient.checkout.create();
         localStorage.setItem('rq_checkout_id', shopifyCheckout.id);
@@ -54,6 +59,7 @@ const userState = {
   email: '',
   avatar: '',
   acceptedQuests: [],
+  purchasedQuests: [],
 };
 
 /* ── FALLBACK QUEST DATA ── */
@@ -286,11 +292,14 @@ async function checkAuth() {
       userState.email = session.user.email;
       userState.name = session.user.user_metadata?.display_name || session.user.email.split('@')[0];
       userState.avatar = userState.name.charAt(0);
-      // Load accepted quests
+      // Load accepted quests (cart + purchased)
       const { data } = await db.from('accepted_quests')
-        .select('quest_id')
+        .select('quest_id, status')
         .eq('user_id', session.user.id);
-      if (data) userState.acceptedQuests = data.map(d => d.quest_id);
+      if (data) {
+        userState.acceptedQuests = data.map(d => d.quest_id);
+        userState.purchasedQuests = data.filter(d => d.status === 'purchased').map(d => d.quest_id);
+      }
       // Load favorites
       const { data: favData } = await db.from('favorites')
         .select('quest_id')
@@ -413,7 +422,7 @@ async function handleAuth(e) {
 
 async function logout() {
   if (db) await db.auth.signOut();
-  Object.assign(userState, { loggedIn: false, userId: null, name: '', email: '', avatar: '', acceptedQuests: [] });
+  Object.assign(userState, { loggedIn: false, userId: null, name: '', email: '', avatar: '', acceptedQuests: [], purchasedQuests: [] });
   showToast('ログアウトしました');
   navigateTo('main');
   renderHome();
@@ -541,6 +550,7 @@ function openDetail(questId) {
 function renderDetail(quest) {
   const reviews = reviewsByQuest[quest.id] || [];
   const isAccepted = userState.acceptedQuests.includes(quest.id);
+  const isPurchased = userState.purchasedQuests.includes(quest.id);
   const stars = n => '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n));
 
   document.getElementById('detail-content').innerHTML = `
@@ -623,7 +633,7 @@ function renderDetail(quest) {
 
       <div class="detail-reviews">
         <h3>レビュー ${reviews.length > 0 ? `(${reviews.length}件)` : ''}</h3>
-        ${isAccepted
+        ${isPurchased
           ? `<form class="review-form" onsubmit="submitReview(event, ${quest.id})">
             <div class="review-form-stars">
               <span class="review-form-label">評価</span>
@@ -795,6 +805,30 @@ function goToCheckout() {
   }
 }
 
+async function markCartAsPurchased() {
+  // カート内の商品を購入済みに更新
+  const cartQuestIds = userState.acceptedQuests.filter(id => !userState.purchasedQuests.includes(id));
+  if (cartQuestIds.length === 0) return;
+
+  cartQuestIds.forEach(id => {
+    if (!userState.purchasedQuests.includes(id)) userState.purchasedQuests.push(id);
+  });
+
+  try {
+    if (db && userState.userId) {
+      for (const questId of cartQuestIds) {
+        await db.from('accepted_quests').upsert({
+          user_id: userState.userId,
+          quest_id: questId,
+          status: 'purchased',
+        }, { onConflict: 'user_id,quest_id' });
+      }
+    }
+  } catch (e) { console.warn('Purchase status update failed:', e); }
+
+  showToast('ご購入ありがとうございます！');
+}
+
 /* ── RENDER: MY PAGE ── */
 function renderMyPage() {
   const el = document.getElementById('mypage-content');
@@ -803,7 +837,7 @@ function renderMyPage() {
     return;
   }
 
-  const accepted = allQuests.filter(q => userState.acceptedQuests.includes(q.id));
+  const purchased = allQuests.filter(q => userState.purchasedQuests.includes(q.id));
   const favQuests = allQuests.filter(q => userFavorites.has(q.id));
 
   el.innerHTML = `
@@ -827,8 +861,8 @@ function renderMyPage() {
       `).join('') : '<p class="empty-state">お気に入りはまだありません</p>'}
     </div>
     <div class="mypage-section">
-      <h3>購入した商品 (${accepted.length})</h3>
-      ${accepted.length > 0 ? accepted.map(q => {
+      <h3>購入した商品 (${purchased.length})</h3>
+      ${purchased.length > 0 ? purchased.map(q => {
         const myReview = (reviewsByQuest[q.id] || []).find(r => r.user === userState.name);
         return `
         <div class="cart-item" style="cursor:pointer">
@@ -921,7 +955,7 @@ async function submitReview(e, questId) {
     showToast('ログインが必要です');
     return;
   }
-  if (!userState.acceptedQuests.includes(questId)) {
+  if (!userState.purchasedQuests.includes(questId)) {
     showToast('レビューは購入者のみ投稿できます');
     return;
   }
