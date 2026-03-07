@@ -246,6 +246,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadQuests();
   await initShopify();
   await checkAuth();
+  updateCartBadge();
   renderHome();
 });
 
