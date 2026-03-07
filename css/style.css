@@ -483,6 +483,15 @@ img { max-width: 100%; display: block; }
 .static-body ul, .static-body ol { padding-left: 1.5rem; margin-bottom: 1rem; }
 .static-body li { margin-bottom: 0.3rem; }
 .legal-body h2 { font-size: 1rem; }
+.tokushoho-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.tokushoho-table th, .tokushoho-table td {
+  padding: 0.8rem 1rem; border-bottom: 1px solid rgba(184,152,88,0.12);
+  text-align: left; font-size: 0.85rem; vertical-align: top;
+}
+.tokushoho-table th {
+  width: 35%; color: var(--gold-dim); font-weight: 500; white-space: nowrap;
+}
+.tokushoho-table td { color: var(--text-primary); }
 
 .news-item { padding: 1rem 0; border-bottom: 1px solid rgba(184,152,88,0.08); }
 .news-date { font-size: 0.75rem; color: var(--text-dim); }
