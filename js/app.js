@@ -591,10 +591,8 @@ function renderDetail(quest) {
         </div>
       </div>
 
-      <button class="btn-purchase ${isAccepted ? 'purchased' : ''}"
-              onclick="${isAccepted ? '' : `acceptQuest(${quest.id})`}"
-              ${isAccepted ? 'disabled' : ''}>
-        ${isAccepted ? '✓ カートに追加済み' : quest.price === 0 ? '▶ プレイ開始' : `¥${quest.price.toLocaleString()} で購入する`}
+      <button class="btn-purchase" onclick="acceptQuest(${quest.id})">
+        ${quest.price === 0 ? '▶ プレイ開始' : isAccepted ? `¥${quest.price.toLocaleString()} もう1つ追加する` : `¥${quest.price.toLocaleString()} で購入する`}
       </button>
 
       ${quest.items && quest.items.length > 0 ? `
@@ -671,10 +669,8 @@ async function acceptQuest(questId) {
   const quest = allQuests.find(q => q.id === questId);
   if (!quest) return;
 
-  // Add to local state
-  if (!userState.acceptedQuests.includes(questId)) {
-    userState.acceptedQuests.push(questId);
-  }
+  // Add to local state (複数追加OK)
+  userState.acceptedQuests.push(questId);
 
   // Re-render detail
   renderDetail(quest);
@@ -708,7 +704,12 @@ async function acceptQuest(questId) {
 }
 
 function updateCartBadge() {
-  const count = shopifyCheckout?.lineItems?.length || userState.acceptedQuests.length;
+  let count = 0;
+  if (shopifyCheckout?.lineItems?.length > 0) {
+    count = shopifyCheckout.lineItems.reduce((sum, item) => sum + item.quantity, 0);
+  } else {
+    count = userState.acceptedQuests.length;
+  }
   document.querySelectorAll('.cart-count').forEach(el => {
     el.textContent = count;
     el.style.display = count > 0 ? '' : 'none';
@@ -739,8 +740,13 @@ function renderCartDrawer() {
         <div class="cart-item-info">
           <div class="cart-item-title">${item.title}</div>
           <div class="cart-item-price">¥${parseInt(item.variant?.price?.amount || 0).toLocaleString()}</div>
-          <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">削除</button>
+          <div class="cart-item-qty">
+            <button class="qty-btn" onclick="updateQty('${item.id}', ${item.quantity - 1})">−</button>
+            <span class="qty-value">${item.quantity}</span>
+            <button class="qty-btn" onclick="updateQty('${item.id}', ${item.quantity + 1})">+</button>
+          </div>
         </div>
+        <button class="cart-item-delete" onclick="removeFromCart('${item.id}')" aria-label="削除">🗑</button>
       </div>
     `).join('');
     const total = shopifyCheckout.totalPrice?.amount || '0';
@@ -762,18 +768,28 @@ function renderCartDrawer() {
     return;
   }
 
-  cartItemsEl.innerHTML = localItems.map(q => `
+  // 数量をカウント
+  const qtyMap = {};
+  userState.acceptedQuests.forEach(id => { qtyMap[id] = (qtyMap[id] || 0) + 1; });
+  const uniqueItems = [...new Set(userState.acceptedQuests)].map(id => allQuests.find(q => q.id === id)).filter(Boolean);
+
+  cartItemsEl.innerHTML = uniqueItems.map(q => `
     <div class="cart-item">
       <img class="cart-item-img" src="${q.image}" alt="${q.title}">
       <div class="cart-item-info">
         <div class="cart-item-title">${q.title}</div>
         <div class="cart-item-price">${q.price === 0 ? '無料' : '¥' + q.price.toLocaleString()}</div>
-        <button class="cart-item-remove" onclick="removeFromCartLocal(${q.id})">削除</button>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="updateLocalQty(${q.id}, -1)">−</button>
+          <span class="qty-value">${qtyMap[q.id]}</span>
+          <button class="qty-btn" onclick="updateLocalQty(${q.id}, 1)">+</button>
+        </div>
       </div>
+      <button class="cart-item-delete" onclick="removeFromCartLocal(${q.id})" aria-label="削除">🗑</button>
     </div>
   `).join('');
 
-  const total = localItems.reduce((sum, q) => sum + q.price, 0);
+  const total = uniqueItems.reduce((sum, q) => sum + q.price * qtyMap[q.id], 0);
   cartFooterEl.innerHTML = `
     <div class="cart-total">
       <span>合計</span>
@@ -787,6 +803,37 @@ function removeFromCartLocal(questId) {
   userState.acceptedQuests = userState.acceptedQuests.filter(id => id !== questId);
   updateCartBadge();
   renderCartDrawer();
+}
+
+function updateLocalQty(questId, delta) {
+  if (delta > 0) {
+    userState.acceptedQuests.push(questId);
+  } else {
+    const idx = userState.acceptedQuests.indexOf(questId);
+    if (idx !== -1) userState.acceptedQuests.splice(idx, 1);
+  }
+  if (!userState.acceptedQuests.includes(questId)) {
+    removeFromCartLocal(questId);
+    return;
+  }
+  updateCartBadge();
+  renderCartDrawer();
+}
+
+async function updateQty(lineItemId, newQty) {
+  try {
+    if (!shopifyClient || !shopifyCheckout) return;
+    if (newQty <= 0) {
+      await removeFromCart(lineItemId);
+      return;
+    }
+    shopifyCheckout = await shopifyClient.checkout.updateLineItems(shopifyCheckout.id, [{
+      id: lineItemId,
+      quantity: newQty,
+    }]);
+    updateCartBadge();
+    renderCartDrawer();
+  } catch (e) { console.warn('Qty update failed:', e); }
 }
 
 async function removeFromCart(lineItemId) {
