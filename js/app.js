@@ -57,22 +57,23 @@ const userState = {
 /* ── FALLBACK QUEST DATA ── */
 const FALLBACK_QUESTS = [
   {
-    id: 1, title: '枯山水の暗号 ― 禅庭に隠された遺言',
-    tagline: '石の配置が示す、住職が遺した最後の謎',
-    genre: '推理', subGenre: 'フィールド探索',
-    price: 3500, difficulty: 3,
-    image: 'images/quest-1-new.webp',
-    estimatedTime: '3〜5時間', players: '1〜4人',
-    region: '京都・東山〜南禅寺周辺', format: 'outdoor',
+    id: 1, title: '夢の国急行 ― 都市遊園地への旅',
+    tagline: 'レトロな路面電車の切符が、失われた遊園地への片道切符だった',
+    genre: '冒険', subGenre: '街歩きファンタジー',
+    price: 3000, difficulty: 2,
+    image: 'images/quest-1-dreamland.png',
+    estimatedTime: '2〜4時間', players: '1〜4人',
+    region: '大阪・新世界〜天王寺周辺', format: 'outdoor',
     isNew: true, isOfficial: true,
-    prologue: '京都東山の古刹。三代続いた住職が遺したのは、枯山水の庭に刻まれた暗号だった。白砂の波紋、苔むした飛び石、刈り込まれた植栽――すべてが一つの座標を指し示している。寺院の参道を歩き、石庭の配置を読み解き、住職が300年守り続けた秘密の在処を突き止めよ。',
-    cautions: ['歩きやすい靴推奨', '雨天決行', 'スマートフォン必須', '対象年齢: 12歳以上'],
-    reviewAvg: 4.7, reviewCount: 12, salesCount: 156,
-    creatorName: 'REALQUEST公式', creatorSns: '',
+    prologue: '古い切符売り場で見つけた一枚の乗車券。行き先には「夢の国遊園地」と印字されているが、そんな遊園地は地図のどこにも載っていない。切符の裏に書かれたヒントを頼りに街を歩くと、レトロな看板、古びた時計塔、色褪せたサーカスのポスター――かつて街に実在した幻の遊園地の痕跡が次々と浮かび上がる。驚きの世界へ続く最終ゲートを見つけ出し、夢の国急行に乗車せよ。',
+    cautions: ['歩きやすい靴推奨', '雨天決行', 'スマートフォン必須', '対象年齢: 全年齢'],
+    reviewAvg: 4.8, reviewCount: 18, salesCount: 245,
+    creatorName: 'QUESTORE公式', creatorSns: '',
     items: [
-      { icon: '◆', name: '住職の遺言状（和紙・封蝋付き）' },
-      { icon: '◆', name: '庭園見取り図（暗号入り）' },
-      { icon: '◆', name: '石の配置を読み解く解読シート' },
+      { icon: '◆', name: '夢の国遊園地 乗車券（レトロ復刻版）' },
+      { icon: '◆', name: '幻の遊園地マップ（古地図風）' },
+      { icon: '◆', name: 'サーカス団の暗号カード（全6枚）' },
+      { icon: '◆', name: '時計塔の鍵（レプリカ）' },
     ],
   },
   {
@@ -171,13 +172,33 @@ const FALLBACK_QUESTS = [
       { icon: '◆', name: '写真家の日記（抜粋）' },
     ],
   },
+  {
+    id: 7, title: 'おかんPの8bit商店街 ― ロックママの隠しトラック',
+    tagline: 'ゲーム音楽の伝説が仕掛けた、商店街まるごと音の謎解き',
+    genre: '冒険', subGenre: '音楽×街歩き',
+    price: 2500, difficulty: 2,
+    image: 'images/quest-7-okanp.webp',
+    estimatedTime: '2〜3時間', players: '1〜4人',
+    region: '大阪・豊中〜庄内商店街周辺', format: 'outdoor',
+    isNew: true, isOfficial: true,
+    prologue: '伝説のゲーム音楽作曲家「おかんP」こと藤田晴美。ロックマン3やファイナルファイトの旋律を生んだ彼女が、地元・大阪の商店街にある"音の暗号"を仕掛けた。商店街のBGM、自販機のメロディ、踏切の警告音――街に溢れる音の中に、アルバム「ロックママ」の隠しトラックへの手がかりが眠っている。8bitの記憶を辿り、おかんPが街に隠した最後の1曲を見つけ出せ。',
+    cautions: ['イヤホン持参推奨', 'スマートフォン必須', '対象年齢: 全年齢', '商店街の営業時間内に開始してください'],
+    reviewAvg: 4.8, reviewCount: 14, salesCount: 312,
+    creatorName: 'おかんP × Cloud Illusion', creatorSns: '@soundfujita',
+    items: [
+      { icon: '◆', name: 'おかんP直筆サイン入りロックママCD' },
+      { icon: '◆', name: '8bit音の暗号カード（全8枚）' },
+      { icon: '◆', name: '商店街マップ（おかんP描き下ろしイラスト入り）' },
+      { icon: '◆', name: '隠しトラック解放コード' },
+    ],
+  },
 ];
 
 const FALLBACK_REVIEWS = {
   1: [
-    { id: 101, user: '旅する謎解き師', stars: 5, text: '枯山水の庭が本当に美しくて、謎解きしながら京都の文化に触れられる素晴らしい体験でした。石の配置の暗号は難しかったけど、解けた時の達成感がすごい！', date: '2026-02-15', likeCount: 8 },
-    { id: 102, user: 'ミステリー好き', stars: 5, text: '友人4人で参加。全員で議論しながら進めるのが楽しかった。難易度もちょうどよく、3時間半で完了。', date: '2026-02-08', likeCount: 5 },
-    { id: 103, user: '京都散歩', stars: 4, text: '庭園の雰囲気が最高。謎解きの難易度は高めなので、初心者だけだと少し苦戦するかも。ヒントシステムがあると嬉しい。', date: '2026-01-22', likeCount: 3 },
+    { id: 101, user: '冒険好きファミリー', stars: 5, text: '子供が大興奮！レトロな乗車券のクオリティが高くて、本当に幻の遊園地に向かってる気分になった。新世界の街並みとの相性も抜群。', date: '2026-03-01', likeCount: 14 },
+    { id: 102, user: '街歩きマニア', stars: 5, text: '大阪に住んでるけど知らなかった歴史がたくさん。古地図を片手に歩くのがワクワクする。時計塔の鍵の演出に鳥肌。', date: '2026-02-22', likeCount: 10 },
+    { id: 103, user: 'レトロ好き', stars: 4, text: 'ポスターの世界観そのまま！サーカスの暗号カードが可愛くて、謎解き後もコレクションとして飾ってます。', date: '2026-02-10', likeCount: 7 },
   ],
   2: [
     { id: 201, user: '夜の京都が好き', stars: 5, text: '夜の先斗町の雰囲気と謎解きの組み合わせが最高でした。提灯の紋章を探すのがワクワクする。', date: '2026-02-20', likeCount: 12 },
@@ -200,6 +221,11 @@ const FALLBACK_REVIEWS = {
     { id: 601, user: '写真家志望', stars: 5, text: '夕暮れの京都×謎解きという組み合わせが天才的。写真を手がかりに街を巡るのが楽しすぎて時間を忘れました。', date: '2026-02-22', likeCount: 11 },
     { id: 602, user: '初めての謎解き', stars: 5, text: '謎解き初心者でも楽しめました。難易度が低めなので入門にぴったり。景色も最高です。', date: '2026-02-14', likeCount: 8 },
     { id: 603, user: '八坂の住人', stars: 4, text: '地元民ですが、知らない路地や新しい発見があって新鮮でした。観光客にも地元民にもおすすめ。', date: '2026-01-30', likeCount: 4 },
+  ],
+  7: [
+    { id: 701, user: 'レトロゲーマー', stars: 5, text: 'ロックマン世代にはたまらない！商店街の音に8bitの記憶が重なって、めちゃくちゃエモかった。CDも最高。', date: '2026-03-01', likeCount: 18 },
+    { id: 702, user: '音楽好きママ', stars: 5, text: '子供と一緒に参加。ゲーム知らなくても音探しが楽しい。おかんPのサイン入りCDは家宝にします。', date: '2026-02-28', likeCount: 14 },
+    { id: 703, user: '大阪観光で来た', stars: 4, text: '商店街のおっちゃんおばちゃんも協力してくれて、大阪の温かさを感じた。地元感あって良い！', date: '2026-02-20', likeCount: 9 },
   ],
 };
 
