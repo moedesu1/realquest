@@ -216,15 +216,15 @@ async function loadQuests() {
     }));
     // Load reviews
     const { data: revData } = await db.from('reviews')
-      .select('*, profiles(name)')
+      .select('*, profiles(display_name)')
       .order('created_at', { ascending: false });
     if (revData) {
       reviewsByQuest = {};
       revData.forEach(r => {
         if (!reviewsByQuest[r.quest_id]) reviewsByQuest[r.quest_id] = [];
         reviewsByQuest[r.quest_id].push({
-          user: r.profiles?.name || '匿名',
-          stars: r.stars,
+          user: r.profiles?.display_name || '匿名',
+          stars: r.rating,
           text: r.text,
           date: new Date(r.created_at).toLocaleDateString('ja-JP'),
         });
@@ -513,7 +513,7 @@ function renderDetail(quest) {
         <div class="detail-section-header">お問い合わせ先</div>
         <div class="creator-contact">
           ${quest.creatorSns ? `<p>X (Twitter): <a href="https://twitter.com/${quest.creatorSns.replace('@','')}" target="_blank">${quest.creatorSns}</a></p>` : ''}
-          <p>Email: <a href="mailto:${quest.creatorSns ? quest.creatorSns.replace('@','') + '.nazo@gmail.com' : 'info@realquest.jp'}">${quest.creatorSns ? quest.creatorSns.replace('@','') + '.nazo@gmail.com' : 'info@realquest.jp'}</a></p>
+          <p>Email: <a href="mailto:${quest.creatorSns ? quest.creatorSns.replace('@','') + '.nazo@gmail.com' : 'info@c-ill.com'}">${quest.creatorSns ? quest.creatorSns.replace('@','') + '.nazo@gmail.com' : 'info@c-ill.com'}</a></p>
         </div>
       </div>
 
@@ -523,21 +523,32 @@ function renderDetail(quest) {
         ${isAccepted ? '✓ カートに追加済み' : quest.price === 0 ? '▶ プレイ開始' : `¥${quest.price.toLocaleString()} で購入する`}
       </button>
 
-      ${reviews.length > 0 ? `
-        <div class="detail-reviews">
-          <h3>レビュー (${reviews.length}件)</h3>
-          ${reviews.map(r => `
-            <div class="review-card">
-              <div class="review-header">
-                <span class="review-user">${r.user}</span>
-                <span class="review-stars">${stars(r.stars)}</span>
+      <div class="detail-reviews">
+        <h3>レビュー ${reviews.length > 0 ? `(${reviews.length}件)` : ''}</h3>
+        ${userState.loggedIn ? `
+          <form class="review-form" onsubmit="submitReview(event, ${quest.id})">
+            <div class="review-form-stars">
+              <span class="review-form-label">評価</span>
+              <div class="star-select" id="star-select">
+                ${[1,2,3,4,5].map(n => `<span class="star-btn" data-star="${n}" onclick="selectStar(${n})">☆</span>`).join('')}
               </div>
-              <div class="review-text">${r.text}</div>
-              <div class="review-date">${r.date}</div>
+              <input type="hidden" id="review-stars" value="0">
             </div>
-          `).join('')}
-        </div>
-      ` : ''}
+            <textarea id="review-text" class="review-textarea" placeholder="感想を書いてください（任意）" rows="3"></textarea>
+            <button type="submit" class="btn-primary" style="margin-top:0.5rem">レビューを投稿</button>
+          </form>
+        ` : `<p class="review-login-hint">レビューを投稿するには<a href="#" onclick="openAuthModal(); return false;">ログイン</a>してください</p>`}
+        ${reviews.length > 0 ? reviews.map(r => `
+          <div class="review-card">
+            <div class="review-header">
+              <span class="review-user">${r.user}</span>
+              <span class="review-stars">${stars(r.stars)}</span>
+            </div>
+            <div class="review-text">${r.text}</div>
+            <div class="review-date">${r.date}</div>
+          </div>
+        `).join('') : '<p class="empty-state" style="margin-top:1rem">まだレビューはありません。最初のレビューを書いてみましょう。</p>'}
+      </div>
     </div>
   `;
 }
@@ -690,17 +701,17 @@ async function renderNews() {
     if (!db) throw new Error('no db');
     const { data, error } = await db.from('news')
       .select('*')
-      .eq('is_published', true)
       .order('published_at', { ascending: false });
     if (error) throw error;
     if (!data || data.length === 0) {
       el.innerHTML = '<p class="empty-state">お知らせはまだありません。</p>';
       return;
     }
+    const catLabel = { info: 'お知らせ', new: '新着', important: '重要', update: 'アップデート', maintenance: 'メンテナンス' };
     el.innerHTML = data.map(n => `
       <div class="news-item">
         <span class="news-date">${new Date(n.published_at).toLocaleDateString('ja-JP')}</span>
-        <span class="news-category">${n.category}</span>
+        <span class="news-category">${catLabel[n.category] || n.category}</span>
         <div class="news-title">${n.title}</div>
       </div>
     `).join('');
@@ -719,17 +730,75 @@ async function submitContact(e) {
 
   try {
     if (db) {
-      await db.from('contact_submissions').insert({
-        user_id: userState.userId || null,
-        name, email, type, message,
-        tab: type === 'business' ? 'business' : 'general',
-        status: 'new',
+      const { error } = await db.from('contact_submissions').insert({
+        name, email, category: type, message,
       });
+      if (error) throw error;
     }
     showToast('送信しました。ありがとうございます。');
     document.getElementById('contact-form').reset();
   } catch (err) {
-    showToast('送信に失敗しました。');
+    console.error('Contact submit error:', err);
+    showToast('送信に失敗しました。時間をおいて再度お試しください。');
+  }
+}
+
+/* ── REVIEWS ── */
+function selectStar(n) {
+  document.getElementById('review-stars').value = n;
+  document.querySelectorAll('#star-select .star-btn').forEach(btn => {
+    const val = parseInt(btn.dataset.star);
+    btn.textContent = val <= n ? '★' : '☆';
+    btn.classList.toggle('selected', val <= n);
+  });
+}
+
+async function submitReview(e, questId) {
+  e.preventDefault();
+  const starsVal = parseInt(document.getElementById('review-stars').value);
+  const text = document.getElementById('review-text').value.trim();
+
+  if (!starsVal || starsVal < 1) {
+    showToast('星の数を選択してください');
+    return;
+  }
+  if (!userState.loggedIn || !db) {
+    showToast('ログインが必要です');
+    return;
+  }
+
+  try {
+    const { error } = await db.from('reviews').upsert({
+      user_id: userState.userId,
+      quest_id: questId,
+      rating: starsVal,
+      text: text,
+    }, { onConflict: 'user_id,quest_id' });
+    if (error) throw error;
+
+    showToast('レビューを投稿しました');
+
+    // Update local review data
+    if (!reviewsByQuest[questId]) reviewsByQuest[questId] = [];
+    const existing = reviewsByQuest[questId].findIndex(r => r.user === userState.name);
+    const reviewEntry = {
+      user: userState.name,
+      stars: starsVal,
+      text: text,
+      date: new Date().toLocaleDateString('ja-JP'),
+    };
+    if (existing >= 0) {
+      reviewsByQuest[questId][existing] = reviewEntry;
+    } else {
+      reviewsByQuest[questId].unshift(reviewEntry);
+    }
+
+    // Re-render detail
+    const quest = allQuests.find(q => q.id === questId);
+    if (quest) renderDetail(quest);
+  } catch (err) {
+    console.error('Review submit error:', err);
+    showToast(err.message || 'レビューの投稿に失敗しました');
   }
 }
 

@@ -1,0 +1,4 @@
+.DS_Store
+.wrangler/
+*.jpeg
+convert_to_webp.sh
