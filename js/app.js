@@ -424,6 +424,7 @@ async function handleAuth(e) {
 async function logout() {
   if (db) await db.auth.signOut();
   Object.assign(userState, { loggedIn: false, userId: null, name: '', email: '', avatar: '', acceptedQuests: [], purchasedQuests: [] });
+  updateCartBadge();
   showToast('ログアウトしました');
   navigateTo('main');
   renderHome();
