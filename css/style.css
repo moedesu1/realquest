@@ -363,8 +363,10 @@ img { max-width: 100%; display: block; }
    ============================================================ */
 .section-about-teaser { text-align: center; padding: 3rem 1rem; }
 .about-teaser-text {
-  color: var(--text-secondary); font-size: 0.9rem; line-height: 1.9; margin: 1.5rem 0 2rem;
+  color: var(--text-secondary); font-size: 0.9rem; line-height: 1.9; margin: 0.2rem 0;
 }
+.about-teaser-text:first-of-type { margin-top: 1.5rem; }
+.about-teaser-text:last-of-type { margin-bottom: 2rem; }
 .ux-steps {
   display: flex; align-items: center; justify-content: center;
   gap: 0.3rem; flex-wrap: wrap; margin-bottom: 2rem;
