@@ -50,6 +50,7 @@ async function initShopify() {
 let allQuests = [];
 let reviewsByQuest = {};
 let currentCategory = 'all';
+let currentMode = 'solo';
 let currentPage = 'opening';
 
 const userState = {
@@ -107,7 +108,7 @@ const FALLBACK_QUESTS = [
   {
     id: 3, title: '湯煙の失踪 ― 温泉街最後の手がかり',
     tagline: '湯気の向こうに消えた旅人の行方を追え',
-    genre: '推理', subGenre: 'フィールド探索',
+    genre: 'ミステリー', subGenre: 'フィールド探索',
     price: 3500, difficulty: 3,
     image: 'images/quest-3-new.webp',
     estimatedTime: '3〜5時間', players: '2〜4人',
@@ -165,7 +166,7 @@ const FALLBACK_QUESTS = [
   {
     id: 6, title: '黄昏の街 ― 五重塔に沈む真実',
     tagline: '夕暮れの京都で、街全体が謎解きの舞台になる',
-    genre: '推理', subGenre: '街歩きミステリー',
+    genre: 'ミステリー', subGenre: '街歩きミステリー',
     price: 3000, difficulty: 2,
     image: 'images/quest-6-new.webp',
     estimatedTime: '2〜4時間', players: '1〜4人',
@@ -467,11 +468,26 @@ function startOpeningTimer() {
   openingTimer = setTimeout(enterSite, 2400);
 }
 
+/* ── MODE SWITCH (1人 / 複数) ── */
+function switchMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.mode === mode);
+  });
+  renderHome();
+}
+
 /* ── RENDER: HOME ── */
 function renderHome() {
+  let base = allQuests;
+  if (currentMode === 'solo') {
+    base = base.filter(q => q.players && q.players.startsWith('1'));
+  } else {
+    base = base.filter(q => q.players && !q.players.startsWith('1'));
+  }
   const filtered = currentCategory === 'all'
-    ? allQuests
-    : allQuests.filter(q => q.genre === currentCategory);
+    ? base
+    : base.filter(q => q.genre === currentCategory);
 
   const newQuests = filtered.filter(q => q.isNew).length > 0
     ? filtered.filter(q => q.isNew) : filtered.slice(0, 4);

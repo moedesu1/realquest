@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Maru+Gothic:wght@500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="https://sdks.shopifycdn.com/buy-button-sdk/3.1.0/buybutton.min.js" defer></script>
@@ -106,25 +106,13 @@
 <div class="toast" id="toast"></div>
 
 <!-- ============================================================
-     PAGE: OPENING
-     ============================================================ -->
-<div class="page active" id="page-opening" onclick="enterSite()" style="cursor:pointer">
-  <div class="opening-bg"></div>
-  <div class="opening-content">
-    <h1 class="opening-title">QUESTORE</h1>
-    <p class="opening-sub">-クエストア-</p>
-    <p class="opening-desc">あなたの日常がRPGになる</p>
-  </div>
-</div>
-
-<!-- ============================================================
      PAGE: MAIN (Quest Listing)
      ============================================================ -->
-<div class="page" id="page-main">
+<div class="page active" id="page-main">
   <!-- Header -->
   <header class="site-header">
     <div class="header-inner">
-      <div class="header-logo" onclick="navigateTo('main')">QUESTORE</div>
+      <div class="header-logo" onclick="navigateTo('main')"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div>
       <nav class="header-nav">
         <a href="#" class="nav-link active" data-page="main" onclick="event.preventDefault();navigateTo('main')">ホーム</a>
         <a href="#" class="nav-link" data-page="about" onclick="event.preventDefault();navigateTo('about')">Questoreとは</a>
@@ -176,23 +164,27 @@
     <!-- Hero -->
     <section class="hero">
       <div class="hero-bg"></div>
-      <div class="hero-content">
-        <h2 class="hero-title">QUESTORE</h2>
-        <p class="hero-sub">-クエストア-</p>
-        <p class="hero-desc">あなたの日常がRPGになる</p>
-      </div>
+      <img class="hero-overlay-logo" src="images/hero-logo-overlay.png" alt="体験型謎解きショップ クエストア">
+      <a class="hero-cta" href="#" onclick="event.preventDefault();document.querySelector('.filter-container').scrollIntoView({behavior:'smooth'})">
+        <img src="images/btn-explore.png" alt="今すぐ謎を探す">
+      </a>
     </section>
 
-    <!-- Category Filter -->
-    <div class="category-bar">
-      <div class="category-bar-inner">
-        <button class="cat-btn active" data-cat="all" onclick="filterByCategory('all')">すべて</button>
-        <button class="cat-btn" data-cat="推理" onclick="filterByCategory('推理')">謎解き</button>
-        <button class="cat-btn" data-cat="ホラー" onclick="filterByCategory('ホラー')">ホラー</button>
-        <button class="cat-btn" data-cat="冒険" onclick="filterByCategory('冒険')">冒険</button>
-        <button class="cat-btn" data-cat="スパイ" onclick="filterByCategory('スパイ')">スパイ</button>
-        <button class="cat-btn" data-cat="歴史" onclick="filterByCategory('歴史')">歴史</button>
-        <button class="cat-btn" data-cat="家族向け" onclick="filterByCategory('家族向け')">家族向け</button>
+    <!-- Play Mode Tabs + Category Filter -->
+    <div class="filter-container">
+      <div class="filter-inner">
+        <div class="mode-tabs-row">
+          <button class="mode-tab active" data-mode="solo" onclick="switchMode('solo')">ひとりで</button>
+          <button class="mode-tab" data-mode="multi" onclick="switchMode('multi')">みんなで</button>
+        </div>
+        <div class="category-bar">
+          <button class="cat-btn active" data-cat="all" onclick="filterByCategory('all')">すべて</button>
+          <button class="cat-btn" data-cat="ミステリー" onclick="filterByCategory('ミステリー')">ミステリー</button>
+          <button class="cat-btn" data-cat="冒険" onclick="filterByCategory('冒険')">冒険</button>
+          <button class="cat-btn" data-cat="スパイ" onclick="filterByCategory('スパイ')">スパイ</button>
+          <button class="cat-btn" data-cat="歴史" onclick="filterByCategory('歴史')">歴史</button>
+          <button class="cat-btn" data-cat="ホラー" onclick="filterByCategory('ホラー')">ホラー</button>
+        </div>
       </div>
     </div>
 
@@ -243,8 +235,7 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-logo">QUESTORE</div>
-      <nav class="footer-nav">
+            <nav class="footer-nav">
         <a href="#" onclick="navigateTo('main')">ホーム</a>
         <a href="#" onclick="navigateTo('about')">Questoreとは</a>
         <a href="#" onclick="navigateTo('creator')">クリエイター</a>
@@ -265,7 +256,7 @@
 <div class="page" id="page-detail">
   <header class="site-header">
     <div class="header-inner">
-      <div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div>
+      <div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div>
       <div class="header-actions">
         <button class="icon-btn cart-btn" onclick="openCart()" aria-label="カート">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -279,8 +270,7 @@
   </main>
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-logo">QUESTORE</div>
-      <p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p>
+            <p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p>
     </div>
   </footer>
 </div>
@@ -291,7 +281,7 @@
 <div class="page" id="page-about">
   <header class="site-header">
     <div class="header-inner">
-      <div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div>
+      <div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div>
     </div>
   </header>
   <main class="static-content">
@@ -311,14 +301,14 @@
       <p>リアルRPGは「現実 &times; ゲーム」の文脈。作品のビジュアルは観光地・建物・街・神社・路地・廃墟など実写写真をベースにしています。</p>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: CREATOR
      ============================================================ -->
 <div class="page" id="page-creator">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div></div></header>
+  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">クリエイターの方へ</h1>
     <div class="static-body">
@@ -346,28 +336,28 @@
       </ul>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: NEWS
      ============================================================ -->
 <div class="page" id="page-news">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div></div></header>
+  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">お知らせ</h1>
     <div class="news-list" id="news-list">
       <p class="empty-state">お知らせはまだありません。</p>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: REVIEWS
      ============================================================ -->
 <div class="page" id="page-reviews-page">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div></div></header>
+  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">レビュー</h1>
     <div id="all-reviews-list"></div>
@@ -383,14 +373,14 @@
       });
     </script>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: CONTACT
      ============================================================ -->
 <div class="page" id="page-contact">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div></div></header>
+  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">お問い合わせ</h1>
     <div class="static-body">
@@ -419,28 +409,28 @@
       </form>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: MY PAGE
      ============================================================ -->
 <div class="page" id="page-mypage">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div></div></header>
+  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">マイページ</h1>
     <div id="mypage-content">
       <p class="empty-state">ログインしてください。</p>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: TERMS
      ============================================================ -->
 <div class="page" id="page-terms">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div></div></header>
+  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">利用規約</h1>
     <div class="static-body legal-body">
@@ -515,14 +505,14 @@
       <p style="margin-top:2rem; color:var(--text-dim);">運営: 株式会社Cloud Illusion<br>お問い合わせ: info@c-ill.com</p>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: PRIVACY
      ============================================================ -->
 <div class="page" id="page-privacy">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div></div></header>
+  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">プライバシーポリシー</h1>
     <div class="static-body legal-body">
@@ -588,14 +578,14 @@
       <p>株式会社Cloud Illusion<br>メール: info@c-ill.com<br>電話: 06-4400-0361</p>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: TOKUSHOHO (特定商取引法に基づく表記)
      ============================================================ -->
 <div class="page" id="page-tokushoho">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; QUESTORE</div></div></header>
+  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">特定商取引法に基づく表記</h1>
     <div class="static-body legal-body">
@@ -616,7 +606,7 @@
       </table>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo">QUESTORE</div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <script src="js/config.js"></script>
