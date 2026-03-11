@@ -15,7 +15,7 @@
   --bg-panel: #eeeadf;
   --bg-card: #ffffff;
   --bg-card-hover: #f8f5f0;
-  --bg-header: #484040;
+  --bg-header: var(--bg-deep);
   --bg-section-dark: #ebe6df;
 
   --gold: #7c5cbf;
@@ -168,15 +168,15 @@ img { max-width: 100%; display: block; }
 }
 .header-nav { display: flex; gap: 1.5rem; }
 .nav-link {
-  color: #b5b0a8; font-size: 0.82rem;
+  color: var(--text-secondary); font-size: 0.82rem;
   transition: color 0.2s; white-space: nowrap;
 }
-.nav-link:hover, .nav-link.active { color: #fff; }
+.nav-link:hover, .nav-link.active { color: var(--text-primary); }
 
 .header-actions { display: flex; align-items: center; gap: 0.5rem; }
 
 .icon-btn {
-  background: none; border: none; color: #b5b0a8;
+  background: none; border: none; color: #484040;
   cursor: pointer; padding: 0.4rem; transition: color 0.2s; position: relative;
 }
 .icon-btn:hover { color: #fff; }
@@ -195,9 +195,9 @@ img { max-width: 100%; display: block; }
 }
 .hamburger span {
   display: block; width: 20px; height: 1.5px;
-  background: #b5b0a8; transition: background 0.2s;
+  background: var(--text-secondary); transition: background 0.2s;
 }
-.hamburger:hover span { background: #fff; }
+.hamburger:hover span { background: var(--text-primary); }
 
 @media (max-width: 768px) {
   .header-nav { display: none; }
@@ -207,7 +207,7 @@ img { max-width: 100%; display: block; }
 /* Mobile Menu */
 .mobile-menu {
   position: fixed; inset: 0; z-index: 200;
-  background: rgba(0,0,0,0.95);
+  background: rgba(245,241,235,0.98);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   opacity: 0; pointer-events: none; transition: opacity 0.3s;
@@ -283,7 +283,7 @@ img { max-width: 100%; display: block; }
   .hero { aspect-ratio: auto; height: auto; }
   .hero-bg {
     position: relative; width: 100%;
-    padding-top: 56.25%; /* 16:9 */
+    padding-top: 56.25%;
     background-size: 100% auto;
     background-position: top center;
   }
@@ -350,7 +350,7 @@ img { max-width: 100%; display: block; }
 .section--dark { background: var(--bg-section-dark); }
 .section-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 1rem; }
 .section-header { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1.5rem; }
-.section-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+.section-title { font-size: 1.2rem; font-weight: 700; color: #484040; }
 .section-title-en {
   font-family: var(--font-display); font-size: 0.7rem;
   color: var(--text-dim); letter-spacing: 0.15em;
