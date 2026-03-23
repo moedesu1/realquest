@@ -244,11 +244,14 @@ const FALLBACK_REVIEWS = {
 document.addEventListener('DOMContentLoaded', async () => {
   initSupabase();
   startOpeningTimer();
-  await loadQuests();
-  await initShopify();
-  await checkAuth();
-  updateCartBadge();
+  // フォールバックデータで即座に描画
+  allQuests = FALLBACK_QUESTS;
+  reviewsByQuest = FALLBACK_REVIEWS;
   renderHome();
+  // バックグラウンドで外部データ読み込み
+  loadQuests().then(() => renderHome()).catch(() => {});
+  initShopify().catch(() => {});
+  checkAuth().then(() => { updateCartBadge(); renderHome(); }).catch(() => {});
 });
 
 /* ── DATA LOADING ── */
@@ -1169,3 +1172,22 @@ function showToast(msg) {
   el.classList.add('show');
   setTimeout(() => el.classList.remove('show'), 3000);
 }
+
+/* ── SCROLL ANIMATIONS ── */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.page').forEach(page => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('inview');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, root: page });
+
+    page.querySelectorAll('.char-dog-wrap, .char-arkman-wrap, .howto-step').forEach(el => {
+      el.classList.add('scroll-reveal');
+      observer.observe(el);
+    });
+  });
+});

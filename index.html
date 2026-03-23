@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QUESTORE — 物語の書庫</title>
-<meta name="description" content="QUESTORE（クエストア）は現実世界を舞台にしたリアルRPGコンテンツが集まるプラットフォーム。謎解き・冒険・ホラーなど多ジャンルの体験があなたを待っています。">
+<title>クエストア — 物語の書庫</title>
+<meta name="description" content="クエストア（クエストア）は現実世界を舞台にしたリアルRPGコンテンツが集まるプラットフォーム。謎解き・冒険・ホラーなど多ジャンルの体験があなたを待っています。">
 <meta name="theme-color" content="#1a140e">
-<meta property="og:title" content="QUESTORE — 物語の書庫">
+<meta property="og:title" content="クエストア — 物語の書庫">
 <meta property="og:description" content="現実世界を舞台にしたリアルRPGコンテンツが集まるプラットフォーム">
 <meta property="og:type" content="website">
 <meta property="og:image" content="images/ogp.png">
@@ -22,9 +22,12 @@
 </head>
 <body>
 
-<!-- Transition Overlay -->
-<div class="transition-overlay" id="transition-overlay">
-  <div class="transition-text">読み込み中...</div>
+<!-- Loading Screen -->
+<div id="loading-screen" style="position:fixed;inset:0;z-index:9999;background:#f5f1eb;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.4s;">
+  <img src="images/logo-questore.png" alt="クエストア" style="height:48px;margin-bottom:1rem;opacity:0.7;">
+  <div style="width:120px;height:3px;background:#e0dbd4;border-radius:2px;overflow:hidden;">
+    <div id="loading-bar" style="width:0%;height:100%;background:#7c5cbf;border-radius:2px;transition:width 0.3s;"></div>
+  </div>
 </div>
 
 <!-- Auth Modal -->
@@ -115,7 +118,7 @@
       <div class="header-logo" onclick="navigateTo('main')"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div>
       <nav class="header-nav">
         <a href="#" class="nav-link active" data-page="main" onclick="event.preventDefault();navigateTo('main')">ホーム</a>
-        <a href="#" class="nav-link" data-page="about" onclick="event.preventDefault();navigateTo('about')">Questoreとは</a>
+        <a href="#" class="nav-link" data-page="about" onclick="event.preventDefault();navigateTo('about')">クエストアとは</a>
         <a href="#" class="nav-link" data-page="creator" onclick="event.preventDefault();navigateTo('creator')">クリエイター</a>
         <a href="#" class="nav-link" data-page="news" onclick="event.preventDefault();navigateTo('news')">お知らせ</a>
         <a href="#" class="nav-link" data-page="contact" onclick="event.preventDefault();navigateTo('contact')">お問い合わせ</a>
@@ -143,7 +146,7 @@
     <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
     <nav class="mobile-nav">
       <a href="#" onclick="navigateTo('main');closeMobileMenu()">ホーム</a>
-      <a href="#" onclick="navigateTo('about');closeMobileMenu()">Questoreとは</a>
+      <a href="#" onclick="navigateTo('about');closeMobileMenu()">クエストアとは</a>
       <a href="#" onclick="navigateTo('creator');closeMobileMenu()">クリエイター</a>
       <a href="#" onclick="navigateTo('news');closeMobileMenu()">お知らせ</a>
       <a href="#" onclick="navigateTo('reviews-page');closeMobileMenu()">レビュー</a>
@@ -178,12 +181,12 @@
           <button class="mode-tab" data-mode="multi" onclick="switchMode('multi')">みんなで</button>
         </div>
         <div class="category-bar">
-          <button class="cat-btn active" data-cat="all" onclick="filterByCategory('all')">すべて</button>
-          <button class="cat-btn" data-cat="ミステリー" onclick="filterByCategory('ミステリー')">ミステリー</button>
-          <button class="cat-btn" data-cat="冒険" onclick="filterByCategory('冒険')">冒険</button>
-          <button class="cat-btn" data-cat="スパイ" onclick="filterByCategory('スパイ')">スパイ</button>
-          <button class="cat-btn" data-cat="歴史" onclick="filterByCategory('歴史')">歴史</button>
-          <button class="cat-btn" data-cat="ホラー" onclick="filterByCategory('ホラー')">ホラー</button>
+          <button class="cat-btn active" data-cat="all" onclick="filterByCategory('all')"><svg class="cat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>すべて</button>
+          <button class="cat-btn" data-cat="ミステリー" onclick="filterByCategory('ミステリー')"><svg class="cat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>ミステリー</button>
+          <button class="cat-btn" data-cat="冒険" onclick="filterByCategory('冒険')"><svg class="cat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" stroke="none"/></svg>冒険</button>
+          <button class="cat-btn" data-cat="スパイ" onclick="filterByCategory('スパイ')"><svg class="cat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>スパイ</button>
+          <button class="cat-btn" data-cat="歴史" onclick="filterByCategory('歴史')"><svg class="cat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>歴史</button>
+          <button class="cat-btn" data-cat="ホラー" onclick="filterByCategory('ホラー')"><svg class="cat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/></svg>ホラー</button>
         </div>
       </div>
     </div>
@@ -197,9 +200,10 @@
     </section>
 
     <!-- New Arrivals -->
-    <section class="section">
+    <section class="section section--pattern">
       <div class="section-inner">
         <div class="section-header">
+          <svg class="section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <h2 class="section-title">新着コンテンツ</h2>
           <span class="section-title-en">NEW ARRIVALS</span>
         </div>
@@ -207,12 +211,20 @@
       </div>
     </section>
 
-    <div class="section-divider"><span class="dv-line"></span><span class="dv-diamond"></span><span class="dv-line"></span></div>
+    <!-- Paw trail divider — dog walked through here -->
+    <div class="paw-trail-divider" aria-hidden="true">
+      <svg class="paw-step" viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="6"/><circle cx="6" cy="8" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="9" cy="4" r="2"/><circle cx="15" cy="4" r="2"/></svg>
+      <svg class="paw-step" viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="6"/><circle cx="6" cy="8" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="9" cy="4" r="2"/><circle cx="15" cy="4" r="2"/></svg>
+      <svg class="paw-step" viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="6"/><circle cx="6" cy="8" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="9" cy="4" r="2"/><circle cx="15" cy="4" r="2"/></svg>
+      <svg class="paw-step" viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="6"/><circle cx="6" cy="8" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="9" cy="4" r="2"/><circle cx="15" cy="4" r="2"/></svg>
+      <svg class="paw-step" viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="6"/><circle cx="6" cy="8" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="9" cy="4" r="2"/><circle cx="15" cy="4" r="2"/></svg>
+    </div>
 
     <!-- Popular -->
-    <section class="section">
+    <section class="section section--pattern-alt">
       <div class="section-inner">
         <div class="section-header">
+          <svg class="section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <h2 class="section-title">人気コンテンツ</h2>
           <span class="section-title-en">POPULAR</span>
         </div>
@@ -220,24 +232,33 @@
       </div>
     </section>
 
+    <!-- Wave Divider before About -->
+    <div class="wave-divider wave-divider--flip">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C200,0 400,60 600,30 C800,0 1000,60 1200,30 L1200,60 L0,60 Z" fill="var(--bg-section-dark)"/></svg>
+    </div>
+
     <!-- About Teaser -->
-    <section class="section section--dark">
+    <section class="section section--dark section--about-decorated">
       <div class="section-inner section-about-teaser">
-        <h2 class="section-title">Questoreとは</h2>
+        <h2 class="section-title">クエストアとは</h2>
         <p class="about-teaser-text">家でも外でも遊べる、アナログの謎解き体験。</p>
         <p class="about-teaser-text">キットが届いた瞬間から物語が始まり、現実の世界がゲームフィールドになります。</p>
         <p class="about-teaser-text">あなた自身が主人公となって進む、体験型ストーリーコンテンツです。</p>
         <button class="btn-secondary" onclick="navigateTo('about')">もっと詳しく &rarr;</button>
       </div>
+      <!-- Dog Character -->
+      <div class="char-dog-wrap" onclick="navigateTo('about')">
+        <div class="speech-bubble">初めての方は<br>こちらだワン!</div>
+        <img src="images/char-dog.png" alt="もふぞう" class="char-dog" loading="lazy">
+      </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-inner">
             <nav class="footer-nav">
         <a href="#" onclick="navigateTo('main')">ホーム</a>
-        <a href="#" onclick="navigateTo('about')">Questoreとは</a>
+        <a href="#" onclick="navigateTo('about')">クエストアとは</a>
         <a href="#" onclick="navigateTo('creator')">クリエイター</a>
         <a href="#" onclick="navigateTo('contact')">お問い合わせ</a>
         <a href="#" onclick="navigateTo('terms')">利用規約</a>
@@ -245,7 +266,7 @@
         <a href="#" onclick="navigateTo('tokushoho')">特定商取引法に基づく表記</a>
         <a href="https://cloud-illusion.com/company/" target="_blank">運営会社</a>
       </nav>
-      <p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p>
+      <p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p>
     </div>
   </footer>
 </div>
@@ -256,7 +277,7 @@
 <div class="page" id="page-detail">
   <header class="site-header">
     <div class="header-inner">
-      <div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div>
+      <a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div>
       <div class="header-actions">
         <button class="icon-btn cart-btn" onclick="openCart()" aria-label="カート">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -270,7 +291,7 @@
   </main>
   <footer class="site-footer">
     <div class="footer-inner">
-            <p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p>
+            <p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p>
     </div>
   </footer>
 </div>
@@ -281,38 +302,64 @@
 <div class="page" id="page-about">
   <header class="site-header">
     <div class="header-inner">
-      <div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div>
+      <a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div>
     </div>
   </header>
-  <main class="static-content">
-    <h1 class="page-title">Questoreとは</h1>
+  <main class="static-content about-page">
+    <h1 class="page-title">
+      <svg class="page-title-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.5" fill="var(--gold)"/></svg>
+      クエストアとは
+    </h1>
     <div class="static-body">
-      <p>QUESTORE（クエストア）は、アナログで遊べるリアルRPGが集まるプラットフォームです。家でも外でも、手で触れて楽しめる体験をお届けします。</p>
-      <p>クリエイターが制作した謎解き・冒険・ホラー・スパイ・歴史・家族向けなど多ジャンルの体験を、あなたはこの「書庫」で手に取り、物語の主人公になることができます。</p>
-      <h2>体験の流れ</h2>
-      <ol>
-        <li><strong>書庫に入る</strong> — QUESTOREのサイトにアクセス</li>
-        <li><strong>本（コンテンツ）を見る</strong> — 気になる作品を探す</li>
-        <li><strong>本を開く</strong> — 詳細ページでストーリーや情報を確認</li>
-        <li><strong>物語を読む</strong> — 購入してプレイ開始</li>
-        <li><strong>その物語の主人公になる</strong> — 現実世界で冒険する</li>
-      </ol>
-      <h2>ビジュアル方針</h2>
-      <p>リアルRPGは「現実 &times; ゲーム」の文脈。作品のビジュアルは観光地・建物・街・神社・路地・廃墟など実写写真をベースにしています。</p>
+      <div class="about-intro-wrap">
+        <div class="about-intro-text">
+          <p>アナログで遊べる「体験型謎解きゲーム」が集まるプラットフォームです。</p>
+        </div>
+        <div class="char-arkman-wrap">
+          <div class="speech-bubble speech-bubble--arkman">ワシが案内<br>してやろう...</div>
+          <img src="images/char-arkman.png" alt="アークマン" class="char-arkman" loading="lazy">
+        </div>
+      </div>
+      <h2><svg class="h2-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>クエストアの遊び方</h2>
+      <div class="howto-steps">
+        <div class="howto-step">
+          <span class="howto-num">1</span>
+          <svg class="howto-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <strong>遊びたいゲームを見つける</strong>
+        </div>
+        <div class="howto-arrow">&darr;</div>
+        <div class="howto-step">
+          <span class="howto-num">2</span>
+          <svg class="howto-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <strong>ゲームを購入する</strong>
+        </div>
+        <div class="howto-arrow">&darr;</div>
+        <div class="howto-step">
+          <span class="howto-num">3</span>
+          <svg class="howto-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <strong>ゲームキットが自宅に届く</strong>
+        </div>
+        <div class="howto-arrow">&darr;</div>
+        <div class="howto-step">
+          <span class="howto-num">4</span>
+          <svg class="howto-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          <strong>キットを開くと、物語が始まる</strong>
+        </div>
+      </div>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: CREATOR
      ============================================================ -->
 <div class="page" id="page-creator">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
+  <header class="site-header"><div class="header-inner"><a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">クリエイターの方へ</h1>
     <div class="static-body">
-      <p>QUESTOREでは、リアルRPGコンテンツを制作するクリエイターを募集しています。</p>
+      <p>クエストアでは、リアルRPGコンテンツを制作するクリエイターを募集しています。</p>
       <h2>投稿方式</h2>
       <h3>1. 運営案件</h3>
       <p>観光企画・レジェンド企画・コラボ企画など、運営から制作を依頼するケース。</p>
@@ -336,28 +383,28 @@
       </ul>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: NEWS
      ============================================================ -->
 <div class="page" id="page-news">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
+  <header class="site-header"><div class="header-inner"><a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">お知らせ</h1>
     <div class="news-list" id="news-list">
       <p class="empty-state">お知らせはまだありません。</p>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: REVIEWS
      ============================================================ -->
 <div class="page" id="page-reviews-page">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
+  <header class="site-header"><div class="header-inner"><a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">レビュー</h1>
     <div id="all-reviews-list"></div>
@@ -373,14 +420,14 @@
       });
     </script>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: CONTACT
      ============================================================ -->
 <div class="page" id="page-contact">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
+  <header class="site-header"><div class="header-inner"><a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">お問い合わせ</h1>
     <div class="static-body">
@@ -409,35 +456,35 @@
       </form>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: MY PAGE
      ============================================================ -->
 <div class="page" id="page-mypage">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
+  <header class="site-header"><div class="header-inner"><a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">マイページ</h1>
     <div id="mypage-content">
       <p class="empty-state">ログインしてください。</p>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: TERMS
      ============================================================ -->
 <div class="page" id="page-terms">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
+  <header class="site-header"><div class="header-inner"><a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">利用規約</h1>
     <div class="static-body legal-body">
       <p>最終更新日: 2026年3月7日</p>
 
       <h2>第1条（適用）</h2>
-      <p>本規約は、株式会社Cloud Illusion（以下「当社」）が運営するQUESTORE（以下「本サービス」）の利用に関する条件を定めるものです。ユーザーは本規約に同意の上、本サービスを利用するものとします。</p>
+      <p>本規約は、株式会社Cloud Illusion（以下「当社」）が運営するクエストア（以下「本サービス」）の利用に関する条件を定めるものです。ユーザーは本規約に同意の上、本サービスを利用するものとします。</p>
 
       <h2>第2条（定義）</h2>
       <p>本規約において、次の用語は以下の意味で使用します。</p>
@@ -505,14 +552,14 @@
       <p style="margin-top:2rem; color:var(--text-dim);">運営: 株式会社Cloud Illusion<br>お問い合わせ: info@c-ill.com</p>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: PRIVACY
      ============================================================ -->
 <div class="page" id="page-privacy">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
+  <header class="site-header"><div class="header-inner"><a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">プライバシーポリシー</h1>
     <div class="static-body legal-body">
@@ -578,14 +625,14 @@
       <p>株式会社Cloud Illusion<br>メール: info@c-ill.com<br>電話: 06-4400-0361</p>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <!-- ============================================================
      PAGE: TOKUSHOHO (特定商取引法に基づく表記)
      ============================================================ -->
 <div class="page" id="page-tokushoho">
-  <header class="site-header"><div class="header-inner"><div class="header-logo" onclick="navigateTo('main')">&larr; <img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
+  <header class="site-header"><div class="header-inner"><a class="back-btn" onclick="navigateTo('main')">&larr; 戻る</a><div class="header-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img"></div></div></header>
   <main class="static-content">
     <h1 class="page-title">特定商取引法に基づく表記</h1>
     <div class="static-body legal-body">
@@ -606,10 +653,30 @@
       </table>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-logo"><img src="images/logo-questore.png" alt="クエストア" class="logo-img logo-img--footer"></div><p class="footer-copy">&copy; 2026 QUESTORE. 運営: 株式会社Cloud Illusion</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-copy">&copy; 2026 クエストア. 運営: 株式会社Cloud Illusion</p></div></footer>
 </div>
 
 <script src="js/config.js"></script>
 <script src="js/app.js"></script>
+<script>
+(function(){
+  var bar = document.getElementById('loading-bar');
+  var screen = document.getElementById('loading-screen');
+  var progress = 0;
+  var timer = setInterval(function(){
+    progress += Math.random() * 15 + 5;
+    if(progress > 90) progress = 90;
+    bar.style.width = progress + '%';
+  }, 150);
+  window.addEventListener('load', function(){
+    clearInterval(timer);
+    bar.style.width = '100%';
+    setTimeout(function(){
+      screen.style.opacity = '0';
+      setTimeout(function(){ screen.style.display = 'none'; }, 400);
+    }, 200);
+  });
+})();
+</script>
 </body>
 </html>
